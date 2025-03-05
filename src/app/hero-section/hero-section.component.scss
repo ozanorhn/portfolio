@@ -1,0 +1,185 @@
+@import "../../styles.scss";
+
+.sc1-hero {
+  position: relative;
+  top: 0;
+  width: $main-width;
+  background-size: cover;
+  background-position: center;
+}
+.hero {
+  height: calc(100vh - 100px);
+  @include dFlex($jc: space-between, $ai: flex-end);
+  padding: $main-padding;
+}
+.center {
+  @include dFlex();
+  flex-direction: column;
+  position: relative;
+  bottom: 50%;
+  > span {
+    font-size: clamp(1.5rem, 2.5vw, 3rem);
+  }
+  > h1 {
+    font-size: clamp(4.5rem, 8vw, 8rem);
+    margin: 3% 0;
+  }
+  .button-div {
+    @include dFlex($g: 40px);
+  }
+}
+.left {
+  .line {
+    width: 1px;
+    height: 220px;
+    background-color: $main-color2;
+    position: relative;
+    left: 50%;
+    margin-top: 100%;
+  }
+  .arrow-container {
+    width: 30px;
+    height: 48px;
+    border: 1px solid cyan;
+    border-radius: 50px;
+    @include dFlex();
+    position: relative;
+    > button {
+      width: 100%;
+      height: 100%;
+      > img {
+        position: relative;
+        animation: moveArrow 1.5s ease-in infinite;
+      }
+    }
+  }
+
+  @keyframes moveArrow {
+    0%,
+    100% {
+      transform: translateY(-4px);
+    }
+    50% {
+      transform: translateY(12px);
+    }
+  }
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  @include linkDot(
+    $positionX: 36px,
+    $positionY: 50%,
+    $hover-color: $main-color2
+  );
+  > a {
+    > img {
+      &:hover {
+        filter: brightness(0) saturate(100%) invert(100%);
+      }
+    }
+  }
+
+  .align-mail {
+    writing-mode: vertical-rl;
+    text-orientation: sideways-right;
+    transform: rotate(-180deg);
+    margin-left: 16%;
+    margin-bottom: 16px;
+    &:hover {
+      color: $main-color2;
+    }
+  }
+
+  .line {
+    width: 1px;
+    height: 190px;
+    background-color: $main-color;
+    position: relative;
+    left: 50%;
+    margin-top: 40%;
+  }
+}
+
+@media (max-width: 800px) {
+  .hero {
+    padding: 0 2%;
+
+    .right {
+      @include linkDot(
+        $positionX: -12px,
+        $positionY: 50%,
+        $hover-color: $main-color2
+      );
+      .align-mail {
+        display: none;
+      }
+
+      a:first-of-type {
+        display: block;
+      }
+    }
+  }
+  .center {
+    > h1 {
+      word-break: normal;
+      text-align: center;
+    }
+  }
+}
+@media (max-width: 620px) {
+  .center {
+    width: min-content;
+  }
+}
+
+@media (max-width: 480px) {
+  .center {
+    > h1 {
+      font-size: 4rem;
+    }
+    .button-div {
+      gap: 15px;
+    }
+  }
+}
+
+@media (max-width: 440px) {
+  .center {
+    > span {
+      font-size: 1.3rem;
+    }
+    > h1 {
+      margin-top: 0;
+      font-size: 3rem;
+    }
+    .button-div {
+      gap: 10px;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .hero {
+    @include dFlex($jc: center, $ai: flex-end);
+  }
+  .left {
+    position: absolute;
+    left: 2px;
+  }
+  .right {
+    position: absolute;
+    right: 2px;
+  }
+}
+
+@media (max-height: 800px) {
+  .hero {
+    height: auto;
+    min-height: calc(100vh - 100px);
+  }
+  .center {
+    margin-bottom: 250px;
+  }
+}

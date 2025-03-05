@@ -1,0 +1,64 @@
+<nav>
+    <div>
+      <div class="left">
+        <div class="logo-small">
+          <button (click)="navigateWithOffset('about-me', 100)">
+            <img class="logo1-small" src="assets/img/logo/logo1-green.png" alt="logo1-green" />
+            <img class="logo2-small" src="assets/img/logo/logo1-white.png" alt="logo2-white" />
+          </button>
+        </div>
+        <div class="switch">
+          <input
+            id="language-toggle"
+            class="check-toggle"
+            type="checkbox"
+            (change)="onToggleChange($event)"
+          />
+          <label for="language-toggle"> 
+            <span class="lang en">EN</span>
+            <span class="lang de">DE</span>
+          </label>
+        </div>
+  
+        <button (click)="navigateWithOffset('about-me', 100)">{{ "link1" | translate }}</button>
+        <button (click)="navigateWithOffset('skill-set', 100)">{{ "link2" | translate }}</button>
+        <button (click)="navigateWithOffset('projects', 100)">{{ "link3" | translate }}</button>
+      </div>
+      <div class="right">
+        <div
+          class="hamburger-icon d-none"
+          (click)="toggleMenu()"
+          (click)="stopPropagation($event)"
+        >
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+        </div>
+        <div [ngClass]="{ 'd-none': !isMenuOpen }" class="hamburger-menu">
+          <button (click)="navigateWithOffset('about-me', 100)">{{ "link1" | translate }}</button>
+          <button (click)="navigateWithOffset('skill-set', 100)">{{ "link2" | translate }}</button>
+          <button (click)="navigateWithOffset('projects', 100)">{{ "link3" | translate }}</button>
+          <div>
+            <input
+              id="language-toggle"
+              class="check-toggle"
+              type="checkbox"
+              (change)="onToggleChange($event)"
+            />
+            <label for="language-toggle"> 
+              <span class="lang en">EN</span>
+              <span class="lang de">DE</span>
+            </label>
+          </div>
+        </div>
+        <div class="logo">
+          <button (click)="navigateWithOffset('about-me', 100)">
+            <img class="logo1" src="assets/img/logo/logo1-green.png" alt="logo1-green" />
+            <img class="logo1" src="assets/img/logo/logo2-white.png" alt="logo2-white" />
+            <img class="logo2" src="assets/img/logo/logo1-white.png" alt="logo2-white" />
+            <img class="logo2" src="assets/img/logo/logo2-green.png" alt="logo2-green" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>

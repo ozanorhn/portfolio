@@ -1,0 +1,76 @@
+@import "../../../styles.scss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: relative;
+  overflow: hidden;
+}
+
+.container .item {
+  padding: 20px 0;
+  background-color: $main-color3;
+}
+
+.--bold {
+  font-weight: 500;
+}
+
+.--box {
+  font-family: "Karla";
+  font-size: 2.1rem;
+  padding: 12px 0 12px 24px;
+  @include dFlex($g: 24px);
+  color: $main-color2;
+  background-color: $main-color3;
+  opacity: 0.9;
+}
+
+.--floating-center {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.--rotate {
+  rotate: var(--_rotation-deg, -10deg);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: $main-color2;
+  border-radius: 50%;
+}
+
+// .banner {
+//   @include dFlex($g: 40px);
+//   margin-left: 40px;
+//   height: 50px;
+//   width: 100%;
+//   color: $main-color2;
+//   background-color: $main-color3;
+
+//   white-space: nowrap;  // Verhindert, dass der Inhalt umbricht.
+//   animation: marquee 10s linear infinite;  // Endlose Bewegung.
+//   .banner-item{
+//     @include dFlex($g: 40px);
+
+//   }
+// }
+
+// @keyframes marquee {
+//     from {
+//       transform: translateX(0%);  // Startet außerhalb des sichtbaren Bereichs.
+//     }
+//     to {
+//       transform: translateX(-100%);  // Endet ebenfalls außerhalb des sichtbaren Bereichs.
+//     }
+//   }

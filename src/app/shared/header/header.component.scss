@@ -1,0 +1,192 @@
+@import "../../../styles.scss";
+
+nav {
+  position: relative;
+  padding: $main-padding;
+  background-image: linear-gradient(to top right, black, rgb(15, 83, 72));
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  height: 100px;
+  @include dFlex();
+  > div {
+    width: $main-width;
+    @include dFlex($jc: space-between);
+
+    .left {
+      >button{
+        font-size: 1.2rem;
+        white-space: nowrap;
+      }
+      .logo-small{
+        display: none;
+      }
+      width: 36%;
+      @include dFlex($jc: space-between, $g: 5%);
+
+      @include linkDot(50%, -8px);
+    }
+    .right {
+      .logo{
+        >button{
+
+          display: flex;
+          .logo2{
+            display: none;
+          }
+          &:hover{
+            .logo1{
+              display: none;
+            }
+            .logo2{
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.switch{
+  display: flex;
+
+}
+label {
+  width: 84px;
+  height: 24px;
+  position: relative;
+  display: block;
+  background: transparent;
+  border: 1px solid $main-color2;
+  border-radius: 50px;
+  transition: 0.3s;
+  &:hover{
+    border:1px solid white;
+    cursor: pointer;
+  }
+  &:hover .de{
+    color: $main-color2;
+  }
+}
+label:after {
+  content: "";
+  width: 44px;
+  height: 24px;
+  position: absolute;
+  top: -1px;
+  left: -1px; 
+  background: $main-color2;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.check-toggle {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+input:checked + label:after {
+  left: 84px; 
+  transform: translateX(-100%);
+}
+label span {
+  position: absolute;
+  z-index: 100;
+  font-weight: bolder;
+}
+label span.en {
+  left: 12px;
+  transition: 0.3s;
+}
+label span.de {
+  color: $main-color3;
+  right: 10px;
+  transition: 0.3s;
+  
+}
+input:checked + label span.en {
+  color: $main-color3;
+}
+input:checked + label span.de {
+  color: white
+}
+input:checked + label:hover .en {
+  color: $main-color2;
+}
+
+.hamburger-line {
+  width: 32px;
+  height: 2px;
+  background-color: white;
+  margin-top: 4px;
+  border-radius: 4px;
+}
+.hamburger-icon {
+  cursor: pointer;
+  &:hover .hamburger-line {
+    background-color: $main-color2;
+  }
+}
+.hamburger-menu {
+  @include dFlex($g: 6px);
+  flex-direction: column;
+  background-image: linear-gradient(
+    to top right,
+    black 40%,
+    rgb(15, 83, 72) 100%
+  );
+  width: 200px;
+  padding: 16px;
+  border-radius: 10px;
+  position: relative;
+  top: 70px;
+  font-size: 1.2rem;
+}
+.hamburgerMenu {
+  display: none;
+}
+.hamburger-menu button {
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: white;
+}
+.hamburger-menu button:hover {
+  color: $main-color2;
+}
+
+.d-none {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .hamburger-icon {
+    display: block;
+  }
+  .left {
+    .logo-small{
+      display: block !important;
+      .logo2-small{
+        display: none;
+      }
+      &:hover{
+        .logo2-small{
+          display: block;
+        }
+        .logo1-small{
+          display: none;
+        }
+      }
+      
+    }
+    .switch {
+      display: none;
+    }
+    > button {
+      display: none;
+    }
+  }
+  .right {
+    .logo{
+      display: none !important;
+    }
+  
+  }
+}
