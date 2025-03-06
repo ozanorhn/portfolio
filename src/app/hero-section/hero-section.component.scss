@@ -6,6 +6,7 @@
   width: $main-width;
   background-size: cover;
   background-position: center;
+  background-image: url('../../assets/img/bg1.png');
 }
 .hero {
   height: calc(100vh - 100px);
@@ -23,11 +24,38 @@
   > h1 {
     font-size: clamp(4.5rem, 8vw, 8rem);
     margin: 3% 0;
+    animation: fadeIn 2s ease-in-out, slideUp 1.5s ease-in-out;
+    display: inline-block;
+    transition: transform 0.5s ease-in-out, color 0.3s ease-in-out;
+    position: relative;
+  }
+  > h1:hover {
+    transform: rotateX(360deg) scale(1.1);
+    color: $main-color2;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
   }
   .button-div {
     @include dFlex($g: 40px);
   }
 }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 .left {
   .line {
     width: 1px;
@@ -38,8 +66,8 @@
     margin-top: 100%;
   }
   .arrow-container {
-    width: 30px;
-    height: 48px;
+    width: 25px;
+    height: 40px;
     border: 1px solid cyan;
     border-radius: 50px;
     @include dFlex();
@@ -48,6 +76,8 @@
       width: 100%;
       height: 100%;
       > img {
+        width: 70%;
+        height: auto;
         position: relative;
         animation: moveArrow 1.5s ease-in infinite;
       }
@@ -75,6 +105,8 @@
   );
   > a {
     > img {
+      width: 20px;
+      height: auto;
       &:hover {
         filter: brightness(0) saturate(100%) invert(100%);
       }

@@ -21,7 +21,7 @@
   $main-color3: rgb(31, 46, 43);
   
   // main container background
-  $main-background: black;
+  $main-background: #1A2120;
   $main-width: 100%;
   $main-max-width: 1920px;
   $main-padding: 0 4%;
@@ -136,7 +136,7 @@
   
   body {
     margin: 0;
-    background-color: black;
+    background-color: #292929;
     color: $main-color;
     font-family: "Fira Code";
     box-sizing: border-box;

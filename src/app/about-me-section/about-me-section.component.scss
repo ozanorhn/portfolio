@@ -1,0 +1,138 @@
+@import "../../styles.scss";
+
+.sc2-about-me {
+  background-color: $main-background;
+  padding: 0 0 50px 0;
+  width: $main-width;
+  max-width: $main-max-width;
+  @include dFlex($jc: space-around, $g: 80px);
+}
+.left {
+  position: relative;
+  width: 35%;
+  margin-bottom: 8%;
+  margin-top: 50px;
+  @include customShadow();
+  z-index: 10;
+  
+  .image {
+    position: relative; 
+    background-image: linear-gradient(to top right, black 10%, rgb(15, 83, 72) 100%);
+    background-size: 300% 300%; 
+    animation: animateBackground 8s ease-in-out infinite; 
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 40px;
+  }
+}
+
+@keyframes animateBackground {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+.align-right {
+  width: 32%;
+  margin-top: 8%;
+
+  .right {
+    background-color: rgb(31, 46, 43);
+    padding: 5%;
+    aspect-ratio: 1 / 1;
+    border-radius: 40px;
+    @include dFlex($jc: flex-start, $ai: flex-start);
+    flex-direction: column;
+    border: 1px solid $main-color2;
+    > div {
+      *:not(:first-child) {
+        &:hover {
+          transform: scale(1.01);
+        }
+      }
+    }
+    > p {
+      font-family: "Karla";
+      font-size: 1.1rem;
+      margin-bottom: 5%;
+    }
+
+    > div {
+      @include dFlex($g: 4%, $ai: flex-start);
+      > p {
+        font-family: "Karla";
+        font-size: 1.1rem;
+        margin: 0 0 12px 0;
+      }
+      > img {
+        margin-top: 4px;
+        height: 35px;
+      }
+    }
+  }
+}
+
+@media (max-width: 960px) {
+  .sc2-about-me {
+    padding: 50px 50px;
+    @include dFlex($jc: space-between);
+  }
+  .align-right {
+    width: 40%;
+  }
+  .left {
+    width: 45%;
+  }
+}
+
+@media (max-width: 800px) {
+  .sc2-about-me {
+    padding: 30px 30px;
+    @include dFlex($g:30px);
+    flex-direction: column;
+  }
+  .align-right {
+    width: 80%;
+    margin-bottom: 30px;
+  }
+  .left {
+    width: 75%;
+    margin-bottom: 0;
+  }
+}
+@media (max-width: 640px) {
+  
+  .align-right {
+    width: 90%;
+  }
+  .left {
+    width: 85%;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .sc2-about-me {
+    padding: 30px 10px;
+  
+  }
+  .align-right {
+    width: 90%;
+  }
+  .left {
+    width: 85%;
+    margin-bottom: 0;
+  }
+
+}
