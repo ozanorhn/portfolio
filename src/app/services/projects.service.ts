@@ -35,7 +35,7 @@ export class ProjectsService {
       link_github: 'https://github.com/ozanorhn/PokeDex',
       live_link: '',
       languages: ['JavaScript', 'Rest-Api', 'HTML', 'CSS'],
-      image: '',
+      image: 'assets/img/pokedex.png',
       description_en:
         'A Pokémon database featuring a vast collection of data on every Pokémon there is.',
       description_de:
