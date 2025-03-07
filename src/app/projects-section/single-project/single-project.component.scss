@@ -1,0 +1,156 @@
+@import "../../../styles.scss";
+
+.align-single-project {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.left {
+  width: 70%;
+}
+
+.single-project {
+  position: relative;
+  height: 100px;
+  @include dFlex($jc: space-between);
+
+  .hover-img {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+  }
+
+  &:hover .hover-img {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: $main-color3;
+  }
+
+  .name {
+    margin-left: 16px;
+    @include dFlex($jc: space-between, $g: 4px);
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .languages {
+    @include dFlex($jc: space-between, $g: 20px);
+
+    .small-line:not(:last-child) {
+      width: 1px;
+      height: 16px;
+      background-color: $main-color2;
+    }
+  }
+}
+
+.line {
+  height: 1px;
+  width: 100%;
+  background-color: $main-color2;
+}
+
+.right {
+  width: 30%;
+  position: relative;
+  @include dFlex();
+}
+
+.image-div {
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+  margin-left: 8px;
+
+  @include customShadow(
+    $position: absolute,
+    $border-radius: 12px,
+    $line-gap: 12px,
+    $angle: 135deg,
+    $translate-x: 20px,
+    $translate-y: 20px
+  );
+
+  &::before {
+    box-sizing: border-box;
+    padding: 10px;
+  }
+
+  > img {
+    width: 300px;
+    height: 170px;
+    border-radius: 12px;
+    display: block;
+  }
+}
+
+.left:hover ~ .right .image-div {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 1100px) {
+  .image-div {
+    > img {
+      width: 250px;
+      aspect-ratio: 3/2;
+    }
+  }
+}
+@media (max-width: 920px) {
+  .image-div {
+    > img {
+      width: 200px;
+    }
+  }
+}
+@media (max-width: 800px) {
+  .left {
+    width: 100%;
+  }
+  .right {
+    display: none;
+  }
+}
+
+@media (max-width: 580px) {
+  .single-project {
+    position: relative;
+    height: 80px;
+    @include dFlex($ai: flex-start);
+    flex-direction: column;
+    .languages {
+      margin-left: 16px;
+      @include dFlex($jc: space-between, $g: 10px);
+    }
+  }
+}
+@media (max-width: 580px) {
+  .single-project {
+    position: relative;
+    height: 80px;
+    @include dFlex($ai: flex-start);
+    flex-direction: column;
+    .languages {
+      margin-left: 0px;
+    }
+    .name {
+      margin-left: 0px;
+      font-size: 1.3rem;
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .single-project {
+    .languages {
+      @include dFlex($jc: space-between, $g: 5px);
+    }
+  }
+}

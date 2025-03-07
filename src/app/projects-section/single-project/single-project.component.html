@@ -1,0 +1,25 @@
+<div class="align-single-project">
+  <div class="left">
+    <div class="single-project">
+      <span class="name"
+        >{{ project.name }}
+        <img
+          src="assets/icons/arrow-outward.png"
+          alt="arrow_outward"
+          class="hover-img"
+      /></span>
+      <div class="languages">
+        @for(language of project.languages; track language){
+        <span>{{ language }}</span>
+        <div class="small-line"></div>
+        }
+      </div>
+    </div>
+    <div class="line"></div>
+  </div>
+  <div class="right">
+    <div class="image-div">
+      <img src="{{ project.image }}" alt="image of {{ project.name }}" />
+    </div>
+  </div>
+</div>

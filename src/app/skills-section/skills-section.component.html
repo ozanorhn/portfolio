@@ -1,0 +1,37 @@
+<div class="sc3-skill-set">
+    <div class="align-skill-set">
+      <h3>{{ "skill" | translate }}</h3>
+      <div class="skill-set">
+        <h2>Skill Set</h2>
+        <p>
+          {{ "p5" | translate }}
+        </p>
+        <h4>
+          {{ "h4" | translate }}<span> {{ "another" | translate }}</span>
+        </h4>
+        <p>
+          {{ "p6" | translate }}
+        </p>
+        <button (click)="navigateWithOffset('projects', 100)" class="slide-button" aria-label="scroll to contact section">
+          <span class="slide-text">Let's Talk</span>
+        </button>
+      </div>
+    </div>
+  
+    <div class="skill-set-icons">
+      <div class="icon-container">
+        @for(icon of service.icons; track icon){
+        <div class="single-icon">
+          <img src="{{ icon.path }}" alt="{{ icon.alt }} Icon" />
+          <span>{{ icon.name }}</span>
+          @if(icon.name === 'Growth mindset'){
+          <div class="talk-bubble talk-bubble-left">
+            <span>{{ "popup-msg" | translate }}</span>
+            <img src="assets/icons/mindset-frame.png" alt="interestsPopUp" />
+          </div>
+          }
+        </div>
+        }
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,194 @@
+@import "../../styles.scss";
+
+.sc3-skill-set {
+  background-color: $main-background;
+  @include dFlex($jc: space-around);
+  box-sizing: border-box;
+  width: 100%;
+}
+.align-skill-set {
+  width: 32%;
+  .skill-set {
+    background-color: $main-color3;
+    padding: 5%;
+    aspect-ratio: 1 / 1;
+    border-radius: 40px;
+    @include dFlex($ai: flex-start, $jc: flex-start);
+    flex-direction: column;
+    border: 1px solid $main-color2;
+    > p {
+      font-family: "Karla";
+      font-size: 1.1rem;
+      text-align: justify;
+      hyphens: auto;
+    }
+    > h4 {
+      margin: 4% 0 3% 0;
+      font-family: "Karla";
+      font-size: 1.5rem;
+
+      > span {
+        color: $main-color2;
+      }
+    }
+    > button {
+      margin-top: 4%;
+    }
+  }
+}
+.talk-bubble {
+  font-family: "Karla";
+  font-size: 1.2rem;
+  font-weight: 500;
+  position: absolute;
+  right: -30px;
+  top: -165px;
+  @include dFlex($g: 12px);
+  flex-direction: column;
+  width: 224px;
+  height: 150px;
+  background: #fff;
+  border-radius: 24px;
+  padding: 24px;
+  text-align: center;
+  color: #000;
+  display: none;
+  opacity: 0;
+  transition: transform 0.3s ease-in-out, opacity 1s ease-in-out;
+
+  > span {
+    color: $main-color2;
+  }
+}
+
+.talk-bubble-left:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 24px solid #fff;
+  border-right: 12px solid transparent;
+  border-top: 12px solid #fff;
+  border-bottom: 20px solid transparent;
+  right: 32px;
+  bottom: -24px;
+}
+
+.icon-container {
+  max-width: 500px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(104px, 100%), 1fr));
+  gap: 20px;
+
+  .single-icon {
+    height: 108px;
+    margin-top: 12px;
+    @include dFlex($jc: flex-start);
+    flex-direction: column;
+    position: relative;
+
+    > img {
+      width: 55px;
+      height: 55px;
+      padding-bottom: 4px;
+      transition: transform 0.3s ease-in-out;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+    > span {
+      text-align: center;
+      transition: color 0.1s ease-in-out;
+    }
+
+    &:last-child {
+      transition: color 0.1s ease-in-out;
+      position: relative;
+
+      &:hover .talk-bubble {
+        display: block;
+        transform: translateY(-10px);
+        opacity: 1;
+      }
+      &:hover span {
+        color: $main-color2;
+      }
+    }
+  }
+}
+
+
+
+@media (max-width: 960px) {
+  .icon-container {
+    max-width: 400px;
+    gap: 10px;
+  }
+  .align-skill-set {
+    width: 40%;
+  }
+}
+
+@media (max-width: 800px) {
+  .sc3-skill-set {
+    @include dFlex();
+    padding: 30px 30px;
+    flex-direction: column;
+  }
+  .icon-container {
+    gap: 10px;
+  }
+  .align-skill-set {
+    width: 80%;
+    margin-bottom: 50px;
+  }
+}
+@media (max-width: 640px) {
+  .align-skill-set {
+    width: 90%;
+  }
+}
+@media (max-width: 520px) {
+  .sc3-skill-set {
+    padding: 30px 10px;
+  }
+  .icon-container {
+    max-width: 380px;
+    gap: 0;
+  }
+}
+@media (max-width: 420px) {
+  .icon-container {
+    max-width: 300px;
+    gap: 10px;
+  }
+  .talk-bubble-left:before {
+    left: 32px;
+  }
+  .talk-bubble {
+    left: 40px;
+    top: -165px;
+  }
+}
+@media (max-width: 340px) {
+  .icon-container {
+    max-width: 200px;
+    gap: 15px;
+  }
+  .sc3-skill-set {
+    padding: 30px 0px;
+  }
+  .talk-bubble-left:before {
+    left: 100px;
+  }
+  .talk-bubble {
+    font-family: "Karla";
+    font-size: 1.2rem;
+    font-weight: 500;
+    position: absolute;
+    left: 10px;
+    top: -165px;
+   
+  }
+
+}
