@@ -3,7 +3,6 @@
 footer {
   height: 184px;
   padding: $main-padding;
-  /* Flexbox-Einstellungen */
   @include dFlex($jc: space-between, $ai: center);
   flex-wrap: nowrap; 
   flex: 1;

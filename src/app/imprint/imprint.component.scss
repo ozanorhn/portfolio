@@ -1,14 +1,21 @@
 @import "../../styles.scss";
-div{
+
+div {
   font-size: 1.4rem;
-    height: 100vh;
-    width: 100%;
-    max-width: $main-max-width;
-    text-align: center;
+  height: 100vh;
+  width: 100%;
+  max-width: $main-max-width;
+  text-align: center;
+  background-image: url('../../assets/img/bg1.png');
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  background-position: center; 
 }
+
 h3{
     padding-top: 10%;
     font-size: 3rem;
+   
 }
 a {
   color: $main-color2;

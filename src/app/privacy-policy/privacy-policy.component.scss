@@ -1,6 +1,13 @@
 @import "../../styles.scss";
 
-div {
+.bg{
+  background-image: url('../../assets/img/bg1.png');
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  background-position: center; 
+}
+
+.content {
   max-width: $main-max-width;
   box-sizing: border-box;
   margin: 5%;

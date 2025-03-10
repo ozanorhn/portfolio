@@ -22,13 +22,14 @@
   
   // main container background
   $main-background: #1A2120;
-  $main-width: 100vw;
+  $main-width: 100%;
   $main-max-width: 100vw;
   $main-padding: 0 4%;
   
   *{
     scroll-behavior: smooth;
     box-sizing: border-box;
+    
   }
   button,
   a,
@@ -191,7 +192,7 @@
   }
 
   h2 {
-    font-size: 4rem; /
+    font-size: 4rem; 
 
   h3 {
     font-size: 2rem;
