@@ -9,11 +9,13 @@
         </div>
         <div class="switch">
           <input
-            id="language-toggle"
-            class="check-toggle"
-            type="checkbox"
-            (change)="onToggleChange($event)"
-          />
+  id="language-toggle"
+  class="check-toggle"
+  type="checkbox"
+  (change)="onToggleChange($event)"
+  [checked]="selectedLanguage === 'de'"
+/>
+
           <label for="language-toggle"> 
             <span class="lang en">EN</span>
             <span class="lang de">DE</span>

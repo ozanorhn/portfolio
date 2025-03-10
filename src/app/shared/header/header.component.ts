@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslationService } from '../../services/translate.service';
 import { CommonModule } from '@angular/common';
 import { ScrollService } from '../../services/scroll.service';
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -18,14 +19,27 @@ import { ScrollService } from '../../services/scroll.service';
 })
 export class HeaderComponent {
   translate = inject(TranslationService);
+  isMenuOpen = false;
+  selectedLanguage: string = 'en';
+
+  constructor(private scrollService: ScrollService) {
+    this.loadLanguage(); // Sprache beim Laden der Komponente setzen
+  }
 
   public onToggleChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const language = input.checked ? 'de' : 'en';
-    this.translate.switchLanguage(language);
+    this.selectedLanguage = input.checked ? 'de' : 'en';
+    this.translate.switchLanguage(this.selectedLanguage);
+    localStorage.setItem('language', this.selectedLanguage); // Sprache im localStorage speichern
   }
 
-  isMenuOpen = false;
+  loadLanguage(): void {
+    const savedLanguage = localStorage.getItem('language');
+    if (savedLanguage) {
+      this.selectedLanguage = savedLanguage;
+      this.translate.switchLanguage(this.selectedLanguage);
+    }
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -44,10 +58,10 @@ export class HeaderComponent {
     this.closeMenuEmitter.emit();
     this.isMenuOpen = false;
   }
+
   stopPropagation(event: Event) {
     event.stopPropagation();
   }
-  constructor(private scrollService: ScrollService) {}
 
   navigateWithOffset(targetId: string, offset: number = 100) {
     this.scrollService.navigateWithOffset(targetId, offset);
