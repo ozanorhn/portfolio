@@ -11,7 +11,7 @@ export class ProjectsService {
     {
       name: 'EL Pollo Loco',
       link_github: 'https://github.com/ozanorhn/El-Pollo-Loco',
-      live_link: '',
+      live_link: 'http://el-pollo-loco.ozan-orhan.com/',
       languages: ['JavaScript', 'HTML', 'CSS'],
       image: 'assets/img/el-pollo-loce.png',
       description_en:
@@ -22,7 +22,7 @@ export class ProjectsService {
     {
       name: 'Join',
       link_github: 'https://github.com/SilverBlure/Join',
-      live_link: '',
+      live_link: 'http://join.ozan-orhan.com',
       languages: ['JavaScript', 'Firebase', 'HTML', 'CSS'],
       image: 'assets/img/join.png',
       description_en:
@@ -33,13 +33,25 @@ export class ProjectsService {
     {
       name: 'Pokedex',
       link_github: 'https://github.com/ozanorhn/PokeDex',
-      live_link: '',
+      live_link: 'http://pokedex.ozan-orhan.com/',
       languages: ['JavaScript', 'Rest-Api', 'HTML', 'CSS'],
       image: 'assets/img/pokedex.png',
       description_en:
         'A Pokémon database featuring a vast collection of data on every Pokémon there is.',
       description_de:
         'Eine Pokémon-Datenbank mit einer Fülle an Informationen über jedes Pokémon, das es gibt.',
+    },
+
+    {
+      name: 'DaBubble - comming soon',
+      link_github: '',
+      live_link: '',
+      languages: ['Angular', 'TypeScript', 'Firebase', 'SCSS', ],
+      image: 'assets/img/Bildschirmfoto 2025-03-10 um 12.34.57.png',
+      description_en:
+        'Similar to Slack, this app enhances team communication with real-time messaging and well-structured channels.',
+      description_de:
+        'Ähnlich wie Slack optimiert diese App die Teamkommunikation mit Echtzeitnachrichten und klar strukturierten Kanälen.',
     },
   ];
 

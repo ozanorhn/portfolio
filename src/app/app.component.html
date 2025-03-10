@@ -1,7 +1,11 @@
-<app-header></app-header>
-<router-outlet>
-  <app-hero-section></app-hero-section>
-  <app-about-me-section></app-about-me-section>
-  <app-skills-section></app-skills-section>
-<app-projects-section></app-projects-section>
-</router-outlet>
+<div class="align-main-content">
+  <div class="align-footer-header header-align">
+    <app-header></app-header>
+  </div>
+
+  <router-outlet></router-outlet>
+
+  <div class="align-footer-header">
+    <app-footer></app-footer>
+  </div>
+</div>

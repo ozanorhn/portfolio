@@ -1,0 +1,30 @@
+@import "../../styles.scss";
+
+div {
+  max-width: $main-max-width;
+  box-sizing: border-box;
+  margin: 5%;
+}
+h1 {
+  font-size: clamp(2rem, 4vw, 6rem);
+  word-break: break-all;
+  margin-top: 0;
+}
+h2{
+    font-size: clamp(1.5rem, 3.5vw, 5rem);
+}
+h3 {
+  color: white;
+}
+a {
+  color: $main-color2;
+  word-break: break-all;
+}
+
+
+@media (max-width: 420px) {
+    div {
+        margin: 2% !important;
+        hyphens: auto;
+      }
+}

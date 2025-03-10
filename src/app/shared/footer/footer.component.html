@@ -1,1 +1,21 @@
-<p>footer works!</p>
+
+<footer>
+    <div class="left">
+        <div class="logo">
+            <button (click)="navigateWithOffset('hero', 100)">
+                <img class="logo1" src="assets/img/1.svg" alt="logo1-green" />
+                <img class="logo2" src="assets/img/LOGO (1).png" alt="logo2-green" />
+            </button>
+          </div>
+        <span>Web Developer</span>
+        <span>Hannover Germany</span>
+    </div>
+    <div class="middle">&#169; Ozan Orhan 2025</div>
+    <div class="right">
+        <a href="https://github.com/ozanorhn" target="_blank">Github</a>
+        <a href="https://www.linkedin.com/in/ozan-orhan-7014a22a3/" target="_blank">LinkedIn</a>
+        <a href="mailto:contact@ozan-orhan.com">Email</a>
+        <a href="imprint">{{ "imprint" | translate }}</a>
+        <a href="privacy-policy">{{ "privacy-policy" | translate }}</a>
+    </div>
+</footer>

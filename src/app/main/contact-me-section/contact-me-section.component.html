@@ -1,0 +1,96 @@
+<div id="contact1" class="contact-me-div">
+    <div class="left">
+      <h3>{{ "sc6" | translate }}</h3>
+      <h2>{{ "work" | translate }}</h2>
+      <h4>{{ "problem" | translate }}</h4>
+      <p>
+        {{ "p8" | translate }}
+        <br />  <br /> 
+        {{ "p8.3" | translate }} <span>{{ "p8.6" | translate }}</span>
+      </p>
+    </div>
+  
+    <div class="right">
+      <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
+        <div class="line"></div>
+        <label for="name">{{ "q1" | translate }}</label>
+        <input
+          #name="ngModel"
+          [(ngModel)]="contactData.name"
+          name="name"
+          id="name"
+          type="text"
+          placeholder="{{ 'placeholder1' | translate }}"
+          required
+        />
+        @if(!name.valid && name.touched && !name.disabled){
+        <span>{{ "err1" | translate }}</span>
+        }
+        <div class="line"></div>
+        <label for="email">{{ "q2" | translate }}</label>
+  
+        <input
+          #email="ngModel"
+          [(ngModel)]="contactData.email"
+          name="email"
+          id="email"
+          type="email"
+          placeholder="{{ 'placeholder2' | translate }}"
+          required
+          pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+        />
+        @if(!email.valid && email.touched && !email.disabled){
+        <span>{{ "err2" | translate }}</span>
+        }
+        <div class="line"></div>
+        <label for="text">{{ "q3" | translate }}</label>
+  
+        <textarea
+          #message="ngModel"
+          [(ngModel)]="contactData.message"
+          name="message"
+          id="message"
+          type="text"
+          placeholder="{{ 'placeholder3' | translate }}"
+          required
+        ></textarea>
+        @if(!message.valid && message.touched && !message.disabled){
+        <span>{{ "err3" | translate }}</span>
+        }
+        <div class="line"></div>
+  
+        <p class="custom-checkbox">
+          <input
+            #privacy="ngModel"
+            [(ngModel)]="checkboxState"
+            type="checkbox"
+            id="privacy"
+            name="privacy"
+            required
+            aria-labelledby="privacyLabel"
+          />
+          <span class="checkbox-label">
+            <span>{{ "policy1" | translate }}</span><a href="privacy-policy" class="policy"> {{ "policy2" | translate }}</a><span> {{ "policy3" | translate }}</span> 
+          
+          </span>
+        </p>
+        @if(!privacy.valid && privacy.touched && !privacy.disabled){
+        <span>Please accept the privacy policy.</span>
+        }
+        <div>
+          <button type="submit" value="submit" title="Submit">{{ "hello" | translate }}</button>
+        </div>
+        <!-- popup.component.html -->
+  <div class="popup" [ngClass]="{'visible': showPopup}" (click)="closePopup()">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+      <span class="close" (click)="closePopup()">&times;</span>
+      <h2>{{ "popup-1" | translate }}</h2>
+      <p>{{ "popup-2" | translate }}</p>
+      <p>{{ "popup-3" | translate }}</p>
+    </div>
+  </div>
+  
+      </form>
+    </div>
+  </div>
+  

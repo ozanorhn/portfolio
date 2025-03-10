@@ -1,0 +1,26 @@
+<div id="projects" class="sc4-featured-p">
+    <div class="headline">
+      <h3>Portfolio</h3>
+      <h2>{{ "projects" | translate }}</h2>
+      <p>
+        {{ "p7" | translate }}
+      </p>
+      <div class="line"></div>
+    </div>
+    <div class="project-section">
+      @for(project of service.projects; track $index){
+  
+      <app-single-project
+        [project]="project"
+        (click)="openProject($index)" aria-label="open the project"
+      ></app-single-project>
+      }
+    </div>
+  
+    <app-project-pop-up
+      *ngIf="popupVisible"
+      [project]="selectedProject"
+      (close)="closePopup()"
+      aria-label="close the project"
+    ></app-project-pop-up>
+  </div>

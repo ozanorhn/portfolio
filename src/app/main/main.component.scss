@@ -1,0 +1,37 @@
+@import "../../styles.scss";
+
+#main-content-div {
+  width: $main-width;
+  max-width: $main-max-width;
+  @include dFlex($ai: none);
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+#scrollToTop {
+  position: fixed;
+  @include dFlex();
+  bottom: 20px;
+  left: 50%;
+
+  transform: translate(-50%);
+  display: block;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: transparent;
+  z-index: 10;
+  > img {
+    width: 40px;
+  }
+}
+
+#scrollToTop:hover {
+  background-color: $main-color3;
+  > img {
+    filter: brightness(0) saturate(100%) invert(76%) sepia(20%) saturate(1108%)
+      hue-rotate(118deg) brightness(86%) contrast(103%);
+    transform: scale(1.3);
+  }
+}

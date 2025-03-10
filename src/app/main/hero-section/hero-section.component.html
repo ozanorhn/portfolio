@@ -1,0 +1,65 @@
+<div id="hero" class="sc1-hero">
+  <div class="hero">
+    <div class="left">
+      <div class="arrow-container">
+        <button
+          (click)="navigateWithOffset('about-me', 100)"
+          aria-label="scroll to about-me section"
+        >
+          <img src="assets/icons/Vector.svg" alt="d" />
+        </button>
+      </div>
+      <div class="line"></div>
+    </div>
+
+    <div class="center">
+      <span>{{ "subtitle" | translate }}</span>
+
+      <h1>Ozan Orhan</h1>
+      <div class="button-div">
+        <button
+          (click)="navigateWithOffset('projects', 100)"
+          aria-label="scroll to projects section"
+          class="slide-button"
+        >
+          <span class="slide-text">{{ "button1" | translate }}</span>
+        </button>
+
+        <button
+          (click)="navigateWithOffset('contact', 100)"
+          aria-label="scroll to contact section"
+          class="slide-button"
+        >
+          <span class="slide-text">{{ "button2" | translate }}</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="right">
+      <a
+        href="mailto:contact@ozan-orhan.com"
+        class="d-none"
+        aria-label="send message"
+        ><img src="assets/icons/mail.png" alt="Mail icon"
+      /></a>
+      <a
+        href="mailto:contact@ozan-orhan.com"
+        class="align-mail no-dot"
+        aria-label="send message"
+        >contact&#64;ozan-orhan.com</a
+      >
+
+      <a
+        href="https://github.com/ozanorhn"
+        target="_blank"
+        aria-label="open github"
+        ><img src="assets/icons/github.png" alt="Github icon"
+      /></a>
+      <a href="https://www.linkedin.com/in/ozan-orhan-7014a22a3/" target="_blank" aria-label="open LinkedIn"
+        ><img src="assets/icons/linkedin.png" alt="LinkedIn icon"
+      /></a>
+      <div class="line"></div>
+    </div>
+  </div>
+  <app-banner></app-banner>
+</div>

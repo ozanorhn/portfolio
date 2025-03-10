@@ -1,0 +1,66 @@
+@import "../../../styles.scss";
+
+.sc4-featured-p {
+  background-color: $main-background;
+  padding: $main-padding;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+}
+
+.line {
+  height: 1px;
+  width: 70%;
+  background-color: $main-color2;
+}
+
+@media (max-width: 1150px) {
+  .sc4-featured-p {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 800px) {
+  .line {
+    width: 100%;
+  }
+}
+@media (max-width: 580px) {
+  .sc4-featured-p {
+    padding: 16px;
+
+    > p {
+      text-align: justify;
+    }
+  }
+  h2{
+    font-size: 2.2rem;
+    hyphens: auto;
+    // word-break: break-all;
+  }
+}
+
+@media (max-width: 440px) {
+  .sc4-featured-p {
+    padding: 16px;
+    .headline {
+      > p {
+        text-align: justify;
+        hyphens: auto;
+      }
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .sc4-featured-p {
+    padding: 8px;
+    .headline {
+      > p {
+        font-size: 0.9rem;
+        word-spacing: -.2rem;
+      }
+      
+    }
+  }
+  
+}

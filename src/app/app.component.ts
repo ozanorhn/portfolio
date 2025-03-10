@@ -2,15 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./shared/header/header.component";
-import { HeroSectionComponent } from './hero-section/hero-section.component';
-import { AboutMeSectionComponent } from './about-me-section/about-me-section.component';
-import { SkillsSectionComponent } from './skills-section/skills-section.component';
-import { ProjectsSectionComponent } from './projects-section/projects-section.component';
+import { FooterComponent } from "./shared/footer/footer.component";
+import { MainComponent } from './main/main.component';
+import { ImprintComponent } from './imprint/imprint.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet ,HeaderComponent, HeroSectionComponent, AboutMeSectionComponent, SkillsSectionComponent, ProjectsSectionComponent],
+  imports: [CommonModule, RouterOutlet, MainComponent, FooterComponent, ImprintComponent, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
