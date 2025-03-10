@@ -22,8 +22,8 @@
   
   // main container background
   $main-background: #1A2120;
-  $main-width: 100%;
-  $main-max-width: 1920px;
+  $main-width: 100vw;
+  $main-max-width: 100vw;
   $main-padding: 0 4%;
   
   *{
@@ -184,6 +184,47 @@
     }
   }
   
+
+@media (min-width: 2300px) {
+  body {
+    font-size: 1.5rem; 
+  }
+
+  h2 {
+    font-size: 4rem; /
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  .slide-button {
+    height: 60px;
+    padding: 20px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  body {
+    font-size: 0.8rem; 
+  }
+
+  h2 {
+    font-size: 2rem; 
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  .slide-button {
+    height: 40px;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
   .d-none{
     display: none;
   }
+}

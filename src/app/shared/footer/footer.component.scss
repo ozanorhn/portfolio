@@ -1,12 +1,11 @@
 @import '../../../styles.scss';
 
 footer {
-  /* Basis-Layout für große Screens */
-  height: 184px; /* Wenn gewünscht, sonst entfernen oder auf auto setzen */
+  height: 184px;
   padding: $main-padding;
   /* Flexbox-Einstellungen */
   @include dFlex($jc: space-between, $ai: center);
-  flex-wrap: nowrap; /* Keine Zeilenumbrüche für größere Bildschirme */
+  flex-wrap: nowrap; 
   flex: 1;
 
   .left {
@@ -58,7 +57,6 @@ footer {
       }
     }
 
-    /* Falls du in .left weitere Elemente hast, kannst du hier Flex anpassen */
     @include dFlex($jc: space-between, $ai: flex-start, $g: 8px);
     flex-direction: column;
   }
@@ -78,14 +76,14 @@ footer {
 margin-top: 40px;
 
     .right {
-      order: 2; /* .right sitzt daneben rechts */
+      order: 2; 
       flex: 0 0 auto;
       margin-bottom: 10px;
     }
 
     .middle {
-      order: 3; /* .middle soll unten sein */
-      flex: 0 0 100%; /* Nimmt ganze Zeile ein, damit es unter left+right sitzt */
+      order: 3; 
+      flex: 0 0 100%; 
       margin-top: 10px;
       display: flex; 
       justify-content: center;
