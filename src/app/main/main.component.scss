@@ -1,11 +1,14 @@
 @import "../../styles.scss";
 
+
+
 #main-content-div {
   width: $main-width;
   max-width: $main-max-width;
   @include dFlex($ai: none);
   flex-direction: column;
   box-sizing: border-box;
+  overflow-x: hidden !important;
 }
 
 #scrollToTop {

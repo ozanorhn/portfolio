@@ -1,9 +1,7 @@
 @import "../../../styles.scss";
 
 .contact-me-div {
-  border-top: 60px solid $main-background;
   background-color: $main-background;
-  padding-bottom: 60px;
   @include dFlex($jc: space-around, $ai: flex-start);
 
   .left {
@@ -179,8 +177,7 @@
   .contact-me-div {
     align-items: center;
     flex-direction: column;
-    .left,
-    .right {
+    .left, .right{
       width: 90%;
     }
   }
@@ -203,14 +200,15 @@
     border-radius: 24px;
     width: 90%;
   }
-  h2 {
+  h2{
     font-size: 2rem;
   }
 }
 
-@media (max-height: 500px) and (min-width: 601px) {
+@media (max-height: 500px) and (min-width: 601px){
   .popup-content {
     margin: 0;
     width: 80%;
   }
+
 }

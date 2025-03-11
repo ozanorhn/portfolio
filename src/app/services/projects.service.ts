@@ -46,7 +46,7 @@ export class ProjectsService {
       name: 'DaBubble - comming soon',
       link_github: '',
       live_link: '',
-      languages: ['Angular', 'TypeScript', 'Firebase', 'SCSS', ],
+      languages: ['Angular', 'TypeScript', 'SCSS', ],
       image: 'assets/img/Bildschirmfoto 2025-03-10 um 12.34.57.png',
       description_en:
         'Similar to Slack, this app enhances team communication with real-time messaging and well-structured channels.',
