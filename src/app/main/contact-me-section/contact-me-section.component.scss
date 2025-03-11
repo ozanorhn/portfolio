@@ -3,7 +3,7 @@
 .contact-me-div {
   background-color: $main-background;
   @include dFlex($jc: space-around, $ai: flex-start);
-
+margin-top: 60px;
   .left {
     width: 40%;
     hyphens: auto;
