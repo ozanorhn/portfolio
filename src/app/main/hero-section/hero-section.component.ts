@@ -8,7 +8,7 @@ import { HeaderComponent } from "../../shared/header/header.component";
 @Component({
   selector: 'app-hero-section',
   standalone: true, 
-  imports: [BannerComponent, TranslateModule, HeaderComponent], 
+  imports: [BannerComponent, TranslateModule], 
   templateUrl: './hero-section.component.html',
   styleUrls: ['./hero-section.component.scss']
 })

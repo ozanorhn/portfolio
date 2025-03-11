@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-privacy-policy',
   standalone: true,
-  imports: [TranslateModule, HeaderComponent],
+  imports: [TranslateModule],
   templateUrl: './privacy-policy.component.html',
   styleUrls: ['./privacy-policy.component.scss'] 
 })

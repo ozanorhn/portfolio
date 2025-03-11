@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-imprint',
   standalone: true,
-  imports: [TranslateModule, HeaderComponent],
+  imports: [TranslateModule],
   templateUrl: './imprint.component.html',
   styleUrls: ['./imprint.component.scss'] // Korrektur hier (Plural)
 })

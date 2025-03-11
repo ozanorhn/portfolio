@@ -1,5 +1,4 @@
 import { Component, HostListener } from '@angular/core';
-import { HeaderComponent } from "../shared/header/header.component";
 import { AboutMeSectionComponent } from "./about-me-section/about-me-section.component";
 import { ProjectsSectionComponent } from "./projects-section/projects-section.component";
 import { ContactMeSectionComponent } from "./contact-me-section/contact-me-section.component";
@@ -9,7 +8,7 @@ import { HeroSectionComponent } from "./hero-section/hero-section.component";
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [HeaderComponent, AboutMeSectionComponent, ProjectsSectionComponent, ContactMeSectionComponent, SkillsSectionComponent, HeroSectionComponent],
+  imports: [AboutMeSectionComponent, ProjectsSectionComponent, ContactMeSectionComponent, SkillsSectionComponent, HeroSectionComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
