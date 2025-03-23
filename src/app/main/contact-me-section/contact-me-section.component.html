@@ -1,16 +1,17 @@
 <div id="contact1" class="contact-me-div">
-    <div class="left">
-      <h3>{{ "sc6" | translate }}</h3>
-      <h2>{{ "work" | translate }}</h2>
-      <h4>{{ "problem" | translate }}</h4>
-      <p>
-        {{ "p8" | translate }}
-        <br />  <br /> 
-        {{ "p8.3" | translate }} <span>{{ "p8.6" | translate }}</span>
-      </p>
-    </div>
+  <div class="left slide-in-left"> <!-- Animation hier -->
+    <h3>{{ "sc6" | translate }}</h3>
+    <h2>{{ "work" | translate }}</h2>
+    <h4>{{ "problem" | translate }}</h4>
+    <p>
+      {{ "p8" | translate }}
+      <br /><br />
+      {{ "p8.3" | translate }} <span>{{ "p8.6" | translate }}</span>
+    </p>
+  </div>
+
   
-    <div class="right">
+    <div class="right slide-in-right">
       <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
         <div class="line"></div>
         <label for="name">{{ "q1" | translate }}</label>

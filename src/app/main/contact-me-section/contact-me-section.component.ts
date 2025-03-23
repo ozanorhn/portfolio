@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationService } from '../../services/translate.service';
@@ -13,9 +13,24 @@ import { CommonModule } from '@angular/common';
   styleUrl: './contact-me-section.component.scss'
 })
 export class ContactMeSectionComponent {
-
   translate = inject(TranslationService);
   http = inject(HttpClient);
+  private el = inject(ElementRef); // <–– DOM Zugriff
+
+  ngAfterViewInit(): void {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    const elements = this.el.nativeElement.querySelectorAll('.slide-in-left, .slide-in-right');
+    elements.forEach((el: HTMLElement) => observer.observe(el));
+  }
 
   contactData = {
     name: '',
@@ -74,3 +89,4 @@ export class ContactMeSectionComponent {
     this.showPopup = false;
   }
 }
+

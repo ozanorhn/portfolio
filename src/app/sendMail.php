@@ -1,36 +1,42 @@
 <?php
 
 switch ($_SERVER['REQUEST_METHOD']) {
-    case ("OPTIONS"): //Allow preflighting to take place.
+    case ("OPTIONS"): // Allow preflighting to take place.
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: POST");
         header("Access-Control-Allow-Headers: content-type");
         exit;
-        case("POST"): 
-            header("Access-Control-Allow-Origin: *");
-
-            $json = file_get_contents('php://input');
-            //parse the Payload from text format to Object
-            $params = json_decode($json);
     
-            $email = $params->email;
-            $name = $params->name;
-            $message = $params->message;
-    
-            $recipient = 'contact@ozan-orhan.com';
-            $subject = "Contact From <$email>";
-            $message = "From:" . $name . "<br>" . $message ;
-    
-            $headers   = array();
-            $headers[] = 'MIME-Version: 1.0';
-            $headers[] = 'Content-type: text/html; charset=utf-8';
+    case("POST"): 
+        header("Access-Control-Allow-Origin: *");
 
-            // Additional headers
-            $headers[] = "From: noreply@mywebsite.com";
+        $json = file_get_contents('php://input');
+        $params = json_decode($json);
 
-            mail($recipient, $subject, $message, implode("\r\n", $headers));
-            break;
-        default: //Reject any non POST or OPTIONS requests.
-            header("Allow: POST", true, 405);
-            exit;
-    } 
+        $email = htmlspecialchars($params->email);
+        $name = htmlspecialchars($params->name);
+        $message = nl2br(htmlspecialchars($params->message));
+
+        $recipient = 'contact@ozan-orhan.com';
+        $subject = "Contact Form Message from $name";
+
+        $body = "From: $name &lt;$email&gt;<br><br>" . $message;
+
+        $headers   = array();
+        $headers[] = 'MIME-Version: 1.0';
+        $headers[] = 'Content-type: text/html; charset=utf-8';
+        $headers[] = "From: noreply@mywebsite.com";
+        $headers[] = "Reply-To: $email"; 
+        $headers[] = "X-Mailer: PHP/" . phpversion();
+
+
+        mail($recipient, $subject, $body, implode("\r\n", $headers));
+        
+
+        echo json_encode(["status" => "success", "message" => "Email sent successfully"]);
+        break;
+
+    default: 
+        header("Allow: POST", true, 405);
+        exit;
+}

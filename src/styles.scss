@@ -190,3 +190,28 @@ h3 {
 .d-none{
   display: none;
 }
+
+.slide-in-left,
+.slide-in-right,
+.slide-in-up {
+  opacity: 0;
+  transition: all 0.8s ease-out;
+  position: relative;
+}
+
+.slide-in-left {
+  transform: translateX(-80px);
+}
+
+.slide-in-right {
+  transform: translateX(80px);
+}
+
+.slide-in-up {
+  transform: translateY(60px);
+}
+
+.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}

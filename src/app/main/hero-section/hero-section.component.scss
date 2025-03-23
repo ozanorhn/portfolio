@@ -226,3 +226,39 @@
     margin-bottom: 250px;
   }
 }
+
+.epic-subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $main-color2; 
+  text-shadow:
+    0 0 5px rgba(67, 214, 204, 0.6),
+    0 0 10px rgba(67, 214, 204, 0.5),
+    0 0 20px rgba(67, 214, 204, 0.4),
+    0 0 40px rgba(67, 214, 204, 0.3);
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0% {
+    text-shadow:
+      0 0 5px rgba(67, 214, 204, 0.4),
+      0 0 10px rgba(67, 214, 204, 0.3),
+      0 0 20px rgba(67, 214, 204, 0.2),
+      0 0 40px rgba(67, 214, 204, 0.1);
+  }
+  50% {
+    text-shadow:
+      0 0 10px rgba(67, 214, 204, 0.8),
+      0 0 20px rgba(67, 214, 204, 0.6),
+      0 0 30px rgba(67, 214, 204, 0.5),
+      0 0 50px rgba(67, 214, 204, 0.4);
+  }
+  100% {
+    text-shadow:
+      0 0 5px rgba(67, 214, 204, 0.4),
+      0 0 10px rgba(67, 214, 204, 0.3),
+      0 0 20px rgba(67, 214, 204, 0.2),
+      0 0 40px rgba(67, 214, 204, 0.1);
+  }
+}
