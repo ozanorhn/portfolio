@@ -6,8 +6,7 @@
   width: $main-width;
   background-size: cover;
   background-position: center;
-  background-image: url('../../../assets/img/bg1.png');
-
+  background-image: url("../../../assets/img/bg1.png");
 }
 .hero {
   height: calc(100vh - 100px);
@@ -25,18 +24,54 @@
   > h1 {
     font-size: clamp(4.5rem, 8vw, 8rem);
     margin: 3% 0;
-    animation: fadeIn 2s ease-in-out, slideUp 1.5s ease-in-out;
     display: inline-block;
-    transition: transform 0.5s ease-in-out, color 0.3s ease-in-out;
+    color: transparent;
     position: relative;
+    animation: textReveal 2.5s ease forwards;
+    background: linear-gradient(90deg, $main-color2, white);
+    background-size: 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
+
+  > h1::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 0;
+    background-color: $main-color2;
+    animation: underlineTrace 2.5s ease forwards;
+  }
+
   > h1:hover {
-    transform: rotateX(360deg) scale(1.1);
-    color: $main-color2;
-    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+    filter: drop-shadow(0 0 6px $main-color2);
   }
+  @keyframes textReveal {
+    0% {
+      background-position: 200%;
+    }
+    100% {
+      background-position: 0%;
+    }
+  }
+
+  @keyframes underlineTrace {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
   .button-div {
-    @include dFlex($g: 40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
   }
 }
 @keyframes fadeIn {
@@ -210,11 +245,8 @@
   }
 
   .center[_ngcontent-ng-c3744515764] {
-
     bottom: 61%;
-}
-
-
+  }
 }
 
 @media (max-height: 800px) {
@@ -230,35 +262,19 @@
 .epic-subtitle {
   font-size: 1.5rem;
   font-weight: 600;
-  color: $main-color2; 
-  text-shadow:
-    0 0 5px rgba(67, 214, 204, 0.6),
-    0 0 10px rgba(67, 214, 204, 0.5),
-    0 0 20px rgba(67, 214, 204, 0.4),
-    0 0 40px rgba(67, 214, 204, 0.3);
-  animation: glowPulse 2.5s ease-in-out infinite;
+  color: $main-color2;
+  text-shadow: 0 0 4px rgba(67, 214, 204, 0.3), 0 0 8px rgba(67, 214, 204, 0.2),
+    0 0 12px rgba(67, 214, 204, 0.1);
+  animation: glowPulse 3s ease-in-out infinite;
 }
-
 @keyframes glowPulse {
-  0% {
-    text-shadow:
-      0 0 5px rgba(67, 214, 204, 0.4),
-      0 0 10px rgba(67, 214, 204, 0.3),
-      0 0 20px rgba(67, 214, 204, 0.2),
-      0 0 40px rgba(67, 214, 204, 0.1);
+  0%,
+  100% {
+    text-shadow: 0 0 3px rgba(67, 214, 204, 0.2),
+      0 0 6px rgba(67, 214, 204, 0.1), 0 0 10px rgba(67, 214, 204, 0.05);
   }
   50% {
-    text-shadow:
-      0 0 10px rgba(67, 214, 204, 0.8),
-      0 0 20px rgba(67, 214, 204, 0.6),
-      0 0 30px rgba(67, 214, 204, 0.5),
-      0 0 50px rgba(67, 214, 204, 0.4);
-  }
-  100% {
-    text-shadow:
-      0 0 5px rgba(67, 214, 204, 0.4),
-      0 0 10px rgba(67, 214, 204, 0.3),
-      0 0 20px rgba(67, 214, 204, 0.2),
-      0 0 40px rgba(67, 214, 204, 0.1);
+    text-shadow: 0 0 5px rgba(67, 214, 204, 0.4),
+      0 0 10px rgba(67, 214, 204, 0.25), 0 0 16px rgba(67, 214, 204, 0.15);
   }
 }
