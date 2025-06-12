@@ -43,9 +43,9 @@ export class ProjectsService {
     },
 
     {
-      name: 'DaBubble - comming soon',
-      link_github: '',
-      live_link: '',
+      name: 'DaBubble',
+      link_github: 'https://github.com/ozanorhn/DaBubble',
+      live_link: 'http://dabubble.ozan-orhan.com/',
       languages: ['Angular', 'TypeScript', 'SCSS', ],
       image: 'assets/img/Bildschirmfoto 2025-03-10 um 12.34.57.png',
       description_en:
