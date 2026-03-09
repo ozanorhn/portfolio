@@ -1,0 +1,117 @@
+@import 'styles/variables';
+
+.contact {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  background: radial-gradient(circle at 50% 0%, rgba(0, 113, 227, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact-header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: $spacing-3xl;
+
+  h2 {
+    margin-bottom: $spacing-md;
+  }
+
+  p {
+    font-size: $font-size-body;
+    color: $color-text-secondary;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-lg;
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: $breakpoint-tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-card {
+  position: relative;
+  padding: $spacing-2xl;
+  background: $color-glass;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  text-decoration: none;
+  transition: $transition-base;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  cursor: pointer;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  &:hover {
+    border-color: $color-accent;
+    background: $color-glass-light;
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 113, 227, 0.15);
+
+    &::before {
+      left: 100%;
+    }
+
+    .contact-arrow {
+      transform: translateX(4px);
+    }
+
+    .contact-icon {
+      transform: scale(1.2) rotate(-5deg);
+    }
+  }
+
+  h3 {
+    font-size: 20px;
+    color: $color-text-primary;
+    margin: 0;
+  }
+
+  p {
+    font-size: $font-size-body-small;
+    color: $color-text-secondary;
+    margin: 0;
+  }
+}
+
+.contact-icon {
+  font-size: 32px;
+  transition: $transition-fast;
+}
+
+.contact-arrow {
+  align-self: flex-start;
+  color: $color-accent;
+  font-size: 20px;
+  transition: $transition-fast;
+  margin-top: auto;
+}

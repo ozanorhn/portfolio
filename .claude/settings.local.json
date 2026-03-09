@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --version)",
+      "Bash(npm --version)",
+      "Bash(ng version)",
+      "Bash(ng new . --standalone --routing --style=scss --skip-git --package-manager=npm --skip-install)",
+      "Read(//Users/ozan/Desktop/**)",
+      "Bash(ng new portfolio --standalone --routing --style=scss --skip-git --skip-install)"
+    ]
+  }
+}

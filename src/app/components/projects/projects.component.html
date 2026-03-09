@@ -1,0 +1,17 @@
+<section id="projects" class="projects">
+  <div class="container">
+    <div appReveal class="projects-header">
+      <h2>Projekte</h2>
+      <p class="projects-subtitle">Ausgewählte Arbeiten und Innovationen</p>
+    </div>
+
+    <div class="projects-list">
+      <app-project-card
+        *ngFor="let project of projects; let i = index"
+        [project]="project"
+        appReveal
+        [revealDelay]="i * 150"
+      ></app-project-card>
+    </div>
+  </div>
+</section>

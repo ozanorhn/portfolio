@@ -1,0 +1,76 @@
+@import 'styles/variables';
+
+.footer {
+  border-top: 1px solid $color-border;
+  padding: $spacing-2xl $container-padding;
+  margin-top: $spacing-section;
+  background: $color-black;
+  position: relative;
+  z-index: 10;
+}
+
+.footer-content {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-2xl;
+  flex-wrap: wrap;
+
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.footer-text {
+  font-size: $font-size-body-small;
+  color: $color-text-secondary;
+  margin: 0;
+}
+
+.footer-scroll-top {
+  font-size: $font-size-body-small;
+  color: $color-text-secondary;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: $transition-fast;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-md;
+
+  &:hover {
+    color: $color-accent;
+    background: $color-glass;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    width: 100%;
+  }
+}
+
+.footer-divider {
+  height: 1px;
+  background: $color-border;
+  margin: $spacing-lg 0;
+}
+
+.footer-bottom {
+  text-align: center;
+}
+
+.footer-credit {
+  font-size: $font-size-body-small;
+  color: $color-text-tertiary;
+  margin: 0;
+
+  .heart {
+    animation: pulse 2s ease-in-out infinite;
+  }
+}

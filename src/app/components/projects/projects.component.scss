@@ -1,0 +1,31 @@
+@import 'styles/variables';
+
+.projects {
+  position: relative;
+}
+
+.projects-header {
+  text-align: center;
+  margin-bottom: $spacing-3xl;
+
+  h2 {
+    margin-bottom: $spacing-md;
+  }
+}
+
+.projects-subtitle {
+  font-size: $font-size-body;
+  color: $color-text-secondary;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3xl;
+
+  @media (max-width: $breakpoint-tablet) {
+    gap: $spacing-2xl;
+  }
+}

@@ -1,0 +1,143 @@
+@import './variables';
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: $font-family;
+  font-size: $font-size-body;
+  font-weight: $font-weight-regular;
+  line-height: 1.6;
+  color: $color-text-primary;
+  background: $color-black;
+  overflow-x: hidden;
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(48px, 8vw, 96px);
+}
+
+h2 {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: $font-weight-semibold;
+}
+
+h3 {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: $font-weight-semibold;
+}
+
+h4 {
+  font-size: 24px;
+  font-weight: $font-weight-semibold;
+}
+
+h5 {
+  font-size: 19px;
+  font-weight: $font-weight-semibold;
+}
+
+h6 {
+  font-size: 17px;
+  font-weight: $font-weight-semibold;
+}
+
+// Paragraphs
+p {
+  margin: 0;
+  padding: 0;
+  font-size: $font-size-body;
+  line-height: 1.6;
+  color: $color-text-primary;
+
+  &.secondary {
+    color: $color-text-secondary;
+    font-size: $font-size-body;
+    line-height: 1.6;
+  }
+
+  &.tertiary {
+    color: $color-text-tertiary;
+    font-size: $font-size-body-small;
+  }
+}
+
+// Links
+a {
+  color: $color-accent;
+  text-decoration: none;
+  transition: $transition-fast;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-accent-hover;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+// Code
+code, pre {
+  font-family: $font-family-mono;
+  background: $color-glass;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-body-small;
+}
+
+pre {
+  padding: $spacing-lg;
+  overflow-x: auto;
+}
+
+// Small text
+small {
+  font-size: $font-size-body-small;
+  color: $color-text-secondary;
+}
+
+// Strong
+strong {
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+// Utility classes
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: $color-text-primary;
+}
+
+.text-secondary {
+  color: $color-text-secondary;
+}
+
+.text-accent {
+  color: $color-accent;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #0071e3 0%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
