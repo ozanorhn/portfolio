@@ -17,7 +17,9 @@
         appReveal
         [revealDelay]="i * 150"
       >
-        <div class="contact-icon">{{ contact.icon }}</div>
+        <div class="contact-icon">
+          <lucide-icon [img]="contact.icon" [size]="28" strokeWidth="1.5"></lucide-icon>
+        </div>
         <h3>{{ contact.label }}</h3>
         <p>{{ contact.value }}</p>
         <span class="contact-arrow">→</span>

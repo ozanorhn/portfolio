@@ -34,21 +34,39 @@
 
 .gradient-blob {
   position: absolute;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(0, 113, 227, 0.1) 0%, transparent 70%);
-  border-radius: 50%;
-  top: 10%;
-  right: 10%;
   filter: blur(60px);
-  animation: float 6s ease-in-out infinite;
 
-  @media (max-width: $breakpoint-tablet) {
-    width: 300px;
-    height: 300px;
-    right: -50px;
+  &--blue {
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(0, 113, 227, 0.06) 0%, transparent 70%);
+    top: 10%;
+    right: 10%;
+    animation: float 6s ease-in-out infinite;
+
+    @media (max-width: $breakpoint-tablet) {
+      width: 200px;
+      height: 200px;
+      right: -50px;
+    }
+  }
+
+  &--violet {
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%);
+    top: 50%;
+    left: 5%;
+    animation: float 8s ease-in-out infinite reverse;
+
+    @media (max-width: $breakpoint-tablet) {
+      width: 180px;
+      height: 180px;
+      left: -40px;
+    }
   }
 }
+
 
 .hero-content {
   position: relative;
@@ -64,6 +82,16 @@
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
+.hero-eyebrow {
+  font-size: $font-size-label;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $color-accent;
+  margin: 0 0 $spacing-md 0;
+  animation: fadeInDown 0.6s ease-out forwards;
+}
+
 .hero-title {
   font-size: clamp(56px, 10vw, 96px);
   font-weight: $font-weight-bold;
@@ -71,7 +99,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.003em;
   margin-bottom: $spacing-lg;
   line-height: 1.1;
 
@@ -105,7 +133,7 @@
   font-size: clamp(17px, 2vw, 19px);
   color: $color-text-secondary;
   line-height: 1.6;
-  max-width: 600px;
+  max-width: 528px;
   margin: 0 auto $spacing-3xl;
 
   @media (max-width: $breakpoint-tablet) {
@@ -115,6 +143,29 @@
   @media (max-width: $breakpoint-mobile) {
     font-size: 16px;
   }
+}
+
+.accent-violet {
+  color: $color-accent-ai !important;
+}
+
+.hero-tags {
+  display: flex;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: $spacing-xl;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+
+.hero-tag {
+  font-size: $font-size-label;
+  padding: 5px $spacing-md;
+  border: 1px solid $color-border;
+  border-radius: 100px;
+  color: $color-text-secondary;
+  background: $color-surface;
+  white-space: nowrap;
 }
 
 .hero-buttons {

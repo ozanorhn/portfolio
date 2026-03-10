@@ -3,18 +3,9 @@
 .contact {
   position: relative;
   overflow: hidden;
+  background: $color-light-bg;
 }
 
-.contact-gradient {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 400px;
-  background: radial-gradient(circle at 50% 0%, rgba(0, 113, 227, 0.1) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
 
 .contact-header {
   position: relative;
@@ -24,11 +15,12 @@
 
   h2 {
     margin-bottom: $spacing-md;
+    color: $color-text-on-light;
   }
 
   p {
     font-size: $font-size-body;
-    color: $color-text-secondary;
+    color: $color-text-secondary-on-light;
     max-width: 500px;
     margin: 0 auto;
   }
@@ -49,9 +41,10 @@
 .contact-card {
   position: relative;
   padding: $spacing-2xl;
-  background: $color-glass;
-  border: 1px solid $color-border;
-  border-radius: $radius-lg;
+  background: $color-light-bg-card;
+  border: none;
+  border-radius: $radius-card;
+  box-shadow: $shadow-card-light;
   text-decoration: none;
   transition: $transition-base;
   display: flex;
@@ -60,51 +53,41 @@
   cursor: pointer;
   overflow: hidden;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.5s ease;
-  }
-
   &:hover {
-    border-color: $color-accent;
-    background: $color-glass-light;
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 113, 227, 0.15);
-
-    &::before {
-      left: 100%;
-    }
+    border-color: $color-border-hover;
+    background: $color-surface-hover;
+    transform: translateY(-4px);
+    box-shadow: $shadow-card-light-hover;
 
     .contact-arrow {
       transform: translateX(4px);
     }
 
     .contact-icon {
-      transform: scale(1.2) rotate(-5deg);
+      color: $color-accent;
     }
   }
 
   h3 {
     font-size: 20px;
-    color: $color-text-primary;
+    color: $color-text-on-light;
     margin: 0;
   }
 
   p {
     font-size: $font-size-body-small;
-    color: $color-text-secondary;
+    color: $color-text-secondary-on-light;
     margin: 0;
   }
 }
 
 .contact-icon {
-  font-size: 32px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-accent;
   transition: $transition-fast;
 }
 

@@ -1,8 +1,8 @@
 <section id="skills" class="skills">
   <div class="container">
     <div appReveal class="skills-header">
-      <h2>Tech Stack</h2>
-      <p class="skills-subtitle">Meine Kompetenzen und Werkzeuge</p>
+      <h2>KI-Kompetenzen</h2>
+      <p class="skills-subtitle">10 Kernbereiche — von der Idee bis zur produktionsreifen KI-Lösung</p>
     </div>
 
     <div class="skills-grid">
@@ -10,9 +10,11 @@
         *ngFor="let skill of skills; let i = index"
         class="skill-card"
         appReveal
-        [revealDelay]="i * 100"
+        [revealDelay]="i * 80"
       >
-        <div class="skill-icon">{{ skill.icon }}</div>
+        <div class="skill-icon">
+          <lucide-icon [img]="skill.icon" [size]="32" strokeWidth="1.5"></lucide-icon>
+        </div>
         <h3>{{ skill.title }}</h3>
         <div class="skill-technologies">
           <span *ngFor="let tech of skill.technologies" class="badge">

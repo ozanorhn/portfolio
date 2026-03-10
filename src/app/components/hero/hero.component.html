@@ -1,32 +1,41 @@
 <section id="home" class="hero">
   <div class="hero-background">
-    <div class="gradient-blob"></div>
+    <div class="gradient-blob gradient-blob--blue"></div>
+    <div class="gradient-blob gradient-blob--violet"></div>
   </div>
 
   <div class="hero-content">
     <div class="hero-text">
+      <p class="hero-eyebrow">AI Automation Engineer</p>
       <h1 class="hero-title">Ozan Orhan</h1>
       <h2 class="hero-subtitle">
-        <span class="subtitle-line">Frontend Entwickler</span>
-        <span class="subtitle-line">AI & Automation</span>
+        <span class="subtitle-line">KI-Systeme.</span>
+        <span class="subtitle-line accent-violet">Automation. Ergebnisse.</span>
       </h2>
       <p class="hero-description">
-        Ich entwickle moderne Webanwendungen, AI-gestützte Tools und automatisierte Systeme,
-        die komplexe Prozesse vereinfachen.
+        Ich entwickle KI-Agenten, LLM-basierte Systeme und automatisierte Workflows,
+        die Unternehmen messbar effizienter machen — von der Architektur bis zur Produktion.
       </p>
+
+      <div class="hero-tags">
+        <span class="hero-tag">LLM Integration</span>
+        <span class="hero-tag">AI Agents</span>
+        <span class="hero-tag">Workflow Automation</span>
+        <span class="hero-tag">Prompt Engineering</span>
+      </div>
 
       <div class="hero-buttons">
         <button class="btn btn-primary btn-lg" (click)="scrollToSection('projects')">
-          Projekte ansehen
+          KI-Projekte ansehen
         </button>
         <button class="btn btn-secondary btn-lg" (click)="scrollToSection('contact')">
-          Kontakt
+          Kontakt aufnehmen
         </button>
       </div>
     </div>
   </div>
 
-  <div class="scroll-indicator">
+  <div class="scroll-indicator" (click)="scrollToSection('about')">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
       <polyline points="6 9 12 15 18 9"></polyline>
     </svg>

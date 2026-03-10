@@ -141,16 +141,16 @@ section {
 
 // Card component
 .card {
-  background: $color-glass;
-  border: 1px solid $color-border;
-  border-radius: $radius-lg;
+  background: $color-surface;
+  border: none;
+  border-radius: $radius-card;
   padding: $spacing-lg;
   transition: $transition-base;
-  backdrop-filter: blur($blur-md);
+  box-shadow: $shadow-card-light;
 
   &:hover {
     border-color: $color-border-hover;
-    background: $color-glass-light;
+    background: $color-surface-hover;
     transform: translateY(-4px);
   }
 }
@@ -162,9 +162,9 @@ section {
   justify-content: center;
   gap: $spacing-sm;
   padding: $spacing-md $spacing-lg;
-  border-radius: $radius-lg;
+  border-radius: 980px;
   font-size: $font-size-body;
-  font-weight: $font-weight-medium;
+  font-weight: $font-weight-regular;
   transition: $transition-fast;
   cursor: pointer;
   border: 1px solid transparent;
@@ -192,7 +192,7 @@ section {
 
     &:hover {
       border-color: $color-border-hover;
-      background: $color-glass;
+      background: rgba(0, 113, 227, 0.08);
       transform: translateY(-2px);
     }
 
@@ -216,7 +216,7 @@ section {
 .badge {
   display: inline-block;
   padding: $spacing-sm $spacing-md;
-  background: $color-glass;
+  background: $color-surface;
   border: 1px solid $color-border;
   border-radius: $radius-md;
   font-size: $font-size-label;
@@ -225,7 +225,7 @@ section {
   transition: $transition-fast;
 
   &:hover {
-    background: $color-glass-light;
+    background: $color-surface-hover;
     border-color: $color-border-hover;
   }
 

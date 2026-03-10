@@ -52,6 +52,13 @@
   gap: $spacing-lg;
 }
 
+.project-header {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+}
+
 .project-title {
   font-size: clamp(28px, 4vw, 40px);
   font-weight: $font-weight-semibold;
@@ -77,43 +84,55 @@
 .tech-badge {
   display: inline-block;
   padding: $spacing-sm $spacing-md;
-  background: $color-glass;
+  background: $color-surface;
   border: 1px solid $color-border;
-  border-radius: $radius-md;
+  border-radius: 980px;
   font-size: $font-size-label;
   font-weight: $font-weight-medium;
   color: $color-accent;
   transition: $transition-fast;
 
   &:hover {
-    background: $color-glass-light;
-    border-color: $color-accent;
+    background: $color-surface-hover;
+    border-color: $color-border-hover;
   }
 }
 
 .project-image {
   position: relative;
-  min-height: 300px;
-  border-radius: $radius-lg;
+  aspect-ratio: 16 / 9;
+  border-radius: $radius-card;
   overflow: hidden;
+  background: $color-surface;
+  border: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+
+  @media (max-width: $breakpoint-tablet) {
+    aspect-ratio: auto;
+    min-height: 250px;
+  }
+}
+
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: $radius-lg;
+  transition: transform $transition-slow;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .image-placeholder {
   width: 100%;
   height: 100%;
-  background: $color-glass;
+  background: $color-surface;
   border: 1px solid $color-border;
   border-radius: $radius-lg;
   position: relative;
   overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 0%, rgba(0, 113, 227, 0.1) 50%, transparent 100%);
-    animation: shimmer 3s infinite;
-  }
 }
 
 .placeholder-gradient {
@@ -128,14 +147,6 @@
   animation: float 6s ease-in-out infinite;
 }
 
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
 
 .project-links {
   display: flex;
@@ -147,9 +158,9 @@
 .project-link-btn {
   display: inline-block;
   padding: $spacing-md $spacing-lg;
-  background: $color-glass;
+  background: $color-surface;
   border: 1px solid $color-border;
-  border-radius: $radius-md;
+  border-radius: 980px;
   color: $color-accent;
   font-size: $font-size-body-small;
   font-weight: $font-weight-medium;
@@ -158,18 +169,40 @@
   cursor: pointer;
 
   &:hover {
-    background: $color-glass-light;
-    border-color: $color-accent;
+    background: $color-surface-hover;
+    border-color: $color-border-hover;
     transform: translateX(4px);
   }
 
   &.project-link-github {
-    border-color: #6e40c9;
-    color: #d298e3;
+    border-color: $color-border;
+    color: $color-text-secondary;
 
     &:hover {
-      background: rgba(110, 64, 201, 0.1);
-      border-color: #d298e3;
+      background: $color-surface-hover;
+      border-color: $color-border-hover;
     }
   }
+}
+
+.confidential-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: $font-size-label;
+  font-weight: $font-weight-semibold;
+  padding: 4px $spacing-md;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: 100px;
+  color: $color-text-secondary;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.confidential-note {
+  font-size: $font-size-body-small;
+  color: $color-text-tertiary;
+  font-style: italic;
+  margin: 0;
 }

@@ -14,8 +14,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isMobileMenuOpen = false;
 
   navItems = [
-    { label: 'Startseite', id: 'home' },
+    { label: 'Start', id: 'home' },
     { label: 'Über mich', id: 'about' },
+    { label: 'Kompetenzen', id: 'skills' },
     { label: 'Projekte', id: 'projects' },
     { label: 'Kontakt', id: 'contact' },
   ];

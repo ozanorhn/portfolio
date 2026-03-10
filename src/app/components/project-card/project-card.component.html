@@ -1,7 +1,13 @@
 <div class="project-card" [ngClass]="'order-' + project.order">
   <div class="project-content">
     <div class="project-text">
-      <h3 class="project-title">{{ project.title }}</h3>
+      <div class="project-header">
+        <h3 class="project-title">{{ project.title }}</h3>
+        <span *ngIf="project.confidential" class="confidential-badge">
+          <lucide-icon [img]="lockIcon" [size]="12" strokeWidth="2"></lucide-icon>
+          Vertraulich
+        </span>
+      </div>
       <p class="project-description">{{ project.description }}</p>
       <div class="project-technologies">
         <span *ngFor="let tech of project.technologies" class="tech-badge">
@@ -9,7 +15,7 @@
         </span>
       </div>
 
-      <div class="project-links" *ngIf="project.liveUrl || project.githubUrl">
+      <div class="project-links" *ngIf="!project.confidential && (project.liveUrl || project.githubUrl)">
         <a
           *ngIf="project.liveUrl"
           [href]="project.liveUrl"
@@ -29,12 +35,14 @@
           GitHub Repository →
         </a>
       </div>
+
+      <p *ngIf="project.confidential" class="confidential-note">
+        Details auf Anfrage verfügbar.
+      </p>
     </div>
 
     <div class="project-image" *ngIf="project.image">
-      <div class="image-placeholder">
-        <div class="placeholder-gradient"></div>
-      </div>
+      <img [src]="project.image" [alt]="project.title" class="project-img" />
     </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
 @import 'styles/variables';
 
 .footer {
-  border-top: 1px solid $color-border;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: $spacing-2xl $container-padding;
   margin-top: $spacing-section;
   background: $color-black;
@@ -47,7 +47,7 @@
 
   &:hover {
     color: $color-accent;
-    background: $color-glass;
+    background: $color-surface;
   }
 
   @media (max-width: $breakpoint-mobile) {
@@ -71,6 +71,10 @@
   margin: 0;
 
   .heart {
+    color: #e84040;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
     animation: pulse 2s ease-in-out infinite;
   }
 }

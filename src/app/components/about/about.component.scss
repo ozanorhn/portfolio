@@ -2,6 +2,7 @@
 
 .about {
   position: relative;
+  background: $color-light-bg;
 
   h2 {
     margin-bottom: $spacing-lg;
@@ -23,6 +24,7 @@
 .about-content {
   h2 {
     font-size: clamp(32px, 4vw, 56px);
+    color: $color-text-on-light;
   }
 }
 
@@ -37,14 +39,14 @@
 .about-intro {
   font-size: $font-size-body;
   font-weight: $font-weight-semibold;
-  color: $color-text-primary;
+  color: $color-text-on-light;
   margin-bottom: $spacing-lg;
   line-height: 1.6;
 }
 
 .about-text {
   font-size: $font-size-body;
-  color: $color-text-secondary;
+  color: $color-text-secondary-on-light;
   margin-bottom: $spacing-lg;
   line-height: 1.8;
 }
@@ -54,7 +56,7 @@
   gap: $spacing-2xl;
   margin-top: $spacing-3xl;
   padding-top: $spacing-2xl;
-  border-top: 1px solid $color-border;
+  border-top: 1px solid $color-border-on-light;
 
   @media (max-width: $breakpoint-mobile) {
     flex-direction: column;
@@ -76,20 +78,21 @@
 
   .stat-label {
     font-size: $font-size-body-small;
-    color: $color-text-secondary;
+    color: $color-text-secondary-on-light;
   }
 }
 
 .about-expertise {
   margin-top: $spacing-2xl;
   padding: $spacing-2xl;
-  background: $color-glass;
-  border: 1px solid $color-border;
-  border-radius: $radius-lg;
+  background: $color-light-bg-card;
+  border: none;
+  box-shadow: $shadow-card-light;
+  border-radius: $radius-card;
 
   h3 {
     font-size: 18px;
-    color: $color-text-primary;
+    color: $color-text-on-light;
     margin-bottom: $spacing-lg;
     margin-top: 0;
   }
@@ -105,7 +108,7 @@
 
   li {
     font-size: $font-size-body;
-    color: $color-text-secondary;
+    color: $color-text-secondary-on-light;
     padding-left: $spacing-lg;
     position: relative;
 
@@ -132,6 +135,20 @@
   }
 }
 
+.about-image {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  border-radius: $radius-xl;
+  object-fit: cover;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  animation: float 4s ease-in-out infinite;
+
+  @media (max-width: $breakpoint-tablet) {
+    max-width: 280px;
+  }
+}
+
 .visual-element {
   position: absolute;
   width: 300px;
@@ -140,6 +157,7 @@
   border: 1px solid $color-border;
   border-radius: 20%;
   animation: float 4s ease-in-out infinite;
+  display: none;
 
   @media (max-width: $breakpoint-tablet) {
     width: 250px;
@@ -158,4 +176,5 @@
   right: -50px;
   filter: blur(40px);
   animation: float 6s ease-in-out infinite reverse;
+  display: none;
 }
