@@ -21,7 +21,8 @@ export class SeoService {
 
   set(input: SeoInput): void {
     const url = SITE.origin + input.pfad;
-    const bild = SITE.origin + '/' + (input.bild ?? 'assets/img/og-bild.png').replace(/^\//, '');
+    const roh = input.bild ?? 'assets/img/og-bild.png';
+    const bild = /^https?:\/\//.test(roh) ? roh : SITE.origin + '/' + roh.replace(/^\//, '');
 
     this.title.setTitle(input.titel);
     this.upsertName('description', input.beschreibung);

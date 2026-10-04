@@ -12,6 +12,16 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/projekt/projekt').then((m) => m.ProjektComponent),
   },
 
+  {
+    path: 'blog',
+    loadComponent: () => import('./pages/blog/blog').then((m) => m.BlogComponent),
+  },
+  {
+    path: 'blog/:slug',
+    loadComponent: () =>
+      import('./pages/blog-artikel/blog-artikel').then((m) => m.BlogArtikelComponent),
+  },
+
   // Alte Adressen bleiben erreichbar
   { path: 'arbeiten', redirectTo: 'projekte', pathMatch: 'full' },
   { path: 'arbeiten/:slug', redirectTo: 'projekte/:slug' },

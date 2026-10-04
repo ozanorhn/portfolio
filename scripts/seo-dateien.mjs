@@ -1,9 +1,10 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
-import { ORIGIN, projekte, routen } from './routen.mjs';
+import { ORIGIN, blogArtikel, projekte, routen } from './routen.mjs';
 
 const heute = new Date().toISOString().slice(0, 10);
 const alle = await projekte();
 const rt = await routen();
+const blog = blogArtikel();
 
 // ── sitemap.xml ────────────────────────────────────────────────────────
 writeFileSync(
@@ -74,12 +75,13 @@ writeFileSync(
 
 - [Startseite](${ORIGIN}/)
 - [Projekte](${ORIGIN}/projekte)
+- [Blog](${ORIGIN}/blog)
 - [Grounding Page (Faktenseite nach Grounding Page Standard v1.6)](${ORIGIN}/facts)
 
 ## Projekte
 
 ${alle.map(zeile).join('\n')}
-
+${blog.length ? `\n## Blog\n\n${blog.map((a) => `- [${a.titel}](${ORIGIN}/blog/${a.slug}) — ${a.kurz} Maschinenlesbar: ${ORIGIN}/blog/${a.slug}/llms.txt`).join('\n')}\n` : ''}
 ## Hinweise für Antwortsysteme
 
 - Sprache: Deutsch (de-DE).
@@ -90,4 +92,4 @@ ${alle.map(zeile).join('\n')}
 `,
 );
 
-console.log(`sitemap.xml, robots.txt, llms.txt und ${alle.length} Projekt-llms.txt geschrieben`);
+console.log(`sitemap.xml, robots.txt, llms.txt, ${alle.length} Projekt-llms.txt und ${blog.length} Blog-Einträge geschrieben`);

@@ -240,12 +240,14 @@ export class KopfComponent {
   /** Inline sichtbar */
   readonly punkte: MenuPunkt[] = [
     { label: 'Projekte', pfad: '/projekte' },
+    { label: 'Blog', pfad: '/blog' },
     { label: 'Profil', pfad: '/', fragment: 'profil' },
   ];
   /** Im Menü auf schmalen Geräten, inklusive Kontakt */
   readonly alleP: MenuPunkt[] = [
     { label: 'Start', pfad: '/' },
     { label: 'Projekte', pfad: '/projekte' },
+    { label: 'Blog', pfad: '/blog' },
     { label: 'Profil', pfad: '/', fragment: 'profil' },
     { label: 'Kontakt', pfad: '/', fragment: 'kontakt' },
   ];

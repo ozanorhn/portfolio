@@ -8,6 +8,7 @@
 
 - [Startseite](https://ozan-orhan.com/)
 - [Projekte](https://ozan-orhan.com/projekte)
+- [Blog](https://ozan-orhan.com/blog)
 - [Grounding Page (Faktenseite nach Grounding Page Standard v1.6)](https://ozan-orhan.com/facts)
 
 ## Projekte

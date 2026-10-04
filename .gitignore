@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Zugangsdaten und aus Strapi erzeugte Blogdateien
+.env
+.env.*
+/public/blog/

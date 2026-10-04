@@ -1,0 +1,148 @@
+<app-kopf />
+
+<main id="inhalt" class="wrap">
+  @if (artikel(); as a) {
+    <article>
+      <header class="einstieg">
+        <nav class="mono einstieg__pfad" aria-label="Brotkrumen">
+          <a routerLink="/">Start</a> / <a routerLink="/blog">Blog</a>
+        </nav>
+        <h1 class="titel einstieg__titel">{{ a.titel }}</h1>
+        @if (a.kurz) { <p class="lede einstieg__lede">{{ a.kurz }}</p> }
+        <p class="mono einstieg__meta">
+          Von <a [routerLink]="[]" fragment="autor">{{ a.autor }}</a>
+          · <time [attr.datetime]="a.datum">{{ datum(a.datum) }}</time>
+          @if (aktualisiert()) {
+            · aktualisiert <time [attr.datetime]="a.geaendert">{{ datum(a.geaendert) }}</time>
+          }
+          · {{ a.lesezeit }} Min. Lesezeit
+        </p>
+      </header>
+
+      @if (a.bild) {
+        <img class="bild" [src]="a.bild" [alt]="a.bildAlt" loading="eager" decoding="async" />
+      }
+
+      @if (a.kernaussagen.length || a.fakten.length) {
+        <div class="kurz grid">
+          @if (a.kernaussagen.length) {
+            <section class="kurz__aussagen" aria-labelledby="t-kurz">
+              <h2 id="t-kurz" class="meta kurz__titel">Das Wichtigste in Kürze</h2>
+              <ul class="prosa kurz__liste">
+                @for (k of a.kernaussagen; track $index) { <li>{{ k }}</li> }
+              </ul>
+            </section>
+          }
+          @if (a.fakten.length) {
+            <section class="kurz__fakten" aria-labelledby="t-fakten">
+              <h2 id="t-fakten" class="meta kurz__titel">Key Facts</h2>
+              <dl class="fakten">
+                @for (f of a.fakten; track $index) {
+                  <div class="fakten__paar">
+                    <dt class="mono">{{ f.label }}</dt>
+                    <dd>{{ f.wert }}</dd>
+                  </div>
+                }
+              </dl>
+            </section>
+          }
+        </div>
+      }
+
+      <div class="korpus grid">
+        @if (abschnitte().length > 1) {
+          <div class="korpus__nav">
+            <p class="meta korpus__navtitel">Inhalt</p>
+            <!-- Je Artikel neu erzeugen: die Navigation beobachtet die Überschriften nur beim Start -->
+            @for (s of [a.slug]; track s) {
+              <app-case-study-nav [abschnitte]="abschnitte()" />
+            }
+          </div>
+        }
+
+        <div class="korpus__inhalt">
+          <div class="prosa" [innerHTML]="html()"></div>
+
+          @if (a.faq.length) {
+            <section id="faq" class="teil" aria-labelledby="t-faq">
+              <h2 id="t-faq" class="untertitel teil__titel">Häufige Fragen</h2>
+              @for (f of a.faq; track $index) {
+                <div class="faq">
+                  <h3 class="faq__frage">{{ f.frage }}</h3>
+                  <p class="faq__antwort">{{ f.antwort }}</p>
+                </div>
+              }
+            </section>
+          }
+
+          @if (a.quellen.length) {
+            <section id="quellen" class="teil" aria-labelledby="t-quellen">
+              <h2 id="t-quellen" class="untertitel teil__titel">Quellen</h2>
+              <ol class="quellen">
+                @for (q of a.quellen; track $index) {
+                  <li>
+                    <a class="textlink" [href]="q.url" rel="noopener" target="_blank">{{ q.titel }}</a>
+                    @if (q.abgerufen) {
+                      <span class="mono"> · abgerufen {{ datum(q.abgerufen) }}</span>
+                    }
+                  </li>
+                }
+              </ol>
+            </section>
+          }
+
+          <section id="autor" class="autor" aria-labelledby="t-autor">
+            <p class="meta">Über den Autor</p>
+            <h2 id="t-autor" class="untertitel autor__name">{{ a.autor }}</h2>
+            <p class="autor__rolle">{{ site.rolle }} · {{ site.ort }}</p>
+            <p class="autor__text">
+              Entwickelt AI-Automationen, Agenten und LLM-Anwendungen mit Schwerpunkt auf n8n,
+              Python, MCP, RAG und APIs.
+            </p>
+            <p class="autor__links">
+              <a class="textlink" routerLink="/projekte">Projekte</a>
+              <a class="textlink" [href]="site.github" rel="noopener me" target="_blank">GitHub</a>
+              <a class="textlink" [href]="site.linkedin" rel="noopener me" target="_blank">LinkedIn</a>
+            </p>
+          </section>
+
+          @if (a.verwandt.length || a.projekte.length) {
+            <section class="weiter" aria-labelledby="t-weiter">
+              <h2 id="t-weiter" class="meta">Weiterlesen</h2>
+              <ul class="weiter__liste">
+                @for (v of a.verwandt; track v.slug) {
+                  <li>
+                    <a class="weiter__link" [routerLink]="['/blog', v.slug]">
+                      <span class="mono">Artikel</span>
+                      <span class="untertitel weiter__titel">{{ v.titel }}</span>
+                    </a>
+                  </li>
+                }
+                @for (p of a.projekte; track p.slug) {
+                  <li>
+                    <a class="weiter__link" [routerLink]="['/projekte', p.slug]">
+                      <span class="mono">Projekt · {{ p.kurz }}</span>
+                      <span class="untertitel weiter__titel">{{ p.titel }}</span>
+                    </a>
+                  </li>
+                }
+              </ul>
+            </section>
+          }
+
+          @if (a.tags.length) {
+            <p class="mono tags">{{ a.tags.join(' · ') }}</p>
+          }
+        </div>
+      </div>
+    </article>
+  } @else if (artikel() === null) {
+    <section class="leer">
+      <h1 class="titel">Artikel nicht gefunden</h1>
+      <p class="leer__text">Diesen Artikel gibt es nicht oder nicht mehr.</p>
+      <a class="textlink" routerLink="/blog">Zu allen Artikeln</a>
+    </section>
+  }
+</main>
+
+<app-fuss />

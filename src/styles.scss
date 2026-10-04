@@ -271,6 +271,22 @@ a.textlink:hover { text-decoration-color: $petrol; }
     content: ''; position: absolute; left: 0; top: 0.72em;
     width: 8px; height: $strich-regel; background: $tusche-2;
   }
+  ol { margin: 0.9em 0; padding-left: 1.4em; list-style: decimal; }
+  ol > li { padding-left: 0.2em; }
+  ol > li::before { content: none; }
+  ul, ol { & + p { margin-top: 1.1em; } }
+  blockquote {
+    margin: 1.4em 0; padding-left: $s5;
+    border-left: $strich-regel solid $linie; color: $tusche-2;
+  }
+  code { font-family: $mono; font-size: 0.86em; }
+  pre {
+    margin: 1.4em 0; padding: $s5; overflow-x: auto;
+    background: $platte; color: $kreide; font-size: 13px; line-height: 1.6;
+    code { font-size: inherit; }
+  }
+  img { display: block; max-width: 100%; height: auto; margin: 1.4em 0; }
+  hr { border: 0; border-top: $strich-haar solid $linie; margin: 2em 0; }
 }
 
 /* ─── Tabellensatz ──────────────────────────────────────────────────── */
