@@ -1,0 +1,63 @@
+# AI Visibility Monitoring Platform
+
+> Drei Workflows führen fünf externe Datenquellen zusammen und prüfen, ob sich umgesetzte Maßnahmen messbar ausgewirkt haben — ohne dass jemand Daten von Hand sammelt.
+
+URL: https://ozan-orhan.com/projekte/ai-visibility-monitoring-platform
+Status: Produktiv, drei Komponenten
+Kontext: Unternehmenskontext · anonymisiert dargestellt
+Stack: n8n, Webhook mit synchroner Antwort, Zeitplan-Trigger, OAuth-Credentials, LLM-Agent mit strukturiertem Output, Postgres über REST mit Upsert, JavaScript
+
+## Ausgangspunkt
+
+Sichtbarkeit in KI-Antworten, Suchmetriken, Webanalyse und Backlinks lagen in fünf getrennten Systemen. Sie von Hand zusammenzuführen war aufwendig, und ob eine umgesetzte Maßnahme gewirkt hat, ließ sich nur mit erneuter Handarbeit belegen.
+
+## Überblick
+
+Drei n8n-Workflows führen fünf externe Datenquellen zusammen: Suchmetriken, Ranking-Daten, Webanalyse und Sichtbarkeit in KI-Antworten.
+
+Sie beantworten drei Fragen: wo Sichtbarkeit in KI-Antworten verloren geht, wo Traffic einbricht, und ob sich umgesetzte Maßnahmen messbar ausgewirkt haben.
+
+## Architektur
+
+Zwei Komponenten laufen täglich. Die erste ruft die Sichtbarkeits-APIs parallel ab, extrahiert defensiv, baut daraus einen Kontext und übergibt ihn an einen Analyse-Agenten; dessen Ausgabe wird in Code normalisiert und über stabile Schlüssel in eine Insights-Tabelle geschrieben. Die zweite holt Webanalyse, Suchkonsole und Backlinks über zwei Zeiträume, aggregiert nach URL und erkennt Anomalien, woraus Aufgaben und eine Chat-Meldung entstehen.
+
+Die dritte läuft vierzehntägig und wird extern angestoßen: ein Agent-System ruft einen n8n-Webhook mit synchroner Antwort. n8n berechnet Zeiträume, lädt die betreuten URLs, führt je URL vier Abfragen aus und gibt eine bewertete Zusammenfassung zurück.
+
+## Entscheidungen
+
+### n8n als Rechen-Service hinter einem Agenten
+
+Bei der Zielüberprüfung besitzt das Agent-System Auslösung und Kommunikation, n8n die Datenbeschaffung und Auswertung. Diese Trennung macht n8n zu einer austauschbaren Komponente hinter einer klaren Schnittstelle und hält beide Seiten einfach.
+
+### Signal-Voting statt Schwellwert auf einer Metrik
+
+Die Trend-Bewertung sammelt Richtungssignale aus Klick- und Rankingentwicklung und entscheidet per Mehrheit. Bei gegenläufigen Signalen lautet der Status „gemischt“, bei fehlenden Signalen „stabil“.
+
+### Fehlende Werte werden nicht als Null gezählt
+
+Bevorzugt wird die Position des Drittanbieters, ersatzweise die der Suchkonsole. Ist keine verfügbar, fließt Ranking gar nicht in die Bewertung ein. Vier Quellen liefern unterschiedlich oft nichts; jedes Fehlen als Null zu zählen hätte falsche Trends erzeugt. Deltas werden nur berechnet, wenn beide Seiten vorliegen.
+
+### Defensive Extraktion aus instabilen Fremd-APIs
+
+Die Antwortstrukturen sind tief verschachtelt und nicht garantiert stabil. Eine Komponente extrahiert rekursiv über den Antwortbaum und erkennt Datensätze an ihrer Feldsignatur statt an einem festen Pfad. HTTP-Fehler brechen den Lauf nicht ab; bei unbrauchbarer Antwort entsteht eine leere Menge statt eines Fehlers.
+
+### Modellausgaben werden deterministisch nachbearbeitet
+
+Der Analyse-Agent hat keine Tools und keinen Schreibzugriff. Er verarbeitet einen vorbereiteten Kontext und gibt schema-gebundenes JSON zurück; Priorität, Schlüsselbildung und Feldlängen werden danach in Code normalisiert. Alle Schreibvorgänge passieren in deterministischen Nodes, Zugriffe laufen über den Credential Store mit OAuth.
+
+### Der Bericht legt seine eigene Filterung offen
+
+Nur Einträge mit klarem Trend erscheinen. Die Kopfzeile weist aus, wie viele Einträge geprüft und wie viele ausgeblendet wurden.
+
+## Ergebnis
+
+Fünf externe Datenquellen und ein zweites Agent-System sind angebunden. Der Wirkungsnachweis für umgesetzte Maßnahmen läuft ohne manuelle Datensammlung, und Sichtbarkeitsverluste erzeugen nachverfolgbare Einträge in einer Datenbank.
+
+## Einschränkungen der Darstellung
+
+Dieses Projekt liegt im Unternehmenskontext. Es werden keine Screenshots interner
+Systeme, keine Kundennamen, keine Domains und keine internen Kennungen gezeigt.
+Die Darstellung ist auf die Architektur abstrahiert.
+
+Kontakt: contact@ozan-orhan.com
+

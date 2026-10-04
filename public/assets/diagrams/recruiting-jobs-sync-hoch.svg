@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 1596" width="760" height="1596" role="img" aria-labelledby="sbt sbd" preserveAspectRatio="xMidYMid meet">
+<title id="sbt">Systembild Recruiting Jobs Sync</title>
+<desc id="sbd">Hochformat. Täglicher Batch mit einem Lauf-Zeitstempel als Wahrheitsanker: Karriereseite, Scraping und Extraktion, LLM-gestützte Extraktion, Validierung, Upsert mit last_seen_at, danach Deaktivierung aller im Lauf nicht berührten Zeilen.</desc>
+<rect x="0" y="0" width="760" height="1596" fill="#1C1B19"/>
+<line x1="96" y1="178" x2="96" y2="1120" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="44" y="62" font-family="Archivo, ui-sans-serif, system-ui, sans-serif" font-size="21" font-weight="400" fill="#8A857C" letter-spacing="2.31" text-anchor="start">RECRUITING JOBS SYNC · TÄGLICHER BATCH</text>
+<line x1="44" y1="112" x2="716" y2="112" stroke="#3A3833" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<circle cx="96" cy="178" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="152" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">01</text>
+<text x="132" y="186" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">KARRIERESEITE / WEBQUELLE</text>
+<text x="132" y="220" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">HTML, KEINE API, KEINE</text>
+<text x="132" y="244" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">ÄNDERUNGSMELDUNG</text>
+<circle cx="96" cy="342" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="316" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">02</text>
+<text x="132" y="350" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">SCRAPING / EXTRAKTION</text>
+<text x="132" y="384" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">LINKS NORMALISIERT, DEDUPLIZIERT</text>
+<text x="132" y="408" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">SLUG AUS DEM PFAD</text>
+<circle cx="96" cy="506" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="480" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">03</text>
+<text x="132" y="514" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">LLM-GESTÜTZTE EXTRAKTION</text>
+<text x="132" y="548" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">DETAILSEITE BEREINIGT</text>
+<text x="132" y="572" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">JSON-SCHEMA · ENUM AUF SENIORITÄT</text>
+<circle cx="96" cy="670" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="644" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">04</text>
+<text x="132" y="678" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">VALIDIERUNG /</text>
+<text x="132" y="708" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">NORMALISIERUNG</text>
+<text x="132" y="742" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">UNKLARE FELDER BLEIBEN LEER</text>
+<circle cx="96" cy="840" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="814" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">05</text>
+<text x="132" y="848" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">UPSERT IN DATENSPEICHER</text>
+<text x="132" y="882" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">MATCH ÜBER SLUG · IDEMPOTENT</text>
+<circle cx="96" cy="980" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="954" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">06</text>
+<text x="132" y="988" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">last_seen_at</text>
+<text x="132" y="1022" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">= LAUFZEITPUNKT</text>
+<circle cx="96" cy="1120" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="1094" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">07</text>
+<text x="132" y="1128" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">STALE DETECTION</text>
+<text x="132" y="1162" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">WEICH DEAKTIVIERT, NICHT GELÖSCHT</text>
+<path d="M91.5,255.5 L96,260.0 L100.5,255.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,419.5 L96,424.0 L100.5,419.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,583.5 L96,588.0 L100.5,583.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,750.5 L96,755.0 L100.5,750.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,905.5 L96,910.0 L100.5,905.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,1045.5 L96,1050.0 L100.5,1045.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M81,178 H54 V1120 H79" fill="none" stroke="#8A857C" stroke-width="1.0" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M71.5,1115.5 L76,1120 L71.5,1124.5" fill="none" stroke="#8A857C" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="44" y="136" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.8" text-anchor="start">LAUF-ZEITSTEMPEL — EINMAL</text>
+<text x="44" y="160" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.8" text-anchor="start">GESETZT, ÜBER DEN GESAMTEN</text>
+<text x="44" y="184" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.8" text-anchor="start">LAUF GEFÜHRT</text>
+<path d="M81,342 H78 V840 H81" fill="none" stroke="#8A857C" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="44" y="300" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.8" text-anchor="start">SCHLEIFE JE LINK · BATCHGRÖSSE</text>
+<text x="44" y="324" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.8" text-anchor="start">1</text>
+<line x1="44" y1="1314" x2="716" y2="1314" stroke="#3A3833" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="44" y="1360" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23" letter-spacing="0.8" fill="#E8E4DC">last_seen_at &lt; Lauf-Zeitstempel</text>
+<text x="44" y="1394" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23" letter-spacing="0.8" fill="#E8E4DC">und status = active</text>
+<text x="44" y="1428" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23" letter-spacing="0.8" fill="#3F8C79">→ status = inactive</text>
+<line x1="44" y1="1490" x2="84" y2="1490" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="98" y="1496" font-family="Archivo, ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="400" fill="#8A857C" letter-spacing="1.53" text-anchor="start">DATENFLUSS</text>
+<line x1="44" y1="1520" x2="84" y2="1520" stroke="#8A857C" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="98" y="1526" font-family="Archivo, ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="400" fill="#8A857C" letter-spacing="1.53" text-anchor="start">STEUERFLUSS / BEZUG</text>
+</svg>

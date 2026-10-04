@@ -1,0 +1,158 @@
+<app-kopf />
+
+@if (work(); as w) {
+  <main id="inhalt" class="wrap">
+    <header class="einstieg grid" [class.einstieg--bild]="w.plate?.kind === 'bild'">
+      <div class="einstieg__text">
+        <h1 class="titel">{{ w.titel }}</h1>
+        <p class="lede einstieg__lede">{{ w.lede }}</p>
+        <p class="mono einstieg__marke">Projekt {{ w.nr }} · {{ w.kicker }}</p>
+      </div>
+      @if (w.plate?.kind === 'bild') {
+        <div class="einstieg__bild">
+          <app-tafel [plate]="w.plate" [eager]="true" [hoehe]="'46vh'" />
+        </div>
+      }
+    </header>
+
+    <section class="kenn" aria-label="Kenndaten">
+      <dl class="kenn__liste">
+        <div class="kenn__paar kenn__paar--breit">
+          <dt class="meta">Stack</dt>
+          <dd class="kenn__stack">{{ w.stack.join(' · ') }}</dd>
+        </div>
+      </dl>
+    </section>
+
+    @if (w.plate?.kind === 'systembild') {
+      <!-- Das Systembild ist das größte Element der Seite. Es bekommt die volle
+           Breite, damit die Beschriftung lesbar bleibt, und steht nach dem Titel,
+           damit auf schmalen Geräten zuerst klar ist, worum es geht. -->
+      <div class="systembild">
+        <app-tafel [plate]="w.plate" [eager]="true" />
+      </div>
+    }
+
+    <div class="korpus grid">
+      <div class="korpus__nav">
+        <app-case-study-nav [abschnitte]="nav()" />
+      </div>
+
+      <div class="korpus__inhalt">
+        @if (w.ausgangspunkt.length) {
+          <section id="ausgangspunkt" class="teil" aria-labelledby="t-ausgang">
+            <h2 id="t-ausgang" class="untertitel teil__titel">Ausgangspunkt</h2>
+            <div class="prosa">@for (p of w.ausgangspunkt; track $index) { <p>{{ p }}</p> }</div>
+          </section>
+        }
+
+        @if (w.ueberblick.length) {
+          <section id="ueberblick" class="teil" aria-labelledby="t-ueberblick">
+            <h2 id="t-ueberblick" class="untertitel teil__titel">Überblick</h2>
+            <div class="prosa">@for (p of w.ueberblick; track $index) { <p>{{ p }}</p> }</div>
+          </section>
+        }
+
+        @if (w.architektur?.length) {
+          <section id="architektur" class="teil" aria-labelledby="t-arch">
+            <h2 id="t-arch" class="untertitel teil__titel">Architektur</h2>
+            <!-- Der Fluss erscheint dort, wo die Tafel ein Foto ist und noch kein
+                 Systembild zeigt. Bei Systembild-Tafeln steht das Bild oben. -->
+            @if (w.fluss && w.plate?.kind !== 'systembild') {
+              <app-system-flow class="teil__flow" [stationen]="w.fluss" [kopf]="w.titel + ' · Ablauf'" />
+            }
+            <div class="prosa">@for (p of w.architektur; track $index) { <p>{{ p }}</p> }</div>
+          </section>
+        } @else if (w.fluss && !w.plate) {
+          <section id="architektur" class="teil" aria-labelledby="t-arch">
+            <h2 id="t-arch" class="untertitel teil__titel">Ablauf</h2>
+            <app-system-flow class="teil__flow teil__flow--allein" [stationen]="w.fluss" [kopf]="w.titel + ' · Ablauf'" />
+          </section>
+        }
+
+        @if (w.demo === 'pocket') {
+          <section id="demo" class="teil" aria-labelledby="t-demo">
+            <h2 id="t-demo" class="untertitel teil__titel">Interaktion</h2>
+            <div class="prosa"><p>
+              Eine Anfrage durchläuft feste Zustände: Aufnahme, Transkription, gegebenenfalls
+              ein Toolaufruf über MCP und Sprachausgabe. Sichtbar sind nur diese Zustände und
+              die ausgeführten Aufrufe.
+            </p></div>
+            <app-agent-state-flow class="teil__flow" />
+            <div class="teil__flow journal">
+              <p class="journal__kopf">Beispiel eines Toolaufrufs</p>
+              <app-tool-invocation [aufruf]="beispielAufruf" />
+            </div>
+          </section>
+        }
+        @if (w.demo === 'lnw') {
+          <section id="demo" class="teil" aria-labelledby="t-demo">
+            <h2 id="t-demo" class="untertitel teil__titel">Freigabe</h2>
+            <div class="prosa"><p>
+              Der Lauf startet nicht nach Zeitplan, sondern nach einer Reaktion auf eine
+              Slack-Nachricht. Die Reaktion wählt über einen Switch den Zeitraum; ohne Reaktion
+              gibt es keinen Lauf.
+            </p></div>
+            <app-system-flow class="teil__flow" [stationen]="freigabeFluss" [kopf]="'Human-in-the-loop-Gate · vor der Ausführung'" />
+          </section>
+        }
+        @if (w.demo === 'grounding') {
+          <section id="demo" class="teil" aria-labelledby="t-demo">
+            <h2 id="t-demo" class="untertitel teil__titel">Freigabe</h2>
+            <div class="prosa"><p>
+              Der Agent liefert Vorschläge mit einem modellseitigen Confidence-Signal und
+              markiert Felder, die er nicht beantworten kann. Erst nach der Bestätigung startet
+              die Generierung.
+            </p></div>
+            <app-approval-example class="teil__flow" />
+          </section>
+        }
+
+        @if (w.entscheidungen.length) {
+          <section id="entscheidungen" class="teil" aria-labelledby="t-ent">
+            <h2 id="t-ent" class="untertitel teil__titel">Engineering-Entscheidungen</h2>
+            @for (e of w.entscheidungen; track e.titel) {
+              <article class="entsch">
+                <h3 class="entsch__titel">{{ e.titel }}</h3>
+                <p class="entsch__text">{{ e.text }}</p>
+              </article>
+            }
+          </section>
+        }
+
+        <section id="ergebnis" class="teil" aria-labelledby="t-erg">
+          <h2 id="t-erg" class="untertitel teil__titel">Ergebnis</h2>
+          <div class="prosa">@for (p of w.ergebnis; track $index) { <p>{{ p }}</p> }</div>
+          @if (w.links?.length) {
+            <p class="teil__links">
+              @for (l of w.links; track l.href) {
+                <a class="aktion" [href]="l.href" target="_blank" rel="noopener noreferrer">
+                  {{ l.label }}<lucide-icon [img]="IconExtern" [size]="14" [strokeWidth]="2" />
+                </a>
+              }
+            </p>
+          }
+        </section>
+      </div>
+    </div>
+
+    @if (naechste(); as n) {
+      <nav class="weiter" aria-label="Weiteres Projekt">
+        <hr class="regel-stark" />
+        <a class="weiter__link" [routerLink]="['/projekte', n.slug]">
+          <span class="meta">Nächstes Projekt</span>
+          <span class="untertitel weiter__titel">{{ n.titel }}</span>
+        </a>
+        <p><a class="aktion" routerLink="/projekte">Alle Projekte</a></p>
+      </nav>
+    }
+  </main>
+} @else {
+  <main id="inhalt" class="wrap leer">
+    <h1 class="titel">Projekt nicht gefunden</h1>
+    <p class="lede leer__text">Dieser Eintrag existiert nicht.</p>
+    <p><a class="aktion aktion--primaer" routerLink="/projekte">Alle Projekte</a></p>
+  </main>
+}
+
+<app-fuss />

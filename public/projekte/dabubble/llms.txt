@@ -1,0 +1,20 @@
+# DaBubble
+
+> Team-Messenger mit Kanälen, Direktnachrichten und Threads. Nachrichten synchronisieren in Echtzeit über Firebase; gebaut in Angular mit RxJS.
+
+URL: https://ozan-orhan.com/projekte/dabubble
+Status: Abgeschlossen, live
+Kontext: Ausbildungsprojekt · Developer Akademie
+Stack: Angular, TypeScript, Firebase, RxJS, SCSS
+Repository: https://github.com/ozanorhn/DaBubble
+
+## Überblick
+
+Ein Messenger mit Kanälen, Direktnachrichten und Threads. Die Synchronisierung läuft in Echtzeit über Firebase.
+
+## Ergebnis
+
+Abgeschlossen; die Anwendung läuft weiterhin live, der Quellcode ist öffentlich.
+
+Kontakt: contact@ozan-orhan.com
+

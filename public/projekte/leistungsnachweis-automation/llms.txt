@@ -1,0 +1,57 @@
+# Leistungsnachweis Automation
+
+> Ein monatlicher Workflow, der Zeiterfassungen aus Toggl verarbeitet, kundenspezifisch aufbereitet und daraus automatisch Leistungsnachweise und Dokumente erzeugt.
+
+URL: https://ozan-orhan.com/projekte/leistungsnachweis-automation
+Status: Aktiver monatlicher Workflow
+Kontext: Unternehmenskontext · anonymisiert dargestellt
+Stack: n8n, Toggl API, Slack Reaction Trigger, Google Sheets, Google Drive, JavaScript, Datentransformation, Dokumentvorlagen
+
+## Ausgangspunkt
+
+Die Arbeitszeiten liegen bereits strukturiert in Toggl vor. Für monatliche Leistungsnachweise mussten diese Daten jedoch erneut gefiltert, Kunden zugeordnet, aufbereitet und in Dokumente übertragen werden.
+
+Der Workflow übernimmt diesen Prozess automatisiert und erzeugt aus den vorhandenen Zeiterfassungen die benötigten Leistungsnachweise.
+
+## Architektur
+
+Der n8n-Workflow umfasst 152 Nodes und zwei Trigger. Eine Slack-Nachricht fragt monatlich die Freigabe ab; eine Reaktion darauf startet den Lauf und bestimmt über einen Switch den Zeitraum. Anschließend lädt der Workflow die Zeiteinträge aus Toggl, ordnet sie Kunden zu und transformiert sie in die je Kunde benötigte Struktur.
+
+Aus den aufbereiteten Daten entstehen Sheets und Dokumente, die in der vorgesehenen Drive-Ordnerstruktur abgelegt werden. Den Abschluss meldet der Workflow in Slack zurück.
+
+## Entscheidungen
+
+### Toggl als Source of Truth
+
+Die bereits vorhandene Zeiterfassung wird direkt weiterverarbeitet. Es entsteht keine zweite manuell gepflegte Datenquelle.
+
+### Freigabe vor Ausführung
+
+Der monatliche Lauf startet erst nach einer expliziten Slack-Reaktion. Verschiedene Reaktionen können unterschiedliche Zeiträume oder Pfade auswählen.
+
+### Verarbeitung vor Dokumentausgabe
+
+Rohdaten aus Toggl werden zuerst transformiert und kundenspezifisch aufbereitet. Dokumente und Sheets erhalten bereits vorbereitete Daten.
+
+### Automatisierte Datei- und Ordnerstruktur
+
+Ausgaben werden automatisiert in der vorgesehenen Drive-Struktur abgelegt.
+
+### Prozess-Telemetrie als Ausbaupfad
+
+Für einen Teil des Workflows existiert bereits ein Telemetrie-Schema für Laufzeit, potenzielle Zeitersparnis, Kosten und Fehlertypen, mit Feldern wie Execution-ID, Workflow, Baseline-Zeit, eingesparter Zeit, Stundensatz, erzeugtem Wert, AI-Kosten und Fehlertyp. Es ist noch nicht über alle Pfade ausgerollt.
+
+## Ergebnis
+
+Der monatliche Workflow verarbeitet Toggl-Zeiterfassungen, bereitet sie für mehrere Kunden auf, erzeugt die benötigten Dokumente bzw. Tabellen und legt die Ergebnisse in Drive ab.
+
+Die Ausführung kann über eine Slack-Reaktion freigegeben werden. Der Abschluss wird ebenfalls über Slack zurückgemeldet.
+
+## Einschränkungen der Darstellung
+
+Dieses Projekt liegt im Unternehmenskontext. Es werden keine Screenshots interner
+Systeme, keine Kundennamen, keine Domains und keine internen Kennungen gezeigt.
+Die Darstellung ist auf die Architektur abstrahiert.
+
+Kontakt: contact@ozan-orhan.com
+

@@ -1,0 +1,63 @@
+# Grounding Page Generator
+
+> Ein dreistufiger Workflow, der eine Grounding Page nach dem offenen Standard erzeugt: Fakten recherchieren, von einem Menschen bestätigen lassen, als HTML mit JSON-LD ausliefern. Vorher war das Handarbeit von Spezialisten.
+
+URL: https://ozan-orhan.com/projekte/grounding-page-generator
+Status: Produktiv im Einsatz
+Kontext: Unternehmenskontext · anonymisiert dargestellt
+Stack: n8n, Form-Trigger, LLM-Agent mit Tool Calling, JSON Schema, JSON-LD · Schema.org, Web-Scraping-API, Web-Such-API, Tabellenspeicher, JavaScript
+
+## Ausgangspunkt
+
+Der Grounding Page Standard definiert ein strukturiertes Format für überprüfbare Entitätsinformationen, die für Menschen und AI-Systeme lesbar sind. Er adressiert vier Risiken in AI-Antwortsystemen: Halluzination, Entitätsverwechslung, Nichtnennung und englischdominierte Retrieval-Muster.
+
+Die manuelle Erstellung erfordert Recherche, strukturierte Fakten, Disambiguierung und konsistentes Schema.org-Markup. Ich habe dafür einen dreistufigen Workflow gebaut, der Recherche und Generierung automatisiert, die fachliche Freigabe aber beim Menschen lässt.
+
+## Architektur
+
+Stufe eins nimmt Entität und optionale URL entgegen, legt eine Session an und holt die Seite bei vorhandener URL als Markdown. Ein Research-Agent mit Web-Such-Tool füllt die Felder und gibt schema-validiertes JSON zurück: Quellenliste, modellseitige Konfidenz je Feld und eine Liste der Felder, die Nutzereingabe brauchen. Stufe zwei zeigt diese Werte zur Freigabe und Korrektur. Stufe drei erzeugt Titel, Meta-Description, JSON-LD und HTML-Body gegen ein striktes Schema. Ausgabe als HTML-Datei und als kopierbare Blöcke.
+
+## Entscheidungen
+
+### Recherche und Generierung sind getrennte Modellaufrufe
+
+Beide Aufrufe haben eigene Parameter, Schemas und Token-Budgets. Für die Recherche verwende ich eine niedrige Temperatur, um die Varianz der Ausgabe zu reduzieren; die Generierung formuliert freier. Beide lassen sich einzeln debuggen und austauschen.
+
+### Freigabe auf Feldebene vor der Generierung
+
+Die fachliche Freigabe erfolgt auf Feldebene vor der Generierung. Dadurch verarbeitet der zweite Modellaufruf bereits bestätigte Fakten.
+
+### Pflichtfelder ohne Modellbeteiligung
+
+Abgrenzung zu ähnlichen Entitäten und die kanonische URL kommen aus dem Formular. Diese Angaben kann ein Modell nicht zuverlässig liefern, also wird es nicht danach gefragt.
+
+### Das Ausgabeschema bildet den Standard ab
+
+Die Pflichtbausteine des Standards sind als Schemafelder abgebildet. Das Ausgabeschema erzwingt die erwartete Struktur und verhindert zusätzliche, nicht definierte Felder. Die inhaltliche Validierung erfolgt davor durch den Menschen.
+
+### Unsicherheit ist ein eigenes Ausgabefeld
+
+Bei Unsicherheit liefert der Agent keinen Wert, sondern einen Eintrag in der Liste „Nutzereingabe nötig“, dazu ein modellseitiges Confidence-Signal, das im Formular angezeigt wird. Der Merge ist deterministisch: Ein Formularwert überschreibt nur, wenn er nicht leer ist; ein leeres Feld bedeutet Zustimmung.
+
+### Schema-Bindung und Credential Store
+
+Das Schema begrenzt die Ausgabe auf definierte Felder. Alle externen Zugriffe laufen über den Credential Store.
+
+### Ausfall des Scrapings führt in den bestehenden Pfad
+
+Schlägt der Scraping-Aufruf fehl, bricht der Lauf nicht ab. Der Agent recherchiert dann vollständig im Web und nutzt den Pfad, der für Eingaben ohne URL ohnehin existiert.
+
+## Ergebnis
+
+Der Workflow führt Recherche, menschliche Validierung und Dokumentgenerierung in einem dreistufigen Prozess zusammen. Das Ergebnis enthält sichtbaren HTML-Inhalt und passendes JSON-LD nach Grounding Page Standard v1.6.
+
+Jeder Lauf besitzt eine Session-ID und wird über die einzelnen Prozessstufen fortgeschrieben. Dadurch bleibt nachvollziehbar, welche recherchierten Werte vor der Generierung bestätigt oder angepasst wurden.
+
+## Einschränkungen der Darstellung
+
+Dieses Projekt liegt im Unternehmenskontext. Es werden keine Screenshots interner
+Systeme, keine Kundennamen, keine Domains und keine internen Kennungen gezeigt.
+Die Darstellung ist auf die Architektur abstrahiert.
+
+Kontakt: contact@ozan-orhan.com
+

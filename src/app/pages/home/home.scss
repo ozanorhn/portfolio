@@ -1,0 +1,83 @@
+@use 'styles/tokens' as *;
+
+.auftakt { padding-block: clamp(36px, 5.5vw, 96px) clamp(28px, 3.4vw, 56px); }
+.auftakt__these {
+  grid-column: 1 / -1;
+  font-size: clamp(40px, 6.4vw, 92px);
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+  max-width: 22ch;
+}
+.auftakt__lede {
+  grid-column: 1 / 7;
+  margin-top: clamp(24px, 2.8vw, 44px);
+  color: $tusche-2;
+  font-size: clamp(18px, 1.5vw, 23px);
+}
+.auftakt__aktionen {
+  grid-column: 1 / -1;
+  display: flex; flex-wrap: wrap; align-items: center; gap: $s3;
+  margin-top: clamp(28px, 3vw, 44px);
+}
+.auftakt__wege { display: inline-flex; gap: $s3; margin-left: $s3; }
+
+.auftakt__kenn {
+  grid-column: 9 / 13; align-self: end;
+  display: flex; flex-direction: column; gap: 4px;
+  margin-top: clamp(24px, 2.8vw, 44px);
+  p { margin: 0; }
+}
+.auftakt__name { font-weight: 600; letter-spacing: -0.01em; }
+.auftakt__rolle { color: $tusche-2; }
+.auftakt__stichworte { color: $tusche-2; margin-top: $s3 !important; }
+
+.block { padding-block: clamp(48px, 5.5vw, 80px) 0; }
+.block__kopf {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: $s4; padding-bottom: $s4;
+}
+.block__notiz { text-align: right; }
+
+.profil { row-gap: $s6; padding-top: $s3; align-items: start; }
+.profil__bild { grid-column: 1 / 4; }
+.profil__bild img {
+  width: 100%; height: auto; aspect-ratio: 4 / 5;
+  object-fit: cover; object-position: center 22%;
+  background: $papier-tief;
+}
+.profil__text { grid-column: 5 / 10; }
+.profil__kenn { grid-column: 10 / 13; }
+.profil__kenn > div { padding-block: $s4; border-top: $strich-haar solid $linie; }
+.profil__kenn dd { margin-top: 6px; font-size: 15.5px; line-height: 1.5; }
+
+.block--kontakt { padding-top: clamp(40px, 4.5vw, 64px); }
+.kontakt { padding-top: $s5; row-gap: $s5; }
+.kontakt__text { grid-column: 1 / 5; }
+.kontakt__zeile { margin-top: $s3; color: $tusche-2; font-size: 16px; line-height: 1.55; max-width: 40ch; }
+.kontakt__wege { grid-column: 6 / 12; }
+.kontakt__mail a {
+  font-family: $serif; font-size: clamp(21px, 2.6vw, 34px); letter-spacing: -0.012em;
+  border-bottom: $strich-regel solid $linie;
+  transition: color 120ms linear, border-color 120ms linear;
+}
+.kontakt__mail a:hover { color: $petrol; border-bottom-color: $petrol; }
+.kontakt__links { display: flex; flex-wrap: wrap; gap: $s2 $s5; margin-top: $s3; }
+/* Berührungsziele: 44 px hoch, auch wenn die Marke klein ist */
+.kontakt__links a, .kontakt__links li { padding-block: 12px; }
+.kontakt__links a { border-bottom: $strich-regel solid transparent; transition: color 120ms linear, border-color 120ms linear; }
+.kontakt__links a:hover { color: $petrol; border-bottom-color: $petrol; }
+
+@media (max-width: $bp-m) {
+  .auftakt__these, .auftakt__lede, .auftakt__kenn,
+  .profil__bild, .profil__text, .profil__kenn,
+  .kontakt__text, .kontakt__wege { grid-column: 1 / -1; }
+  .profil__bild { max-width: 320px; }
+  .block__notiz { text-align: left; }
+}
+
+/* Icons sitzen auf der Grundlinie ihres Textes */
+.kontakt__mail a,
+.kontakt__links a,
+.kontakt__links li { display: inline-flex; align-items: center; gap: $s2; }
+.kontakt__mail lucide-icon { color: $tusche-2; }
+.aktion lucide-icon { display: inline-block; vertical-align: -2px; margin-left: $s2; }

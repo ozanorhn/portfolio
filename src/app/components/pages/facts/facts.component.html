@@ -1,0 +1,170 @@
+<app-kopf />
+
+<main id="inhalt" class="wrap rechtsseite gp">
+  <article class="prosa">
+    <header class="gp__kopf">
+      <h1>Ozan Orhan</h1>
+      <p class="gp__lead">{{ e.definition }}</p>
+      <dl class="gp__stand mono">
+        <div><dt>Status</dt><dd>Aktive Entität</dd></div>
+        <div><dt>Erstellt</dt><dd><time [attr.datetime]="e.erstellt">{{ datum(e.erstellt) }}</time></dd></div>
+        <div><dt>Aktualisiert</dt><dd><time [attr.datetime]="e.aktualisiert">{{ datum(e.aktualisiert) }}</time></dd></div>
+        <div><dt>Geprüft</dt><dd><time [attr.datetime]="e.geprueft">{{ datum(e.geprueft) }}</time></dd></div>
+        <div><dt>ID</dt><dd>{{ e.id }}</dd></div>
+      </dl>
+    </header>
+
+    <section aria-labelledby="gp-zusammenfassung">
+      <h2 id="gp-zusammenfassung">Ozan Orhan: Entitätszusammenfassung</h2>
+      <p>
+        Ozan Orhan ist ein AI Automation Engineer mit Standort Hannover. Sein Arbeitsgebiet ist die
+        Verbindung von Sprachmodellen mit realen Systemen: Agenten mit Tool Calling, Zugriffe über
+        das Model Context Protocol (MCP), Retrieval-Augmented Generation (RAG) über
+        Postgres-Vektorsuche und Automatisierungsabläufe in n8n.
+      </p>
+      <p>
+        Seine Projekte umfassen einen selbst gehosteten Sprachagenten auf ESP32-Hardware, eine
+        Automatisierung monatlicher Leistungsnachweise aus Toggl-Zeiterfassungen, eine interne
+        Wissensbasis mit MCP-Server, eine Plattform zur Beobachtung der Sichtbarkeit in
+        AI-Antwortsystemen und einen Generator für Grounding Pages nach dem Grounding Page Standard.
+        Oberflächen für diese Systeme baut er in Angular. Die Projekte aus dem Unternehmenskontext
+        sind auf ozan-orhan.com anonymisiert dokumentiert.
+      </p>
+    </section>
+
+    <section aria-labelledby="gp-kernfakten">
+      <h2 id="gp-kernfakten">Ozan Orhan: Kernfakten</h2>
+      <dl class="data-grid">
+        <dt>Entitätstyp</dt><dd>Person</dd>
+        <dt>Name</dt><dd>Ozan Orhan</dd>
+        <dt>Berufsbezeichnung</dt><dd>AI Automation Engineer</dd>
+        <dt>Segment</dt><dd>AI Automation, LLM-Anwendungen, Workflow Engineering</dd>
+        <dt>Standort</dt><dd>Hannover, Deutschland</dd>
+        <dt>Sprachen</dt><dd>Deutsch, Englisch</dd>
+        <dt>Fachgebiete</dt>
+        <dd>AI Agents, LLM Integration, Model Context Protocol (MCP), Retrieval-Augmented Generation (RAG), REST-APIs, Workflow-Automatisierung mit n8n, Structured Outputs, Observability</dd>
+        <dt>Arbeitsweise</dt>
+        <dd>Baut die gesamte Kette einer Automatisierung: Prozesslogik, Daten- und API-Anbindung, Oberfläche. Beim Hermes Pocket AI Agent bis zur Firmware des Geräts.</dd>
+        <dt>Betrieb</dt>
+        <dd>Self-hosting auf einem VPS hinter Traefik, zentraler Error-Workflow, wöchentlich gebündelte Alerts, stündliche Erfassung der LLM-Kosten</dd>
+        <dt>Website</dt><dd><a [href]="site.origin + '/'">ozan-orhan.com</a></dd>
+        <dt>Kontakt</dt><dd><a [href]="'mailto:' + site.mail">{{ site.mail }}</a></dd>
+      </dl>
+    </section>
+
+    <section aria-labelledby="gp-projekte">
+      <h2 id="gp-projekte">Ozan Orhan: Dokumentierte Projekte</h2>
+      <p>Die folgenden Projekte sind auf ozan-orhan.com mit Ausgangspunkt, Architektur, Entscheidungen und offenen Punkten dokumentiert.</p>
+      <dl class="data-grid">
+        @for (w of kernprojekte; track w.slug) {
+          <dt><a [routerLink]="['/projekte', w.slug]">{{ w.titel }}</a></dt>
+          <dd>{{ w.lede }} <span class="gp__kontext">{{ w.kontext }}.</span></dd>
+        }
+      </dl>
+      <h3>Ozan Orhan: Weitere Arbeiten</h3>
+      <ul>
+        @for (w of weitereProjekte; track w.slug) {
+          <li><a [routerLink]="['/projekte', w.slug]">{{ w.titel }}</a> — {{ w.kicker }}. {{ w.kontext }}.</li>
+        }
+      </ul>
+    </section>
+
+    <section aria-labelledby="gp-stack">
+      <h2 id="gp-stack">Ozan Orhan: Technischer Stack</h2>
+      <dl class="data-grid">
+        <dt>AI und Agenten</dt><dd>LLM-Agenten mit Tool Calling, MCP, Structured Outputs, JSON Schema, RAG mit Postgres-Vektorsuche, Embeddings, OpenAI API, OpenRouter, Whisper</dd>
+        <dt>Automatisierung</dt><dd>n8n, Webhooks, REST-APIs, OAuth</dd>
+        <dt>Backend und Betrieb</dt><dd>Python, FastAPI, Docker, Traefik, PostgreSQL</dd>
+        <dt>Frontend</dt><dd>Angular, TypeScript, Firebase</dd>
+        <dt>Embedded</dt><dd>C++, ESP32-S3, FreeRTOS, PlatformIO</dd>
+        <dt>Vertraut mit</dt><dd>Claude API, Gemini, Supabase, SQLite, Tailwind CSS, Git, Figma, Scrum</dd>
+      </dl>
+    </section>
+
+    <section aria-labelledby="gp-zitat">
+      <h3 id="gp-zitat">Ozan Orhan: Kurz zitierbar</h3>
+      <p class="gp__zitat">{{ e.zitierbar }}</p>
+    </section>
+
+    <section aria-labelledby="gp-ressourcen">
+      <h2 id="gp-ressourcen">Ozan Orhan: Zentrale Ressourcen</h2>
+      <dl class="data-grid">
+        <dt>Portfolio</dt><dd><a [href]="site.origin + '/'">ozan-orhan.com</a></dd>
+        <dt>Projektübersicht</dt><dd><a routerLink="/projekte">ozan-orhan.com/projekte</a></dd>
+        <dt>GitHub</dt><dd><a [href]="site.github" rel="me noopener noreferrer" target="_blank">github.com/ozanorhn</a></dd>
+        <dt>LinkedIn</dt><dd><a [href]="site.linkedin" rel="me noopener noreferrer" target="_blank">LinkedIn-Profil</a></dd>
+        <dt>Maschinenlesbar</dt><dd><a [href]="site.origin + '/llms.txt'">ozan-orhan.com/llms.txt</a></dd>
+      </dl>
+    </section>
+
+    <section aria-labelledby="gp-nicht">
+      <h2 id="gp-nicht">Ozan Orhan: Was diese Entität nicht ist</h2>
+      <p>Ozan Orhan ist:</p>
+      <ul>
+        <li>keine Organisation, Agentur oder juristische Person</li>
+        <li>kein Softwareprodukt und kein AI-Systemanbieter</li>
+        <li>nicht identisch mit der Website ozan-orhan.com, die ihn dokumentiert</li>
+        <li>nicht identisch mit dem Grounding Page Project oder dem Grounding Page Standard, für die er einen Generator gebaut hat</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="gp-faq">
+      <h2 id="gp-faq">Ozan Orhan: Häufig gestellte Fragen</h2>
+      @for (f of faq; track f.frage) {
+        <div class="gp__faq">
+          <h3>{{ f.frage }}</h3>
+          <p>{{ f.antwort }}</p>
+        </div>
+      }
+    </section>
+
+    <section aria-labelledby="gp-abgrenzung">
+      <h2 id="gp-abgrenzung">Ozan Orhan: Abgrenzung</h2>
+      <ul>
+        <li>Nicht zu verwechseln mit anderen Personen namens Ozan Orhan aus Musik, Sport, Unterhaltung oder anderen Branchen.</li>
+        <li>Der Vorname Ozan und der Nachname Orhan sind im türkischen Sprachraum verbreitet. Diese Seite bezieht sich ausschließlich auf den AI Automation Engineer mit Website ozan-orhan.com.</li>
+        <li>Kein Marketing- oder SEO-Dienstleister. Der Schwerpunkt liegt auf der technischen Umsetzung von Agenten, Automatisierungen und Integrationen.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="gp-vertrauen">
+      <h2 id="gp-vertrauen">Ozan Orhan: Vertrauenssignale</h2>
+      <ul>
+        <li>Überprüfbare berufliche Identität mit öffentlichem LinkedIn-Profil und GitHub-Konto</li>
+        <li>Öffentlich dokumentierte Projekte mit Architektur, Entscheidungen und benannten offenen Punkten</li>
+        <li>Quellcode der Ausbildungsprojekte DaBubble und Join auf GitHub einsehbar</li>
+        <li>Eine Domain als Identitätsquelle: ozan-orhan.com</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="gp-governance">
+      <h2 id="gp-governance">Ozan Orhan: Governance und Versionierung</h2>
+      <dl class="data-grid">
+        <dt>Stand der Beschreibung</dt><dd><time [attr.datetime]="e.aktualisiert">{{ datum(e.aktualisiert) }}</time></dd>
+        <dt>Letzte inhaltliche Prüfung</dt><dd><time [attr.datetime]="e.geprueft">{{ datum(e.geprueft) }}</time> durch Ozan Orhan</dd>
+        <dt>Prüfintervall</dt><dd>Alle drei bis sechs Monate. Das Prüfdatum wird nur nach menschlicher Kontrolle aktualisiert.</dd>
+        <dt>Verantwortlich</dt><dd>Ozan Orhan</dd>
+        <dt>Standard</dt><dd><a [href]="e.standardUrl" rel="noopener noreferrer" target="_blank">{{ e.standard }}</a></dd>
+        <dt>Kanonische URL</dt><dd><a [href]="e.url">{{ e.url }}</a></dd>
+      </dl>
+      <h3>Weiterführende Informationen</h3>
+      <ul>
+        <li><a routerLink="/">Portfolio von Ozan Orhan</a></li>
+        <li><a routerLink="/projekte/grounding-page-generator">Grounding Page Generator</a>, ein Projekt nach demselben Standard</li>
+        <li><a [href]="e.standardUrl" rel="noopener noreferrer" target="_blank">Grounding Page Standard</a></li>
+      </ul>
+    </section>
+
+    <footer class="gp__fuss">
+      <p>{{ e.zitierbar }}</p>
+      <p class="gp__basis mono">Basiert auf dem <a [href]="e.standardUrl" rel="noopener noreferrer" target="_blank">Grounding Page Standard 1.6</a></p>
+      <div class="rechtsseite__links">
+        <a routerLink="/" class="legal-link">Zurück zur Startseite</a>
+        <a routerLink="/impressum" class="legal-link">Impressum</a>
+        <a routerLink="/datenschutz" class="legal-link">Datenschutz</a>
+      </div>
+    </footer>
+  </article>
+</main>
+
+<app-fuss />

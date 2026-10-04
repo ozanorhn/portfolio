@@ -1,0 +1,53 @@
+# Recruiting Jobs Sync
+
+> Eine LLM-gestützte Datenpipeline, die Stellenanzeigen aus HTML strukturiert und über last_seen_at idempotent synchron hält.
+
+URL: https://ozan-orhan.com/projekte/recruiting-jobs-sync
+Status: Implementiert und lauffähig
+Kontext: Unternehmenskontext · anonymisiert dargestellt
+Stack: n8n, Zeitplan-Trigger, HTTP-Abruf, JavaScript, Schema-gebundene LLM-Extraktion, Enum-Constraints, Datenspeicher mit Upsert
+
+## Ausgangspunkt
+
+Die Quelle ist eine Karriereseite ohne API oder Änderungsereignisse. Ein reiner Import würde deshalb Stellen dauerhaft als aktiv halten, auch wenn sie auf der Quelle bereits entfernt wurden.
+
+Ich habe dafür einen täglichen Sync gebaut, der Stellen aus HTML extrahiert, strukturiert speichert und über einen Lauf-Zeitstempel erkennt, welche Einträge nicht mehr vorhanden sind.
+
+## Architektur
+
+Zu Beginn wird ein Lauf-Zeitstempel gesetzt und über den Lauf mitgeführt. Aus der Übersichtsseite werden die Detail-Links extrahiert, normalisiert und dedupliziert; aus dem Pfad entsteht ein stabiler Slug. Je Link wird die Detailseite bereinigt, schema-gebunden extrahiert und über den Slug geupsertet, wobei last_seen_at auf den Laufzeitpunkt gesetzt wird. Danach werden alle aktiven Zeilen mit älterem Zeitstempel auf inaktiv gesetzt.
+
+Die Detailseiten werden einzeln verarbeitet. Das vereinfacht die Zuordnung von Quelle, Modellantwort und Fehlerfall und verhindert, dass mehrere Stellen in einem gemeinsamen Modellaufruf vermischt werden.
+
+## Entscheidungen
+
+### Lauf-Zeitstempel statt Snapshot-Vergleich
+
+Alles, was in einem erfolgreichen Lauf gesehen wird, bekommt denselben Lauf-Zeitstempel. Anschließend reicht eine Abfrage, um ältere aktive Einträge zu finden. Dadurch brauche ich keinen separaten Soll-Ist-Snapshot.
+
+### Soft Delete statt Löschen
+
+Entfernte Anzeigen bekommen den Status „inaktiv“. Der historische Bestand bleibt auswertbar, und wird eine Anzeige in einem Lauf nicht erfasst, kann ein späterer erfolgreicher Lauf sie wieder aktivieren.
+
+### Slug als natürlicher Schlüssel
+
+Der Pfad ist stabil und wird von der Quelle vergeben. Damit ist der Upsert idempotent, ohne dass ich einen eigenen Schlüsselraum verwalte; ein wiederholter Lauf erzeugt keine Duplikate.
+
+### Deterministische Vorverarbeitung, schema-gebundene LLM-Extraktion
+
+Skripte, Styles und Markup werden entfernt, bevor Text ins Modell geht. Das spart Token und nimmt dem Modell Inhalte weg, die es in die Irre führen können. Die Extraktion ist schema-gebunden; ein Enum begrenzt die möglichen Senioritätswerte und sorgt dafür, dass die Ergebnisse über mehrere Läufe konsistent gruppierbar bleiben.
+
+## Ergebnis
+
+Der Workflow überführt eine HTML-Quelle ohne API in einen strukturierten, wiederholbar synchronisierbaren Datenbestand.
+
+Upserts über den Slug verhindern Duplikate. last_seen_at ermöglicht die Erkennung nicht mehr vorhandener Stellen, ohne Datensätze zu löschen. Dadurch bleibt der historische Bestand erhalten und spätere Läufe können Einträge wieder aktivieren.
+
+## Einschränkungen der Darstellung
+
+Dieses Projekt liegt im Unternehmenskontext. Es werden keine Screenshots interner
+Systeme, keine Kundennamen, keine Domains und keine internen Kennungen gezeigt.
+Die Darstellung ist auf die Architektur abstrahiert.
+
+Kontakt: contact@ozan-orhan.com
+

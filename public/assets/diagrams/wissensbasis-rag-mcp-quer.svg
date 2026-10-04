@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 640" width="1600" height="640" role="img" aria-labelledby="sbt sbd" preserveAspectRatio="xMidYMid meet">
+<title id="sbt">Systembild Wissensbasis — RAG-Pipeline und MCP-Server</title>
+<desc id="sbd">Zwei getrennte Workflows teilen sich einen Vector Store. Schreibpfad: Dokumentquelle, Ingest als manuell ausgelöster Batch, Chunking, mehrsprachige Embeddings. Gemeinsamer Vector Store auf Postgres mit Vektor-Erweiterung und dedizierter Match-Funktion. Lesepfad: Retrieval, MCP-Server mit einem nur lesenden Tool, beliebige MCP-Clients als Consumer. Die Anfrage läuft gegenläufig zum Treffer.</desc>
+<rect x="0" y="0" width="1600" height="640" fill="#1C1B19"/>
+<text x="110" y="110" font-family="Archivo, ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="400" fill="#8A857C" letter-spacing="1.32" text-anchor="start">SCHREIBPFAD · EIGENER WORKFLOW</text>
+<line x1="110" y1="122" x2="1490" y2="122" stroke="#3A3833" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<line x1="170" y1="190" x2="1440" y2="190" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M320.5,185.5 L325.0,190 L320.5,194.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M630.5,185.5 L635.0,190 L630.5,194.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M940.5,185.5 L945.0,190 L940.5,194.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M1285.5,185.5 L1290,190 L1285.5,194.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<circle cx="170" cy="190" r="7" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="186" y="178" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9" font-weight="400" fill="#8A857C" letter-spacing="1.26" text-anchor="start">01</text>
+<text x="170" y="226.0" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" font-weight="400" fill="#E8E4DC" letter-spacing="0.92" text-anchor="middle">DOKUMENTQUELLE</text>
+<text x="170" y="245" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" font-weight="400" fill="#8A857C" letter-spacing="0.76" text-anchor="middle">ORDNER</text>
+<circle cx="480" cy="190" r="7" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="496" y="178" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9" font-weight="400" fill="#8A857C" letter-spacing="1.26" text-anchor="start">02</text>
+<text x="480" y="226.0" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" font-weight="400" fill="#E8E4DC" letter-spacing="0.92" text-anchor="middle">INGEST</text>
+<text x="480" y="245" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" font-weight="400" fill="#8A857C" letter-spacing="0.76" text-anchor="middle">BATCH, MANUELL AUSGELÖST</text>
+<circle cx="790" cy="190" r="7" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="806" y="178" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9" font-weight="400" fill="#8A857C" letter-spacing="1.26" text-anchor="start">03</text>
+<text x="790" y="226.0" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" font-weight="400" fill="#E8E4DC" letter-spacing="0.92" text-anchor="middle">CHUNKING</text>
+<text x="790" y="245" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" font-weight="400" fill="#8A857C" letter-spacing="0.76" text-anchor="middle">TEXT-SPLITTER</text>
+<circle cx="1100" cy="190" r="7" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="1116" y="178" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9" font-weight="400" fill="#8A857C" letter-spacing="1.26" text-anchor="start">04</text>
+<text x="1100" y="226.0" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" font-weight="400" fill="#E8E4DC" letter-spacing="0.92" text-anchor="middle">EMBEDDINGS</text>
+<text x="1100" y="245" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" font-weight="400" fill="#8A857C" letter-spacing="0.76" text-anchor="middle">MEHRSPRACHIGES MODELL</text>
+<path d="M1440,190 V302" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M1435.5,292.5 L1440,297 L1444.5,292.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<line x1="110" y1="310" x2="640" y2="310" stroke="#E8E4DC" stroke-width="2.0" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<line x1="960" y1="310" x2="1490" y2="310" stroke="#E8E4DC" stroke-width="2.0" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="800" y="314" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="400" fill="#E8E4DC" letter-spacing="1.43" text-anchor="middle">05  VECTOR STORE</text>
+<text x="800" y="336" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" font-weight="400" fill="#8A857C" letter-spacing="0.76" text-anchor="middle">POSTGRES MIT VEKTOR-ERWEITERUNG · DEDIZIERTE MATCH-FUNKTION</text>
+<path d="M110,310 V480 H163" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M163.5,475.5 L168,480 L163.5,484.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="170" y="400" font-family="Archivo, ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="400" fill="#8A857C" letter-spacing="1.32" text-anchor="start">LESEPFAD · EIGENER WORKFLOW · DREI NODES</text>
+<line x1="170" y1="412" x2="1490" y2="412" stroke="#3A3833" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<line x1="170" y1="480" x2="950" y2="480" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M360.5,475.5 L365.0,480 L360.5,484.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M750.5,475.5 L755.0,480 L750.5,484.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<circle cx="170" cy="480" r="7" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="186" y="468" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9" font-weight="400" fill="#8A857C" letter-spacing="1.26" text-anchor="start">06</text>
+<text x="170" y="516.0" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" font-weight="400" fill="#E8E4DC" letter-spacing="0.92" text-anchor="middle">RETRIEVAL</text>
+<text x="170" y="535" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" font-weight="400" fill="#8A857C" letter-spacing="0.76" text-anchor="middle">MATCH-FUNKTION IN DER DATENBANK</text>
+<circle cx="560" cy="480" r="7" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="576" y="468" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9" font-weight="400" fill="#8A857C" letter-spacing="1.26" text-anchor="start">07</text>
+<text x="560" y="516.0" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" font-weight="400" fill="#E8E4DC" letter-spacing="0.92" text-anchor="middle">MCP-SERVER</text>
+<text x="560" y="535" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" font-weight="400" fill="#8A857C" letter-spacing="0.76" text-anchor="middle">EIN TOOL, NUR LESEND</text>
+<circle cx="950" cy="480" r="7" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="966" y="468" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9" font-weight="400" fill="#8A857C" letter-spacing="1.26" text-anchor="start">08</text>
+<text x="950" y="516.0" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" font-weight="400" fill="#E8E4DC" letter-spacing="0.92" text-anchor="middle">AGENT / CONSUMER</text>
+<text x="950" y="535" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" font-weight="400" fill="#8A857C" letter-spacing="0.76" text-anchor="middle">BELIEBIGE MCP-CLIENTS</text>
+<text x="1130" y="482" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" font-weight="400" fill="#8A857C" letter-spacing="0.8" text-anchor="start">Die Anfrage läuft gegenläufig:</text>
+<text x="1130" y="498" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" font-weight="400" fill="#8A857C" letter-spacing="0.8" text-anchor="start">Consumer → MCP-Server → Retrieval → Vector Store.</text>
+<line x1="110" y1="578" x2="1490" y2="578" stroke="#3A3833" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<line x1="110" y1="601.5" x2="136" y2="601.5" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="146" y="605" font-family="Archivo, ui-sans-serif, system-ui, sans-serif" font-size="9.5" font-weight="400" fill="#8A857C" letter-spacing="0.85" text-anchor="start">DATENFLUSS</text>
+<text x="1490" y="605" font-family="Archivo, ui-sans-serif, system-ui, sans-serif" font-size="9.5" font-weight="400" fill="#8A857C" letter-spacing="1.14" text-anchor="end">SYSTEMBILD · WISSENSBASIS — RAG-PIPELINE + MCP-SERVER</text>
+</svg>

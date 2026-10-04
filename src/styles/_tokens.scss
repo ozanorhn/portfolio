@@ -1,0 +1,41 @@
+// Werkverzeichnis — Designtokens.
+// Farben laufen über CSS-Variablen, damit der Theme-Wechsel ohne Neubau greift.
+// Die SCSS-Namen bleiben, damit alle bestehenden Komponenten unverändert weiterlaufen.
+
+// ─── Papier (Seitengrund) ───────────────────────────────────────────────
+$papier:        var(--papier);
+$papier-tief:   var(--papier-tief);
+$tusche:        var(--tusche);
+$tusche-2:      var(--tusche-2);
+$linie:         var(--linie);
+$petrol:        var(--petrol);
+
+// ─── Platte (dunkle Flächen: Systembilder, Flüsse, Journale) ────────────
+$platte:        var(--platte);
+$kreide:        var(--kreide);
+$kreide-2:      var(--kreide-2);
+$linie-platte:  var(--linie-platte);
+$petrol-platte: var(--petrol-platte);
+
+// ─── Schrift ────────────────────────────────────────────────────────────
+$serif: 'Source Serif 4', ui-serif, Georgia, 'Times New Roman', serif;
+$sans:  'Archivo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+$mono:  'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+// ─── Linienstärken — die Stärke trägt Bedeutung ─────────────────────────
+$strich-haar:  0.75px;
+$strich-regel: 1px;
+$strich-stark: 2px;
+
+// ─── Raster ─────────────────────────────────────────────────────────────
+$max:    2000px;
+$gosse:  clamp(20px, 2.6vw, 44px);
+$bp-s:   560px;
+$bp-m:   900px;
+$bp-l:   1200px;
+
+// ─── Rhythmus ───────────────────────────────────────────────────────────
+$s1: 4px;   $s2: 8px;   $s3: 12px;  $s4: 16px;
+$s5: 24px;  $s6: 32px;  $s7: 48px;  $s8: 64px;
+$s9: 96px;  $s10: 128px;
+$band: clamp(72px, 9vw, 136px);

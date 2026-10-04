@@ -1,0 +1,20 @@
+# Join
+
+> Aufgabenmanager nach dem Kanban-Prinzip: Tasks anlegen, per Drag-and-Drop zwischen Spalten bewegen, Personen zuordnen. Reines JavaScript mit Firebase.
+
+URL: https://ozan-orhan.com/projekte/join
+Status: Abgeschlossen, live
+Kontext: Ausbildungsprojekt · Developer Akademie
+Stack: JavaScript, HTML/CSS, Firebase
+Repository: https://github.com/ozanorhn/Join
+
+## Überblick
+
+Tasks anlegen, per Drag-and-Drop zwischen Status-Spalten bewegen, Personen und Kategorien zuordnen.
+
+## Ergebnis
+
+Abgeschlossen; die Anwendung läuft weiterhin live, der Quellcode ist öffentlich.
+
+Kontakt: contact@ozan-orhan.com
+

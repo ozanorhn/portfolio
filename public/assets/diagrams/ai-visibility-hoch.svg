@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 3114" width="760" height="3114" role="img" aria-labelledby="sbt sbd" preserveAspectRatio="xMidYMid meet">
+<title id="sbt">Systembild AI Visibility Monitoring Platform</title>
+<desc id="sbd">Hochformat. Drei Komponenten: täglicher Sync der Sichtbarkeits-APIs mit defensiver Extraktion und Analyse-Agent; täglicher Abgleich von Webanalyse, Suchkonsole und Backlinks mit Anomalieerkennung; vierzehntägige Zielüberprüfung, bei der ein Agent-System n8n als Rechen-Service hinter einem Webhook aufruft.</desc>
+<rect x="0" y="0" width="760" height="3114" fill="#1C1B19"/>
+<line x1="96" y1="1938" x2="96" y2="2638" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<line x1="96" y1="1236" x2="96" y2="1686" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<line x1="96" y1="284" x2="96" y2="984" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="44" y="62" font-family="Archivo, ui-sans-serif, system-ui, sans-serif" font-size="21" font-weight="400" fill="#8A857C" letter-spacing="2.31" text-anchor="start">AI VISIBILITY MONITORING PLATFORM · DREI</text>
+<text x="44" y="90" font-family="Archivo, ui-sans-serif, system-ui, sans-serif" font-size="21" font-weight="400" fill="#8A857C" letter-spacing="2.31" text-anchor="start">KOMPONENTEN</text>
+<line x1="44" y1="140" x2="716" y2="140" stroke="#3A3833" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="44" y="206" font-family="Archivo, ui-sans-serif, system-ui, sans-serif" font-size="21" font-weight="400" fill="#8A857C" letter-spacing="2.31" text-anchor="start">SICHTBARKEIT IN KI-ANTWORTEN · TÄGLICH</text>
+<line x1="44" y1="224" x2="716" y2="224" stroke="#3A3833" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<circle cx="96" cy="284" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="258" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">01</text>
+<text x="132" y="292" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">SICHTBARKEITS-APIS</text>
+<text x="132" y="326" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">PARALLELE ABRUFE</text>
+<circle cx="96" cy="424" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="398" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">02</text>
+<text x="132" y="432" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">DEFENSIVE EXTRAKTION</text>
+<text x="132" y="466" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">REKURSIV, STRUKTURAGNOSTISCH</text>
+<circle cx="96" cy="564" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="538" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">03</text>
+<text x="132" y="572" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">KONTEXT</text>
+<text x="132" y="606" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">GEWONNEN · VERLOREN · WETTBEWERB</text>
+<circle cx="96" cy="704" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="678" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">04</text>
+<text x="132" y="712" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">ANALYSE-AGENT</text>
+<text x="132" y="746" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">OHNE TOOLS, OHNE SCHREIBRECHT</text>
+<circle cx="96" cy="844" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="818" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">05</text>
+<text x="132" y="852" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">NORMALISIERUNG</text>
+<text x="132" y="886" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">PRIORITÄT · SCHLÜSSEL · LÄNGEN</text>
+<circle cx="96" cy="984" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="958" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">06</text>
+<text x="132" y="992" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">UPSERT INSIGHTS</text>
+<text x="132" y="1026" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">STABILE SCHLÜSSEL</text>
+<text x="44" y="1158" font-family="Archivo, ui-sans-serif, system-ui, sans-serif" font-size="21" font-weight="400" fill="#8A857C" letter-spacing="2.31" text-anchor="start">TRAFFIC UND RANKINGS · TÄGLICH</text>
+<line x1="44" y1="1176" x2="716" y2="1176" stroke="#3A3833" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<circle cx="96" cy="1236" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="1210" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">07</text>
+<text x="132" y="1244" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">ANALYSE · SUCHKONSOLE ·</text>
+<text x="132" y="1274" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">BACKLINKS</text>
+<text x="132" y="1308" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">ZWEI ZEITRÄUME</text>
+<circle cx="96" cy="1406" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="1380" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">08</text>
+<text x="132" y="1414" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">AGGREGATION NACH URL</text>
+<text x="132" y="1448" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">PERSISTENZ</text>
+<circle cx="96" cy="1546" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="1520" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">09</text>
+<text x="132" y="1554" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">ANOMALIEERKENNUNG</text>
+<text x="132" y="1588" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">EINBRÜCHE · BEINAHE-RANKINGS</text>
+<circle cx="96" cy="1686" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="1660" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">10</text>
+<text x="132" y="1694" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">AUFGABEN + MELDUNG</text>
+<text x="132" y="1728" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">PROJEKTSYSTEM · CHAT-KANAL</text>
+<text x="44" y="1860" font-family="Archivo, ui-sans-serif, system-ui, sans-serif" font-size="21" font-weight="400" fill="#8A857C" letter-spacing="2.31" text-anchor="start">ZIELÜBERPRÜFUNG · 14-TÄGIG, EXTERN ANGESTOSSEN</text>
+<line x1="44" y1="1878" x2="716" y2="1878" stroke="#3A3833" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<line x1="81" y1="1938" x2="111" y2="1938" stroke="#E8E4DC" stroke-width="2.0" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="1912" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">11</text>
+<text x="132" y="1946" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">AGENT-SYSTEM</text>
+<text x="132" y="1980" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">AUSLÖSUNG UND KOMMUNIKATION</text>
+<circle cx="96" cy="2078" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="2052" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">12</text>
+<text x="132" y="2086" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">WEBHOOK</text>
+<text x="132" y="2120" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">SYNCHRONE ANTWORT</text>
+<circle cx="96" cy="2218" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="2192" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">13</text>
+<text x="132" y="2226" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">ZEITRÄUME + URLS</text>
+<text x="132" y="2260" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">VIER DATUMSGRENZEN</text>
+<circle cx="96" cy="2358" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="2332" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">14</text>
+<text x="132" y="2366" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">SCHLEIFE JE URL</text>
+<text x="132" y="2400" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">VIER ABFRAGEN</text>
+<circle cx="96" cy="2498" r="9" fill="#1C1B19" stroke="#E8E4DC" stroke-width="1.0" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="2472" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">15</text>
+<text x="132" y="2506" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">TREND-BEWERTUNG</text>
+<text x="132" y="2540" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">SIGNAL-VOTING · GEMISCHT ZÄHLT</text>
+<line x1="81" y1="2638" x2="111" y2="2638" stroke="#E8E4DC" stroke-width="2.0" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="132" y="2612" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="400" fill="#8A857C" letter-spacing="2.24" text-anchor="start">16</text>
+<text x="132" y="2646" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="400" fill="#E8E4DC" letter-spacing="1.92" text-anchor="start">ANTWORT AN DEN AGENTEN</text>
+<text x="132" y="2680" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="400" fill="#8A857C" letter-spacing="1.44" text-anchor="start">DER AGENT STELLT ZU</text>
+<path d="M91.5,349.5 L96,354.0 L100.5,349.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,489.5 L96,494.0 L100.5,489.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,629.5 L96,634.0 L100.5,629.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,769.5 L96,774.0 L100.5,769.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,909.5 L96,914.0 L100.5,909.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,1316.5 L96,1321.0 L100.5,1316.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,1471.5 L96,1476.0 L100.5,1471.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,1611.5 L96,1616.0 L100.5,1611.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,2003.5 L96,2008.0 L100.5,2003.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,2143.5 L96,2148.0 L100.5,2143.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,2283.5 L96,2288.0 L100.5,2283.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,2423.5 L96,2428.0 L100.5,2423.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<path d="M91.5,2563.5 L96,2568.0 L100.5,2563.5" fill="none" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" stroke-linejoin="miter" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<line x1="44" y1="2832" x2="716" y2="2832" stroke="#3A3833" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="44" y="2878" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23" letter-spacing="0.8" fill="#E8E4DC">n8n ist hier kein Automatisierungstool,</text>
+<text x="44" y="2912" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23" letter-spacing="0.8" fill="#E8E4DC">sondern ein Rechen-Service</text>
+<text x="44" y="2946" font-family="'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23" letter-spacing="0.8" fill="#3F8C79">hinter einem Agenten.</text>
+<line x1="44" y1="3008" x2="84" y2="3008" stroke="#3F8C79" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="98" y="3014" font-family="Archivo, ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="400" fill="#8A857C" letter-spacing="1.53" text-anchor="start">DATENFLUSS</text>
+<line x1="44" y1="3038" x2="84" y2="3038" stroke="#8A857C" stroke-width="0.75" stroke-linecap="butt" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+<text x="98" y="3044" font-family="Archivo, ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="400" fill="#8A857C" letter-spacing="1.53" text-anchor="start">ZUSTÄNDIGKEIT / BEZUG</text>
+</svg>

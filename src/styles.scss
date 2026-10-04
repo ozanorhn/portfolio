@@ -1,302 +1,344 @@
-@import 'styles/variables';
-@import 'styles/typography';
-@import 'styles/animations';
+@use 'styles/tokens' as *;
 
-// Reset
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* ─── Farbwerte ───────────────────────────────────────────────────────
+   Hell ist der Standard. Dunkel spiegelt die Palette an den benannten
+   Gegenwerten, die das System für die Plattenflächen ohnehin führt. */
+:root {
+  --papier:        #F5F2ED;
+  --papier-tief:   #EBE7E0;
+  --tusche:        #1A1917;
+  --tusche-2:      #6E6A63;
+  --linie:         #D6D1C8;
+  --petrol:        #17403C;
+  --petrol-schwach: #93A9A5;
+
+  --platte:        #1C1B19;
+  --kreide:        #E8E4DC;
+  --kreide-2:      #8F8A81;
+  --linie-platte:  #3A3833;
+  --petrol-platte: #479A84;
+
+  color-scheme: light;
 }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+[data-theme='dunkel'] {
+  --papier:        #141310;
+  --papier-tief:   #1C1B18;
+  --tusche:        #E8E4DC;
+  --tusche-2:      #948E84;
+  --linie:         #33312B;
+  --petrol:        #6FB59D;
+  --petrol-schwach: #3D5C54;
+
+  /* Plattenflächen bleiben Flächen: eine Stufe heller als der Seitengrund */
+  --platte:        #201F1C;
+  --linie-platte:  #403D37;
+
+  color-scheme: dark;
 }
+
+/* ─── Reset ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body, h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+img, svg, video { display: block; max-width: 100%; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button { background: none; border: 0; padding: 0; cursor: pointer; }
+
+/* ─── Grund ─────────────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
-  background: $color-black;
-  color: $color-text-primary;
-  font-family: $font-family;
-  font-size: $font-size-body;
+  background: $papier;
+  transition: background-color 160ms linear, color 160ms linear;
+  color: $tusche;
+  font-family: $serif;
+  font-size: 17px;
+  line-height: 1.62;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  position: relative;
 }
 
-// Remove default button styling
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-  padding: 0;
-  margin: 0;
+/* ─── Browserflächen, die sonst niemandem gehören ───────────────────── */
+::selection { background: $petrol; color: $papier; }
+:focus-visible {
+  outline: 2px solid $petrol;
+  outline-offset: 3px;
 }
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: $papier-tief; }
+::-webkit-scrollbar-thumb { background: $linie; border: 3px solid $papier-tief; }
+::-webkit-scrollbar-thumb:hover { background: $tusche-2; }
+* { scrollbar-color: $linie $papier-tief; scrollbar-width: thin; }
 
-// Remove default list styling
-ul, ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-// Default input styling
-input, textarea {
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
-}
-
-// Container utility
-.container {
-  max-width: $container-max-width;
-  margin: 0 auto;
-  padding: 0 $container-padding;
+/* ─── Raster ────────────────────────────────────────────────────────── */
+.wrap {
   width: 100%;
+  max-width: $max;
+  margin-inline: auto;
+  padding-inline: $gosse;
 }
-
-// Section base styling
-section {
-  position: relative;
-  z-index: 1;
-  padding: $spacing-section 0;
-
-  &:first-of-type {
-    padding-top: 0;
-  }
-}
-
-// Grid utilities
 .grid {
   display: grid;
-  gap: $spacing-lg;
-
-  &.grid-2 {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-
-    @media (max-width: $breakpoint-tablet) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  &.grid-3 {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
-    @media (max-width: $breakpoint-tablet) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: $breakpoint-mobile) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  &.grid-4 {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
-    @media (max-width: $breakpoint-tablet) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: $breakpoint-mobile) {
-      grid-template-columns: 1fr;
-    }
-  }
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(16px, 2vw, 32px);
+}
+/* Grid-Items sind per Default min-width:auto und blähen jeden Scroll-Container auf. */
+.grid > * { min-width: 0; }
+@media (max-width: $bp-m) {
+  .grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 }
 
-// Flex utilities
-.flex {
-  display: flex;
-
-  &.flex-center {
-    align-items: center;
-    justify-content: center;
-  }
-
-  &.flex-between {
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &.flex-column {
-    flex-direction: column;
-  }
-
-  &.gap-sm {
-    gap: $spacing-sm;
-  }
-
-  &.gap-md {
-    gap: $spacing-md;
-  }
-
-  &.gap-lg {
-    gap: $spacing-lg;
-  }
+/* ─── Schriftrollen ─────────────────────────────────────────────────── */
+.display {
+  font-family: $serif;
+  font-weight: 400;
+  font-size: clamp(38px, 5.4vw, 76px);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.titel {
+  font-family: $serif;
+  font-weight: 400;
+  font-size: clamp(29px, 3.4vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+.untertitel {
+  font-family: $serif;
+  font-weight: 600;
+  font-size: clamp(20px, 1.9vw, 26px);
+  line-height: 1.25;
+  letter-spacing: -0.008em;
+}
+.lede {
+  font-family: $serif;
+  font-size: clamp(18px, 1.35vw, 21px);
+  line-height: 1.55;
+  color: $tusche;
+}
+.meta {
+  font-family: $sans;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: $tusche-2;
+}
+.mono {
+  font-family: $mono;
+  overflow-wrap: break-word;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+  color: $tusche-2;
+  font-variant-numeric: tabular-nums;
 }
 
-// Card component
-.card {
-  background: $color-surface;
-  border: none;
-  border-radius: $radius-card;
-  padding: $spacing-lg;
-  transition: $transition-base;
-  box-shadow: $shadow-card-light;
+/* ─── Regeln statt Rahmen ───────────────────────────────────────────── */
+.regel      { border: 0; border-top: $strich-regel solid $linie; }
+.regel-haar { border: 0; border-top: $strich-haar solid $linie; }
+.regel-stark{ border: 0; border-top: $strich-stark solid $tusche; }
 
-  &:hover {
-    border-color: $color-border-hover;
-    background: $color-surface-hover;
-    transform: translateY(-4px);
-  }
+/* ─── Links ─────────────────────────────────────────────────────────── */
+a { color: inherit; text-decoration: none; }
+.prosa a,
+a.textlink {
+  color: $petrol;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: var(--petrol-schwach);
+  transition: color 120ms linear, text-decoration-color 120ms linear;
 }
+.prosa a:hover,
+a.textlink:hover { text-decoration-color: $petrol; }
 
-// Button component
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: $spacing-sm;
-  padding: $spacing-md $spacing-lg;
-  border-radius: 980px;
-  font-size: $font-size-body;
-  font-weight: $font-weight-regular;
-  transition: $transition-fast;
-  cursor: pointer;
-  border: 1px solid transparent;
-  text-decoration: none;
-  white-space: nowrap;
-
-  &.btn-primary {
-    background: $color-accent;
-    color: white;
-
-    &:hover {
-      background: $color-accent-hover;
-      transform: translateY(-2px);
-    }
-
-    &:active {
-      transform: translateY(0);
-    }
-  }
-
-  &.btn-secondary {
-    background: transparent;
-    border: 1px solid $color-border;
-    color: $color-text-primary;
-
-    &:hover {
-      border-color: $color-border-hover;
-      background: rgba(0, 113, 227, 0.08);
-      transform: translateY(-2px);
-    }
-
-    &:active {
-      transform: translateY(0);
-    }
-  }
-
-  &.btn-lg {
-    padding: $spacing-lg $spacing-2xl;
-    font-size: 17px;
-  }
-
-  &.btn-sm {
-    padding: $spacing-sm $spacing-md;
-    font-size: $font-size-body-small;
-  }
-}
-
-// Badge component
-.badge {
+/* ─── Handlung als beschriftete Linie, nie als Pille ────────────────── */
+.aktion {
   display: inline-block;
-  padding: $spacing-sm $spacing-md;
-  background: $color-surface;
-  border: 1px solid $color-border;
-  border-radius: $radius-md;
-  font-size: $font-size-label;
-  font-weight: $font-weight-medium;
-  color: $color-text-secondary;
-  transition: $transition-fast;
+  font-family: $sans;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $tusche;
+  padding-block: 12px;
+  border-bottom: $strich-regel solid $linie;
+  transition: border-color 120ms linear, color 120ms linear;
+}
+.aktion:hover { color: $petrol; border-bottom-color: $petrol; }
+.aktion--primaer { border-bottom-width: $strich-stark; border-bottom-color: $tusche; }
+.aktion--primaer:hover { border-bottom-color: $petrol; }
 
-  &:hover {
-    background: $color-surface-hover;
-    border-color: $color-border-hover;
-  }
+.knopf {
+  display: inline-flex; align-items: center; gap: $s2;
+  height: 44px; padding-inline: $s5;
+  background: $tusche; color: $papier;
+  border: $strich-regel solid $tusche; border-radius: 2px;
+  font-family: $sans; font-size: 12.5px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  transition: background-color 120ms linear, border-color 120ms linear, color 120ms linear;
+}
+.knopf:hover { background: $petrol; border-color: $petrol; color: $papier; }
+.rundknopf {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  border: $strich-regel solid $linie; border-radius: 2px;
+  color: $tusche-2;
+  transition: color 120ms linear, border-color 120ms linear, background-color 120ms linear;
+}
+.rundknopf:hover { color: $petrol; border-color: $petrol; background: $papier-tief; }
 
-  &.badge-accent {
-    background: rgba(0, 113, 227, 0.1);
-    border-color: $color-accent;
-    color: $color-accent;
-
-    &:hover {
-      background: rgba(0, 113, 227, 0.15);
-    }
-  }
+/* ─── Tech-Stack ────────────────────────────────────────────────────── */
+.techstack { row-gap: $s6; align-items: start; }
+.techstack__titel { grid-column: 1 / 4; }
+.techstack__gruppen {
+  grid-column: 5 / 13;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(24px, 3vw, 40px);
+}
+@media (max-width: $bp-s) {
+  .techstack__gruppen { grid-template-columns: 1fr; }
+}
+.techstack__gruppe {
+  min-width: 0;
+  padding-block: $s4 $s5;
+  border-top: $strich-regel solid $linie;
+}
+.techstack__gruppe dt {
+  display: flex;
+  align-items: center;
+  gap: $s2;
+  font-family: $sans;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: $tusche;
+}
+.techstack__gruppe dt lucide-icon { color: $petrol; flex: none; }
+.techstack__gruppe dd {
+  margin: $s3 0 0;
+  font-family: $mono;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: $tusche-2;
+  /* Angular entfernt den Leerraum zwischen den Spans, damit fehlt der Zeilenumbruch-
+     Punkt. Flex-Wrap stellt ihn unabhängig vom Markup wieder her. */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+/* Einträge brechen zwischen sich um, nie innerhalb eines Namens.
+   Der Trenner hängt hinten, damit keine Folgezeile mit einem Punkt beginnt. */
+.techstack__eintrag { white-space: nowrap; }
+.techstack__eintrag:not(:last-child)::after {
+  content: '·';
+  padding-inline: 7px;
+  color: $linie;
 }
 
-// Divider
-.divider {
-  height: 1px;
-  background: $color-border;
-  margin: $spacing-lg 0;
-}
-
-// Responsive utilities
-@media (max-width: $breakpoint-tablet) {
-  section {
-    padding: 80px 0;
-  }
-
-  .container {
-    padding: 0 $spacing-lg;
-  }
-}
-
-@media (max-width: $breakpoint-mobile) {
-  section {
-    padding: 60px 0;
-  }
-
-  .container {
-    padding: 0 $spacing-md;
-  }
-
-  h1 {
-    font-size: clamp(36px, 6vw, 48px);
-  }
-
+/* ─── Fließtext ─────────────────────────────────────────────────────── */
+.prosa {
+  max-width: 68ch;
+  overflow-wrap: break-word;
+  p + p { margin-top: 1.1em; }
   h2 {
-    font-size: clamp(24px, 4vw, 32px);
+    font-family: $serif; font-weight: 600;
+    font-size: clamp(21px, 2vw, 27px); line-height: 1.25;
+    margin-top: 2em; margin-bottom: 0.5em;
+  }
+  h3 {
+    font-family: $sans; font-weight: 600; font-size: 15px;
+    letter-spacing: 0.04em; margin-top: 1.6em; margin-bottom: 0.4em;
+  }
+  h4 {
+    font-family: $sans; font-weight: 600; font-size: 13.5px;
+    letter-spacing: 0.03em; margin-top: 1.3em; margin-bottom: 0.3em; color: $tusche-2;
+  }
+  strong { font-weight: 600; }
+  ul { margin: 0.9em 0; }
+  li { position: relative; padding-left: 1.15em; margin-top: 0.35em; }
+  li::before {
+    content: ''; position: absolute; left: 0; top: 0.72em;
+    width: 8px; height: $strich-regel; background: $tusche-2;
   }
 }
 
-// Scrollbar styling
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+/* ─── Tabellensatz ──────────────────────────────────────────────────── */
+.tabelle {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: $sans;
+  font-size: 13.5px;
+  font-variant-numeric: tabular-nums;
+  th {
+    text-align: left; font-weight: 600; font-size: 11.5px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: $tusche-2;
+    padding: 0 $s5 $s3 0; border-bottom: $strich-regel solid $linie; white-space: nowrap;
+  }
+  td { padding: $s3 $s5 $s3 0; vertical-align: top; border-bottom: $strich-haar solid $linie; }
+  tr:last-child td { border-bottom: 0; }
 }
 
-::-webkit-scrollbar-track {
-  background: $color-black;
+.tabelle-scroll {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
 }
 
-::-webkit-scrollbar-thumb {
-  background: $color-text-tertiary;
-  border-radius: $radius-lg;
-
-  &:hover {
-    background: $color-text-secondary;
+/* Auf schmalen Geräten wird die Tabelle gestapelt statt seitlich gescrollt. */
+@media (max-width: $bp-s) {
+  .tabelle-scroll { overflow-x: visible; }
+  .tabelle,
+  .tabelle tbody,
+  .tabelle tr,
+  .tabelle td { display: block; width: 100%; }
+  .tabelle thead { display: none; }
+  .tabelle tr {
+    padding-block: $s4;
+    border-bottom: $strich-regel solid $linie;
+  }
+  .tabelle tr:last-child { border-bottom: 0; }
+  .tabelle td {
+    padding: 0;
+    border-bottom: 0;
+  }
+  .tabelle td + td { margin-top: $s3; }
+  .tabelle td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 2px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $tusche-2;
   }
 }
 
-// Selection color
-::selection {
-  background: $color-accent;
-  color: white;
+/* ─── Sprungmarke ───────────────────────────────────────────────────── */
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: $tusche; color: $papier; padding: 12px 18px;
+  font-family: $sans; font-size: 13px; letter-spacing: 0.06em;
+  &:focus { left: 0; }
+}
+@media (max-width: $bp-m) {
+  .techstack__titel, .techstack__gruppen { grid-column: 1 / -1; }
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }

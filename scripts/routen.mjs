@@ -1,0 +1,35 @@
+import { readFileSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { createRequire } from 'node:module';
+
+const require_ = createRequire(import.meta.url);
+export const ORIGIN = 'https://ozan-orhan.com';
+
+/** works.ts einmal kompilieren und laden, damit Sitemap und llms.txt nie driften. */
+export async function projekte() {
+  const esbuild = require_('esbuild');
+  const quelle = new URL('../src/app/data/works.ts', import.meta.url).pathname;
+  const out = join(mkdtempSync(join(tmpdir(), 'works-')), 'works.cjs');
+  await esbuild.build({
+    entryPoints: [quelle],
+    bundle: true,
+    format: 'cjs',
+    platform: 'node',
+    outfile: out,
+    logLevel: 'silent',
+  });
+  return require_(out).WORKS;
+}
+
+export async function routen() {
+  const w = await projekte();
+  return [
+    { pfad: '/', prio: '1.0', freq: 'monthly' },
+    { pfad: '/projekte', prio: '0.9', freq: 'monthly' },
+    ...w.map((p) => ({ pfad: `/projekte/${p.slug}`, prio: '0.8', freq: 'yearly' })),
+    { pfad: '/facts', prio: '0.5', freq: 'yearly' },
+    { pfad: '/impressum', prio: '0.2', freq: 'yearly' },
+    { pfad: '/datenschutz', prio: '0.2', freq: 'yearly' },
+  ];
+}

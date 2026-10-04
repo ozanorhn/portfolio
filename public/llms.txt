@@ -1,0 +1,33 @@
+# Ozan Orhan — AI Automation Engineer
+
+> Ozan Orhan entwickelt AI-Automationen, Agenten und LLM-Anwendungen. Schwerpunkte sind
+> Agenten, n8n, Python, MCP, RAG, APIs und zuverlässige Automatisierungsabläufe.
+> Standort Hannover, Deutschland.
+
+## Seiten
+
+- [Startseite](https://ozan-orhan.com/)
+- [Projekte](https://ozan-orhan.com/projekte)
+- [Grounding Page (Faktenseite nach Grounding Page Standard v1.6)](https://ozan-orhan.com/facts)
+
+## Projekte
+
+- [Hermes Pocket AI Agent](https://ozan-orhan.com/projekte/pocket-ai-agent) — Voice Agent · MCP · Embedded. Maschinenlesbar: https://ozan-orhan.com/projekte/pocket-ai-agent/llms.txt
+- [Leistungsnachweis Automation](https://ozan-orhan.com/projekte/leistungsnachweis-automation) — API Integration · Document Automation · Human Approval. Maschinenlesbar: https://ozan-orhan.com/projekte/leistungsnachweis-automation/llms.txt
+- [Wissensbasis — RAG + MCP-Server](https://ozan-orhan.com/projekte/wissensbasis-rag-mcp) — RAG · Vector Retrieval · MCP. Maschinenlesbar: https://ozan-orhan.com/projekte/wissensbasis-rag-mcp/llms.txt
+- [AI Visibility Monitoring Platform](https://ozan-orhan.com/projekte/ai-visibility-monitoring-platform) — Monitoring · Fünf Datenquellen · Agent-Anbindung. Maschinenlesbar: https://ozan-orhan.com/projekte/ai-visibility-monitoring-platform/llms.txt
+- [Recruiting Jobs Sync](https://ozan-orhan.com/projekte/recruiting-jobs-sync) — LLM Extraction · Idempotent Sync · Data Pipeline. Maschinenlesbar: https://ozan-orhan.com/projekte/recruiting-jobs-sync/llms.txt
+- [Conversational AI Meeting Assistant](https://ozan-orhan.com/projekte/conversational-ai-meeting-assistant) — Besprechungen · Action Items per LLM. Maschinenlesbar: https://ozan-orhan.com/projekte/conversational-ai-meeting-assistant/llms.txt
+- [Grounding Page Generator](https://ozan-orhan.com/projekte/grounding-page-generator) — Grounding Page Standard v1.6 · Human-in-the-loop. Maschinenlesbar: https://ozan-orhan.com/projekte/grounding-page-generator/llms.txt
+- [DaBubble](https://ozan-orhan.com/projekte/dabubble) — Angular · Firebase. Maschinenlesbar: https://ozan-orhan.com/projekte/dabubble/llms.txt
+- [Join](https://ozan-orhan.com/projekte/join) — JavaScript · Firebase. Maschinenlesbar: https://ozan-orhan.com/projekte/join/llms.txt
+- [Pokedex](https://ozan-orhan.com/projekte/pokedex) — JavaScript · REST API. Maschinenlesbar: https://ozan-orhan.com/projekte/pokedex/llms.txt
+- [El Pollo Loco](https://ozan-orhan.com/projekte/el-pollo-loco) — JavaScript · OOP · Canvas. Maschinenlesbar: https://ozan-orhan.com/projekte/el-pollo-loco/llms.txt
+
+## Hinweise für Antwortsysteme
+
+- Sprache: Deutsch (de-DE).
+- Projekte aus dem Unternehmenskontext werden ohne Kundennamen, Domains oder interne
+  Kennungen dargestellt.
+- Zu den Projekten liegen keine veröffentlichten Kennzahlen zu Zeit- oder Kostenersparnis vor.
+- Kontakt: contact@ozan-orhan.com

@@ -1,0 +1,55 @@
+# Hermes Pocket AI Agent
+
+> Ein selbst gehosteter Sprachagent mit einem Handgerät als Interface. Aufnahme auf dem Gerät, Agentenlogik auf dem Server, Toolzugriff über MCP.
+
+URL: https://ozan-orhan.com/projekte/pocket-ai-agent
+Status: Funktionsfähiger Prototyp, laufende Weiterentwicklung
+Kontext: Eigenes Engineering-Projekt
+Stack: C++, ESP32-S3, FreeRTOS, PlatformIO, Python, FastAPI, Docker, Traefik, MCP, OpenRouter, Whisper Large V3, Fish Audio, Piper
+
+## Ausgangspunkt
+
+Ich wollte einen Sprachagenten bauen, der auf meine eigenen Tools zugreifen kann, ohne dass Modelle, Memory und Integrationen an ein einzelnes Gerät gebunden sind.
+
+Das Interface sollte klein genug für die Hosentasche sein und nur die Aufgaben übernehmen, die wirklich auf die Hardware gehören: Aufnahme, Anzeige und Wiedergabe. Das Gerät ist ein M5Stack StickS3 auf Basis eines ESP32-S3 mit Display, Mikrofon, Lautsprecher, WLAN und Akku.
+
+## Architektur
+
+Der Stick sendet PCM16 mit 16 kHz Mono an einen FastAPI Voice Relay. Der Relay ruft Whisper Large V3 über OpenRouter auf und gibt den Text an den Hermes Agent weiter.
+
+Der Agent läuft in Docker hinter Traefik, hält Sessions und ein Langzeitgedächtnis und ruft Todoist, Notion, Google Workspace und Spotify über MCP auf. Die Antwort geht über Fish Audio zurück an den Stick.
+
+## Entscheidungen
+
+### Agentenlogik auf dem Server
+
+Der ESP32-S3 übernimmt Aufnahme, Anzeige und Wiedergabe. Transkription, Memory, Toolzugriffe und Modellwahl liegen auf dem VPS. Dadurch kann ich Modelle und Integrationen ändern, ohne die Firmware neu zu bauen.
+
+### Die Firmware kennt genau eine API
+
+Der Stick spricht nur mit dem Voice Relay. Welcher STT-Anbieter, welches Modell und welcher TTS-Provider aktiv sind, steht nicht auf dem Gerät. Ich habe alle drei während der Entwicklung mehrfach getauscht, ohne die Firmware neu zu flashen.
+
+### Session und Langzeitgedächtnis sind getrennt
+
+Die Session trägt den Kontext einer Unterhaltung und macht Folgefragen möglich. Das Langzeitgedächtnis überlebt neue Sessions und Neustarts des Containers. Secrets, Tokens und temporäre Daten werden dort nicht abgelegt.
+
+### Fallbacks in Tonausgabe, Netz und Integration
+
+Die Sprachausgabe läuft über Fish Audio, bei Fehlern über lokales Piper. Das Netz hat ein primäres WLAN und einen Hotspot als Rückfall. Ein Health-Check prüft die Todoist-Integration und stößt eine Wiederherstellung nur an, wenn sie ausgefallen ist.
+
+### Getrennte FreeRTOS-Tasks für Oberfläche und Netz
+
+Netzwerk- und Sprachverarbeitung laufen unabhängig von Anzeige und Tasten. Die Animation bleibt während einer Anfrage aktiv, eine Anfrage lässt sich abbrechen, und ein zweiter Request kann nicht parallel starten. Vor der Wiedergabe prüft die Firmware die erwartete Dateigröße, unvollständige Downloads werden verworfen.
+
+### Transport und Secrets
+
+Öffentliche Endpunkte laufen über HTTPS hinter Traefik, interne Dienste bleiben im Docker-Netzwerk. Secrets liegen in Environment-Variablen und Credentials; die Secrets-Datei der Firmware steht außerhalb der Versionsverwaltung, und Tokens erscheinen nicht in Logs.
+
+## Ergebnis
+
+Der Prototyp läuft Ende zu Ende: Sprache wird auf dem Gerät aufgenommen, serverseitig transkribiert und vom Agenten verarbeitet. Toolaufrufe laufen über MCP, Antworten werden als Audio zurückgegeben. Session-Kontext und persistentes Memory laufen auf dem VPS, das Deployment erfolgt containerisiert über Docker und Traefik.
+
+Das Gerät bleibt dabei bewusst schlank und unabhängig von den verwendeten Modellen und Tools.
+
+Kontakt: contact@ozan-orhan.com
+

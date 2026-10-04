@@ -1,0 +1,57 @@
+# Wissensbasis — RAG + MCP-Server
+
+> Eine zentrale RAG-Wissensbasis, die Agenten über MCP als Retrieval-Tool nutzen können.
+
+URL: https://ozan-orhan.com/projekte/wissensbasis-rag-mcp
+Status: Produktiv aktiv
+Kontext: Unternehmenskontext · anonymisiert dargestellt
+Stack: n8n, MCP-Server-Trigger, Postgres mit Vektor-Erweiterung, Mehrsprachige Embeddings, Dokument-Loader, Text-Splitter
+
+## Ausgangspunkt
+
+Interne Dokumente sollten mehreren AI-Assistenten zur Verfügung stehen, ohne Retrieval und Datenanbindung für jeden Agenten erneut aufzubauen.
+
+Dafür habe ich die Wissensbasis als eigene Retrieval-Schicht umgesetzt, die über MCP von unterschiedlichen Clients genutzt werden kann.
+
+## Architektur
+
+Die Architektur besteht aus zwei getrennten Workflows. Der Ingest-Pfad lädt Dokumente, zerlegt sie in Chunks, erzeugt mehrsprachige Embeddings und speichert Text und Vektoren in PostgreSQL mit Vektor-Erweiterung.
+
+Der Retrieval-Pfad stellt die Wissensbasis über einen MCP-Server als read-only Tool bereit. Eine Anfrage wird mit demselben Embedding-Modell verarbeitet und über eine dedizierte Match-Funktion gegen den Vector Store gesucht. Dadurch bleiben Dokumentverarbeitung und Serving voneinander getrennt.
+
+## Entscheidungen
+
+### Retrieval hinter MCP kapseln
+
+Der MCP-Server stellt eine klar begrenzte Fähigkeit bereit: semantische Suche in der Wissensbasis. Agenten müssen dadurch weder Datenbankzugriff noch Retrieval-Logik selbst implementieren. Änderungen an Chunking, Embeddings oder Suche können zentral vorgenommen werden.
+
+### Ingest und Serving trennen
+
+Dokumentverarbeitung und Retrieval laufen als getrennte Workflows. Ein neuer Ingest kann dadurch unabhängig von laufenden Anfragen ausgeführt und verändert werden.
+
+### Tool-Beschreibung als Teil des Interfaces
+
+Die Beschreibung des MCP-Tools erklärt dem Agenten, wann und wofür die Wissensbasis verwendet werden soll. Ich behandle Tool-Name, Beschreibung, Input-Schema und Rückgabeformat deshalb wie eine API-Schnittstelle und nicht nur als technische Metadaten.
+
+### Read-only Tool
+
+Über MCP wird ausschließlich Retrieval angeboten. Schreiboperationen auf Dokumente oder Vector Store sind nicht Bestandteil des exponierten Tools. Datenbank- und Modellzugriffe laufen über den Credential Store.
+
+### Mehrsprachiges Retrieval
+
+Da Dokumente überwiegend deutsch sind, Anfragen aber auch auf Englisch erfolgen können, verwende ich ein mehrsprachiges Embedding-Modell. Die Similarity Search liegt als eigene Match-Funktion in PostgreSQL und kann unabhängig von den Clients angepasst werden.
+
+## Ergebnis
+
+Die Wissensbasis stellt internes Wissen zentral über MCP bereit.
+
+Neue MCP-fähige Agenten können dieselbe Retrieval-Schicht verwenden, ohne jeweils eine eigene Dokumentpipeline oder Datenbankanbindung zu benötigen. Änderungen an Chunking, Embeddings oder Match-Logik wirken damit zentral für alle angebundenen Clients.
+
+## Einschränkungen der Darstellung
+
+Dieses Projekt liegt im Unternehmenskontext. Es werden keine Screenshots interner
+Systeme, keine Kundennamen, keine Domains und keine internen Kennungen gezeigt.
+Die Darstellung ist auf die Architektur abstrahiert.
+
+Kontakt: contact@ozan-orhan.com
+

@@ -1,0 +1,43 @@
+@use 'styles/tokens' as *;
+
+.rechtsseite { padding-block: clamp(36px, 6vw, 88px) 0; }
+.rechtsseite h1 {
+  font-family: $serif; font-weight: 400;
+  font-size: clamp(29px, 3.4vw, 44px); line-height: 1.14; letter-spacing: -0.012em;
+}
+.rechtsseite .regel { margin-block: $s5 $s6; }
+.rechtsseite__teil { margin-top: $s7; }
+.rechtsseite__links { margin-top: $s7; }
+.rechtsseite__links a {
+  font-family: $sans; font-size: 13px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border-bottom: $strich-regel solid $linie; padding-block: 8px;
+  transition: color 120ms linear, border-color 120ms linear;
+}
+.rechtsseite__links a:hover { color: $petrol; border-bottom-color: $petrol; }
+
+.notice-card {
+  border-top: $strich-stark solid $tusche;
+  padding: $s4 0 $s5;
+  margin-bottom: $s6;
+  font-size: 16px;
+  color: $tusche-2;
+}
+.lead { font-size: clamp(18px, 1.35vw, 20px); line-height: 1.55; }
+.secondary-text, .muted-text, .source-note { color: $tusche-2; font-size: 16px; }
+.data-grid {
+  display: grid;
+  grid-template-columns: minmax(9rem, 14rem) minmax(0, 1fr);
+  column-gap: clamp(16px, 3vw, 40px);
+  margin-top: $s5;
+  dt {
+    font-family: $sans; font-size: 11.5px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: $tusche-2;
+    padding-block: $s3; border-top: $strich-haar solid $linie;
+  }
+  dd { padding-block: $s3; border-top: $strich-haar solid $linie; font-size: 16px; }
+}
+@media (max-width: $bp-s) {
+  .data-grid { grid-template-columns: 1fr; }
+  .data-grid dd { border-top: 0; padding-top: 0; }
+}

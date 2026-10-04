@@ -1,0 +1,137 @@
+<app-kopf />
+
+<main id="inhalt">
+  <section class="auftakt wrap" aria-labelledby="auftakt-titel">
+    <div class="grid">
+      <h1 id="auftakt-titel" class="display auftakt__these">
+        Ich entwickle AI-Agenten und produktive LLM-Anwendungen.
+      </h1>
+      <p class="lede auftakt__lede">
+        Mit Python, APIs, RAG und MCP verbinde ich Modelle mit Daten, Tools und bestehenden
+        Systemen. Automatisierung und Orchestrierung setze ich unter anderem mit n8n um.
+      </p>
+      <div class="auftakt__kenn">
+        <p class="auftakt__name">Ozan Orhan</p>
+        <p class="auftakt__rolle mono">AI Automation Engineer · Hannover</p>
+        <p class="auftakt__stichworte mono">Python · AI Agents · RAG · MCP · APIs · n8n</p>
+      </div>
+
+      <div class="auftakt__aktionen">
+        <a class="aktion aktion--primaer" routerLink="/projekte">
+          Projekte ansehen<lucide-icon [img]="IconPfeil" [size]="14" [strokeWidth]="2" />
+        </a>
+        <span class="auftakt__wege">
+          <a class="rundknopf" [href]="site.linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn-Profil">
+            <lucide-icon [img]="IconLinkedin" [size]="17" [strokeWidth]="1.7" />
+          </a>
+          <a class="rundknopf" [href]="site.github" target="_blank" rel="noopener noreferrer" aria-label="GitHub-Profil">
+            <lucide-icon [img]="IconGithub" [size]="17" [strokeWidth]="1.7" />
+          </a>
+          <a class="rundknopf" [href]="'mailto:' + site.mail" aria-label="E-Mail schreiben">
+            <lucide-icon [img]="IconMail" [size]="17" [strokeWidth]="1.7" />
+          </a>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="projekte" aria-labelledby="werk-titel">
+    <div class="block__kopf">
+      <h2 id="werk-titel" class="untertitel">Projekte</h2>
+      <a class="aktion" routerLink="/projekte">Alle Projekte</a>
+    </div>
+    <app-projekt-liste [projekte]="kernarbeiten" [vorschau]="true" />
+  </section>
+
+  <section class="block wrap" id="profil" aria-labelledby="profil-titel">
+    <div class="block__kopf"><h2 id="profil-titel" class="untertitel">Profil</h2></div>
+    <div class="grid profil">
+      <div class="profil__bild">
+        <img
+          src="assets/img/ozan.jpg"
+          alt="Porträt von Ozan Orhan"
+          width="1400" height="1400" loading="lazy" decoding="async"
+        />
+      </div>
+      <div class="prosa profil__text">
+        <p>
+          Ich entwickle AI-Automationen und LLM-Anwendungen, die Modelle mit APIs, Datenquellen und
+          bestehenden Systemen verbinden. Mein Schwerpunkt liegt auf AI Agents, Python, MCP, RAG und
+          der Orchestrierung mehrstufiger Workflows.
+        </p>
+        <p>
+          Mich interessiert besonders der Weg vom funktionierenden Prototyp zum zuverlässigen System:
+          strukturierte Outputs, Tool Calling, Fehlerbehandlung, Fallbacks, Logging, Observability und
+          ein kontrollierbarer Betrieb. In meinen Projekten setze ich das unter anderem mit
+          schema-validierten Ausgaben, Human-in-the-loop, Health Checks, zentralem Error Handling und
+          deterministischer Logik rund um LLM-Komponenten um.
+        </p>
+        <p>
+          Wenn ein AI-System eine eigene Oberfläche braucht, setze ich sie mit Angular und TypeScript
+          selbst um. Dadurch kann ich Anwendungen von der Integration und Backend-Logik bis zur
+          Benutzeroberfläche durchgängig entwickeln.
+        </p>
+      </div>
+      <dl class="profil__kenn">
+        <div><dt class="meta">Schwerpunkte</dt><dd>AI Agents · LLM Integration · MCP · RAG · Automation · APIs</dd></div>
+        <div><dt class="meta">Stack</dt><dd>Python · n8n · TypeScript · Angular · Docker · PostgreSQL</dd></div>
+        <div><dt class="meta">Production AI</dt><dd>Structured Outputs · Tool Calling · HITL · Error Handling · Fallbacks · Observability</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="block wrap" id="stack" aria-labelledby="stack-titel">
+    <div class="grid techstack">
+      <h2 id="stack-titel" class="untertitel techstack__titel">Tech-Stack</h2>
+      <dl class="techstack__gruppen">
+        @for (g of stack; track g.titel) {
+          <div class="techstack__gruppe">
+            <dt>
+              <lucide-icon [img]="g.icon" [size]="16" [strokeWidth]="1.7" />
+              <span>{{ g.titel }}</span>
+            </dt>
+            <dd>
+              @for (e of g.eintraege; track e) {
+                <span class="techstack__eintrag">{{ e }}</span>
+              }
+            </dd>
+          </div>
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section class="block block--kontakt wrap" id="kontakt" aria-labelledby="kontakt-titel">
+    <hr class="regel-stark" />
+    <div class="grid kontakt">
+      <div class="kontakt__text">
+        <h2 id="kontakt-titel" class="untertitel">Kontakt</h2>
+        <p class="kontakt__zeile">
+          Für passende Rollen und Austausch zu AI Engineering, Agents und Automation.
+        </p>
+      </div>
+      <div class="kontakt__wege">
+        <p class="kontakt__mail">
+          <a [href]="'mailto:' + site.mail">
+            <lucide-icon [img]="IconMail" [size]="20" [strokeWidth]="1.5" />{{ site.mail }}
+          </a>
+        </p>
+        <ul class="kontakt__links mono">
+          <li>
+            <a [href]="site.linkedin" target="_blank" rel="noopener noreferrer">
+              <lucide-icon [img]="IconLinkedin" [size]="15" [strokeWidth]="1.6" />LinkedIn
+            </a>
+          </li>
+          <li>
+            <a [href]="site.github" target="_blank" rel="noopener noreferrer">
+              <lucide-icon [img]="IconGithub" [size]="15" [strokeWidth]="1.6" />GitHub
+            </a>
+          </li>
+          <li><lucide-icon [img]="IconOrt" [size]="15" [strokeWidth]="1.6" />Hannover</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<app-fuss />

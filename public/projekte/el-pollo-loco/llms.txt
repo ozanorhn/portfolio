@@ -1,0 +1,20 @@
+# El Pollo Loco
+
+> Jump-and-Run-Spiel mit Game-Loop, Kollisionserkennung und Endgegner. Objektorientiertes JavaScript auf dem HTML-Canvas.
+
+URL: https://ozan-orhan.com/projekte/el-pollo-loco
+Status: Abgeschlossen, live
+Kontext: Ausbildungsprojekt · Developer Akademie
+Stack: JavaScript, HTML Canvas, OOP, HTML/CSS
+Repository: https://github.com/ozanorhn/El-Pollo-Loco
+
+## Überblick
+
+Spielfigur, Gegner, Gegenstände und Endgegner sind als Klassen modelliert. Ein Game-Loop steuert Bewegung, Kollisionen und Animationen auf dem Canvas.
+
+## Ergebnis
+
+Abgeschlossen; die Anwendung läuft weiterhin live, der Quellcode ist öffentlich.
+
+Kontakt: contact@ozan-orhan.com
+

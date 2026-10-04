@@ -1,0 +1,62 @@
+@use 'styles/tokens' as *;
+
+.rechtsseite { padding-block: clamp(36px, 6vw, 88px) 0; }
+.rechtsseite h1 {
+  font-family: $serif; font-weight: 400;
+  font-size: clamp(29px, 3.4vw, 44px); line-height: 1.14; letter-spacing: -0.012em;
+}
+.rechtsseite__links { margin-top: $s7; }
+.rechtsseite__links a {
+  font-family: $sans; font-size: 13px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border-bottom: $strich-regel solid $linie; padding-block: 8px;
+  transition: color 120ms linear, border-color 120ms linear;
+}
+.rechtsseite__links a:hover { color: $petrol; border-bottom-color: $petrol; }
+
+/* Kopf: Name, Lead-Definition, Stand */
+.gp__lead { font-size: clamp(18px, 1.35vw, 20px); line-height: 1.55; margin-top: $s5; }
+.gp__stand {
+  display: flex; flex-wrap: wrap; gap: $s2 $s5;
+  margin-top: $s5; padding-top: $s4;
+  border-top: $strich-stark solid $tusche;
+  font-size: 12px; letter-spacing: 0.03em; color: $tusche-2;
+  div { display: flex; gap: $s2; }
+  dt::after { content: ':'; }
+  dd { color: $tusche; }
+}
+
+.gp section { margin-top: $s7; }
+.gp section > h3 { margin-top: $s6; }
+.gp__kontext { color: $tusche-2; }
+.gp__zitat {
+  font-family: $serif; font-size: clamp(18px, 1.4vw, 21px); line-height: 1.5;
+  border-left: $strich-regel solid $petrol; padding-left: $s4;
+}
+.gp__faq + .gp__faq { margin-top: $s5; }
+.gp__faq h3 { font-size: 17px; }
+.gp__faq p { margin-top: $s2; }
+
+.gp__fuss {
+  margin-top: $s7; padding-top: $s5;
+  border-top: $strich-haar solid $linie;
+  color: $tusche-2;
+}
+.gp__basis { font-size: 12px; letter-spacing: 0.03em; margin-top: $s3; }
+
+.data-grid {
+  display: grid;
+  grid-template-columns: minmax(9rem, 14rem) minmax(0, 1fr);
+  column-gap: clamp(16px, 3vw, 40px);
+  margin-top: $s5;
+  dt {
+    font-family: $sans; font-size: 11.5px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: $tusche-2;
+    padding-block: $s3; border-top: $strich-haar solid $linie;
+  }
+  dd { padding-block: $s3; border-top: $strich-haar solid $linie; font-size: 16px; }
+}
+@media (max-width: $bp-s) {
+  .data-grid { grid-template-columns: 1fr; }
+  .data-grid dd { border-top: 0; padding-top: 0; }
+}
