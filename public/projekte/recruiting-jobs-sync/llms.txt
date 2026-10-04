@@ -2,7 +2,7 @@
 
 > Eine LLM-gestützte Datenpipeline, die Stellenanzeigen aus HTML strukturiert und über last_seen_at idempotent synchron hält.
 
-URL: https://ozan-orhan.com/projekte/recruiting-jobs-sync
+URL: https://ozan-orhan.com/projekte/recruiting-jobs-sync/
 Status: Implementiert und lauffähig
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: n8n, Zeitplan-Trigger, HTTP-Abruf, JavaScript, Schema-gebundene LLM-Extraktion, Enum-Constraints, Datenspeicher mit Upsert

@@ -4,7 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { KopfComponent } from '../../ui/kopf';
 import { FussComponent } from '../../ui/fuss';
 import { SeoService } from '../../core/seo.service';
-import { SITE } from '../../core/site';
+import { SITE, seiteUrl } from '../../core/site';
 import { BlogService, datumLang } from '../../data/blog';
 
 @Component({
@@ -87,7 +87,7 @@ export class BlogComponent implements OnInit {
         '@context': 'https://schema.org',
         '@type': 'Blog',
         name: `Blog — ${SITE.name}`,
-        url: `${SITE.origin}/blog`,
+        url: seiteUrl('/blog'),
         inLanguage: 'de-DE',
         author: { '@type': 'Person', name: SITE.name, url: SITE.origin },
       },

@@ -1,5 +1,5 @@
 import type { SeoInput } from '../../../core/seo.service';
-import { SITE } from '../../../core/site';
+import { SITE, seiteUrl } from '../../../core/site';
 
 /**
  * Grounding Page für die Entität Ozan Orhan nach Grounding Page Standard v1.6.
@@ -8,7 +8,7 @@ import { SITE } from '../../../core/site';
  */
 export const ENTITAET = {
   id: 'ozan-orhan',
-  url: `${SITE.origin}/facts`,
+  url: seiteUrl('/facts'),
   erstellt: '2026-03-13',
   aktualisiert: '2026-09-05',
   geprueft: '2026-09-05',

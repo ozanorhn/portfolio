@@ -10,7 +10,7 @@ import { ApprovalExampleComponent } from '../../ui/approval-example';
 import { CaseStudyNavComponent } from '../../ui/case-study-nav';
 import { LucideAngularModule, ArrowUpRight } from 'lucide-angular';
 import { SeoService } from '../../core/seo.service';
-import { SITE } from '../../core/site';
+import { SITE, seiteUrl } from '../../core/site';
 import { abschnitte, findWork, nachbar, type FlussStation } from '../../data/works';
 
 @Component({
@@ -76,11 +76,11 @@ export class ProjektComponent {
         headline: w.titel,
         description: w.lede,
         abstract: w.lede,
-        url: `${SITE.origin}/projekte/${w.slug}`,
+        url: seiteUrl(`/projekte/${w.slug}`),
         inLanguage: 'de-DE',
         keywords: w.stack.join(', '),
         creator: { '@type': 'Person', name: SITE.name, url: SITE.origin },
-        isPartOf: { '@type': 'CollectionPage', url: `${SITE.origin}/projekte` },
+        isPartOf: { '@type': 'CollectionPage', url: seiteUrl('/projekte') },
       };
       if (w.repo) schema['codeRepository'] = w.repo;
       if (w.sprachen?.length) schema['programmingLanguage'] = w.sprachen;

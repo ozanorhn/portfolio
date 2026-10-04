@@ -2,7 +2,7 @@
 
 > Ein selbst gehosteter Sprachagent mit einem Handgerät als Interface. Aufnahme auf dem Gerät, Agentenlogik auf dem Server, Toolzugriff über MCP.
 
-URL: https://ozan-orhan.com/projekte/pocket-ai-agent
+URL: https://ozan-orhan.com/projekte/pocket-ai-agent/
 Status: Funktionsfähiger Prototyp, laufende Weiterentwicklung
 Kontext: Eigenes Engineering-Projekt
 Stack: C++, ESP32-S3, FreeRTOS, PlatformIO, Python, FastAPI, Docker, Traefik, MCP, OpenRouter, Whisper Large V3, Fish Audio, Piper

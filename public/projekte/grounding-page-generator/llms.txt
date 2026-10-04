@@ -2,7 +2,7 @@
 
 > Ein dreistufiger Workflow, der eine Grounding Page nach dem offenen Standard erzeugt: Fakten recherchieren, von einem Menschen bestätigen lassen, als HTML mit JSON-LD ausliefern. Vorher war das Handarbeit von Spezialisten.
 
-URL: https://ozan-orhan.com/projekte/grounding-page-generator
+URL: https://ozan-orhan.com/projekte/grounding-page-generator/
 Status: Produktiv im Einsatz
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: n8n, Form-Trigger, LLM-Agent mit Tool Calling, JSON Schema, JSON-LD · Schema.org, Web-Scraping-API, Web-Such-API, Tabellenspeicher, JavaScript

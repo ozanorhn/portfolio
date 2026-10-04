@@ -3,7 +3,7 @@ import { KopfComponent } from '../../ui/kopf';
 import { FussComponent } from '../../ui/fuss';
 import { ProjektListeComponent } from '../../ui/projekt-liste';
 import { SeoService } from '../../core/seo.service';
-import { SITE } from '../../core/site';
+import { SITE, seiteUrl } from '../../core/site';
 import { PROJEKTE } from '../../data/works';
 
 @Component({
@@ -58,12 +58,12 @@ export class ProjekteComponent implements OnInit {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
         name: 'Projekte',
-        url: `${SITE.origin}/projekte`,
+        url: seiteUrl('/projekte'),
         inLanguage: 'de-DE',
         hasPart: PROJEKTE.map((w) => ({
           '@type': 'CreativeWork',
           name: w.titel,
-          url: `${SITE.origin}/projekte/${w.slug}`,
+          url: seiteUrl(`/projekte/${w.slug}`),
           abstract: w.lede,
         })),
       },

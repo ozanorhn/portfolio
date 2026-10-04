@@ -2,7 +2,7 @@
 
 > Drei Workflows führen fünf externe Datenquellen zusammen und prüfen, ob sich umgesetzte Maßnahmen messbar ausgewirkt haben — ohne dass jemand Daten von Hand sammelt.
 
-URL: https://ozan-orhan.com/projekte/ai-visibility-monitoring-platform
+URL: https://ozan-orhan.com/projekte/ai-visibility-monitoring-platform/
 Status: Produktiv, drei Komponenten
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: n8n, Webhook mit synchroner Antwort, Zeitplan-Trigger, OAuth-Credentials, LLM-Agent mit strukturiertem Output, Postgres über REST mit Upsert, JavaScript

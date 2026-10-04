@@ -2,7 +2,7 @@
 
 > Ein monatlicher Workflow, der Zeiterfassungen aus Toggl verarbeitet, kundenspezifisch aufbereitet und daraus automatisch Leistungsnachweise und Dokumente erzeugt.
 
-URL: https://ozan-orhan.com/projekte/leistungsnachweis-automation
+URL: https://ozan-orhan.com/projekte/leistungsnachweis-automation/
 Status: Aktiver monatlicher Workflow
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: n8n, Toggl API, Slack Reaction Trigger, Google Sheets, Google Drive, JavaScript, Datentransformation, Dokumentvorlagen

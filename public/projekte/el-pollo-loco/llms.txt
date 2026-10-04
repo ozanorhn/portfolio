@@ -2,7 +2,7 @@
 
 > Jump-and-Run-Spiel mit Game-Loop, Kollisionserkennung und Endgegner. Objektorientiertes JavaScript auf dem HTML-Canvas.
 
-URL: https://ozan-orhan.com/projekte/el-pollo-loco
+URL: https://ozan-orhan.com/projekte/el-pollo-loco/
 Status: Abgeschlossen, live
 Kontext: Ausbildungsprojekt · Developer Akademie
 Stack: JavaScript, HTML Canvas, OOP, HTML/CSS

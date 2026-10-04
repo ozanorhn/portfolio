@@ -10,7 +10,7 @@ import { KopfComponent } from '../../ui/kopf';
 import { FussComponent } from '../../ui/fuss';
 import { CaseStudyNavComponent } from '../../ui/case-study-nav';
 import { SeoService } from '../../core/seo.service';
-import { SITE } from '../../core/site';
+import { SITE, seiteUrl } from '../../core/site';
 import { BlogService, datumLang, type BlogArtikel } from '../../data/blog';
 import type { Abschnitt } from '../../data/works';
 
@@ -110,11 +110,11 @@ function schema(a: BlogArtikel, pfad: string): Record<string, unknown>[] {
   const posting: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    '@id': SITE.origin + pfad,
-    mainEntityOfPage: SITE.origin + pfad,
+    '@id': seiteUrl(pfad),
+    mainEntityOfPage: seiteUrl(pfad),
     headline: a.titel,
     description: a.seoBeschreibung,
-    url: SITE.origin + pfad,
+    url: seiteUrl(pfad),
     datePublished: a.datum,
     dateModified: a.geaendert,
     inLanguage: 'de-DE',
@@ -122,7 +122,7 @@ function schema(a: BlogArtikel, pfad: string): Record<string, unknown>[] {
     timeRequired: `PT${a.lesezeit}M`,
     author: autor,
     publisher: autor,
-    isPartOf: { '@type': 'Blog', url: `${SITE.origin}/blog` },
+    isPartOf: { '@type': 'Blog', url: seiteUrl('/blog') },
   };
   if (a.tags.length) posting['keywords'] = a.tags.join(', ');
   if (a.bild) posting['image'] = a.bild;
@@ -134,7 +134,7 @@ function schema(a: BlogArtikel, pfad: string): Record<string, unknown>[] {
     posting['mentions'] = a.projekte.map((p) => ({
       '@type': 'CreativeWork',
       name: p.titel,
-      url: `${SITE.origin}/projekte/${p.slug}`,
+      url: seiteUrl(`/projekte/${p.slug}`),
     }));
   }
   const bloecke: Record<string, unknown>[] = [posting];

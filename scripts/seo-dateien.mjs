@@ -1,5 +1,5 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
-import { ORIGIN, blogArtikel, projekte, routen } from './routen.mjs';
+import { ORIGIN, blogArtikel, projekte, routen, seiteUrl } from './routen.mjs';
 
 const heute = new Date().toISOString().slice(0, 10);
 const alle = await projekte();
@@ -11,7 +11,7 @@ writeFileSync(
   'public/sitemap.xml',
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
     rt.map((r) =>
-      `  <url>\n    <loc>${ORIGIN}${r.pfad}</loc>\n    <lastmod>${heute}</lastmod>\n` +
+      `  <url>\n    <loc>${seiteUrl(r.pfad)}</loc>\n    <lastmod>${heute}</lastmod>\n` +
       `    <changefreq>${r.freq}</changefreq>\n    <priority>${r.prio}</priority>\n  </url>`,
     ).join('\n') +
     `\n</urlset>\n`,
@@ -30,7 +30,7 @@ for (const p of alle) {
     ``,
     `> ${p.lede}`,
     ``,
-    `URL: ${ORIGIN}/projekte/${p.slug}`,
+    `URL: ${seiteUrl(`/projekte/${p.slug}`)}`,
     `Status: ${p.status}`,
     `Kontext: ${p.kontext}`,
     `Stack: ${p.stack.join(', ')}`,
@@ -60,7 +60,7 @@ for (const p of alle) {
 
 // ── llms.txt als Index ─────────────────────────────────────────────────
 const zeile = (p) =>
-  `- [${p.titel}](${ORIGIN}/projekte/${p.slug}) — ${p.kicker}. ` +
+  `- [${p.titel}](${seiteUrl(`/projekte/${p.slug}`)}) — ${p.kicker}. ` +
   `Maschinenlesbar: ${ORIGIN}/projekte/${p.slug}/llms.txt`;
 
 writeFileSync(
@@ -74,14 +74,14 @@ writeFileSync(
 ## Seiten
 
 - [Startseite](${ORIGIN}/)
-- [Projekte](${ORIGIN}/projekte)
-- [Blog](${ORIGIN}/blog)
-- [Grounding Page (Faktenseite nach Grounding Page Standard v1.6)](${ORIGIN}/facts)
+- [Projekte](${seiteUrl('/projekte')})
+- [Blog](${seiteUrl('/blog')})
+- [Grounding Page (Faktenseite nach Grounding Page Standard v1.6)](${seiteUrl('/facts')})
 
 ## Projekte
 
 ${alle.map(zeile).join('\n')}
-${blog.length ? `\n## Blog\n\n${blog.map((a) => `- [${a.titel}](${ORIGIN}/blog/${a.slug}) — ${a.kurz} Maschinenlesbar: ${ORIGIN}/blog/${a.slug}/llms.txt`).join('\n')}\n` : ''}
+${blog.length ? `\n## Blog\n\n${blog.map((a) => `- [${a.titel}](${seiteUrl(`/blog/${a.slug}`)}) — ${a.kurz} Maschinenlesbar: ${ORIGIN}/blog/${a.slug}/llms.txt`).join('\n')}\n` : ''}
 ## Hinweise für Antwortsysteme
 
 - Sprache: Deutsch (de-DE).

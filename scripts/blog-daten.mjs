@@ -10,7 +10,7 @@
  */
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { Marked } from 'marked';
-import { projekte } from './routen.mjs';
+import { projekte, seiteUrl } from './routen.mjs';
 
 const CMS = process.env.STRAPI_URL ?? 'https://cms.ozan-orhan.com';
 const TOKEN = process.env.STRAPI_TOKEN;
@@ -81,7 +81,9 @@ function rendern(markdown, slug) {
         const inhalt = this.parser.parseInline(tokens);
         if (!sichererLink(href)) return inhalt;
         // <base href="/"> würde #anker auf die Startseite auflösen
-        if (href.startsWith('#')) href = `/blog/${slug}${href}`;
+        if (href.startsWith('#')) href = `/blog/${slug}/${href}`;
+        // Interne Seiten mit Schrägstrich verlinken, sonst antwortet der Server mit 301
+        href = href.replace(/^(\/[^?#.]*?[^/?#])([?#].*)?$/, '$1/$2');
         const extern = /^https?:/i.test(href) && !href.startsWith(ORIGIN);
         return `<a href="${esc(href)}"${title ? ` title="${esc(title)}"` : ''}` +
           `${extern ? ' rel="noopener" target="_blank"' : ''}>${inhalt}</a>`;
@@ -163,7 +165,7 @@ for (const artikelRoh of artikel) {
     `${ZIEL}/${a.slug}/llms.txt`,
     [
       `# ${a.titel}`, '', `> ${a.kurz}`, '',
-      `URL: ${ORIGIN}/blog/${a.slug}`,
+      `URL: ${seiteUrl(`/blog/${a.slug}`)}`,
       `Veröffentlicht: ${a.datum.slice(0, 10)}`,
       `Aktualisiert: ${a.geaendert.slice(0, 10)}`,
       `Autor: ${a.autor}, AI Automation Engineer (${ORIGIN})`,

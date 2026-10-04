@@ -6,6 +6,9 @@ import { createRequire } from 'node:module';
 const require_ = createRequire(import.meta.url);
 export const ORIGIN = 'https://ozan-orhan.com';
 
+/** Wie seiteUrl() in src/app/core/site.ts: Seiten-URLs immer mit Schrägstrich am Ende. */
+export const seiteUrl = (pfad) => ORIGIN + (pfad.endsWith('/') ? pfad : `${pfad}/`);
+
 /** works.ts einmal kompilieren und laden, damit Sitemap und llms.txt nie driften. */
 export async function projekte() {
   const esbuild = require_('esbuild');

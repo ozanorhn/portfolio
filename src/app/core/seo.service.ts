@@ -1,6 +1,6 @@
 import { DOCUMENT, Injectable, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { SITE } from './site';
+import { SITE, seiteUrl } from './site';
 
 export interface SeoInput {
   titel: string;
@@ -20,7 +20,7 @@ export class SeoService {
   private readonly meta = inject(Meta);
 
   set(input: SeoInput): void {
-    const url = SITE.origin + input.pfad;
+    const url = seiteUrl(input.pfad);
     const roh = input.bild ?? 'assets/img/og-bild.png';
     const bild = /^https?:\/\//.test(roh) ? roh : SITE.origin + '/' + roh.replace(/^\//, '');
 
@@ -59,7 +59,7 @@ export class SeoService {
           '@type': 'ListItem',
           position: i + 1,
           name: b.name,
-          item: SITE.origin + b.pfad,
+          item: seiteUrl(b.pfad),
         })),
       });
     }

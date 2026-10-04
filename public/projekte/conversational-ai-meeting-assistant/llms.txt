@@ -2,7 +2,7 @@
 
 > Strukturiert gesprochene Sprache per LLM, zieht Action Items heraus und stellt sie in Slack und per Mail zu.
 
-URL: https://ozan-orhan.com/projekte/conversational-ai-meeting-assistant
+URL: https://ozan-orhan.com/projekte/conversational-ai-meeting-assistant/
 Status: Im Einsatz
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: n8n, OpenAI API, Prompt Engineering, Google Workspace, Slack API
