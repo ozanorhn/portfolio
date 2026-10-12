@@ -2,6 +2,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, ArrowUpRight } from 'lucide-angular';
 import { SITE } from '../core/site';
+import { ConsentService } from '../core/consent.service';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-fuss',
@@ -28,6 +30,7 @@ import { SITE } from '../core/site';
             <a routerLink="/projekte">Projekte</a>
             <a routerLink="/impressum">Impressum</a>
             <a routerLink="/datenschutz">Datenschutz</a>
+            <button type="button" class="cookie-btn" (click)="consent.oeffnen()">Cookie-Einstellungen</button>
             <a routerLink="/facts">Faktenseite</a>
           </nav>
         </div>
@@ -67,10 +70,14 @@ import { SITE } from '../core/site';
         display: inline-flex; align-items: center; gap: 3px; padding-block: 12px;
         border-bottom: $strich-regel solid transparent; transition: color 120ms linear, border-color 120ms linear; }
       .fuss__nav a:hover { color: $tusche; border-bottom-color: $linie; }
+      .cookie-btn { display: inline-flex; align-items: center; padding: 12px 0; border: 0; background: none; color: inherit; cursor: pointer; font: inherit; letter-spacing: inherit; }
+      .cookie-btn:hover { color: $tusche; text-decoration: underline; }
+      .cookie-btn:focus-visible { outline: 2px solid currentColor; }
     `,
   ],
 })
 export class FussComponent {
+  readonly consent = inject(ConsentService);
   readonly site = SITE;
   readonly IconExtern = ArrowUpRight;
 }
