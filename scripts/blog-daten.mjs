@@ -55,7 +55,7 @@ const httpUrl = (u) => typeof u === 'string' && /^https?:\/\//.test(u);
 
 const esc = (t) =>
   String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const sichererLink = (u) => /^(https?:|mailto:|\/|#)/i.test(u ?? '');
+const sichererLink = (u) => /^(https?:|mailto:|\/(?!\/)|#)/i.test(u ?? '');
 
 /**
  * Markdown → HTML; H2 bekommen Anker, aus denen das Inhaltsverzeichnis entsteht.

@@ -1,4 +1,4 @@
-import { afterNextRender, Component, inject } from '@angular/core';
+import { Component, ElementRef, Injector, afterNextRender, effect, inject, viewChild } from '@angular/core';
 import { ConsentService } from '../core/consent.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { ConsentService } from '../core/consent.service';
   template: `
     @if (consent.sichtbar()) {
       <div class="consent-backdrop">
-        <section class="consent" role="dialog" aria-modal="true" aria-labelledby="consent-titel" aria-describedby="consent-text">
+        <section #dialog tabindex="-1" class="consent" role="dialog" aria-modal="true" aria-labelledby="consent-titel" aria-describedby="consent-text">
           <p class="kicker">DATENSCHUTZ</p>
           <h2 id="consent-titel">Deine Privatsphäre zählt.</h2>
           <p id="consent-text">Wir möchten mit optionaler Reichweitenmessung (Google Analytics über Google Tag Manager)
@@ -44,6 +44,7 @@ import { ConsentService } from '../core/consent.service';
     .aktionen { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px; }
     button { min-height: 48px; padding: 10px 14px; border: 1px solid #284f48; border-radius: 4px; background: transparent; color: #1c1b19; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
     button:focus-visible { outline: 3px solid #e8752a; outline-offset: 2px; }
+    .consent:focus { outline: none; }
     .zustimmen { background: #284f48; color: white; }
     .details-btn { margin-top: 8px; width: 100%; border: 0; text-decoration: underline; }
     @media (max-width: 380px) { .aktionen { grid-template-columns: 1fr; } }
@@ -51,7 +52,15 @@ import { ConsentService } from '../core/consent.service';
 })
 export class ConsentComponent {
   readonly consent = inject(ConsentService);
+  private readonly dialog = viewChild<ElementRef<HTMLElement>>('dialog');
+  private readonly injector = inject(Injector);
+
   constructor() {
     afterNextRender(() => this.consent.initialisieren());
+    // Der Dialog steht am Ende des DOM; ohne Fokus müssten Tastaturnutzer die ganze Seite durchlaufen.
+    effect(() => {
+      if (!this.consent.sichtbar()) return;
+      afterNextRender(() => this.dialog()?.nativeElement.focus(), { injector: this.injector });
+    });
   }
 }

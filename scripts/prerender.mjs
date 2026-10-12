@@ -9,7 +9,7 @@ import { promisify } from 'node:util';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { extname, join, normalize } from 'node:path';
-import { routen } from './routen.mjs';
+import { blogArtikel, routen } from './routen.mjs';
 
 const run = promisify(execFile);
 const WURZEL = 'dist/portfolio/browser';
@@ -46,6 +46,13 @@ function server() {
   });
 }
 
+// Ohne STRAPI_TOKEN bleibt public/blog leer; ein Upload würde alle Artikel live löschen.
+if (!blogArtikel().length && process.env.LEERER_BLOG !== '1') {
+  console.error('Abbruch: keine Blogartikel in public/blog/artikel.json. STRAPI_TOKEN setzen und neu bauen');
+  console.error('(oder LEERER_BLOG=1, wenn der Blog wirklich leer sein soll).');
+  process.exit(1);
+}
+
 const srv = server();
 await new Promise((ok) => srv.listen(0, '127.0.0.1', ok));
 const port = srv.address().port;
@@ -78,6 +85,9 @@ for (const { pfad } of await routen()) {
     // Das Theme darf nicht ins statische HTML einbrennen: der Renderer hat ein
     // eigenes Farbschema, der Besucher ein anderes. Das Inline-Skript entscheidet.
     stdout = stdout.replace(/<html([^>]*?)\sdata-theme="[^"]*"/, '<html$1');
+    // Der Renderer hat keine gespeicherte Wahl und zeigt den Consent-Dialog. Der gehört nicht
+    // ins statische HTML (Suchmaschinen, Aufblitzen); Angular blendet ihn bei Bedarf selbst ein.
+    stdout = stdout.replace(/(<app-consent[^>]*>)[\s\S]*?(<\/app-consent>)/, '$1$2');
 
     const ziel = pfad === '/' ? join(WURZEL, 'index.html') : join(WURZEL, pfad, 'index.html');
     await mkdir(join(ziel, '..'), { recursive: true });
