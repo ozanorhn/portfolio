@@ -4,7 +4,7 @@ type Entscheidung = 'akzeptiert' | 'abgelehnt' | null;
 type Fenster = Window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void };
 
 const KEY = 'oo-analytics-consent-v1';
-const GTM = 'GTM-P45SHJW3';
+const GTM = 'GTM-P455HJW3';
 /** Cookies von Google Analytics und Google Ads, die beim Widerruf gelöscht werden. */
 const GOOGLE_COOKIE = /^(_ga|_gid|_gat|_gcl)/;
 
