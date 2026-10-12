@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ConsentComponent } from './ui/consent';
+import { AnalyticsService } from './core/analytics.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,9 @@ import { ConsentComponent } from './ui/consent';
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {}
+export class App {
+  constructor() {
+    // Mail- und LinkedIn-Klicks; gesendet wird nur mit Analytics-Einwilligung.
+    inject(AnalyticsService).linkKlicksBeobachten();
+  }
+}

@@ -10,6 +10,7 @@ import { ApprovalExampleComponent } from '../../ui/approval-example';
 import { CaseStudyNavComponent } from '../../ui/case-study-nav';
 import { LucideAngularModule, ArrowUpRight } from 'lucide-angular';
 import { SeoService } from '../../core/seo.service';
+import { AnalyticsService } from '../../core/analytics.service';
 import { SITE, seiteUrl } from '../../core/site';
 import { abschnitte, findWork, nachbar, type FlussStation } from '../../data/works';
 
@@ -27,6 +28,9 @@ import { abschnitte, findWork, nachbar, type FlussStation } from '../../data/wor
 })
 export class ProjektComponent {
   private readonly seo = inject(SeoService);
+  private readonly analytics = inject(AnalyticsService);
+  /** Zuletzt gemeldete Fallstudie: ein Event pro Aufruf, auch wenn der effect erneut läuft. */
+  private gemeldet: string | null = null;
   readonly IconExtern = ArrowUpRight;
   readonly slug = input<string>('');
 
@@ -98,6 +102,15 @@ export class ProjektComponent {
         ],
         jsonLd: schema,
       });
+
+      if (this.gemeldet !== w.slug) {
+        this.gemeldet = w.slug;
+        this.analytics.senden('portfolio_project_view', {
+          project_slug: w.slug,
+          project_name: w.titel,
+          project_category: w.gruppe,
+        });
+      }
     });
   }
 }
