@@ -16,6 +16,8 @@ export interface BlogEintrag {
   bild?: string;
   bildAlt: string;
   lesezeit: number;
+  /** In Strapi zugeordnete Fallstudien (Slugs) */
+  projektSlugs?: string[];
 }
 
 export interface BlogLink {

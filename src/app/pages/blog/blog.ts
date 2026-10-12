@@ -123,7 +123,7 @@ export class BlogComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.set({
-      titel: `Blog — ${SITE.name}`,
+      titel: `Blog: AI-Agenten, RAG, MCP und n8n — ${SITE.name}`,
       beschreibung:
         'Artikel von Ozan Orhan zu AI-Agenten, n8n-Automationen, MCP, RAG und LLM-Anwendungen.',
       pfad: '/blog',

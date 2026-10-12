@@ -181,7 +181,7 @@ for (const artikelRoh of artikel) {
       `URL: ${seiteUrl(`/blog/${a.slug}`)}`,
       `Veröffentlicht: ${a.datum.slice(0, 10)}`,
       `Aktualisiert: ${a.geaendert.slice(0, 10)}`,
-      `Autor: ${a.autor}, AI Automation Engineer (${ORIGIN})`,
+      `Autor: ${a.autor}, AI Engineer mit Spezialisierung auf AI Automation (${ORIGIN})`,
       a.kernaussagen.length ? `\n## Das Wichtigste in Kürze\n\n${a.kernaussagen.map((k) => `- ${k}`).join('\n')}` : null,
       a.fakten.length ? `\n## Key Facts\n\n${a.fakten.map((f) => `- ${f.label}: ${f.wert}`).join('\n')}` : null,
       '', markdown.trim(),
@@ -192,9 +192,14 @@ for (const artikelRoh of artikel) {
   );
 }
 
+// projektSlugs: Slugs der in Strapi zugeordneten Fallstudien, damit diese auf ihre Artikel verlinken
 writeFileSync(
   `${ZIEL}/artikel.json`,
-  JSON.stringify(artikel.map((a) => ({ ...listenfeld(a), lesezeit: a.lesezeit })), null, 2) + '\n',
+  JSON.stringify(
+    artikel.map((a) => ({ ...listenfeld(a), lesezeit: a.lesezeit, projektSlugs: a.projekte.map((p) => p.slug) })),
+    null,
+    2,
+  ) + '\n',
 );
 
 console.log(`blog: ${artikel.length} Artikel aus ${CMS} geschrieben`);

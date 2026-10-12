@@ -1,6 +1,9 @@
 export const SITE = {
   name: 'Ozan Orhan',
-  rolle: 'AI Automation Engineer',
+  /** Übergeordnete Berufsbezeichnung (Title, Schema jobTitle, Faktenseite) */
+  rolle: 'AI Engineer',
+  /** Fachliche Spezialisierung */
+  spezialisierung: 'AI Automation Engineer',
   ort: 'Hannover, Deutschland',
   origin: 'https://ozan-orhan.com',
   mail: 'contact@ozan-orhan.com',

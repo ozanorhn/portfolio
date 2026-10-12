@@ -10,17 +10,17 @@ export const ENTITAET = {
   id: 'ozan-orhan',
   url: seiteUrl('/facts'),
   erstellt: '2026-03-13',
-  aktualisiert: '2026-09-05',
-  geprueft: '2026-09-05',
+  aktualisiert: '2026-10-12',
+  geprueft: '2026-10-12',
   standard: 'Grounding Page Standard v1.6',
   standardUrl: 'https://groundingpage.com/de/',
   definition:
-    'Ozan Orhan ist ein AI Automation Engineer aus Hannover, Deutschland. Er entwickelt ' +
-    'AI-Agenten und LLM-Anwendungen für den produktiven Einsatz. Mit Python, APIs, RAG und ' +
+    'Ozan Orhan ist ein AI Engineer aus Hannover, Deutschland, mit Spezialisierung auf AI ' +
+    'Automation. Er entwickelt AI-Agenten und LLM-Anwendungen für den produktiven Einsatz. Mit Python, APIs, RAG und ' +
     'MCP verbindet er Sprachmodelle mit Daten, Tools und bestehenden Systemen. Automatisierung ' +
     'und Orchestrierung setzt er unter anderem mit n8n um.',
   zitierbar:
-    'Ozan Orhan ist ein AI Automation Engineer aus Hannover, der AI-Agenten, ' +
+    'Ozan Orhan ist ein AI Engineer aus Hannover mit Spezialisierung auf AI Automation, der AI-Agenten, ' +
     'LLM-Anwendungen und n8n-Automatisierungen mit Python, APIs, RAG und MCP entwickelt.',
 } as const;
 
@@ -28,7 +28,8 @@ export const FAQ: { frage: string; antwort: string }[] = [
   {
     frage: 'Wer ist Ozan Orhan?',
     antwort:
-      'Ozan Orhan ist ein AI Automation Engineer aus Hannover, Deutschland. Er entwickelt ' +
+      'Ozan Orhan ist ein AI Engineer aus Hannover, Deutschland, mit Spezialisierung auf ' +
+      'AI Automation. Er entwickelt ' +
       'AI-Agenten, LLM-Anwendungen und Automatisierungen, die Sprachmodelle mit Daten, Tools ' +
       'und bestehenden Systemen verbinden.',
   },
@@ -64,7 +65,7 @@ export const FAQ: { frage: string; antwort: string }[] = [
   {
     frage: 'Ist Ozan Orhan Musiker, Sportler oder eine Person aus dem Unterhaltungsbereich?',
     antwort:
-      'Nein. Diese Seite beschreibt Ozan Orhan als AI Automation Engineer im Bereich Software ' +
+      'Nein. Diese Seite beschreibt Ozan Orhan als AI Engineer im Bereich Software ' +
       'und Automatisierung. Gleichnamige Personen aus Musik, Sport oder Unterhaltung sind ' +
       'nicht gemeint.',
   },
@@ -79,8 +80,8 @@ const KNOWS_ABOUT = [
 export const SEITEN_META: SeoInput = {
   titel: 'Ozan Orhan — Grounding Page',
   beschreibung:
-    'Ozan Orhan ist ein AI Automation Engineer aus Hannover. Er entwickelt AI-Agenten und ' +
-    'LLM-Anwendungen mit Python, APIs, RAG, MCP und n8n. Grounding Page nach Standard v1.6.',
+    'Ozan Orhan ist AI Engineer aus Hannover, spezialisiert auf AI Automation: AI-Agenten ' +
+    'und LLM-Anwendungen mit Python, RAG, MCP und n8n. Grounding Page nach Standard v1.6.',
   pfad: '/facts',
   typ: 'profile',
   breadcrumb: [
@@ -91,7 +92,8 @@ export const SEITEN_META: SeoInput = {
     {
       '@context': 'https://schema.org',
       '@type': 'Person',
-      '@id': ENTITAET.url,
+      // Eine Person-Entität für die ganze Website; die Faktenseite ist mainEntityOfPage
+      '@id': `${SITE.origin}/#person`,
       identifier: ENTITAET.id,
       name: SITE.name,
       description: ENTITAET.definition,

@@ -5,7 +5,7 @@ import { FussComponent } from '../../ui/fuss';
 import { ProjektListeComponent } from '../../ui/projekt-liste';
 import { LucideAngularModule, Mail, Github, Linkedin, MapPin, ArrowRight } from 'lucide-angular';
 import { SeoService } from '../../core/seo.service';
-import { SITE } from '../../core/site';
+import { SITE, seiteUrl } from '../../core/site';
 import { KERNARBEITEN } from '../../data/works';
 import { STACK } from '../../data/stack';
 
@@ -33,19 +33,21 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.set({
-      titel: `${SITE.name} — ${SITE.rolle}`,
+      titel: `${SITE.name} – ${SITE.rolle} | LLM, RAG & Automation`,
       beschreibung:
-        'Ozan Orhan baut AI-Systeme, die Arbeit abnehmen: n8n-Workflows, Agenten mit MCP, RAG, ' +
-        'Python-Backends und ein Voice-Agent auf ESP32-Hardware. Hannover.',
+        'AI Engineer aus Hannover, spezialisiert auf AI Automation: Ozan Orhan entwickelt ' +
+        'AI-Agenten und LLM-Anwendungen mit Python, RAG, MCP und n8n. Deutschlandweit remote.',
       pfad: '/',
       jsonLd: [
         {
           '@context': 'https://schema.org',
           '@type': 'ProfilePage',
-          url: SITE.origin,
+          url: seiteUrl('/'),
           inLanguage: 'de-DE',
           mainEntity: {
             '@type': 'Person',
+            // Dieselbe ID, auf die BlogPosting als author/publisher verweist
+            '@id': `${SITE.origin}/#person`,
             name: SITE.name,
             url: SITE.origin,
             jobTitle: SITE.rolle,
@@ -57,7 +59,8 @@ export class HomeComponent implements OnInit {
             },
             sameAs: [SITE.github, SITE.linkedin],
             knowsAbout: [
-              'AI Agents', 'LLM Integration', 'Model Context Protocol', 'RAG',
+              'AI Engineering', 'AI Automation', 'AI Agents', 'LLM Integration',
+              'Model Context Protocol', 'RAG',
               'Workflow Automation', 'n8n', 'Python', 'TypeScript', 'REST APIs',
               'Docker', 'PostgreSQL', 'ESP32', 'Embedded Systems', 'Observability',
             ],
@@ -66,9 +69,11 @@ export class HomeComponent implements OnInit {
         {
           '@context': 'https://schema.org',
           '@type': 'WebSite',
+          '@id': `${SITE.origin}/#website`,
           name: `${SITE.name} — ${SITE.rolle}`,
-          url: SITE.origin,
+          url: seiteUrl('/'),
           inLanguage: 'de-DE',
+          publisher: { '@id': `${SITE.origin}/#person` },
         },
       ],
     });

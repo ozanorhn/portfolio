@@ -17,9 +17,9 @@ import { PROJEKTE } from '../../data/works';
       <header class="kopfblock grid">
         <h1 class="titel kopfblock__titel">Projekte</h1>
         <p class="lede kopfblock__lede">
-          Fünf Systeme, die laufen — von einem sprachgesteuerten Handgerät bis zu Workflows, die
-          im Unternehmen täglich Daten zusammenführen. Darunter, klar getrennt: die Projekte aus
-          der Ausbildung.
+          Ausgewählte Projekte und Fallstudien — von einem sprachgesteuerten Handgerät bis zu
+          Workflows, die im Unternehmen Daten zusammenführen. Darunter, klar getrennt: die
+          Projekte aus der Ausbildung.
         </p>
       </header>
 
@@ -48,10 +48,10 @@ export class ProjekteComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.set({
-      titel: `Projekte — ${SITE.name}`,
+      titel: `Projekte & Fallstudien: AI-Agenten, RAG und n8n — ${SITE.name}`,
       beschreibung:
-        'Fünf laufende Systeme: Hermes Pocket AI Agent, Leistungsnachweis Automation, Wissensbasis ' +
-        'mit RAG und MCP, AI Visibility Monitoring, Recruiting Jobs Sync.',
+        'Ausgewählte Projekte und Fallstudien: AI-Agenten, RAG mit MCP, n8n-Automationen und ' +
+        'LLM-Datenpipelines aus Unternehmensprojekten, dazu Projekte aus der Ausbildung.',
       pfad: '/projekte',
       breadcrumb: [{ name: 'Start', pfad: '/' }, { name: 'Projekte', pfad: '/projekte' }],
       jsonLd: {

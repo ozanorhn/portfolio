@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, computed, effect, inject, input } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { KopfComponent } from '../../ui/kopf';
 import { FussComponent } from '../../ui/fuss';
@@ -13,6 +14,7 @@ import { SeoService } from '../../core/seo.service';
 import { AnalyticsService } from '../../core/analytics.service';
 import { SITE, seiteUrl } from '../../core/site';
 import { abschnitte, findWork, nachbar, type FlussStation } from '../../data/works';
+import { BlogService } from '../../data/blog';
 
 @Component({
   selector: 'app-projekt',
@@ -55,6 +57,11 @@ export class ProjektComponent {
   ];
   readonly work = computed(() => findWork(this.slug()));
   readonly naechste = computed(() => nachbar(this.slug()));
+  /** Veröffentlichte Artikel, die in Strapi dieser Fallstudie zugeordnet sind */
+  private readonly blogListe = toSignal(inject(BlogService).liste(), { initialValue: [] });
+  readonly fachartikel = computed(() =>
+    this.blogListe().filter((a) => a.projektSlugs?.includes(this.slug())),
+  );
   readonly nav = computed(() => {
     const w = this.work();
     return w ? abschnitte(w) : [];
@@ -90,8 +97,8 @@ export class ProjektComponent {
       if (w.sprachen?.length) schema['programmingLanguage'] = w.sprachen;
 
       this.seo.set({
-        titel: `${w.titel} — ${SITE.name}`,
-        beschreibung: w.lede,
+        titel: `${w.seoTitel ?? w.titel} — ${SITE.name}`,
+        beschreibung: w.seoBeschreibung ?? w.lede,
         pfad: `/projekte/${w.slug}`,
         bild,
         typ: 'article',

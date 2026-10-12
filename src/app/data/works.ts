@@ -53,12 +53,19 @@ export interface Work {
   links?: { label: string; href: string }[];
   repo?: string;
   sprachen?: string[];
+  /** Suchmaschinen-Titel ohne Namenszusatz; nur Begriffe aus kicker, stack und lede. Sonst titel. */
+  seoTitel?: string;
+  /** Meta-Description; nur belegte Angaben aus lede und stack. Sonst lede. */
+  seoBeschreibung?: string;
 }
 
 export const WORKS: Work[] = [
   // ── 01 ────────────────────────────────────────────────────────────────
   {
     slug: 'pocket-ai-agent',
+    seoTitel: 'Hermes: Voice AI Agent mit MCP und ESP32-S3',
+    seoBeschreibung:
+      'Fallstudie: Selbst gehosteter Sprachagent auf ESP32-S3. Aufnahme auf dem Gerät, Agentenlogik mit Python und FastAPI auf dem Server, Toolzugriff über MCP.',
     nr: '01',
     titel: 'Hermes Pocket AI Agent',
     kicker: 'Voice Agent · MCP · Embedded',
@@ -164,6 +171,9 @@ export const WORKS: Work[] = [
   // ── 02 ────────────────────────────────────────────────────────────────
   {
     slug: 'leistungsnachweis-automation',
+    seoTitel: 'Leistungsnachweis-Automation mit n8n und Toggl API',
+    seoBeschreibung:
+      'Fallstudie: Ein monatlicher n8n-Workflow verarbeitet Zeiterfassungen aus der Toggl API und erzeugt nach Freigabe per Slack automatisch Leistungsnachweise.',
     nr: '02',
     titel: 'Leistungsnachweis Automation',
     kicker: 'API Integration · Document Automation · Human Approval',
@@ -252,6 +262,9 @@ export const WORKS: Work[] = [
   // ── 03 ────────────────────────────────────────────────────────────────
   {
     slug: 'wissensbasis-rag-mcp',
+    seoTitel: 'KI-Wissensdatenbank mit RAG und MCP-Server',
+    seoBeschreibung:
+      'Fallstudie: Zentrale RAG-Wissensbasis in n8n mit Postgres-Vektorsuche und mehrsprachigen Embeddings, die Agenten über einen MCP-Server abfragen.',
     nr: '03',
     titel: 'Wissensbasis — RAG + MCP-Server',
     kicker: 'RAG · Vector Retrieval · MCP',
@@ -341,6 +354,9 @@ export const WORKS: Work[] = [
   // ── 04 ────────────────────────────────────────────────────────────────
   {
     slug: 'ai-visibility-monitoring-platform',
+    seoTitel: 'AI Visibility Monitoring mit n8n und LLM-Agent',
+    seoBeschreibung:
+      'Fallstudie: Drei n8n-Workflows führen fünf Datenquellen zusammen und prüfen, ob umgesetzte Maßnahmen messbar wirken, mit angebundenem LLM-Agenten.',
     nr: '04',
     titel: 'AI Visibility Monitoring Platform',
     kicker: 'Monitoring · Fünf Datenquellen · Agent-Anbindung',
@@ -447,6 +463,9 @@ export const WORKS: Work[] = [
   // ── 05 ────────────────────────────────────────────────────────────────
   {
     slug: 'recruiting-jobs-sync',
+    seoTitel: 'Recruiting Jobs Sync: LLM-Datenextraktion mit n8n',
+    seoBeschreibung:
+      'Fallstudie: Eine n8n-Datenpipeline extrahiert Stellenanzeigen per schema-gebundener LLM-Extraktion aus HTML und hält sie über last_seen_at idempotent synchron.',
     nr: '05',
     titel: 'Recruiting Jobs Sync',
     kicker: 'LLM Extraction · Idempotent Sync · Data Pipeline',
@@ -535,6 +554,9 @@ export const WORKS: Work[] = [
 
   {
     slug: 'conversational-ai-meeting-assistant',
+    seoTitel: 'KI-Meeting-Assistent: Action Items per LLM',
+    seoBeschreibung:
+      'Fallstudie: Ein n8n-Workflow strukturiert gesprochene Sprache über die OpenAI API, zieht Action Items heraus und stellt sie in Slack und per Mail zu.',
     nr: '06',
     titel: 'Conversational AI Meeting Assistant',
     kicker: 'Besprechungen · Action Items per LLM',
@@ -571,6 +593,9 @@ export const WORKS: Work[] = [
   // ── 07 ────────────────────────────────────────────────────────────────
   {
     slug: 'grounding-page-generator',
+    seoTitel: 'Grounding Page Generator mit LLM-Agent und JSON-LD',
+    seoBeschreibung:
+      'Fallstudie: Ein n8n-Workflow mit LLM-Agent recherchiert Fakten, lässt sie von einem Menschen bestätigen und erzeugt eine Grounding Page mit JSON-LD.',
     nr: '07',
     titel: 'Grounding Page Generator',
     kicker: 'Grounding Page Standard v1.6 · Human-in-the-loop',

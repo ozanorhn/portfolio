@@ -65,7 +65,7 @@ const zeile = (p) =>
 
 writeFileSync(
   'public/llms.txt',
-  `# Ozan Orhan — AI Automation Engineer
+  `# Ozan Orhan — AI Engineer, Spezialisierung AI Automation
 
 > Ozan Orhan entwickelt AI-Automationen, Agenten und LLM-Anwendungen. Schwerpunkte sind
 > Agenten, n8n, Python, MCP, RAG, APIs und zuverlässige Automatisierungsabläufe.

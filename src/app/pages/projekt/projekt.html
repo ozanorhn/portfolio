@@ -133,6 +133,25 @@
             </p>
           }
         </section>
+
+        @if (fachartikel().length) {
+          <section id="fachartikel" class="teil" aria-labelledby="t-artikel">
+            <h2 id="t-artikel" class="untertitel teil__titel">Fachartikel zum Thema</h2>
+            <ul class="prosa">
+              @for (a of fachartikel(); track a.slug) {
+                <li><a class="textlink" [href]="'/blog/' + a.slug + '/'">{{ a.titel }}</a></li>
+              }
+            </ul>
+          </section>
+        }
+
+        <section class="teil" aria-labelledby="t-kontakt">
+          <h2 id="t-kontakt" class="untertitel teil__titel">Kontakt</h2>
+          <p class="prosa">
+            Fragen zur Umsetzung oder eine passende Rolle im AI Engineering?
+            <a class="aktion" routerLink="/" fragment="kontakt">Zum Kontakt</a>
+          </p>
+        </section>
       </div>
     </div>
 
