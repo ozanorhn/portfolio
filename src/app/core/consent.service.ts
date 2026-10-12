@@ -20,7 +20,9 @@ export class ConsentService {
     try {
       const wert = localStorage.getItem(KEY);
       if (wert === 'akzeptiert' || wert === 'abgelehnt') gespeichert = wert;
-    } catch { /* Speicher möglicherweise deaktiviert */ }
+    } catch {
+      /* Speicher möglicherweise deaktiviert */
+    }
     this.entscheidung.set(gespeichert);
     this.sichtbar.set(gespeichert === null);
     if (gespeichert === 'akzeptiert') {
@@ -36,10 +38,20 @@ export class ConsentService {
     this.sichtbar.set(true);
   }
 
+  /** Schließen ohne Entscheidung (Escape): nichts wird gespeichert, Tracking bleibt aus. */
+  schliessen(): void {
+    this.sichtbar.set(false);
+    this.details.set(false);
+  }
+
   waehlen(erlaubt: boolean): void {
     const vorher = this.entscheidung();
     const wert: Entscheidung = erlaubt ? 'akzeptiert' : 'abgelehnt';
-    try { localStorage.setItem(KEY, wert); } catch { /* Session-Entscheidung */ }
+    try {
+      localStorage.setItem(KEY, wert);
+    } catch {
+      /* Session-Entscheidung */
+    }
     this.entscheidung.set(wert);
     this.sichtbar.set(false);
     this.details.set(false);
@@ -58,10 +70,12 @@ export class ConsentService {
   private gtag(): (...args: unknown[]) => void {
     const win = window as Fenster;
     const dataLayer = (win.dataLayer = win.dataLayer || []);
-    win.gtag = win.gtag || function () {
-      // eslint-disable-next-line prefer-rest-params
-      dataLayer.push(arguments);
-    };
+    win.gtag =
+      win.gtag ||
+      function () {
+        // eslint-disable-next-line prefer-rest-params
+        dataLayer.push(arguments);
+      };
     return win.gtag;
   }
 

@@ -79,9 +79,31 @@ Server läuft auf `http://localhost:4200`
 ### Production Build
 
 ```bash
-ng build --configuration production
-# Output in dist/portfolio/
+npm run build:prod
+# = Blog aus Strapi → sitemap/robots/llms.txt → ng build → Prerendering (Google Chrome nötig)
+# Upload-Ordner: Inhalt von dist/portfolio/browser/
 ```
+
+### Blog-Build mit Strapi
+
+Die Blogartikel werden beim Build aus Strapi geholt (`scripts/blog-daten.mjs`) und als
+statische Dateien nach `public/blog/` geschrieben (von Git ignoriert).
+
+| Variable | Pflicht | Zweck |
+|---|---|---|
+| `STRAPI_TOKEN` | ja, für Produktions-Builds | Read-only API-Token (nur `find`/`findOne` auf `article`) |
+| `STRAPI_URL` | nein | Standard `https://cms.ozan-orhan.com` |
+| `ERLAUBE_ENTFERNEN=1` | nein | nur wenn ein live veröffentlichter Artikel bewusst depubliziert wurde |
+| `LEERER_BLOG=1` | nein | nur wenn der Blog wirklich leer sein soll |
+
+Token lokal bereitstellen: `cp .env.example .env && chmod 600 .env`, Token in `.env` eintragen.
+`.env` ist in `.gitignore`; den Token nie committen, in Chats kopieren oder in Logs ausgeben.
+
+Schutz vor verlorenen Artikeln: Der Blog-Schritt bricht ab, ohne `public/blog/` anzufassen, wenn
+Strapi 0 Artikel liefert, Slugs doppelt vorkommen oder ein auf ozan-orhan.com veröffentlichter
+Artikel im Abruf fehlt. Ohne Token bleibt der vorhandene Stand liegen; ist dieser leer, bricht das
+Prerendering ab. Ein erfolgreicher Abruf meldet `blog: N Artikel aus … geschrieben` mit Slug-Liste
+und `Live-Abgleich ok`.
 
 ## Design System
 

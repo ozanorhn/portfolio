@@ -12,7 +12,7 @@ import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { Marked } from 'marked';
 import { projekte, seiteUrl } from './routen.mjs';
 
-const CMS = process.env.STRAPI_URL ?? 'https://cms.ozan-orhan.com';
+const CMS = process.env.STRAPI_URL || 'https://cms.ozan-orhan.com';
 const TOKEN = process.env.STRAPI_TOKEN;
 const ZIEL = 'public/blog';
 const ORIGIN = 'https://ozan-orhan.com';
@@ -148,6 +148,19 @@ for (const a of artikel) {
   a.projekte = a.projekte.map((s) => ({ slug: s, titel: PROJEKTE.get(s).titel, kurz: PROJEKTE.get(s).kicker }));
 }
 
+// Schutz vor Datenverlust: erst prüfen, dann den Ordner leeren.
+if (!artikel.length && process.env.LEERER_BLOG !== '1') {
+  console.error('blog: Strapi lieferte 0 veröffentlichte Artikel. Abbruch, public/blog bleibt unverändert.');
+  console.error('      Token-Rechte (find auf "article") und Veröffentlichungsstatus in Strapi prüfen.');
+  process.exit(1);
+}
+const doppelt = artikel.map((a) => a.slug).filter((s, i, alle) => alle.indexOf(s) !== i);
+if (doppelt.length) {
+  console.error(`blog: doppelte Slugs in Strapi: ${[...new Set(doppelt)].join(', ')}. Abbruch.`);
+  process.exit(1);
+}
+await gegenLiveAbgleichen(new Set(artikel.map((a) => a.slug)));
+
 // Neu schreiben, damit zurückgezogene Artikel verschwinden.
 rmSync(ZIEL, { recursive: true, force: true });
 mkdirSync(ZIEL, { recursive: true });
@@ -185,3 +198,33 @@ writeFileSync(
 );
 
 console.log(`blog: ${artikel.length} Artikel aus ${CMS} geschrieben`);
+for (const a of artikel) console.log(`  ${a.datum.slice(0, 10)}  ${a.slug}`);
+
+/**
+ * Jeder live veröffentlichte Artikel muss im neuen Abruf enthalten sein, sonst würde der
+ * Upload eine indexierte URL in einen 404 verwandeln. Gewolltes Depublizieren: ERLAUBE_ENTFERNEN=1.
+ */
+async function gegenLiveAbgleichen(neu) {
+  let live;
+  try {
+    const res = await fetch(`${ORIGIN}/blog/artikel.json`, { signal: AbortSignal.timeout(15000) });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    live = await res.json();
+  } catch (e) {
+    console.warn(`blog: Live-Abgleich nicht möglich (${e.message}), wird übersprungen.`);
+    return;
+  }
+  const fehlend = live.map((a) => a.slug).filter((s) => !neu.has(s));
+  if (!fehlend.length) {
+    console.log(`blog: Live-Abgleich ok, alle ${live.length} Live-Artikel sind enthalten.`);
+    return;
+  }
+  console.error(`blog: ${fehlend.length} live veröffentlichte Artikel fehlen im Strapi-Abruf:`);
+  for (const s of fehlend) console.error(`  - ${s}`);
+  if (process.env.ERLAUBE_ENTFERNEN === '1') {
+    console.warn('blog: ERLAUBE_ENTFERNEN=1 gesetzt, die Artikel werden entfernt.');
+    return;
+  }
+  console.error('blog: Abbruch, public/blog bleibt unverändert. Bewusst depubliziert? ERLAUBE_ENTFERNEN=1 setzen.');
+  process.exit(1);
+}
