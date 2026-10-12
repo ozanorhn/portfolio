@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy, OnInit, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { KopfComponent } from '../../ui/kopf';
 import { FussComponent } from '../../ui/fuss';
@@ -10,7 +9,7 @@ import { BlogService, datumLang } from '../../data/blog';
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [RouterLink, KopfComponent, FussComponent],
+  imports: [KopfComponent, FussComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-kopf />
@@ -28,7 +27,7 @@ import { BlogService, datumLang } from '../../data/blog';
           <ol class="liste" aria-label="Alle Artikel">
             @for (a of liste; track a.slug) {
               <li class="eintrag">
-                <a class="eintrag__link grid" [routerLink]="['/blog', a.slug]">
+                <a class="eintrag__link grid" [href]="seiteUrl('/blog/' + a.slug)">
                   <span class="mono eintrag__datum">
                     <time [attr.datetime]="a.datum">{{ datum(a.datum) }}</time><br />
                     {{ a.lesezeit }} Min.
