@@ -32,7 +32,7 @@ export class SeoService {
     this.upsertProperty('og:type', input.typ ?? 'website');
     this.upsertProperty('og:image', bild);
     this.upsertProperty('og:locale', 'de_DE');
-    this.upsertProperty('og:site_name', `${SITE.name} — ${SITE.rolle}`);
+    this.upsertProperty('og:site_name', SITE.name);
     this.upsertName('twitter:card', 'summary_large_image');
     this.upsertName('twitter:title', input.titel);
     this.upsertName('twitter:description', input.beschreibung);

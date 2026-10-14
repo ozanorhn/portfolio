@@ -67,7 +67,8 @@ writeFileSync(
   'public/llms.txt',
   `# Ozan Orhan — AI Automation Engineer
 
-> Ozan Orhan entwickelt AI-Automationen, Agenten und LLM-Anwendungen. Schwerpunkte sind
+> Ozan Orhan ist AI Automation Engineer aus Hannover. Er entwickelt KI-Agenten und
+> automatisiert Geschäftsprozesse mit KI, n8n, RAG und MCP. Schwerpunkte sind
 > Agenten, n8n, Python, MCP, RAG, APIs und zuverlässige Automatisierungsabläufe.
 > Standort Hannover, Deutschland.
 

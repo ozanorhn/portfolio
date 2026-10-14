@@ -17,7 +17,7 @@ import { KopfComponent } from '../../ui/kopf';
 import { FussComponent } from '../../ui/fuss';
 import { CaseStudyNavComponent } from '../../ui/case-study-nav';
 import { SeoService } from '../../core/seo.service';
-import { SITE, seitenTitel, seiteUrl } from '../../core/site';
+import { SITE, person, seitenTitel, seiteUrl } from '../../core/site';
 import { BlogService, datumLang, type BlogArtikel } from '../../data/blog';
 import type { Abschnitt } from '../../data/works';
 
@@ -105,14 +105,7 @@ export class BlogArtikelComponent {
 }
 
 function schema(a: BlogArtikel, pfad: string, bild: string): Record<string, unknown>[] {
-  const autor = {
-    '@type': 'Person',
-    '@id': `${SITE.origin}/#person`,
-    name: a.autor,
-    url: SITE.origin,
-    jobTitle: SITE.rolle,
-    sameAs: [SITE.github, SITE.linkedin],
-  };
+  const autor = person();
   const posting: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',

@@ -5,7 +5,7 @@ import { FussComponent } from '../../ui/fuss';
 import { ProjektListeComponent } from '../../ui/projekt-liste';
 import { LucideAngularModule, Mail, Github, Linkedin, MapPin, ArrowRight } from 'lucide-angular';
 import { SeoService } from '../../core/seo.service';
-import { SITE, seiteUrl } from '../../core/site';
+import { BESCHREIBUNG, SITE, person, seiteUrl } from '../../core/site';
 import { KERNARBEITEN } from '../../data/works';
 import { STACK } from '../../data/stack';
 
@@ -30,13 +30,14 @@ export class HomeComponent implements OnInit {
   readonly IconPfeil = ArrowRight;
   readonly kernarbeiten = KERNARBEITEN;
   readonly stack = STACK;
+  readonly beschreibung = BESCHREIBUNG;
 
   ngOnInit(): void {
     this.seo.set({
-      titel: `${SITE.name} – ${SITE.rolle} | KI-Automatisierung mit n8n`,
+      titel: `${SITE.name} – ${SITE.rolle} | KI-Agenten & Automatisierung`,
       beschreibung:
-        'AI Automation Engineer aus Hannover: KI-Automatisierung und Prozessautomatisierung ' +
-        'mit n8n, KI-Agenten, RAG und MCP. Deutschlandweit remote.',
+        'AI Automation Engineer aus Hannover: Ozan Orhan entwickelt KI-Agenten und automatisiert ' +
+        'Prozesse mit KI, mit Python, RAG, MCP und n8n. Deutschlandweit remote.',
       pfad: '/',
       jsonLd: [
         {
@@ -44,34 +45,13 @@ export class HomeComponent implements OnInit {
           '@type': 'ProfilePage',
           url: seiteUrl('/'),
           inLanguage: 'de-DE',
-          mainEntity: {
-            '@type': 'Person',
-            // Dieselbe ID, auf die BlogPosting als author/publisher verweist
-            '@id': `${SITE.origin}/#person`,
-            name: SITE.name,
-            url: SITE.origin,
-            jobTitle: SITE.rolle,
-            email: `mailto:${SITE.mail}`,
-            address: {
-              '@type': 'PostalAddress',
-              addressLocality: 'Hannover',
-              addressCountry: 'DE',
-            },
-            sameAs: [SITE.github, SITE.linkedin],
-            knowsAbout: [
-              'KI-Automatisierung', 'Prozessautomatisierung', 'KI-Agenten',
-              'AI Engineering', 'AI Automation', 'AI Agents', 'LLM Integration',
-              'Model Context Protocol', 'RAG',
-              'Workflow Automation', 'n8n', 'Python', 'TypeScript', 'REST APIs',
-              'Docker', 'PostgreSQL', 'ESP32', 'Embedded Systems', 'Observability',
-            ],
-          },
+          mainEntity: person(),
         },
         {
           '@context': 'https://schema.org',
           '@type': 'WebSite',
           '@id': `${SITE.origin}/#website`,
-          name: `${SITE.name} — ${SITE.rolle}`,
+          name: SITE.name,
           url: seiteUrl('/'),
           inLanguage: 'de-DE',
           publisher: { '@id': `${SITE.origin}/#person` },

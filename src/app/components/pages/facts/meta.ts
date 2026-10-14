@@ -1,5 +1,5 @@
 import type { SeoInput } from '../../../core/seo.service';
-import { SITE, seiteUrl } from '../../../core/site';
+import { BESCHREIBUNG, SITE, person, seiteUrl } from '../../../core/site';
 
 /**
  * Grounding Page für die Entität Ozan Orhan nach Grounding Page Standard v1.6.
@@ -14,11 +14,10 @@ export const ENTITAET = {
   geprueft: '2026-10-14',
   standard: 'Grounding Page Standard v1.6',
   standardUrl: 'https://groundingpage.com/de/',
+  // Erster Satz identisch mit Person.description (BESCHREIBUNG), sichtbar als Lead
   definition:
-    'Ozan Orhan ist ein AI Automation Engineer aus Hannover, Deutschland. ' +
-    'Er entwickelt AI-Agenten und LLM-Anwendungen für den produktiven Einsatz. Mit Python, APIs, RAG und ' +
-    'MCP verbindet er Sprachmodelle mit Daten, Tools und bestehenden Systemen. Automatisierung ' +
-    'und Orchestrierung setzt er unter anderem mit n8n um.',
+    BESCHREIBUNG +
+    ' Mit Python, APIs, RAG und MCP verbindet er Sprachmodelle mit Daten, Tools und bestehenden Systemen.',
   zitierbar:
     'Ozan Orhan ist ein AI Automation Engineer aus Hannover, der AI-Agenten, ' +
     'LLM-Anwendungen und n8n-Automatisierungen mit Python, APIs, RAG und MCP entwickelt.',
@@ -70,13 +69,6 @@ export const FAQ: { frage: string; antwort: string }[] = [
   },
 ];
 
-const KNOWS_ABOUT = [
-  'KI-Automatisierung', 'Prozessautomatisierung', 'KI-Agenten', 'RAG',
-  'AI Agents', 'LLM Integration', 'Model Context Protocol', 'Retrieval-Augmented Generation',
-  'Workflow Automation', 'n8n', 'Python', 'FastAPI', 'REST APIs', 'TypeScript', 'Angular',
-  'Docker', 'PostgreSQL', 'ESP32', 'Structured Outputs', 'Observability',
-];
-
 export const SEITEN_META: SeoInput = {
   titel: 'Ozan Orhan — Grounding Page',
   beschreibung:
@@ -91,22 +83,14 @@ export const SEITEN_META: SeoInput = {
   jsonLd: [
     {
       '@context': 'https://schema.org',
-      '@type': 'Person',
-      // Eine Person-Entität für die ganze Website; die Faktenseite ist mainEntityOfPage
-      '@id': `${SITE.origin}/#person`,
-      identifier: ENTITAET.id,
-      name: SITE.name,
-      description: ENTITAET.definition,
-      jobTitle: SITE.rolle,
-      url: SITE.origin,
-      mainEntityOfPage: ENTITAET.url,
-      email: `mailto:${SITE.mail}`,
-      address: { '@type': 'PostalAddress', addressLocality: 'Hannover', addressCountry: 'DE' },
-      knowsLanguage: ['de', 'en'],
-      knowsAbout: KNOWS_ABOUT,
-      sameAs: [SITE.github, SITE.linkedin],
+      // dateCreated/dateModified gehören an die ProfilePage, nicht an die Person
+      '@type': 'ProfilePage',
+      url: ENTITAET.url,
+      inLanguage: 'de-DE',
       dateCreated: ENTITAET.erstellt,
       dateModified: ENTITAET.aktualisiert,
+      // Eine Person-Entität für die ganze Website
+      mainEntity: { ...person(), identifier: ENTITAET.id, knowsLanguage: ['de', 'en'] },
     },
     {
       '@context': 'https://schema.org',

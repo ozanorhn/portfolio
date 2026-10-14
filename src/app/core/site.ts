@@ -9,6 +9,40 @@ export const SITE = {
   linkedin: 'https://www.linkedin.com/in/ozan-o-7014a22a3',
 } as const;
 
+/** Ein Satz für Schema (Person.description), Startseite, Faktenseite und llms.txt. */
+export const BESCHREIBUNG =
+  'Ozan Orhan ist AI Automation Engineer aus Hannover. Er entwickelt KI-Agenten und ' +
+  'automatisiert Geschäftsprozesse mit KI, n8n, RAG und MCP.';
+
+export const KNOWS_ABOUT = [
+  'KI-Automatisierung', 'Prozessautomatisierung', 'KI-Agenten',
+  'AI Automation', 'AI Agents', 'LLM Integration', 'Model Context Protocol', 'RAG',
+  'Workflow Automation', 'n8n', 'Python', 'FastAPI', 'TypeScript', 'Angular', 'REST APIs',
+  'Docker', 'PostgreSQL', 'ESP32', 'Embedded Systems', 'Structured Outputs', 'Observability',
+];
+
+/** Person-Entität (#person), auf allen Seiten identisch; Seiten ergänzen nur eigene Felder. */
+export function person(): Record<string, unknown> {
+  return {
+    '@type': 'Person',
+    '@id': `${SITE.origin}/#person`,
+    name: SITE.name,
+    url: SITE.origin,
+    jobTitle: SITE.rolle,
+    description: BESCHREIBUNG,
+    hasOccupation: {
+      '@type': 'Occupation',
+      name: SITE.rolle,
+      alternateName: ['AI Engineer', 'Automation Engineer', 'KI-Automatisierung'],
+      skills: 'KI-Agenten, Prozessautomatisierung, n8n, RAG, Model Context Protocol, Python',
+    },
+    email: `mailto:${SITE.mail}`,
+    address: { '@type': 'PostalAddress', addressLocality: 'Hannover', addressCountry: 'DE' },
+    knowsAbout: KNOWS_ABOUT,
+    sameAs: [SITE.github, SITE.linkedin],
+  };
+}
+
 /** Google kürzt Titles ab etwa 60 Zeichen; der Name wird nur angehängt, wenn er noch passt. */
 const TITEL_MAX = 60;
 
