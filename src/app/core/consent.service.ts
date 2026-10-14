@@ -99,6 +99,8 @@ export class ConsentService {
     // Default immer vor dem Container, danach das Update aus der Einwilligung.
     gtag('consent', 'default', this.status(false));
     gtag('set', 'ads_data_redaction', true);
+    // _ga-Cookies nur über HTTPS senden (Secure); SameSite wie Google-Standard.
+    gtag('set', 'cookie_flags', 'secure;samesite=lax');
     gtag('consent', 'update', this.status(true));
     const win = window as Fenster;
     win.dataLayer!.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
