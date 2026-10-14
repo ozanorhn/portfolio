@@ -85,25 +85,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ozan-orhan.com/blog/claude-code-mods/</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ozan-orhan.com/blog/n8n-agents-vs-ai-agent-node/</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ozan-orhan.com/blog/mcp-server-mit-n8n-erstellen/</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ozan-orhan.com/blog/agentic-rag-mcp-architektur/</loc>
+    <loc>https://ozan-orhan.com/blog/reverse-engineering-claude-ghidra-mcp/</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -115,7 +97,25 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ozan-orhan.com/blog/reverse-engineering-claude-ghidra-mcp/</loc>
+    <loc>https://ozan-orhan.com/blog/agentic-rag-mcp-architektur/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ozan-orhan.com/blog/n8n-agents-vs-ai-agent-node/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ozan-orhan.com/blog/claude-code-mods/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ozan-orhan.com/blog/mcp-server-mit-n8n-erstellen/</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
