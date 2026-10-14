@@ -39,16 +39,11 @@ export class GlossarBegriffComponent {
     const b = this.begriff();
     return b ? this.sanitizer.bypassSecurityTrustHtml(b.html) : '';
   });
-  readonly beispielHtml = computed(() => {
-    const b = this.begriff();
-    return b ? this.sanitizer.bypassSecurityTrustHtml(b.beispielHtml) : '';
-  });
 
   readonly abschnitte = computed<Abschnitt[]>(() => {
     const b = this.begriff();
     if (!b) return [];
     return [
-      ...(b.beispielHtml ? [{ id: 'beispiel', titel: 'Beispiel aus der Praxis' }] : []),
       ...b.inhalt,
       ...(b.verwandt.length ? [{ id: 'verwandt', titel: 'Verwandte Begriffe' }] : []),
       ...(b.quellen.length ? [{ id: 'quellen', titel: 'Quellen' }] : []),

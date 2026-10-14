@@ -55,13 +55,6 @@
         }
 
         <div class="korpus__inhalt">
-          @if (b.beispielHtml) {
-            <section id="beispiel" class="teil teil--erst" aria-labelledby="t-beispiel">
-              <h2 id="t-beispiel" class="untertitel teil__titel">Beispiel aus der Praxis</h2>
-              <div class="prosa" [innerHTML]="beispielHtml()"></div>
-            </section>
-          }
-
           @if (b.html) {
             <div class="prosa hauptteil" [innerHTML]="html()"></div>
           }

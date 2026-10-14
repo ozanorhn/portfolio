@@ -4,8 +4,7 @@
 .definition { color: $tusche; max-width: 60ch; }
 .vorschau { margin-top: $s4; color: $petrol; }
 
-.teil--erst { padding-top: 0; }
-.hauptteil { padding-top: clamp(36px, 4vw, 60px); }
+.hauptteil { padding-bottom: $s4; }
 
 .verwandt { max-width: 68ch; }
 .verwandt li { padding-block: $s3; border-bottom: $strich-haar solid $linie; }

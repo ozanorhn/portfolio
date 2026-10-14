@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, of, shareReplay } from 'rxjs';
 
-/** Felder aus public/glossar/begriffe.json, erzeugt von scripts/glossar-daten.mjs. */
+/** Felder aus public/glossar/begriffe.json, erzeugt von scripts/glossar-daten.mjs aus content/glossar. */
 export interface GlossarEintrag {
   slug: string;
   begriff: string;
@@ -21,10 +21,9 @@ export interface GlossarBegriff extends GlossarEintrag {
   seoBeschreibung: string;
   aussagen: string[];
   fakten: { label: string; wert: string }[];
-  /** Vom Build-Skript bereinigtes HTML, siehe scripts/markdown.mjs */
-  beispielHtml: string;
+  /** Vom Build-Skript bereinigtes HTML (Beispiel aus der Praxis + Hauptteil), siehe scripts/markdown.mjs */
   html: string;
-  /** H2-Überschriften des Hauptteils für das Inhaltsverzeichnis */
+  /** H2-Überschriften für das Inhaltsverzeichnis */
   inhalt: { id: string; titel: string }[];
   woerter: number;
   faq: { frage: string; antwort: string }[];

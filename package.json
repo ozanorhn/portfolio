@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "blog": "node --env-file-if-exists=.env scripts/blog-daten.mjs",
-    "glossar": "node --env-file-if-exists=.env scripts/glossar-daten.mjs",
+    "glossar": "node scripts/glossar-daten.mjs",
     "seo": "node scripts/seo-dateien.mjs",
     "build": "npm run blog && npm run glossar && npm run seo && ng build",
     "prerender": "node scripts/prerender.mjs",

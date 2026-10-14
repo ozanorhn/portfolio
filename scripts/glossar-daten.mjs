@@ -1,26 +1,23 @@
 /**
- * Holt veröffentlichte Glossarbegriffe aus Strapi und legt sie als statische Dateien ab:
+ * Baut das Glossar aus content/glossar/<slug>.md (JSON-Kopf zwischen ---, darunter Markdown):
  *   public/glossar/begriffe.json          Liste für /glossar und die Navigation
  *   public/glossar/<slug>/begriff.json    Begriff mit fertigem HTML (für /glossar/<slug>)
  *   public/glossar/<slug>/llms.txt        Markdown-Fassung für Antwortsysteme
  *
- * GLOSSAR_VORSCHAU=1 nimmt stattdessen scripts/glossar-vorschau.json (lokale Entwürfe zum
- * Testen der Vorlage). Solche Seiten sind noindex und dürfen nicht hochgeladen werden.
+ * Nur Begriffe mit "status": "veroeffentlicht" kommen in den Build. GLOSSAR_VORSCHAU=1 nimmt
+ * auch Entwürfe mit (noindex, nur lokal ansehen, nicht hochladen). Format: content/glossar/README.md
  */
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { rendern } from './markdown.mjs';
 import { ORIGIN, blogArtikel, projekte, seiteUrl } from './routen.mjs';
 
-const CMS = process.env.STRAPI_URL || 'https://cms.ozan-orhan.com';
-const TOKEN = process.env.STRAPI_TOKEN;
-const VORSCHAU = process.env.GLOSSAR_VORSCHAU === '1';
+const QUELLE = new URL('../content/glossar/', import.meta.url);
 const ZIEL = 'public/glossar';
+const VORSCHAU = process.env.GLOSSAR_VORSCHAU === '1';
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const liste = (x) => (Array.isArray(x) ? x : []);
-const httpUrl = (u) => typeof u === 'string' && /^https?:\/\//.test(u);
 
-/** Werte der Strapi-Enumeration „thema“ (siehe strapi/). Reihenfolge = Reihenfolge auf /glossar. */
-export const THEMEN = {
+/** Reihenfolge = Reihenfolge auf /glossar; wie THEMEN in src/app/data/glossar.ts */
+const THEMEN = {
   ki_grundlagen: 'KI-Grundlagen',
   rag_suche: 'RAG und Suche',
   agenten_mcp: 'Agenten und MCP',
@@ -29,91 +26,77 @@ export const THEMEN = {
   ki_sichtbarkeit: 'Sichtbarkeit in KI-Suchen',
 };
 
-/** IDs aus Layout und Begriffsvorlage; Überschriften im Inhalt dürfen sie nicht vergeben. */
+/** IDs aus Layout und Begriffsvorlage; Überschriften im Text dürfen sie nicht vergeben. */
 const VORLAGEN_IDS = [
-  'inhalt', 'hauptmenue', 'seiten-schema', 'beispiel', 'verwandt', 'quellen', 'faq', 'weiter',
-  'kontakt', 't-steckbrief', 't-beispiel', 't-verwandt', 't-quellen', 't-faq', 't-weiter',
+  'inhalt', 'hauptmenue', 'seiten-schema', 'verwandt', 'quellen', 'faq', 'weiter', 'kontakt',
+  't-steckbrief', 't-verwandt', 't-quellen', 't-faq', 't-praxis',
 ];
 
-function leer(grund) {
-  rmSync(ZIEL, { recursive: true, force: true });
-  mkdirSync(ZIEL, { recursive: true });
-  writeFileSync(`${ZIEL}/begriffe.json`, '[]\n');
-  console.log(`glossar: ${grund}, Glossar bleibt leer`);
-  process.exit(0);
-}
+const fehler = [];
+const pruefe = (bedingung, datei, text) => bedingung || fehler.push(`${datei}: ${text}`);
+const liste = (x) => (Array.isArray(x) ? x : []);
 
-async function ausStrapi() {
-  const roh = [];
-  for (let nr = 1; ; nr++) {
-    const url = new URL('/api/glossarbegriffe', CMS);
-    url.searchParams.set('status', 'published');
-    url.searchParams.set('sort', 'begriff:asc');
-    for (const f of ['steckbriefAussagen', 'steckbriefFakten', 'faq', 'quellen']) {
-      url.searchParams.set(`populate[${f}]`, 'true');
-    }
-    url.searchParams.set('populate[verwandteBegriffe][fields][0]', 'slug');
-    url.searchParams.set('populate[verwandteArtikel][fields][0]', 'slug');
-    url.searchParams.set('pagination[page]', String(nr));
-    url.searchParams.set('pagination[pageSize]', '100');
-    const res = await fetch(url, { headers: { Authorization: `Bearer ${TOKEN}` } });
-    // 404: Inhaltstyp existiert noch nicht · 403: Token hat noch keine Leserechte darauf
-    if (res.status === 404 || res.status === 403) return null;
-    if (!res.ok) throw new Error(`Strapi antwortet mit ${res.status} ${res.statusText}`);
-    const { data, meta } = await res.json();
-    roh.push(...data);
-    if (nr >= meta.pagination.pageCount) break;
+function lesen(datei) {
+  const roh = readFileSync(new URL(datei, QUELLE), 'utf8');
+  const m = roh.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  if (!m) return void fehler.push(`${datei}: JSON-Kopf zwischen --- fehlt`);
+  let k;
+  try {
+    k = JSON.parse(m[1]);
+  } catch (e) {
+    return void fehler.push(`${datei}: JSON-Kopf ungültig (${e.message})`);
   }
-  return roh.map((b) => ({
-    slug: b.slug,
-    begriff: b.begriff,
-    h1: b.h1 || b.begriff,
-    alternativeNamen: liste(b.alternativeNamen).filter((x) => typeof x === 'string'),
-    thema: b.thema,
-    kurzdefinition: b.kurzdefinition ?? '',
-    aussagen: liste(b.steckbriefAussagen).map((a) => a.text).filter(Boolean),
-    fakten: liste(b.steckbriefFakten).filter((f) => f.label && f.wert).map(({ label, wert }) => ({ label, wert })),
-    beispiel: b.beispiel ?? '',
-    inhalt: b.inhalt ?? '',
-    faq: liste(b.faq).filter((f) => f.frage && f.antwort).map(({ frage, antwort }) => ({ frage, antwort })),
-    verwandt: liste(b.verwandteBegriffe).map((r) => r.slug).filter(Boolean),
-    artikel: liste(b.verwandteArtikel).map((r) => r.slug).filter(Boolean),
-    projekte: liste(b.verwandteProjekte).filter((s) => typeof s === 'string'),
-    quellen: liste(b.quellen).filter((q) => q.titel && httpUrl(q.url))
-      .map(({ titel, url, abgerufen }) => ({ titel, url, abgerufen: abgerufen ?? null })),
-    seoTitel: b.seoTitle || b.begriff,
-    seoBeschreibung: b.seoDescription || b.kurzdefinition || '',
-    datum: b.erstveroeffentlicht || b.publishedAt,
-    geaendert: b.updatedAt,
-  }));
-}
-
-let begriffe;
-if (VORSCHAU) {
+  const slug = datei.replace(/\.md$/, '');
+  pruefe(SLUG.test(slug), datei, 'Dateiname muss ein gültiger Slug sein');
+  pruefe(['entwurf', 'veroeffentlicht'].includes(k.status), datei, 'status: entwurf oder veroeffentlicht');
+  pruefe(k.begriff && k.begriff.length <= 60, datei, 'begriff fehlt oder länger als 60');
+  pruefe(k.h1 && k.h1.length <= 90, datei, 'h1 fehlt oder länger als 90');
+  pruefe(THEMEN[k.thema], datei, `thema muss einer von ${Object.keys(THEMEN).join(', ')} sein`);
+  pruefe(k.kurzdefinition && k.kurzdefinition.length <= 300, datei, 'kurzdefinition fehlt oder länger als 300');
+  pruefe(!k.seoTitel || k.seoTitel.length <= 60, datei, 'seoTitel länger als 60');
+  pruefe(!k.seoBeschreibung || k.seoBeschreibung.length <= 160, datei, 'seoBeschreibung länger als 160');
+  if (k.status === 'veroeffentlicht') {
+    pruefe(k.erstveroeffentlicht, datei, 'erstveroeffentlicht fehlt (ISO-Datum)');
+    pruefe(liste(k.faq).length >= 2, datei, 'mindestens 2 FAQ');
+    pruefe(liste(k.quellen).length >= 2, datei, 'mindestens 2 Quellen');
+    pruefe(liste(k.steckbriefAussagen).length >= 3, datei, 'mindestens 3 Steckbrief-Aussagen');
+  }
+  // Kommentare sind Notizen für Autoren, nicht für die Seite
+  const markdown = m[2].replace(/<!--[\s\S]*?-->/g, '').trim();
   const jetzt = new Date().toISOString();
-  begriffe = JSON.parse(readFileSync(new URL('./glossar-vorschau.json', import.meta.url), 'utf8'))
-    .map((b) => ({ beispiel: '', inhalt: '', aussagen: [], fakten: [], quellen: [], artikel: [], projekte: [],
-      alternativeNamen: [], verwandt: [], seoTitel: b.begriff, seoBeschreibung: b.kurzdefinition,
-      datum: jetzt, geaendert: jetzt, ...b, vorschau: true }));
-} else {
-  if (!TOKEN) {
-    if (!existsSync(`${ZIEL}/begriffe.json`)) leer('kein STRAPI_TOKEN gesetzt');
-    console.log('glossar: kein STRAPI_TOKEN gesetzt, vorhandene Begriffe bleiben unverändert');
-    process.exit(0);
-  }
-  begriffe = await ausStrapi();
-  if (begriffe === null) leer('Inhaltstyp „glossarbegriff“ in Strapi fehlt oder Token ohne Leserecht');
+  const datum = k.erstveroeffentlicht || jetzt;
+  return {
+    slug,
+    status: k.status,
+    begriff: k.begriff,
+    h1: k.h1,
+    thema: k.thema,
+    alternativeNamen: liste(k.alternativeNamen).filter((x) => typeof x === 'string'),
+    kurzdefinition: k.kurzdefinition,
+    seoTitel: k.seoTitel || k.begriff,
+    seoBeschreibung: k.seoBeschreibung || k.kurzdefinition,
+    datum,
+    geaendert: k.aktualisiert || datum,
+    aussagen: liste(k.steckbriefAussagen).filter(Boolean),
+    fakten: liste(k.steckbriefFakten).filter((f) => f.label && f.wert),
+    faq: liste(k.faq).filter((f) => f.frage && f.antwort),
+    quellen: liste(k.quellen).filter((q) => q.titel && /^https?:\/\//.test(q.url ?? ''))
+      .map(({ titel, url, abgerufen }) => ({ titel, url, abgerufen: abgerufen ?? null })),
+    verwandt: liste(k.verwandteBegriffe),
+    artikel: liste(k.verwandteArtikel),
+    projekte: liste(k.verwandteProjekte),
+    markdown,
+  };
 }
 
-begriffe = begriffe.filter((b) => SLUG.test(b.slug ?? '') && b.begriff && THEMEN[b.thema]);
-const doppelt = begriffe.map((b) => b.slug).filter((s, i, a) => a.indexOf(s) !== i);
-if (doppelt.length) {
-  console.error(`glossar: doppelte Slugs: ${[...new Set(doppelt)].join(', ')}. Abbruch.`);
+const alle = readdirSync(QUELLE).filter((d) => d.endsWith('.md') && d !== 'README.md').map(lesen).filter(Boolean);
+if (fehler.length) {
+  console.error(`glossar: ${fehler.length} Fehler in content/glossar:`);
+  for (const f of fehler) console.error(`  - ${f}`);
   process.exit(1);
 }
-if (!VORSCHAU) await gegenLiveAbgleichen(new Set(begriffe.map((b) => b.slug)));
 
-// Verweise nur auf vorhandene Begriffe, Artikel und Projekte
+const begriffe = alle.filter((b) => b.status === 'veroeffentlicht' || VORSCHAU);
 const bySlug = new Map(begriffe.map((b) => [b.slug, b]));
 const ARTIKEL = new Map(blogArtikel().map((a) => [a.slug, a]));
 const PROJEKTE = new Map((await projekte()).map((p) => [p.slug, p]));
@@ -121,20 +104,15 @@ const PROJEKTE = new Map((await projekte()).map((p) => [p.slug, p]));
 rmSync(ZIEL, { recursive: true, force: true });
 mkdirSync(ZIEL, { recursive: true });
 
-const listenfeld = ({ slug, begriff, h1, thema, kurzdefinition, alternativeNamen, datum, geaendert, vorschau }) =>
-  ({ slug, begriff, h1, thema, kurzdefinition, alternativeNamen, datum, geaendert, ...(vorschau ? { vorschau } : {}) });
-
 for (const b of begriffe) {
-  const pfad = `/glossar/${b.slug}/`;
-  const beispiel = rendern(b.beispiel, pfad, VORLAGEN_IDS);
-  const haupt = rendern(b.inhalt, pfad, VORLAGEN_IDS);
+  const r = rendern(b.markdown, `/glossar/${b.slug}/`, VORLAGEN_IDS);
+  const { markdown, ...rest } = b;
   const daten = {
-    ...b,
-    beispiel: undefined,
-    beispielHtml: beispiel.html,
-    inhalt: haupt.inhalt,
-    html: haupt.html,
-    woerter: beispiel.woerter + haupt.woerter,
+    ...rest,
+    vorschau: b.status !== 'veroeffentlicht' || undefined,
+    html: r.html,
+    inhalt: r.inhalt,
+    woerter: r.woerter,
     verwandt: b.verwandt.filter((s) => s !== b.slug && bySlug.has(s))
       .map((s) => ({ slug: s, begriff: bySlug.get(s).begriff, kurzdefinition: bySlug.get(s).kurzdefinition })),
     artikel: b.artikel.filter((s) => ARTIKEL.has(s)).map((s) => ({ slug: s, titel: ARTIKEL.get(s).titel })),
@@ -145,9 +123,15 @@ for (const b of begriffe) {
   writeFileSync(`${ZIEL}/${b.slug}/begriff.json`, JSON.stringify(daten));
   writeFileSync(`${ZIEL}/${b.slug}/llms.txt`, llmsText(b, daten));
 }
+const listenfeld = ({ slug, begriff, h1, thema, kurzdefinition, alternativeNamen, datum, geaendert, status }) => ({
+  slug, begriff, h1, thema, kurzdefinition, alternativeNamen, datum, geaendert,
+  ...(status !== 'veroeffentlicht' ? { vorschau: true } : {}),
+});
 writeFileSync(`${ZIEL}/begriffe.json`, JSON.stringify(begriffe.map(listenfeld), null, 2) + '\n');
-console.log(`glossar: ${begriffe.length} Begriffe${VORSCHAU ? ' (VORSCHAU, nicht hochladen)' : ''} geschrieben`);
-for (const b of begriffe) console.log(`  ${THEMEN[b.thema].padEnd(26)} ${b.slug}`);
+
+const entwuerfe = alle.length - alle.filter((b) => b.status === 'veroeffentlicht').length;
+console.log(`glossar: ${begriffe.length} Begriffe geschrieben, ${entwuerfe} Entwürfe in content/glossar` +
+  (VORSCHAU ? ' (VORSCHAU mit Entwürfen, nicht hochladen)' : ''));
 
 function llmsText(b, d) {
   return [
@@ -161,31 +145,10 @@ function llmsText(b, d) {
     b.aussagen.length || b.fakten.length
       ? `\n## Steckbrief\n\n${[...b.aussagen.map((a) => `- ${a}`), ...b.fakten.map((f) => `- ${f.label}: ${f.wert}`)].join('\n')}`
       : null,
-    b.beispiel.trim() ? `\n## Beispiel aus der Praxis\n\n${b.beispiel.trim()}` : null,
-    b.inhalt.trim() ? `\n${b.inhalt.trim()}` : null,
+    b.markdown ? `\n${b.markdown}` : null,
     d.verwandt.length ? `\n## Verwandte Begriffe\n\n${d.verwandt.map((v) => `- [${v.begriff}](${seiteUrl(`/glossar/${v.slug}`)})`).join('\n')}` : null,
     b.faq.length ? `\n## Häufige Fragen\n\n${b.faq.map((f) => `### ${f.frage}\n\n${f.antwort}`).join('\n\n')}` : null,
     b.quellen.length ? `\n## Quellen\n\n${b.quellen.map((q) => `- [${q.titel}](${q.url})`).join('\n')}` : null,
     '',
   ].filter((z) => z !== null).join('\n').replace(/\n{3,}/g, '\n\n') + '\n';
-}
-
-/** Wie beim Blog: Bricht ab, wenn live veröffentlichte Begriffe im Abruf fehlen. */
-async function gegenLiveAbgleichen(neu) {
-  let live;
-  try {
-    const res = await fetch(`${ORIGIN}/glossar/begriffe.json`, { signal: AbortSignal.timeout(15000) });
-    if (res.status === 404) return;
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    live = await res.json();
-  } catch (e) {
-    console.warn(`glossar: Live-Abgleich nicht möglich (${e.message}), wird übersprungen.`);
-    return;
-  }
-  const fehlend = live.filter((b) => !b.vorschau).map((b) => b.slug).filter((s) => !neu.has(s));
-  if (!fehlend.length) return;
-  console.error(`glossar: ${fehlend.length} live veröffentlichte Begriffe fehlen im Strapi-Abruf: ${fehlend.join(', ')}`);
-  if (process.env.ERLAUBE_ENTFERNEN === '1') return;
-  console.error('glossar: Abbruch, public/glossar bleibt unverändert. Bewusst depubliziert? ERLAUBE_ENTFERNEN=1 setzen.');
-  process.exit(1);
 }
