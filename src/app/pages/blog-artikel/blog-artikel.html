@@ -12,9 +12,7 @@
         <p class="mono einstieg__meta">
           Von <a [routerLink]="[]" fragment="autor">{{ a.autor }}</a>
           · <time [attr.datetime]="a.datum">{{ datum(a.datum) }}</time>
-          @if (aktualisiert()) {
-            · aktualisiert <time [attr.datetime]="a.geaendert">{{ datum(a.geaendert) }}</time>
-          }
+          · Aktualisiert am <time [attr.datetime]="a.geaendert">{{ datum(a.geaendert) }}</time>
           · {{ a.lesezeit }} Min. Lesezeit
         </p>
       </header>
@@ -24,18 +22,17 @@
       }
 
       @if (a.kernaussagen.length || a.fakten.length) {
-        <div class="kurz grid">
+        <section class="kurz grid" aria-labelledby="t-steckbrief">
+          <h2 id="t-steckbrief" class="meta kurz__titel">Steckbrief</h2>
           @if (a.kernaussagen.length) {
-            <section class="kurz__aussagen" aria-labelledby="t-kurz">
-              <h2 id="t-kurz" class="meta kurz__titel">Das Wichtigste in Kürze</h2>
+            <div class="kurz__aussagen">
               <ul class="prosa kurz__liste">
                 @for (k of a.kernaussagen; track $index) { <li>{{ k }}</li> }
               </ul>
-            </section>
+            </div>
           }
           @if (a.fakten.length) {
-            <section class="kurz__fakten" aria-labelledby="t-fakten">
-              <h2 id="t-fakten" class="meta kurz__titel">Key Facts</h2>
+            <div class="kurz__fakten">
               <dl class="fakten">
                 @for (f of a.fakten; track $index) {
                   <div class="fakten__paar">
@@ -44,9 +41,9 @@
                   </div>
                 }
               </dl>
-            </section>
+            </div>
           }
-        </div>
+        </section>
       }
 
       <div class="korpus grid">

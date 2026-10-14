@@ -181,9 +181,13 @@ for (const artikelRoh of artikel) {
       `URL: ${seiteUrl(`/blog/${a.slug}`)}`,
       `Veröffentlicht: ${a.datum.slice(0, 10)}`,
       `Aktualisiert: ${a.geaendert.slice(0, 10)}`,
-      `Autor: ${a.autor}, AI Engineer mit Spezialisierung auf AI Automation (${ORIGIN})`,
-      a.kernaussagen.length ? `\n## Das Wichtigste in Kürze\n\n${a.kernaussagen.map((k) => `- ${k}`).join('\n')}` : null,
-      a.fakten.length ? `\n## Key Facts\n\n${a.fakten.map((f) => `- ${f.label}: ${f.wert}`).join('\n')}` : null,
+      `Autor: ${a.autor}, AI Automation Engineer (${ORIGIN})`,
+      a.kernaussagen.length || a.fakten.length
+        ? `\n## Steckbrief\n\n${[
+            ...a.kernaussagen.map((k) => `- ${k}`),
+            ...a.fakten.map((f) => `- ${f.label}: ${f.wert}`),
+          ].join('\n')}`
+        : null,
       '', markdown.trim(),
       a.faq.length ? `\n## Häufige Fragen\n\n${a.faq.map((f) => `### ${f.frage}\n\n${f.antwort}`).join('\n\n')}` : null,
       a.quellen.length ? `\n## Quellen\n\n${a.quellen.map((q) => `- [${q.titel}](${q.url})`).join('\n')}` : null,

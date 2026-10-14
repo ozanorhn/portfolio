@@ -1,5 +1,12 @@
 import {
-  Component, ChangeDetectionStrategy, Injector, afterNextRender, computed, effect, inject, input,
+  Component,
+  ChangeDetectionStrategy,
+  Injector,
+  afterNextRender,
+  computed,
+  effect,
+  inject,
+  input,
 } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -10,7 +17,7 @@ import { KopfComponent } from '../../ui/kopf';
 import { FussComponent } from '../../ui/fuss';
 import { CaseStudyNavComponent } from '../../ui/case-study-nav';
 import { SeoService } from '../../core/seo.service';
-import { SITE, seiteUrl } from '../../core/site';
+import { SITE, seitenTitel, seiteUrl } from '../../core/site';
 import { BlogService, datumLang, type BlogArtikel } from '../../data/blog';
 import type { Abschnitt } from '../../data/works';
 
@@ -34,9 +41,7 @@ export class BlogArtikelComponent {
   readonly site = SITE;
 
   /** undefined: lädt noch · null: nicht gefunden */
-  readonly artikel = toSignal(
-    toObservable(this.slug).pipe(switchMap((s) => this.blog.artikel(s))),
-  );
+  readonly artikel = toSignal(toObservable(this.slug).pipe(switchMap((s) => this.blog.artikel(s))));
 
   /** Das HTML ist im Build bereinigt (rohes HTML maskiert, nur sichere Links);
    *  Angulars Filter würde sonst die Anker des Inhaltsverzeichnisses entfernen. */
@@ -55,9 +60,10 @@ export class BlogArtikelComponent {
     ];
   });
 
-  readonly aktualisiert = computed(() => {
+  /** Eigenes Bild aus Strapi, sonst das beim Build erzeugte (scripts/prerender.mjs). */
+  readonly ogBild = computed(() => {
     const a = this.artikel();
-    return !!a && a.geaendert.slice(0, 10) > a.datum.slice(0, 10);
+    return a ? (a.bild ?? `/blog/${a.slug}/og.png`) : undefined;
   });
 
   constructor() {
@@ -82,23 +88,23 @@ export class BlogArtikelComponent {
 
       const pfad = `/blog/${a.slug}`;
       this.seo.set({
-        titel: `${a.seoTitel} — ${SITE.name}`,
+        titel: seitenTitel(a.seoTitel),
         beschreibung: a.seoBeschreibung,
         pfad,
-        bild: a.bild,
+        bild: this.ogBild(),
         typ: 'article',
         breadcrumb: [
           { name: 'Start', pfad: '/' },
           { name: 'Blog', pfad: '/blog' },
           { name: a.titel, pfad },
         ],
-        jsonLd: schema(a, pfad),
+        jsonLd: schema(a, pfad, this.ogBild()!),
       });
     });
   }
 }
 
-function schema(a: BlogArtikel, pfad: string): Record<string, unknown>[] {
+function schema(a: BlogArtikel, pfad: string, bild: string): Record<string, unknown>[] {
   const autor = {
     '@type': 'Person',
     '@id': `${SITE.origin}/#person`,
@@ -125,10 +131,14 @@ function schema(a: BlogArtikel, pfad: string): Record<string, unknown>[] {
     isPartOf: { '@type': 'Blog', url: seiteUrl('/blog') },
   };
   if (a.tags.length) posting['keywords'] = a.tags.join(', ');
-  if (a.bild) posting['image'] = a.bild;
+  posting['image'] = /^https?:\/\//.test(bild) ? bild : SITE.origin + bild;
   if (a.kernaussagen.length) posting['abstract'] = a.kernaussagen.join(' ');
   if (a.quellen.length) {
-    posting['citation'] = a.quellen.map((q) => ({ '@type': 'CreativeWork', name: q.titel, url: q.url }));
+    posting['citation'] = a.quellen.map((q) => ({
+      '@type': 'CreativeWork',
+      name: q.titel,
+      url: q.url,
+    }));
   }
   if (a.projekte.length) {
     posting['mentions'] = a.projekte.map((p) => ({

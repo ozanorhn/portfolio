@@ -31,9 +31,41 @@ const TYPEN = {
   '.woff2': 'font/woff2',
 };
 
+const esc = (t) =>
+  String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+/** Vorlage für das automatisch erzeugte OG-Bild eines Artikels (1200 × 630). */
+function ogHtml(a) {
+  const datum = new Date(a.geaendert || a.datum).toLocaleDateString('de-DE', {
+    day: 'numeric', month: 'long', year: 'numeric',
+  });
+  return `<!doctype html><html lang="de"><head><meta charset="utf-8"><style>
+@font-face { font-family: Archivo; src: url(/assets/fonts/archivo-normal-latin.woff2) format('woff2'); font-weight: 100 900; }
+@font-face { font-family: Mono; src: url(/assets/fonts/spline-sans-mono-normal-latin.woff2) format('woff2'); }
+* { margin: 0; box-sizing: border-box; }
+body { width: 1200px; height: 630px; padding: 72px 80px; background: #F5F2ED; color: #1A1917;
+  display: flex; flex-direction: column; justify-content: space-between; font-family: Archivo, sans-serif; }
+.mono { font-family: Mono, monospace; font-size: 24px; color: #6E6A63; letter-spacing: .02em; }
+h1 { font-size: 66px; line-height: 1.08; font-weight: 700; letter-spacing: -.02em; max-width: 1000px;
+  display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.fuss { display: flex; justify-content: space-between; border-top: 2px solid #D6D1C8; padding-top: 28px; }
+</style></head><body>
+<p class="mono">ozan.orhan / Blog</p>
+<h1>${esc(a.titel)}</h1>
+<div class="fuss mono"><span>Ozan Orhan · AI Automation Engineer</span><span>${esc(datum)}</span></div>
+</body></html>`;
+}
+
 function server() {
   return createServer(async (req, res) => {
     const pfad = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+    const og = pfad.match(/^\/__og\/([a-z0-9-]+)$/);
+    if (og) {
+      const a = blogArtikel().find((x) => x.slug === og[1]);
+      if (!a) return res.writeHead(404).end('nicht gefunden');
+      res.writeHead(200, { 'Content-Type': TYPEN['.html'] });
+      return res.end(ogHtml(a));
+    }
     let datei = join(WURZEL, normalize(pfad).replace(/^(\.\.[/\\])+/, ''));
     if (!existsSync(datei) || !extname(datei)) datei = join(WURZEL, 'index.html');
     try {
@@ -96,6 +128,30 @@ for (const { pfad } of await routen()) {
     ok++;
   } catch (e) {
     console.error(`  ✘ ${pfad} — ${e.message}`);
+    fehler++;
+  }
+}
+
+// OG-Bild je Artikel, sofern in Strapi kein eigenes Titelbild gepflegt ist
+for (const a of blogArtikel().filter((x) => !x.bild)) {
+  const ziel = join(WURZEL, 'blog', a.slug, 'og.png');
+  try {
+    await mkdir(join(ziel, '..'), { recursive: true });
+    await run(CHROME, [
+      '--headless',
+      '--disable-gpu',
+      '--no-sandbox',
+      '--hide-scrollbars',
+      '--force-device-scale-factor=1',
+      '--window-size=1200,630',
+      '--virtual-time-budget=3000',
+      `--screenshot=${ziel}`,
+      `http://127.0.0.1:${port}/__og/${a.slug}`,
+    ]);
+    if (!existsSync(ziel)) throw new Error('kein Bild geschrieben');
+    console.log(`  ✔ og.png ${a.slug}`);
+  } catch (e) {
+    console.error(`  ✘ og.png ${a.slug} — ${e.message}`);
     fehler++;
   }
 }

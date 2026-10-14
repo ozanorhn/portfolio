@@ -9,6 +9,14 @@ export const SITE = {
   linkedin: 'https://www.linkedin.com/in/ozan-o-7014a22a3',
 } as const;
 
+/** Google kürzt Titles ab etwa 60 Zeichen; der Name wird nur angehängt, wenn er noch passt. */
+const TITEL_MAX = 60;
+
+export function seitenTitel(titel: string): string {
+  const mitName = `${titel} | ${SITE.name}`;
+  return mitName.length <= TITEL_MAX ? mitName : titel;
+}
+
 /**
  * Absolute Seiten-URL, so wie der Server sie ausliefert: vorgerenderte Seiten liegen als
  * Ordner mit index.html, Apache leitet /pfad per 301 auf /pfad/ um. Canonical, Sitemap und

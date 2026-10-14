@@ -8,7 +8,7 @@
 
 .bild { display: block; width: 100%; height: auto; max-height: 60vh; object-fit: cover; }
 
-/* Das Wichtigste in Kürze und Key Facts: zuerst lesbar, für Menschen und Antwortsysteme */
+/* Steckbrief (Kernaussagen und Fakten): zuerst lesbar, für Menschen und Antwortsysteme */
 .kurz {
   margin-top: clamp(20px, 2.4vw, 32px);
   padding-block: clamp(20px, 2.4vw, 32px);
@@ -17,8 +17,8 @@
 }
 .kurz__aussagen { grid-column: 1 / 8; }
 .kurz__fakten { grid-column: 9 / 13; }
-.kurz__aussagen:only-child { grid-column: 1 / 10; }
-.kurz__titel { color: $tusche-2; margin-bottom: $s4; }
+.kurz__aussagen:last-child { grid-column: 1 / 10; }
+.kurz__titel { grid-column: 1 / -1; color: $tusche-2; margin-bottom: 0; }
 .kurz__liste { margin: 0; }
 .kurz__liste li:first-child { margin-top: 0; }
 
@@ -68,7 +68,7 @@
 .leer__text { margin-block: $s4 $s6; max-width: 42ch; color: $tusche-2; }
 
 @media (max-width: $bp-m) {
-  .kurz__aussagen, .kurz__fakten, .kurz__aussagen:only-child,
+  .kurz__aussagen, .kurz__fakten, .kurz__aussagen:last-child,
   .korpus__nav, .korpus__inhalt { grid-column: 1 / -1; }
   .korpus__nav { top: 0; z-index: 20; margin-bottom: $s5; }
   .korpus__navtitel { display: none; }
