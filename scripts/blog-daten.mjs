@@ -9,7 +9,7 @@
  * Ohne STRAPI_TOKEN bleibt der bisherige Stand liegen, damit lokale Builds offline gehen.
  */
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { Marked } from 'marked';
+import { rendern } from './markdown.mjs';
 import { projekte, seiteUrl } from './routen.mjs';
 
 const CMS = process.env.STRAPI_URL || 'https://cms.ozan-orhan.com';
@@ -53,64 +53,11 @@ const bildUrl = (b) => (b?.url ? new URL(b.url, CMS).href : undefined);
 const liste = (x) => (Array.isArray(x) ? x : []);
 const httpUrl = (u) => typeof u === 'string' && /^https?:\/\//.test(u);
 
-const esc = (t) =>
-  String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const sichererLink = (u) => /^(https?:|mailto:|\/(?!\/)|#)/i.test(u ?? '');
-
-/**
- * Markdown → HTML; H2 bekommen Anker, aus denen das Inhaltsverzeichnis entsteht.
- * Rohes HTML wird maskiert und Links/Bilder nur mit sicheren Schemata ausgegeben,
- * damit Angular das Ergebnis ungefiltert einsetzen kann (sonst gingen die Anker verloren).
- */
 /** IDs aus Layout und Artikelvorlage; Überschriften dürfen sie nicht noch einmal vergeben. */
 const VORLAGEN_IDS = [
   'inhalt', 'hauptmenue', 'seiten-schema', 'faq', 'quellen', 'autor',
   't-kurz', 't-fakten', 't-faq', 't-quellen', 't-autor', 't-weiter',
 ];
-
-function rendern(markdown, slug) {
-  const inhalt = [];
-  const vergeben = new Set(VORLAGEN_IDS);
-  const md = new Marked();
-  md.use({
-    renderer: {
-      html({ text }) {
-        return esc(text);
-      },
-      link({ href, title, tokens }) {
-        const inhalt = this.parser.parseInline(tokens);
-        if (!sichererLink(href)) return inhalt;
-        // <base href="/"> würde #anker auf die Startseite auflösen
-        if (href.startsWith('#')) href = `/blog/${slug}/${href}`;
-        // Interne Seiten mit Schrägstrich verlinken, sonst antwortet der Server mit 301
-        href = href.replace(/^(\/[^?#.]*?[^/?#])([?#].*)?$/, '$1/$2');
-        const extern = /^https?:/i.test(href) && !href.startsWith(ORIGIN);
-        return `<a href="${esc(href)}"${title ? ` title="${esc(title)}"` : ''}` +
-          `${extern ? ' rel="noopener" target="_blank"' : ''}>${inhalt}</a>`;
-      },
-      image({ href, title, text }) {
-        if (!/^https?:/i.test(href ?? '')) return esc(text);
-        return `<img src="${esc(href)}" alt="${esc(text)}"${title ? ` title="${esc(title)}"` : ''} loading="lazy" decoding="async">`;
-      },
-      heading({ tokens, depth, text }) {
-        const html = this.parser.parseInline(tokens);
-        if (depth !== 2) return `<h${depth}>${html}</h${depth}>\n`;
-        const basis =
-          text.toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue')
-            .replace(/ß/g, 'ss').replace(/<[^>]+>/g, '').replace(/[^a-z0-9]+/g, '-')
-            .replace(/^-|-$/g, '') || 'abschnitt';
-        let id = basis;
-        for (let n = 2; vergeben.has(id); n++) id = `${basis}-${n}`;
-        vergeben.add(id);
-        inhalt.push({ id, titel: text.replace(/<[^>]+>/g, '').replace(/[*_`]/g, '') });
-        return `<h2 id="${id}">${html}</h2>\n`;
-      },
-    },
-  });
-  const html = md.parse(markdown);
-  const woerter = markdown.split(/\s+/).filter(Boolean).length;
-  return { html, inhalt, woerter, lesezeit: Math.max(1, Math.round(woerter / 200)) };
-}
 
 /** Originaldaten (UTC) für Artikel, die vor dem Strapi-Feld erstveroeffentlicht erschienen sind. */
 // ponytail: Datei im Repo; entfällt, sobald erstveroeffentlicht in Strapi gepflegt ist
@@ -179,7 +126,7 @@ const listenfeld = ({ slug, titel, kurz, datum, geaendert, autor, tags, seoTitel
   ({ slug, titel, kurz, datum, geaendert, autor, tags, seoTitel, seoBeschreibung, bild, bildAlt });
 
 for (const artikelRoh of artikel) {
-  const r = rendern(artikelRoh.markdown, artikelRoh.slug);
+  const r = rendern(artikelRoh.markdown, `/blog/${artikelRoh.slug}/`, VORLAGEN_IDS);
   Object.assign(artikelRoh, { lesezeit: r.lesezeit, woerter: r.woerter });
   const { markdown, ...a } = artikelRoh;
   mkdirSync(`${ZIEL}/${a.slug}`, { recursive: true });
