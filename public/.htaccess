@@ -1,0 +1,27 @@
+# Weiterleitungen für ozan-orhan.com (ALL-INKL, Apache)
+# HTTPS erzwingt bereits das KAS; hier nur, was dort fehlt.
+RewriteEngine On
+
+# www → Hauptdomain, damit die Seite nicht doppelt unter zwei Hosts erreichbar ist
+RewriteCond %{HTTP_HOST} ^www\.ozan-orhan\.com$ [NC]
+RewriteRule ^(.*)$ https://ozan-orhan.com/$1 [R=301,L]
+
+# Alte Projektadressen /arbeiten/... → /projekte/...
+RewriteRule ^arbeiten/?$ https://ozan-orhan.com/projekte/ [R=301,L]
+RewriteRule ^arbeiten/([a-z0-9-]+)/?$ https://ozan-orhan.com/projekte/$1/ [R=301,L]
+
+# Security-Header. IfModule: fehlt mod_headers, ignoriert Apache den Block statt mit 500 abzubrechen.
+<IfModule mod_headers.c>
+  # Ohne includeSubDomains, solange nicht alle Projekt-Subdomains sicher HTTPS liefern.
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+
+  # CSP zunächst nur melden (Browser-Konsole), nach dem Test auf Content-Security-Policy umstellen.
+  # Hashes: Theme-Skript in src/index.html und Angulars onload="this.media='all'" am Stylesheet.
+  # Ändert sich das Theme-Skript, muss sein Hash neu berechnet werden.
+  # Google-Domains nur für den Tag Manager nach Einwilligung; neue GTM-Tags brauchen ggf. weitere.
+  Header always set Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' 'sha256-R8t4YGqOtwTVjq7cpQuDlLEEoBkRAvF8khU8NTZELq4=' 'unsafe-hashes' 'sha256-MhtPZXr7+LpJUY5qtMutB+qWfQtMaPccfe7QXtCcEYc=' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+</IfModule>
