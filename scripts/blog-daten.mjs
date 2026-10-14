@@ -120,7 +120,9 @@ const artikel = roh
     slug: a.slug,
     titel: a.title,
     kurz: a.excerpt ?? '',
-    datum: a.publishedAt,
+    // Strapi setzt publishedAt bei jedem erneuten Veröffentlichen neu; das Originaldatum
+    // steht im Feld erstveroeffentlicht. Leer: Fallback auf publishedAt.
+    datum: a.erstveroeffentlicht || a.publishedAt,
     geaendert: a.updatedAt,
     autor: a.author ?? 'Ozan Orhan',
     tags: Array.isArray(a.tags) ? a.tags.filter((t) => typeof t === 'string') : [],
@@ -137,7 +139,9 @@ const artikel = roh
     verwandt: liste(a.relatedArticles).map((r) => r.slug).filter(Boolean),
     projekte: liste(a.relatedProjects).filter((s) => PROJEKTE.has(s)),
     markdown: a.content ?? '',
-  }));
+  }))
+  // Neueste zuerst nach Erstveröffentlichung, nicht nach dem letzten Veröffentlichen
+  .sort((x, y) => y.datum.localeCompare(x.datum));
 
 // Interne Links nur auf veröffentlichte Artikel und vorhandene Projekte
 const bySlug = new Map(artikel.map((a) => [a.slug, a]));
