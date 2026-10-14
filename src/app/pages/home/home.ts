@@ -33,10 +33,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.set({
-      titel: `${SITE.name} – ${SITE.rolle} | LLM, RAG & Automation`,
+      titel: `${SITE.name} – ${SITE.rolle} | KI-Automatisierung mit n8n`,
       beschreibung:
-        'AI Engineer aus Hannover, spezialisiert auf AI Automation: Ozan Orhan entwickelt ' +
-        'AI-Agenten und LLM-Anwendungen mit Python, RAG, MCP und n8n. Deutschlandweit remote.',
+        'AI Automation Engineer aus Hannover: KI-Automatisierung und Prozessautomatisierung ' +
+        'mit n8n, KI-Agenten, RAG und MCP. Deutschlandweit remote.',
       pfad: '/',
       jsonLd: [
         {
@@ -59,6 +59,7 @@ export class HomeComponent implements OnInit {
             },
             sameAs: [SITE.github, SITE.linkedin],
             knowsAbout: [
+              'KI-Automatisierung', 'Prozessautomatisierung', 'KI-Agenten',
               'AI Engineering', 'AI Automation', 'AI Agents', 'LLM Integration',
               'Model Context Protocol', 'RAG',
               'Workflow Automation', 'n8n', 'Python', 'TypeScript', 'REST APIs',
