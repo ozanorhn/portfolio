@@ -22,6 +22,16 @@ export const routes: Routes = [
       import('./pages/blog-artikel/blog-artikel').then((m) => m.BlogArtikelComponent),
   },
 
+  {
+    path: 'glossar',
+    loadComponent: () => import('./pages/glossar/glossar').then((m) => m.GlossarComponent),
+  },
+  {
+    path: 'glossar/:slug',
+    loadComponent: () =>
+      import('./pages/glossar-begriff/glossar-begriff').then((m) => m.GlossarBegriffComponent),
+  },
+
   // Alte Adressen bleiben erreichbar
   { path: 'arbeiten', redirectTo: 'projekte', pathMatch: 'full' },
   { path: 'arbeiten/:slug', redirectTo: 'projekte/:slug' },

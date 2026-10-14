@@ -1,0 +1,478 @@
+[
+  {
+    "slug": "prompt-injection",
+    "begriff": "Prompt Injection",
+    "h1": "Prompt Injection: Definition, Beispiele und Schutz",
+    "thema": "sicherheit",
+    "seoTitel": "Prompt Injection: Definition, Beispiele & Schutz",
+    "kurzdefinition": "Prompt Injection ist ein Angriff auf KI-Anwendungen, bei dem ein Angreifer Anweisungen in die Eingabe eines Sprachmodells schmuggelt, damit es seine eigentlichen Vorgaben ignoriert.",
+    "verwandt": [
+      "system-prompt",
+      "ki-agent",
+      "mcp-model-context-protocol",
+      "tool-calling",
+      "rag"
+    ],
+    "artikel": [
+      "mcp-server-mit-n8n-erstellen",
+      "agentic-rag-mcp-architektur"
+    ],
+    "quellen": [
+      {
+        "titel": "OWASP Top 10 for LLM Applications: LLM01 Prompt Injection",
+        "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+        "abgerufen": null
+      }
+    ],
+    "faq": [
+      {
+        "frage": "Was ist Prompt Injection?",
+        "antwort": "Prompt Injection ist ein Angriff auf KI-Anwendungen, bei dem ein Angreifer Anweisungen in die Eingabe eines Sprachmodells schmuggelt, damit es seine eigentlichen Vorgaben ignoriert. Das Modell kann dann vertrauliche Informationen preisgeben oder Aktionen ausführen, die niemand beabsichtigt hat. OWASP führt Prompt Injection als größtes Risiko in seinen Top 10 für LLM-Anwendungen."
+      },
+      {
+        "frage": "Was ist der Unterschied zwischen direkter und indirekter Prompt Injection?",
+        "antwort": "Bei der direkten Prompt Injection gibt ein Nutzer die manipulierende Anweisung selbst in den Chat ein. Bei der indirekten Prompt Injection steckt die Anweisung in Inhalten, die das Modell verarbeitet, etwa in einer Webseite, einer E-Mail oder einem Dokument. Die indirekte Form ist für KI-Agenten besonders gefährlich, weil sie Inhalte aus vielen Quellen lesen und gleichzeitig Werkzeuge bedienen."
+      },
+      {
+        "frage": "Wie kann man sich vor Prompt Injection schützen?",
+        "antwort": "Vollständig verhindern lässt sich Prompt Injection nach heutigem Stand nicht, das Risiko lässt sich aber stark begrenzen. Wichtig sind minimale Rechte für jedes Werkzeug, eine menschliche Freigabe vor folgenreichen Aktionen, die Trennung von Anweisungen und Fremdinhalten sowie die Kontrolle der Ausgaben. Anweisungen im System Prompt allein sind keine Sicherheitsgrenze."
+      },
+      {
+        "frage": "Kann Prompt Injection auch bei MCP-Servern passieren?",
+        "antwort": "Ja. Liest ein Agent über einen MCP-Server Inhalte aus E-Mails, Tickets oder Webseiten, können darin versteckte Anweisungen stehen, die ihn zu weiteren Werkzeugaufrufen verleiten. Deshalb sollte jedes MCP-Werkzeug nur die Rechte haben, die es für seine Aufgabe braucht, und schreibende Aktionen sollten eine Bestätigung verlangen."
+      }
+    ]
+  },
+  {
+    "slug": "rag",
+    "begriff": "RAG (Retrieval-Augmented Generation)",
+    "h1": "RAG (Retrieval-Augmented Generation): Definition und Funktionsweise",
+    "thema": "rag_suche",
+    "seoTitel": "Was ist RAG? Retrieval-Augmented Generation erklärt",
+    "alternativeNamen": [
+      "Retrieval-Augmented Generation",
+      "RAG-System"
+    ],
+    "kurzdefinition": "RAG (Retrieval-Augmented Generation) ist ein Verfahren, bei dem ein Sprachmodell vor dem Antworten passende Informationen aus einer externen Wissensquelle abruft und seine Antwort darauf stützt.",
+    "verwandt": [
+      "embeddings",
+      "vektordatenbank",
+      "chunking",
+      "reranking",
+      "ki-halluzinationen",
+      "fine-tuning"
+    ],
+    "artikel": [
+      "company-brain-aufbauen-rag-architektur",
+      "agentic-rag-mcp-architektur"
+    ],
+    "projekte": [
+      "wissensbasis-rag-mcp"
+    ],
+    "quellen": [
+      {
+        "titel": "Lewis et al. (2020): Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+        "url": "https://arxiv.org/abs/2005.11401",
+        "abgerufen": null
+      },
+      {
+        "titel": "Anthropic (2024): Introducing Contextual Retrieval",
+        "url": "https://www.anthropic.com/news/contextual-retrieval",
+        "abgerufen": null
+      }
+    ],
+    "faq": [
+      {
+        "frage": "Was ist RAG?",
+        "antwort": "RAG steht für Retrieval-Augmented Generation und bezeichnet ein Verfahren, bei dem ein Sprachmodell vor dem Antworten passende Informationen aus einer externen Wissensquelle abruft. Diese Textstellen werden dem Modell zusammen mit der Frage übergeben, sodass es seine Antwort auf aktuelle oder interne Daten stützen kann. Der Begriff geht auf eine Veröffentlichung von Lewis et al. aus dem Jahr 2020 zurück."
+      },
+      {
+        "frage": "Wie funktioniert ein RAG-System?",
+        "antwort": "Ein RAG-System zerlegt Dokumente zunächst in Abschnitte, wandelt sie in Embeddings um und speichert sie in einer Vektordatenbank. Bei einer Frage sucht es die passendsten Abschnitte, sortiert sie bei Bedarf mit einem Reranker neu und gibt sie dem Sprachmodell als Kontext mit. Das Modell formuliert daraus die Antwort, idealerweise mit Quellenangaben."
+      },
+      {
+        "frage": "Was ist der Unterschied zwischen RAG und Fine-Tuning?",
+        "antwort": "RAG gibt dem Modell Wissen zur Laufzeit mit, ohne das Modell selbst zu verändern. Fine-Tuning trainiert das Modell mit eigenen Beispielen nach und verändert damit sein Verhalten, etwa Stil oder Format. Für aktuelles oder häufig wechselndes Firmenwissen ist RAG meist die bessere Wahl, weil sich die Wissensbasis jederzeit aktualisieren lässt."
+      },
+      {
+        "frage": "Verhindert RAG Halluzinationen?",
+        "antwort": "RAG verringert Halluzinationen, verhindert sie aber nicht vollständig. Findet die Suche die richtigen Textstellen nicht oder sind die Dokumente veraltet, kann das Modell trotzdem falsche Antworten geben. Quellenangaben in der Antwort und eine gute Suche mit hybrider Suche und Reranking machen Fehler leichter erkennbar und seltener."
+      }
+    ]
+  },
+  {
+    "slug": "vektordatenbank",
+    "begriff": "Vektordatenbank",
+    "h1": "Vektordatenbank: Definition, Funktionsweise und Beispiele",
+    "thema": "rag_suche",
+    "seoTitel": "Vektordatenbank: Definition & Beispiele",
+    "alternativeNamen": [
+      "Vector Database",
+      "Vektor-Datenbank"
+    ],
+    "kurzdefinition": "Eine Vektordatenbank ist eine Datenbank, die Inhalte als Vektoren speichert und zu einer Anfrage sehr schnell die inhaltlich ähnlichsten Einträge findet.",
+    "verwandt": [
+      "embeddings",
+      "rag",
+      "cosine-similarity",
+      "semantische-suche",
+      "bm25"
+    ],
+    "artikel": [
+      "company-brain-aufbauen-rag-architektur"
+    ],
+    "projekte": [
+      "wissensbasis-rag-mcp"
+    ],
+    "quellen": [
+      {
+        "titel": "pgvector: Open-source vector similarity search for Postgres",
+        "url": "https://github.com/pgvector/pgvector",
+        "abgerufen": null
+      },
+      {
+        "titel": "Qdrant Dokumentation",
+        "url": "https://qdrant.tech/documentation/",
+        "abgerufen": null
+      }
+    ],
+    "faq": [
+      {
+        "frage": "Was ist eine Vektordatenbank?",
+        "antwort": "Eine Vektordatenbank speichert Daten als Vektoren, also als lange Zahlenreihen, die die Bedeutung von Texten, Bildern oder anderen Inhalten abbilden. Sie ist darauf ausgelegt, zu einer Anfrage sehr schnell die ähnlichsten Vektoren zu finden. Dadurch eignet sie sich für semantische Suche und RAG-Systeme."
+      },
+      {
+        "frage": "Wie funktioniert eine Vektordatenbank?",
+        "antwort": "Inhalte werden zuerst mit einem Embedding-Modell in Vektoren umgewandelt und zusammen mit Metadaten gespeichert. Bei einer Suche wird auch die Anfrage in einen Vektor umgewandelt, und die Datenbank sucht über spezielle Indexverfahren wie HNSW die nächstgelegenen Vektoren. Filter auf Metadaten, etwa nach Abteilung oder Berechtigung, lassen sich dabei kombinieren."
+      },
+      {
+        "frage": "Welche Vektordatenbanken gibt es?",
+        "antwort": "Verbreitete Vektordatenbanken sind unter anderem Qdrant, Milvus, Weaviate und Pinecone. Wer bereits PostgreSQL nutzt, kann mit der Erweiterung pgvector Vektoren direkt in der bestehenden Datenbank speichern. Die Wahl hängt von Datenmenge, Betrieb (selbst gehostet oder Cloud) und benötigten Funktionen wie hybrider Suche ab."
+      }
+    ]
+  },
+  {
+    "slug": "embeddings",
+    "begriff": "Embeddings",
+    "h1": "Embeddings: Was sie sind und wofür KI sie braucht",
+    "thema": "rag_suche",
+    "seoTitel": "Was sind Embeddings? Einfach erklärt",
+    "alternativeNamen": [
+      "Vektor-Embeddings",
+      "Einbettungen"
+    ],
+    "kurzdefinition": "Embeddings sind Zahlenvektoren, die die Bedeutung von Wörtern, Sätzen oder ganzen Texten darstellen, sodass inhaltlich ähnliche Inhalte ähnliche Vektoren erhalten.",
+    "verwandt": [
+      "vektordatenbank",
+      "cosine-similarity",
+      "rag",
+      "semantische-suche",
+      "chunking"
+    ],
+    "quellen": [
+      {
+        "titel": "Google Machine Learning Crash Course: Embeddings",
+        "url": "https://developers.google.com/machine-learning/crash-course/embeddings",
+        "abgerufen": null
+      }
+    ],
+    "faq": [
+      {
+        "frage": "Was sind Embeddings?",
+        "antwort": "Embeddings sind Zahlenvektoren, die die Bedeutung von Wörtern, Sätzen oder ganzen Texten darstellen. Ähnliche Inhalte erhalten ähnliche Vektoren, auch wenn sie unterschiedliche Wörter verwenden. So kann eine KI erkennen, dass „Kündigungsfrist“ und „wie lange vorher muss ich kündigen“ inhaltlich zusammengehören."
+      },
+      {
+        "frage": "Wofür werden Embeddings in der KI verwendet?",
+        "antwort": "Embeddings sind die Grundlage für semantische Suche, RAG-Systeme, Empfehlungen und das Gruppieren ähnlicher Texte. In einem RAG-System werden alle Dokumentabschnitte als Embeddings gespeichert, damit zu einer Frage die inhaltlich passenden Stellen gefunden werden. Die Ähnlichkeit zweier Embeddings wird meist mit der Kosinus-Ähnlichkeit berechnet."
+      },
+      {
+        "frage": "Was ist der Unterschied zwischen Embeddings und Tokens?",
+        "antwort": "Tokens sind die Textbausteine, in die ein Sprachmodell Text zerlegt, etwa Wörter oder Wortteile. Embeddings sind Vektoren, die die Bedeutung eines Tokens oder eines ganzen Textabschnitts abbilden. Für die Suche in RAG-Systemen nutzt man Embeddings ganzer Abschnitte, die von einem eigenen Embedding-Modell erzeugt werden."
+      }
+    ]
+  },
+  {
+    "slug": "ki-agent",
+    "begriff": "KI-Agent",
+    "h1": "KI-Agent: Definition, Funktionsweise und Beispiele",
+    "thema": "agenten_mcp",
+    "seoTitel": "Was ist ein KI-Agent? Definition & Beispiele",
+    "alternativeNamen": [
+      "KI-Agenten",
+      "AI Agent",
+      "AI-Agent"
+    ],
+    "kurzdefinition": "Ein KI-Agent ist ein Programm, das mit Hilfe eines Sprachmodells eine Aufgabe selbstständig in Schritte zerlegt und dafür Werkzeuge wie Suchen, Datenbanken oder APIs nutzt.",
+    "verwandt": [
+      "tool-calling",
+      "mcp-model-context-protocol",
+      "multi-agent-system",
+      "n8n",
+      "prompt-injection",
+      "system-prompt"
+    ],
+    "artikel": [
+      "n8n-agents-vs-ai-agent-node"
+    ],
+    "projekte": [
+      "pocket-ai-agent",
+      "leistungsnachweis-automation"
+    ],
+    "quellen": [
+      {
+        "titel": "Anthropic: Building effective agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "abgerufen": null
+      }
+    ],
+    "faq": [
+      {
+        "frage": "Was ist ein KI-Agent?",
+        "antwort": "Ein KI-Agent ist ein Programm, das mit Hilfe eines Sprachmodells eine Aufgabe selbstständig in Schritte zerlegt und dafür Werkzeuge nutzt, etwa eine Suche, eine Datenbank oder eine API. Er entscheidet anhand der Zwischenergebnisse, welcher Schritt als Nächstes sinnvoll ist. Damit unterscheidet er sich von einem festen Workflow, in dem alle Schritte vorab festgelegt sind."
+      },
+      {
+        "frage": "Was ist der Unterschied zwischen einem KI-Agenten und einem Chatbot?",
+        "antwort": "Ein Chatbot beantwortet Fragen im Gespräch, meist ohne selbst etwas in anderen Systemen zu tun. Ein KI-Agent kann zusätzlich Werkzeuge aufrufen, Daten abfragen und Aktionen ausführen, etwa einen Termin anlegen oder einen Entwurf speichern. Viele moderne Chat-Anwendungen verbinden beides, indem sie Agenten-Funktionen in den Chat einbauen."
+      },
+      {
+        "frage": "Wie erstelle ich einen KI-Agenten?",
+        "antwort": "Ein KI-Agent braucht ein Sprachmodell, klare Anweisungen, eine Auswahl an Werkzeugen und eine Schleife, in der das Modell Werkzeuge aufruft und die Ergebnisse auswertet. Ohne Programmierung geht das zum Beispiel mit n8n, mit Code über Frameworks oder SDKs der Modellanbieter. Wichtig ist, jedem Werkzeug nur die nötigen Rechte zu geben und schreibende Aktionen erst nach Freigabe auszuführen."
+      },
+      {
+        "frage": "Wann lohnt sich ein KI-Agent und wann ein fester Workflow?",
+        "antwort": "Ein fester Workflow ist besser, wenn der Ablauf bekannt ist und sich immer wiederholt, etwa ein monatlicher Bericht. Ein KI-Agent lohnt sich, wenn der nächste Schritt von der Anfrage oder einem Zwischenergebnis abhängt und mehrere Werkzeuge infrage kommen. Agenten sind flexibler, dafür schwerer vorherzusagen und zu testen."
+      }
+    ]
+  },
+  {
+    "slug": "mcp-model-context-protocol",
+    "begriff": "MCP (Model Context Protocol)",
+    "h1": "MCP (Model Context Protocol): Definition und Funktionsweise",
+    "thema": "agenten_mcp",
+    "seoTitel": "Was ist MCP (Model Context Protocol)? Erklärt",
+    "alternativeNamen": [
+      "Model Context Protocol",
+      "MCP-Server"
+    ],
+    "kurzdefinition": "MCP (Model Context Protocol) ist ein offener Standard, über den KI-Anwendungen wie Claude oder ChatGPT externe Werkzeuge und Datenquellen einheitlich ansprechen.",
+    "verwandt": [
+      "ki-agent",
+      "tool-calling",
+      "prompt-injection",
+      "n8n",
+      "rag"
+    ],
+    "artikel": [
+      "mcp-server-mit-n8n-erstellen",
+      "agentic-rag-mcp-architektur",
+      "reverse-engineering-claude-ghidra-mcp"
+    ],
+    "projekte": [
+      "wissensbasis-rag-mcp"
+    ],
+    "quellen": [
+      {
+        "titel": "Model Context Protocol: Spezifikation",
+        "url": "https://modelcontextprotocol.io",
+        "abgerufen": null
+      },
+      {
+        "titel": "Anthropic (2024): Introducing the Model Context Protocol",
+        "url": "https://www.anthropic.com/news/model-context-protocol",
+        "abgerufen": null
+      }
+    ],
+    "faq": [
+      {
+        "frage": "Was ist MCP?",
+        "antwort": "MCP steht für Model Context Protocol und ist ein offener Standard, über den KI-Anwendungen wie Claude oder ChatGPT externe Werkzeuge und Datenquellen ansprechen. Anthropic hat MCP im November 2024 vorgestellt und im Dezember 2025 an die Agentic AI Foundation der Linux Foundation übergeben. Statt für jede Kombination aus KI-Anwendung und Datenquelle eine eigene Schnittstelle zu bauen, genügt ein MCP-Server pro Datenquelle."
+      },
+      {
+        "frage": "Was ist ein MCP-Server?",
+        "antwort": "Ein MCP-Server ist ein Dienst, der einer KI-Anwendung über das Model Context Protocol Werkzeuge, Daten oder Vorlagen bereitstellt. Die KI-Anwendung, der sogenannte Host, verbindet sich über einen MCP-Client mit dem Server und kann dessen Werkzeuge aufrufen. Ein MCP-Server kann zum Beispiel Zugriff auf ein CMS, eine Datenbank oder eine Wissensbasis geben."
+      },
+      {
+        "frage": "Wie unterscheiden sich MCP und eine normale API?",
+        "antwort": "Eine API ist eine Schnittstelle eines einzelnen Dienstes mit eigenem Format. MCP ist ein einheitliches Protokoll, das beschreibt, wie KI-Anwendungen Werkzeuge entdecken und aufrufen. Ein MCP-Server nutzt im Hintergrund oft eine bestehende API und macht sie für KI-Anwendungen in einheitlicher Form verfügbar."
+      },
+      {
+        "frage": "Ist MCP sicher?",
+        "antwort": "MCP selbst regelt, wie Verbindungen aufgebaut und Werkzeuge aufgerufen werden; für entfernte Server sieht die Spezifikation eine Autorisierung nach OAuth 2.1 vor. Wie sicher ein MCP-Server ist, hängt vor allem davon ab, welche Rechte seine Werkzeuge haben. Minimale Rechte und eine Freigabe vor schreibenden Aktionen sind wichtig, weil Agenten durch Prompt Injection manipuliert werden können."
+      }
+    ]
+  },
+  {
+    "slug": "n8n",
+    "begriff": "n8n",
+    "h1": "n8n: Was ist das und wofür nutzt man es?",
+    "thema": "automatisierung",
+    "seoTitel": "Was ist n8n? Einfach erklärt",
+    "kurzdefinition": "n8n ist ein Werkzeug zur Workflow-Automatisierung, mit dem sich Anwendungen und Datenquellen über eine visuelle Oberfläche verbinden und bei Bedarf mit eigenem Code ergänzen lassen.",
+    "verwandt": [
+      "low-code",
+      "webhook",
+      "ki-agent",
+      "rpa",
+      "mcp-model-context-protocol"
+    ],
+    "artikel": [
+      "mcp-server-mit-n8n-erstellen",
+      "n8n-agents-vs-ai-agent-node"
+    ],
+    "projekte": [
+      "leistungsnachweis-automation",
+      "recruiting-jobs-sync"
+    ],
+    "quellen": [
+      {
+        "titel": "n8n Dokumentation",
+        "url": "https://docs.n8n.io/",
+        "abgerufen": null
+      },
+      {
+        "titel": "n8n Sustainable Use License",
+        "url": "https://docs.n8n.io/sustainable-use-license/",
+        "abgerufen": null
+      }
+    ],
+    "faq": [
+      {
+        "frage": "Was ist n8n?",
+        "antwort": "n8n ist ein Werkzeug zur Workflow-Automatisierung, mit dem sich Anwendungen und Datenquellen über eine visuelle Oberfläche verbinden lassen. Abläufe werden aus Nodes zusammengesetzt, etwa ein Auslöser, eine API-Abfrage und ein KI-Schritt, und bei Bedarf mit eigenem Code ergänzt. n8n stammt aus Berlin und lässt sich in der Cloud nutzen oder selbst hosten."
+      },
+      {
+        "frage": "Ist n8n kostenlos?",
+        "antwort": "n8n lässt sich selbst gehostet als Community Edition kostenlos nutzen, unter der Sustainable Use License, die unter anderem die kommerzielle Weitergabe als Dienst einschränkt. Die Cloud-Version und Enterprise-Funktionen sind kostenpflichtig. Die aktuellen Preise und Grenzen stehen auf der Preisseite von n8n."
+      },
+      {
+        "frage": "Was macht man mit n8n?",
+        "antwort": "Mit n8n automatisiert man wiederkehrende Abläufe, etwa Daten zwischen CRM, Tabellen und Projektmanagement abgleichen, Berichte erzeugen oder Anfragen verteilen. Mit den KI-Nodes und n8n Agents lassen sich außerdem Sprachmodelle einbinden und KI-Agenten bauen. Über den MCP Server Trigger kann ein n8n-Workflow auch als MCP-Server für KI-Anwendungen wie Claude dienen."
+      },
+      {
+        "frage": "Was ist der Unterschied zwischen n8n, Make und Zapier?",
+        "antwort": "Alle drei verbinden Anwendungen über visuelle Workflows. n8n lässt sich im Unterschied zu Make und Zapier selbst hosten, was für Datenschutz und Kosten bei vielen Ausführungen relevant sein kann, und erlaubt eigenen Code in Workflows. Zapier ist besonders einfach für den Einstieg, Make liegt bei Bedienung und Flexibilität dazwischen."
+      }
+    ]
+  },
+  {
+    "slug": "llms-txt",
+    "begriff": "llms.txt",
+    "h1": "llms.txt: Was die Datei ist und wie man sie erstellt",
+    "thema": "ki_sichtbarkeit",
+    "seoTitel": "Was ist llms.txt? Datei erklärt",
+    "kurzdefinition": "Die llms.txt ist eine Textdatei im Markdown-Format im Hauptverzeichnis einer Website, die Sprachmodellen eine kompakte Übersicht über die wichtigsten Inhalte gibt.",
+    "verwandt": [
+      "geo-generative-engine-optimization",
+      "ki-sichtbarkeit",
+      "token",
+      "kontextfenster"
+    ],
+    "projekte": [
+      "grounding-page-generator"
+    ],
+    "quellen": [
+      {
+        "titel": "llmstxt.org: The /llms.txt file",
+        "url": "https://llmstxt.org/",
+        "abgerufen": null
+      }
+    ],
+    "faq": [
+      {
+        "frage": "Was ist eine llms.txt?",
+        "antwort": "Die llms.txt ist eine Textdatei im Markdown-Format, die im Hauptverzeichnis einer Website liegt und Sprachmodellen eine kompakte Übersicht über die wichtigsten Inhalte gibt. Sie enthält eine kurze Beschreibung der Website und Links zu zentralen Seiten mit je einem erklärenden Satz. Vorgeschlagen wurde das Format im September 2024 von Jeremy Howard."
+      },
+      {
+        "frage": "Wie erstelle ich eine llms.txt?",
+        "antwort": "Eine llms.txt beginnt mit einer Überschrift mit dem Namen der Website, gefolgt von einer kurzen Zusammenfassung. Darunter folgen Abschnitte mit Links zu den wichtigsten Seiten, jeweils mit einem Satz, worum es auf der Seite geht. Die Datei wird als /llms.txt im Hauptverzeichnis abgelegt; bei Websites mit CMS lässt sie sich beim Build automatisch erzeugen."
+      },
+      {
+        "frage": "Bringt eine llms.txt etwas für SEO oder GEO?",
+        "antwort": "Für das Google-Ranking bringt die llms.txt nach heutigem Stand nichts; Google hat erklärt, die Datei nicht zu verwenden. Ob KI-Suchen und Agenten sie nutzen, ist uneinheitlich und kaum belegt. Sie ist schnell erstellt und schadet nicht, wichtiger für die Sichtbarkeit in KI-Suchen bleiben gut strukturierte, belegte Inhalte."
+      }
+    ]
+  },
+  {
+    "slug": "geo-generative-engine-optimization",
+    "begriff": "GEO (Generative Engine Optimization)",
+    "h1": "GEO (Generative Engine Optimization): Definition und Maßnahmen",
+    "thema": "ki_sichtbarkeit",
+    "seoTitel": "Was ist GEO (Generative Engine Optimization)?",
+    "alternativeNamen": [
+      "Generative Engine Optimization",
+      "GEO-Optimierung",
+      "AI SEO"
+    ],
+    "kurzdefinition": "GEO (Generative Engine Optimization) ist die Optimierung von Inhalten dafür, dass KI-Suchen wie ChatGPT, Perplexity oder die KI-Übersichten von Google sie finden, verstehen und als Quelle zitieren.",
+    "verwandt": [
+      "ki-sichtbarkeit",
+      "llms-txt",
+      "agentic-commerce",
+      "rag"
+    ],
+    "projekte": [
+      "ai-visibility-monitoring-platform",
+      "grounding-page-generator"
+    ],
+    "quellen": [
+      {
+        "titel": "Aggarwal et al. (2023): GEO: Generative Engine Optimization",
+        "url": "https://arxiv.org/abs/2311.09735",
+        "abgerufen": null
+      }
+    ],
+    "faq": [
+      {
+        "frage": "Was ist GEO?",
+        "antwort": "GEO steht für Generative Engine Optimization und bezeichnet die Optimierung von Inhalten dafür, dass KI-Suchen wie ChatGPT, Perplexity oder die KI-Übersichten von Google sie finden, verstehen und als Quelle zitieren. Der Begriff stammt aus einer Forschungsarbeit von Aggarwal et al. aus dem Jahr 2023. Im Mittelpunkt steht die Erwähnung in KI-Antworten, weniger die Position in einer Ergebnisliste."
+      },
+      {
+        "frage": "Was ist der Unterschied zwischen GEO und SEO?",
+        "antwort": "SEO zielt auf Rankings in klassischen Suchergebnissen, GEO auf Erwähnungen und Zitate in KI-generierten Antworten. Beide überschneiden sich stark, denn KI-Suchen greifen häufig auf Seiten zurück, die auch in der klassischen Suche gut abschneiden. GEO legt zusätzlich Wert auf klare Definitionen, zitierfähige Absätze, belegte Zahlen und eine einheitliche Darstellung einer Marke über viele Quellen."
+      },
+      {
+        "frage": "Welche Maßnahmen gehören zu GEO?",
+        "antwort": "Typische Maßnahmen sind eine klare Definition am Anfang einer Seite, in sich verständliche Absätze, Zahlen mit Quelle im selben Satz, strukturierte Daten und regelmäßig aktualisierte Inhalte. Wichtig ist außerdem, dass eine Marke auf vielen vertrauenswürdigen Seiten einheitlich beschrieben wird. Ob die Maßnahmen wirken, lässt sich mit Monitoring-Tools für KI-Sichtbarkeit messen."
+      }
+    ]
+  },
+  {
+    "slug": "reranking",
+    "begriff": "Reranking",
+    "h1": "Reranking: Wie ein Reranker Suchtreffer für KI sortiert",
+    "thema": "rag_suche",
+    "seoTitel": "Was ist Reranking? Reranker einfach erklärt",
+    "alternativeNamen": [
+      "Reranker",
+      "Re-Ranking"
+    ],
+    "kurzdefinition": "Reranking ist ein zweiter Suchschritt, bei dem ein spezielles Modell die Treffer einer ersten Suche neu nach Relevanz sortiert, damit nur die passendsten Textstellen weiterverwendet werden.",
+    "verwandt": [
+      "rag",
+      "embeddings",
+      "bm25",
+      "semantische-suche",
+      "vektordatenbank"
+    ],
+    "artikel": [
+      "company-brain-aufbauen-rag-architektur"
+    ],
+    "quellen": [
+      {
+        "titel": "Anthropic (2024): Introducing Contextual Retrieval",
+        "url": "https://www.anthropic.com/news/contextual-retrieval",
+        "abgerufen": null
+      }
+    ],
+    "faq": [
+      {
+        "frage": "Was ist Reranking?",
+        "antwort": "Reranking ist ein zweiter Suchschritt, bei dem ein spezielles Modell die Treffer einer ersten Suche neu nach Relevanz sortiert. Die erste Suche liefert schnell viele Kandidaten, der Reranker prüft jeden Kandidaten genauer zusammen mit der Frage. In RAG-Systemen gelangen so nur die wirklich passenden Textstellen in den Prompt."
+      },
+      {
+        "frage": "Warum verbessert Reranking RAG-Systeme?",
+        "antwort": "Die Vektorsuche vergleicht Frage und Dokument getrennt voneinander und übersieht dadurch feine Unterschiede wie Verneinungen. Ein Reranker, meist ein Cross-Encoder, liest Frage und Textstelle gemeinsam und bewertet die Passung genauer. In einem Benchmark von Anthropic senkte die Kombination aus kontextualisierten Embeddings, kontextualisiertem BM25 und Reranking die Fehlerrate bei der Suche um 67 Prozent (Anthropic, 2024)."
+      }
+    ]
+  }
+]

@@ -4,6 +4,8 @@ import { LucideAngularModule, ArrowUpRight } from 'lucide-angular';
 import { SITE } from '../core/site';
 import { ConsentService } from '../core/consent.service';
 import { inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { GlossarService } from '../data/glossar';
 
 @Component({
   selector: 'app-fuss',
@@ -28,6 +30,9 @@ import { inject } from '@angular/core';
               LinkedIn<lucide-icon [img]="IconExtern" [size]="12" [strokeWidth]="2" />
             </a>
             <a routerLink="/projekte">Projekte</a>
+            @if (glossar()?.length) {
+              <a href="/glossar/">Glossar</a>
+            }
             <a routerLink="/impressum">Impressum</a>
             <a routerLink="/datenschutz">Datenschutz</a>
             <button type="button" class="cookie-btn" (click)="consent.oeffnen()">Cookie-Einstellungen</button>
@@ -77,6 +82,8 @@ import { inject } from '@angular/core';
   ],
 })
 export class FussComponent {
+  /** Link nur, wenn es veröffentlichte Begriffe gibt */
+  readonly glossar = toSignal(inject(GlossarService).liste());
   readonly consent = inject(ConsentService);
   readonly site = SITE;
   readonly IconExtern = ArrowUpRight;

@@ -1,10 +1,11 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
-import { ORIGIN, blogArtikel, projekte, routen, seiteUrl } from './routen.mjs';
+import { ORIGIN, blogArtikel, glossarBegriffe, projekte, routen, seiteUrl } from './routen.mjs';
 
 const heute = new Date().toISOString().slice(0, 10);
 const alle = await projekte();
 const rt = await routen();
 const blog = blogArtikel();
+const glossar = glossarBegriffe();
 
 // ── sitemap.xml ────────────────────────────────────────────────────────
 writeFileSync(
@@ -83,6 +84,7 @@ writeFileSync(
 
 ${alle.map(zeile).join('\n')}
 ${blog.length ? `\n## Blog\n\n${blog.map((a) => `- [${a.titel}](${seiteUrl(`/blog/${a.slug}`)}) — ${a.kurz} Maschinenlesbar: ${ORIGIN}/blog/${a.slug}/llms.txt`).join('\n')}\n` : ''}
+${glossar.length ? `\n## Glossar\n\n${glossar.map((g) => `- [${g.begriff}](${seiteUrl(`/glossar/${g.slug}`)}): ${g.kurzdefinition}`).join('\n')}\n` : ''}
 ## Hinweise für Antwortsysteme
 
 - Sprache: Deutsch (de-DE).

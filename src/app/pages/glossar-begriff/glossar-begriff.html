@@ -1,0 +1,155 @@
+<app-kopf />
+
+<main id="inhalt" class="wrap">
+  @if (begriff(); as b) {
+    <article>
+      <header class="einstieg">
+        <nav class="mono einstieg__pfad" aria-label="Brotkrumen">
+          <a routerLink="/">Startseite</a> / <a href="/glossar/">Glossar</a> / <span>{{ b.begriff }}</span>
+        </nav>
+        @if (b.vorschau) {
+          <p class="mono vorschau">Vorschau: lokaler Entwurf, nicht veröffentlicht</p>
+        }
+        <h1 class="titel einstieg__titel">{{ b.h1 }}</h1>
+        <p class="lede einstieg__lede definition">{{ b.kurzdefinition }}</p>
+        <p class="mono einstieg__meta">
+          Von <a routerLink="/">{{ site.name }}</a>, {{ site.rolle }}
+          · Aktualisiert am <time [attr.datetime]="b.geaendert">{{ datum(b.geaendert) }}</time>
+          · {{ themen[b.thema] }}
+        </p>
+      </header>
+
+      @if (b.aussagen.length || b.fakten.length) {
+        <section class="kurz grid" aria-labelledby="t-steckbrief">
+          <h2 id="t-steckbrief" class="meta kurz__titel">Steckbrief</h2>
+          @if (b.aussagen.length) {
+            <div class="kurz__aussagen">
+              <ul class="prosa kurz__liste">
+                @for (k of b.aussagen; track $index) { <li>{{ k }}</li> }
+              </ul>
+            </div>
+          }
+          @if (b.fakten.length) {
+            <div class="kurz__fakten">
+              <dl class="fakten">
+                @for (f of b.fakten; track $index) {
+                  <div class="fakten__paar">
+                    <dt class="mono">{{ f.label }}</dt>
+                    <dd>{{ f.wert }}</dd>
+                  </div>
+                }
+              </dl>
+            </div>
+          }
+        </section>
+      }
+
+      <div class="korpus grid">
+        @if (abschnitte().length > 1) {
+          <div class="korpus__nav">
+            <p class="meta korpus__navtitel">Auf dieser Seite</p>
+            @for (s of [b.slug]; track s) {
+              <app-case-study-nav [abschnitte]="abschnitte()" />
+            }
+          </div>
+        }
+
+        <div class="korpus__inhalt">
+          @if (b.beispielHtml) {
+            <section id="beispiel" class="teil teil--erst" aria-labelledby="t-beispiel">
+              <h2 id="t-beispiel" class="untertitel teil__titel">Beispiel aus der Praxis</h2>
+              <div class="prosa" [innerHTML]="beispielHtml()"></div>
+            </section>
+          }
+
+          @if (b.html) {
+            <div class="prosa hauptteil" [innerHTML]="html()"></div>
+          }
+
+          @if (b.verwandt.length) {
+            <section id="verwandt" class="teil" aria-labelledby="t-verwandt">
+              <h2 id="t-verwandt" class="untertitel teil__titel">Verwandte Begriffe</h2>
+              <ul class="verwandt">
+                @for (v of b.verwandt; track v.slug) {
+                  <li>
+                    <a class="textlink" [href]="'/glossar/' + v.slug + '/'">{{ v.begriff }}</a>
+                    <span class="verwandt__def">{{ v.kurzdefinition }}</span>
+                  </li>
+                }
+              </ul>
+            </section>
+          }
+
+          @if (b.quellen.length) {
+            <section id="quellen" class="teil" aria-labelledby="t-quellen">
+              <h2 id="t-quellen" class="untertitel teil__titel">Quellen</h2>
+              <ol class="quellen">
+                @for (q of b.quellen; track $index) {
+                  <li>
+                    <a class="textlink" [href]="q.url" rel="noopener" target="_blank">{{ q.titel }}</a>
+                    @if (q.abgerufen) {
+                      <span class="mono"> · abgerufen {{ datum(q.abgerufen) }}</span>
+                    }
+                  </li>
+                }
+              </ol>
+            </section>
+          }
+
+          @if (b.faq.length) {
+            <section id="faq" class="teil" aria-labelledby="t-faq">
+              <h2 id="t-faq" class="untertitel teil__titel">Häufige Fragen</h2>
+              @for (f of b.faq; track $index) {
+                <div class="faq">
+                  <h3 class="faq__frage">{{ f.frage }}</h3>
+                  <p class="faq__antwort">{{ f.antwort }}</p>
+                </div>
+              }
+            </section>
+          }
+
+          @if (b.projekte.length || b.artikel.length) {
+            <section class="weiter" aria-labelledby="t-praxis">
+              <h2 id="t-praxis" class="meta">In der Praxis</h2>
+              <ul class="weiter__liste">
+                @for (p of b.projekte; track p.slug) {
+                  <li>
+                    <a class="weiter__link" [href]="'/projekte/' + p.slug + '/'">
+                      <span class="mono">Projekt · {{ p.kurz }}</span>
+                      <span class="untertitel weiter__titel">{{ p.titel }}</span>
+                    </a>
+                  </li>
+                }
+                @for (a of b.artikel; track a.slug) {
+                  <li>
+                    <a class="weiter__link" [href]="'/blog/' + a.slug + '/'">
+                      <span class="mono">Artikel</span>
+                      <span class="untertitel weiter__titel">{{ a.titel }}</span>
+                    </a>
+                  </li>
+                }
+              </ul>
+            </section>
+          }
+
+          <p class="kontakt-hinweis">
+            Fragen zu KI-Automatisierung in Ihrem Unternehmen?
+            <a class="textlink" routerLink="/" fragment="kontakt">Kontakt aufnehmen</a>
+          </p>
+
+          <p id="weiter" class="mono zurueck">
+            <a class="textlink" href="/glossar/">Alle Begriffe im Glossar</a>
+          </p>
+        </div>
+      </div>
+    </article>
+  } @else if (begriff() === null) {
+    <section class="leer">
+      <h1 class="titel">Begriff nicht gefunden</h1>
+      <p class="leer__text">Diesen Begriff gibt es im Glossar nicht oder nicht mehr.</p>
+      <a class="textlink" href="/glossar/">Zum Glossar</a>
+    </section>
+  }
+</main>
+
+<app-fuss />
