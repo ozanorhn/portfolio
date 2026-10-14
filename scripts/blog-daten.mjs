@@ -8,7 +8,7 @@
  *
  * Ohne STRAPI_TOKEN bleibt der bisherige Stand liegen, damit lokale Builds offline gehen.
  */
-import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { Marked } from 'marked';
 import { projekte, seiteUrl } from './routen.mjs';
 
@@ -112,6 +112,12 @@ function rendern(markdown, slug) {
   return { html, inhalt, woerter, lesezeit: Math.max(1, Math.round(woerter / 200)) };
 }
 
+/** Originaldaten (UTC) für Artikel, die vor dem Strapi-Feld erstveroeffentlicht erschienen sind. */
+// ponytail: Datei im Repo; entfällt, sobald erstveroeffentlicht in Strapi gepflegt ist
+const ERSTVEROEFFENTLICHT = JSON.parse(
+  readFileSync(new URL('./erstveroeffentlicht.json', import.meta.url), 'utf8'),
+);
+
 const PROJEKTE = new Map((await projekte()).map((p) => [p.slug, p]));
 
 const artikel = roh
@@ -120,9 +126,9 @@ const artikel = roh
     slug: a.slug,
     titel: a.title,
     kurz: a.excerpt ?? '',
-    // Strapi setzt publishedAt bei jedem erneuten Veröffentlichen neu; das Originaldatum
-    // steht im Feld erstveroeffentlicht. Leer: Fallback auf publishedAt.
-    datum: a.erstveroeffentlicht || a.publishedAt,
+    // Strapi setzt publishedAt bei jedem erneuten Veröffentlichen neu. Vorrang: Strapi-Feld
+    // erstveroeffentlicht, dann scripts/erstveroeffentlicht.json, sonst publishedAt.
+    datum: a.erstveroeffentlicht || ERSTVEROEFFENTLICHT[a.slug] || a.publishedAt,
     geaendert: a.updatedAt,
     autor: a.author ?? 'Ozan Orhan',
     tags: Array.isArray(a.tags) ? a.tags.filter((t) => typeof t === 'string') : [],
