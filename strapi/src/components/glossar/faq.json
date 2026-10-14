@@ -1,0 +1,1 @@
+{ "collectionName": "components_glossar_faqs", "info": { "displayName": "FAQ", "description": "Frage und Antwort" }, "options": {}, "attributes": { "frage": { "type": "string", "required": true }, "antwort": { "type": "text", "required": true } } }

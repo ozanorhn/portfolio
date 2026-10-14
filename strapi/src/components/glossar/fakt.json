@@ -1,0 +1,1 @@
+{ "collectionName": "components_glossar_fakten", "info": { "displayName": "Fakt", "description": "Zahl oder Fakt mit Quelle im Steckbrief" }, "options": {}, "attributes": { "label": { "type": "string", "required": true }, "wert": { "type": "string", "required": true } } }

@@ -1,0 +1,1 @@
+{ "collectionName": "components_glossar_aussagen", "info": { "displayName": "Aussage", "description": "Zitierbare Kernaussage im Steckbrief" }, "options": {}, "attributes": { "text": { "type": "text", "required": true } } }

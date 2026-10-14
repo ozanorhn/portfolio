@@ -1,0 +1,107 @@
+{
+  "kind": "collectionType",
+  "collectionName": "glossarbegriffe",
+  "info": {
+    "singularName": "glossarbegriff",
+    "pluralName": "glossarbegriffe",
+    "displayName": "Glossarbegriff",
+    "description": "Ein Begriff im Glossar auf ozan-orhan.com/glossar/<slug>/"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "begriff": {
+      "type": "string",
+      "required": true,
+      "maxLength": 60
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "begriff",
+      "required": true
+    },
+    "h1": {
+      "type": "string",
+      "required": true,
+      "maxLength": 90
+    },
+    "alternativeNamen": {
+      "type": "json"
+    },
+    "thema": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "ki_grundlagen",
+        "rag_suche",
+        "agenten_mcp",
+        "automatisierung",
+        "sicherheit",
+        "ki_sichtbarkeit"
+      ]
+    },
+    "kurzdefinition": {
+      "type": "text",
+      "required": true,
+      "maxLength": 300
+    },
+    "steckbriefAussagen": {
+      "type": "component",
+      "repeatable": true,
+      "component": "glossar.aussage",
+      "max": 5,
+      "min": 3
+    },
+    "steckbriefFakten": {
+      "type": "component",
+      "repeatable": true,
+      "component": "glossar.fakt",
+      "max": 6
+    },
+    "beispiel": {
+      "type": "richtext"
+    },
+    "inhalt": {
+      "type": "richtext"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": true,
+      "component": "glossar.faq",
+      "max": 4,
+      "min": 2
+    },
+    "verwandteBegriffe": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::glossarbegriff.glossarbegriff"
+    },
+    "verwandteArtikel": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::article.article"
+    },
+    "verwandteProjekte": {
+      "type": "json"
+    },
+    "quellen": {
+      "type": "component",
+      "repeatable": true,
+      "component": "glossar.quelle",
+      "min": 2
+    },
+    "seoTitle": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "seoDescription": {
+      "type": "string",
+      "maxLength": 160
+    },
+    "erstveroeffentlicht": {
+      "type": "datetime"
+    }
+  }
+}

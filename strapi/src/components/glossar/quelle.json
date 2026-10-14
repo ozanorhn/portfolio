@@ -1,0 +1,1 @@
+{ "collectionName": "components_glossar_quellen", "info": { "displayName": "Quelle", "description": "Quelle mit Abrufdatum" }, "options": {}, "attributes": { "titel": { "type": "string", "required": true }, "url": { "type": "string", "required": true }, "abgerufen": { "type": "date" } } }
