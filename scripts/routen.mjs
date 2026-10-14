@@ -2,6 +2,7 @@ import { existsSync, readFileSync, mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
 
 const require_ = createRequire(import.meta.url);
 export const ORIGIN = 'https://ozan-orhan.com';
@@ -12,7 +13,8 @@ export const seiteUrl = (pfad) => ORIGIN + (pfad.endsWith('/') ? pfad : `${pfad}
 /** works.ts einmal kompilieren und laden, damit Sitemap und llms.txt nie driften. */
 export async function projekte() {
   const esbuild = require_('esbuild');
-  const quelle = new URL('../src/app/data/works.ts', import.meta.url).pathname;
+  // fileURLToPath statt .pathname: sonst bleibt das Leerzeichen im Ordnernamen als %20 stehen.
+  const quelle = fileURLToPath(new URL('../src/app/data/works.ts', import.meta.url));
   const out = join(mkdtempSync(join(tmpdir(), 'works-')), 'works.cjs');
   await esbuild.build({
     entryPoints: [quelle],
