@@ -58,6 +58,18 @@
     {
       "frage": "Ist MCP sicher?",
       "antwort": "MCP selbst regelt, wie Verbindungen aufgebaut und Werkzeuge aufgerufen werden; für entfernte Server sieht die Spezifikation eine Autorisierung nach OAuth 2.1 vor. Wie sicher ein MCP-Server ist, hängt vor allem davon ab, welche Rechte seine Werkzeuge haben. Minimale Rechte und eine Freigabe vor schreibenden Aktionen sind wichtig, weil Agenten durch Prompt Injection manipuliert werden können."
+    },
+    {
+      "frage": "Was bedeutet MCP im Zusammenhang mit KI?",
+      "antwort": "Im KI-Umfeld steht MCP für Model Context Protocol, einen offenen Standard für die Verbindung von KI-Anwendungen mit Werkzeugen und Daten. Über MCP kann etwa ein Chat-Assistent auf ein CMS, eine Datenbank oder einen Kalender zugreifen, ohne dass für jede Anwendung eine eigene Integration gebaut werden muss."
+    },
+    {
+      "frage": "Hat MCP etwas mit dem Medikament MCP zu tun?",
+      "antwort": "Nein. Das Medikament MCP (Metoclopramid) gegen Übelkeit hat mit dem Model Context Protocol nichts zu tun, die Abkürzung ist zufällig gleich. Diese Seite behandelt ausschließlich das KI-Protokoll. Fragen zum Medikament beantworten Arzt oder Apotheke."
+    },
+    {
+      "frage": "Wie baut man einen MCP-Server?",
+      "antwort": "Ein MCP-Server lässt sich mit den offiziellen SDKs, etwa für TypeScript oder Python, programmieren: Man definiert Werkzeuge mit Name, Beschreibung und Eingabeschema und verbindet sie mit der eigentlichen Logik. Ohne Programmierung geht es mit n8n über den MCP Server Trigger, der einen Workflow als Werkzeug bereitstellt. In beiden Fällen sollte jedes Werkzeug nur die Rechte bekommen, die es braucht."
     }
   ]
 }

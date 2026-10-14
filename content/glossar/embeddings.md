@@ -43,6 +43,10 @@
     {
       "frage": "Was ist der Unterschied zwischen Embeddings und Tokens?",
       "antwort": "Tokens sind die Textbausteine, in die ein Sprachmodell Text zerlegt, etwa Wörter oder Wortteile. Embeddings sind Vektoren, die die Bedeutung eines Tokens oder eines ganzen Textabschnitts abbilden. Für die Suche in RAG-Systemen nutzt man Embeddings ganzer Abschnitte, die von einem eigenen Embedding-Modell erzeugt werden."
+    },
+    {
+      "frage": "Wie werden Embeddings erzeugt?",
+      "antwort": "Embeddings werden von einem Embedding-Modell erzeugt, einem neuronalen Netz, das Text in einen Vektor mit fester Länge umwandelt. Man schickt einen Textabschnitt an das Modell, etwa über die API eines Anbieters oder ein lokal betriebenes Modell, und erhält eine Zahlenreihe zurück. Wichtig ist, für Dokumente und Suchanfragen dasselbe Modell zu verwenden, sonst sind die Vektoren nicht vergleichbar."
     }
   ]
 }

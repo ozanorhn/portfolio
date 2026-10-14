@@ -55,6 +55,14 @@
     {
       "frage": "Was ist der Unterschied zwischen n8n, Make und Zapier?",
       "antwort": "Alle drei verbinden Anwendungen über visuelle Workflows. n8n lässt sich im Unterschied zu Make und Zapier selbst hosten, was für Datenschutz und Kosten bei vielen Ausführungen relevant sein kann, und erlaubt eigenen Code in Workflows. Zapier ist besonders einfach für den Einstieg, Make liegt bei Bedienung und Flexibilität dazwischen."
+    },
+    {
+      "frage": "Was kostet n8n?",
+      "antwort": "Die selbst gehostete Community Edition von n8n ist kostenlos, es fallen nur die Kosten für den eigenen Server an. Die Cloud-Version und Enterprise-Funktionen werden nach Tarif abgerechnet, die aktuellen Preise stehen auf der Preisseite von n8n. Hinzu kommen in KI-Workflows die Kosten der genutzten Sprachmodelle, die meist nach Token abgerechnet werden."
+    },
+    {
+      "frage": "Kann man mit n8n KI-Agenten bauen?",
+      "antwort": "Ja. n8n bietet einen AI-Agent-Node, dem man ein Sprachmodell, Anweisungen und Werkzeuge wie HTTP-Anfragen, Datenbanken oder andere Workflows zuordnet. Der Agent entscheidet dann selbst, welches Werkzeug er aufruft. Für Werkzeuge mit Folgen lässt sich in n8n eine menschliche Freigabe vor dem Aufruf einrichten."
     }
   ]
 }

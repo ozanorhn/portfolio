@@ -41,7 +41,7 @@ Hauptteil …
 | verwandteArtikel | nein | Blog-Slugs |
 | verwandteProjekte | nein | Projekt-Slugs aus `src/app/data/works.ts` |
 | quellen | bei Veröffentlichung mind. 2 | `{ "titel", "url", "abgerufen" }`, Primärquellen bevorzugen |
-| faq | bei Veröffentlichung 2–4 | `{ "frage", "antwort" }`, jede Antwort für sich verständlich |
+| faq | bei Veröffentlichung mind. 2 | `{ "frage", "antwort" }`; alle echten Suchfragen (Ahrefs/Sistrix „Fragen“), jede Antwort für sich verständlich, keine Zahlen ohne Quelle |
 
 ## Schreibregeln
 

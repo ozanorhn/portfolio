@@ -52,6 +52,10 @@
     {
       "frage": "Welche Vektordatenbanken gibt es?",
       "antwort": "Verbreitete Vektordatenbanken sind unter anderem Qdrant, Milvus, Weaviate und Pinecone. Wer bereits PostgreSQL nutzt, kann mit der Erweiterung pgvector Vektoren direkt in der bestehenden Datenbank speichern. Die Wahl hängt von Datenmenge, Betrieb (selbst gehostet oder Cloud) und benötigten Funktionen wie hybrider Suche ab."
+    },
+    {
+      "frage": "Braucht man für RAG immer eine Vektordatenbank?",
+      "antwort": "Nein. Für kleine Datenmengen reicht oft eine bestehende Datenbank mit Vektorerweiterung wie pgvector oder sogar eine reine Stichwortsuche. Eine eigene Vektordatenbank lohnt sich vor allem bei vielen Dokumenten, hohen Anforderungen an die Geschwindigkeit oder Funktionen wie hybrider Suche und Filtern nach Berechtigungen."
     }
   ]
 }

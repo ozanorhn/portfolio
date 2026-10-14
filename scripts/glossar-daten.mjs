@@ -28,8 +28,8 @@ const THEMEN = {
 
 /** IDs aus Layout und Begriffsvorlage; Überschriften im Text dürfen sie nicht vergeben. */
 const VORLAGEN_IDS = [
-  'inhalt', 'hauptmenue', 'seiten-schema', 'verwandt', 'quellen', 'faq', 'weiter', 'kontakt',
-  't-steckbrief', 't-verwandt', 't-quellen', 't-faq', 't-praxis',
+  'inhalt', 'hauptmenue', 'seiten-schema', 'verwandt', 'quellen', 'faq', 'weiter', 'autor',
+  't-steckbrief', 't-verwandt', 't-quellen', 't-faq', 't-praxis', 't-autor',
 ];
 
 const fehler = [];

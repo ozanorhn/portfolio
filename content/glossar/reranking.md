@@ -41,6 +41,10 @@
     {
       "frage": "Warum verbessert Reranking RAG-Systeme?",
       "antwort": "Die Vektorsuche vergleicht Frage und Dokument getrennt voneinander und übersieht dadurch feine Unterschiede wie Verneinungen. Ein Reranker, meist ein Cross-Encoder, liest Frage und Textstelle gemeinsam und bewertet die Passung genauer. In einem Benchmark von Anthropic senkte die Kombination aus kontextualisierten Embeddings, kontextualisiertem BM25 und Reranking die Fehlerrate bei der Suche um 67 Prozent (Anthropic, 2024)."
+    },
+    {
+      "frage": "Welche Reranker gibt es?",
+      "antwort": "Es gibt Reranker als Cloud-Dienst, etwa Cohere Rerank, und frei verfügbare Cross-Encoder-Modelle, die sich selbst betreiben lassen. Einige Vektordatenbanken und Suchmaschinen binden Reranker direkt ein. Welcher passt, hängt von Sprache, Datenmenge, Kosten und Datenschutzanforderungen ab und sollte mit echten Fragen getestet werden."
     }
   ]
 }

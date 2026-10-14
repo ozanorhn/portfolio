@@ -46,6 +46,18 @@
     {
       "frage": "Welche Maßnahmen gehören zu GEO?",
       "antwort": "Typische Maßnahmen sind eine klare Definition am Anfang einer Seite, in sich verständliche Absätze, Zahlen mit Quelle im selben Satz, strukturierte Daten und regelmäßig aktualisierte Inhalte. Wichtig ist außerdem, dass eine Marke auf vielen vertrauenswürdigen Seiten einheitlich beschrieben wird. Ob die Maßnahmen wirken, lässt sich mit Monitoring-Tools für KI-Sichtbarkeit messen."
+    },
+    {
+      "frage": "Sollte man GEO statt SEO machen?",
+      "antwort": "Nein, GEO ersetzt SEO nicht, sondern baut darauf auf. KI-Suchen greifen häufig auf Seiten zurück, die technisch sauber, gut verlinkt und in der klassischen Suche sichtbar sind. Sinnvoll ist, bestehende SEO-Arbeit um GEO-Maßnahmen wie klare Definitionen, belegte Aussagen und eine einheitliche Darstellung der Marke zu ergänzen."
+    },
+    {
+      "frage": "Wie misst man, ob GEO wirkt?",
+      "antwort": "Man stellt KI-Suchen regelmäßig eine feste Liste typischer Fragen und wertet aus, ob und wie die eigene Marke genannt und welche Seiten zitiert werden. Dafür gibt es spezialisierte Monitoring-Tools. Aussagekräftig sind Trends über mehrere Wochen, weil einzelne Antworten schwanken."
+    },
+    {
+      "frage": "Was ist der Unterschied zwischen SEO, GEO und AEO?",
+      "antwort": "SEO optimiert für Rankings in klassischen Suchergebnissen, GEO für Erwähnungen und Zitate in KI-generierten Antworten. AEO steht für Answer Engine Optimization und zielt auf direkte Antworten, etwa in hervorgehobenen Snippets oder Sprachassistenten. Die Begriffe überschneiden sich stark und werden nicht einheitlich verwendet."
     }
   ]
 }

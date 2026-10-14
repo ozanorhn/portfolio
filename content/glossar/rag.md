@@ -58,6 +58,14 @@
     {
       "frage": "Verhindert RAG Halluzinationen?",
       "antwort": "RAG verringert Halluzinationen, verhindert sie aber nicht vollständig. Findet die Suche die richtigen Textstellen nicht oder sind die Dokumente veraltet, kann das Modell trotzdem falsche Antworten geben. Quellenangaben in der Antwort und eine gute Suche mit hybrider Suche und Reranking machen Fehler leichter erkennbar und seltener."
+    },
+    {
+      "frage": "Wofür steht RAG?",
+      "antwort": "RAG steht für Retrieval-Augmented Generation, auf Deutsch etwa durch Abruf erweiterte Generierung. Gemeint ist, dass ein Sprachmodell seine Antwort nicht nur aus dem Trainingswissen erzeugt, sondern vorher passende Informationen aus einer Wissensquelle abruft."
+    },
+    {
+      "frage": "Wie baut man ein RAG-System?",
+      "antwort": "Ein RAG-System braucht vier Bausteine: eine Aufbereitung der Dokumente mit Chunking, ein Embedding-Modell, eine Vektordatenbank oder Suchmaschine und ein Sprachmodell für die Antwort. Für den Einstieg reichen eine bestehende Datenbank mit Vektorerweiterung wie pgvector und eine Automatisierungsplattform wie n8n. Entscheidend für die Qualität sind sauber zerlegte Dokumente, eine hybride Suche und Tests mit echten Fragen."
     }
   ]
 }

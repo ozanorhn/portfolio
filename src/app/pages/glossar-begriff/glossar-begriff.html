@@ -125,10 +125,20 @@
             </section>
           }
 
-          <p class="kontakt-hinweis">
-            Fragen zu KI-Automatisierung in Ihrem Unternehmen?
-            <a class="textlink" routerLink="/" fragment="kontakt">Kontakt aufnehmen</a>
-          </p>
+          <section id="autor" class="autor" aria-labelledby="t-autor">
+            <p class="meta">Über den Autor</p>
+            <h2 id="t-autor" class="untertitel autor__name">{{ site.name }}</h2>
+            <p class="autor__rolle">{{ site.rolle }} · {{ site.ort }}</p>
+            <p class="autor__text">
+              Entwickelt AI-Automationen, Agenten und LLM-Anwendungen mit Schwerpunkt auf n8n,
+              Python, MCP, RAG und APIs.
+            </p>
+            <p class="autor__links">
+              <a class="textlink" href="/projekte/">Projekte</a>
+              <a class="textlink" [href]="site.github" rel="noopener me" target="_blank">GitHub</a>
+              <a class="textlink" [href]="site.linkedin" rel="noopener me" target="_blank">LinkedIn</a>
+            </p>
+          </section>
 
           <p id="weiter" class="mono zurueck">
             <a class="textlink" href="/glossar/">Alle Begriffe im Glossar</a>
