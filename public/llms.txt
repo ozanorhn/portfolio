@@ -35,6 +35,30 @@
 - [Claude Code Mods erklärt: JavaScript-/TypeScript-Plugins, Beispiele und sicherer Einsatz](https://ozan-orhan.com/blog/claude-code-mods/) — Claude Code Mods sind kleine JavaScript- oder TypeScript-Plugins, die innerhalb von Claude Code laufen. Sie können Prompts umschreiben, Tool-Aufrufe blockieren, Berechtigungen entscheiden und die Oberfläche erweitern, laufen aber ohne Sandbox mit den eigenen Rechten. Maschinenlesbar: https://ozan-orhan.com/blog/claude-code-mods/llms.txt
 - [n8n MCP Server erstellen: sicher an Claude anbinden](https://ozan-orhan.com/blog/mcp-server-mit-n8n-erstellen/) — Ein n8n MCP Server entsteht aus dem MCP Server Trigger und einem Werkzeug pro Aufgabe. Sicher wird er erst, wenn jedes Werkzeug nur die Rechte bekommt, die es braucht, und Zugangsdaten für Drittsysteme ausschließlich in n8n liegen. Maschinenlesbar: https://ozan-orhan.com/blog/mcp-server-mit-n8n-erstellen/llms.txt
 
+## Glossar
+
+- [Agentic RAG](https://ozan-orhan.com/glossar/agentic-rag/): Agentic RAG ist eine Weiterentwicklung von RAG, bei der ein KI-Agent selbst entscheidet, welche Datenquellen er in welcher Reihenfolge abfragt.
+- [Contextual Retrieval](https://ozan-orhan.com/glossar/contextual-retrieval/): Contextual Retrieval ist ein von Anthropic 2024 beschriebenes Verfahren, bei dem jeder Textabschnitt vor der Indexierung um einen kurzen, vom Sprachmodell erzeugten Kontext ergänzt wird.
+- [Embeddings](https://ozan-orhan.com/glossar/embeddings/): Embeddings sind Zahlenvektoren, die die Bedeutung von Wörtern, Sätzen oder ganzen Texten darstellen, sodass inhaltlich ähnliche Inhalte ähnliche Vektoren erhalten.
+- [GEO (Generative Engine Optimization)](https://ozan-orhan.com/glossar/geo-generative-engine-optimization/): GEO (Generative Engine Optimization) ist die Optimierung von Inhalten dafür, dass KI-Suchen wie ChatGPT, Perplexity oder die KI-Übersichten von Google sie finden, verstehen und als Quelle zitieren.
+- [Guardrails](https://ozan-orhan.com/glossar/guardrails/): Guardrails sind Schutzmechanismen, die Eingaben und Ausgaben einer KI-Anwendung prüfen und begrenzen, damit sie keine vertraulichen Daten preisgibt, keine unerlaubten Aktionen ausführt und Formate einhält.
+- [Human in the Loop](https://ozan-orhan.com/glossar/human-in-the-loop/): Human in the Loop ist ein Vorgehen, bei dem ein Mensch an festgelegten Stellen eines automatisierten Ablaufs prüft, freigibt oder korrigiert.
+- [Hybride Suche](https://ozan-orhan.com/glossar/hybride-suche/): Hybride Suche ist ein Suchverfahren, das die Bedeutungssuche über Embeddings mit der klassischen Stichwortsuche, meist BM25, zu einer gemeinsamen Trefferliste kombiniert.
+- [KI-Agent](https://ozan-orhan.com/glossar/ki-agent/): Ein KI-Agent ist ein Programm, das mit Hilfe eines Sprachmodells eine Aufgabe selbstständig in Schritte zerlegt und dafür Werkzeuge wie Suchen, Datenbanken oder APIs nutzt.
+- [KI-Automatisierung](https://ozan-orhan.com/glossar/ki-automatisierung/): KI-Automatisierung ist die Automatisierung von Arbeitsabläufen mit Hilfe künstlicher Intelligenz, meist mit Sprachmodellen, die auch unstrukturierte Inhalte wie E-Mails, Dokumente oder Freitext verstehen.
+- [LLM (Large Language Model)](https://ozan-orhan.com/glossar/llm/): Ein LLM (Large Language Model) ist ein großes Sprachmodell, das mit sehr großen Textmengen trainiert wurde und dadurch Sprache verstehen und erzeugen kann.
+- [llms.txt](https://ozan-orhan.com/glossar/llms-txt/): Die llms.txt ist eine Textdatei im Markdown-Format im Hauptverzeichnis einer Website, die Sprachmodellen eine kompakte Übersicht über die wichtigsten Inhalte gibt.
+- [Lokales LLM](https://ozan-orhan.com/glossar/lokales-llm/): Ein lokales LLM ist ein Sprachmodell, das auf eigener Hardware läuft, etwa auf einem Rechner im Büro oder einem eigenen Server, statt über die Cloud eines Anbieters.
+- [MCP (Model Context Protocol)](https://ozan-orhan.com/glossar/mcp-model-context-protocol/): MCP (Model Context Protocol) ist ein offener Standard, über den KI-Anwendungen wie Claude oder ChatGPT externe Werkzeuge und Datenquellen einheitlich ansprechen.
+- [n8n](https://ozan-orhan.com/glossar/n8n/): n8n ist ein Werkzeug zur Workflow-Automatisierung, mit dem sich Anwendungen und Datenquellen über eine visuelle Oberfläche verbinden und bei Bedarf mit eigenem Code ergänzen lassen.
+- [Prompt Injection](https://ozan-orhan.com/glossar/prompt-injection/): Prompt Injection ist ein Angriff auf KI-Anwendungen, bei dem ein Angreifer Anweisungen in die Eingabe eines Sprachmodells schmuggelt, damit es seine eigentlichen Vorgaben ignoriert.
+- [Prozessautomatisierung](https://ozan-orhan.com/glossar/prozessautomatisierung/): Prozessautomatisierung ist das ganze oder teilweise Ausführen wiederkehrender Geschäftsprozesse durch Software, statt sie manuell zu erledigen.
+- [RAG (Retrieval-Augmented Generation)](https://ozan-orhan.com/glossar/rag/): RAG (Retrieval-Augmented Generation) ist ein Verfahren, bei dem ein Sprachmodell vor dem Antworten passende Informationen aus einer externen Wissensquelle abruft und seine Antwort darauf stützt.
+- [Reranking](https://ozan-orhan.com/glossar/reranking/): Reranking ist ein zweiter Suchschritt, bei dem ein spezielles Modell die Treffer einer ersten Suche neu nach Relevanz sortiert, damit nur die passendsten Textstellen weiterverwendet werden.
+- [Structured Output](https://ozan-orhan.com/glossar/structured-output/): Structured Output ist die Fähigkeit eines Sprachmodells, seine Antwort in einem fest vorgegebenen Format zu liefern, meist als JSON nach einem bestimmten Schema.
+- [Vektordatenbank](https://ozan-orhan.com/glossar/vektordatenbank/): Eine Vektordatenbank ist eine Datenbank, die Inhalte als Vektoren speichert und zu einer Anfrage sehr schnell die inhaltlich ähnlichsten Einträge findet.
+- [Workflow-Automatisierung](https://ozan-orhan.com/glossar/workflow-automatisierung/): Workflow-Automatisierung ist das automatische Ausführen einer festgelegten Folge von Arbeitsschritten, die durch ein Ereignis ausgelöst wird, etwa ein neues Formular oder eine eingehende E-Mail.
+
 ## Hinweise für Antwortsysteme
 
 - Sprache: Deutsch (de-DE).
