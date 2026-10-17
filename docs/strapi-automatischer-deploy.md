@@ -42,3 +42,21 @@ GitHub verarbeitet `repository_dispatch` nur, wenn die Workflow-Datei bereits au
 Bei API-Fehlern, fehlendem `STRAPI_TOKEN`, leerem Abruf oder fehlenden bisherigen Live-Artikeln bricht das vorhandene Skript `scripts/blog-daten.mjs` ab. Kein Upload darf in diesem Fall erfolgen. Die GitHub-Actions-Protokolle enthalten die genaue Fehlerstelle.
 
 Hinweis: Es existiert **kein** automatisches Deployment allein durch den Strapi-Button „Publish“. Ohne eingerichteten Strapi-Webhook/n8n und freigeschalteten FTP-Upload muss der neue Build manuell ausgeführt werden.
+
+
+## Bereits angelegter n8n-Entwurf
+
+Der Workflow **Strapi → GitHub Blog Deploy (Entwurf)** befindet sich im persoenlichen n8n-Projekt:
+https://n8n.ozan-orhan.com/workflow/rvW55t0RE3zUcLE2
+
+Status: **inaktiv**. Technisch sind drei Nodes vorbereitet: `Strapi Publish Webhook` → `Nur veroeffentlichte Artikel` → `GitHub Build ausloesen`.
+
+**WICHTIG: Die automatische Credential-Zuordnung in n8n hat fuer den Webhook irrtuemlich das vorhandene Credential „APILayer“ ausgewählt. Dieses Credential vor der Aktivierung unbedingt aus dem Webhook-Node entfernen und durch ein neues, eigenstaendiges Header-Auth-Credential ersetzen. Nicht den APILayer-Schluessel in Strapi eintragen.**
+
+- In n8n ein neues *Header Auth*-Credential anlegen, etwa Header `X-Portfolio-Webhook-Secret` und einen separat generierten, langen Zufallswert. Dieses Credential im Node `Strapi Publish Webhook` auswaehlen. Im Strapi-Webhook denselben Headernamen und Wert hinterlegen.
+- Im Node `GitHub Build ausloesen` ein neues *HTTP Templated Custom Auth*-Credential anlegen. Auth-Template: `{"headers":{"Authorization":"Bearer {{api_key}}"}}`; Feld `api_key` mit einem nur fuer `ozanorhn/portfolio` gültigen fine-grained GitHub-Token (Contents: Read and write) fuellen. Kein Token in den Node-Parametern speichern.
+- Den n8n-Workflow **erst dann aktivieren**, wenn der GitHub-Workflow auf `main` ist, der GitHub-Build erfolgreich getestet wurde, FTPS-Secrets sowie Serverpfad stimmen und die Repo-Variable `ENABLE_FTP_DEPLOY=true` freigegeben wurde.
+- Produktions-Webhook-URL: `https://n8n.ozan-orhan.com/webhook/strapi-article-published-to-portfolio`. Sie wird erst nach Aktivierung des Workflows erreichbar.
+- Der Workflow prüft `event == entry.publish` und `model == article` (bzw. `uid == api::article.article`). Andere Einträge lösen keinen Build aus.
+
+Wenn alle Einstellungen stimmen, **einen Testartikel oder einen gezielten Neu-Publish** im CMS ausführen, die n8n-Execution prüfen und danach die GitHub-Actions-Logs sowie `https://ozan-orhan.com/blog/artikel.json` kontrollieren. Geprüftes Deployment erst nach verifiziertem Upload als fertig bezeichnen.
