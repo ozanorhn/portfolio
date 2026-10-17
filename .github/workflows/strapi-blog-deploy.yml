@@ -1,0 +1,110 @@
+name: Strapi-Blog auf ALL-INKL veroeffentlichen
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Nach erfolgreichem Build via FTPS hochladen'
+        required: true
+        default: false
+        type: boolean
+  repository_dispatch:
+    types: [strapi-blog-published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-ftps-deploy
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v4
+
+      - name: Node.js 24 einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Chrome fuer Angular-Prerendering einrichten
+        id: chrome
+        uses: browser-actions/setup-chrome@v2
+        with:
+          chrome-version: stable
+
+      - name: Abhaengigkeiten installieren
+        run: npm ci
+
+      - name: CMS-Zugriff vor Build pruefen
+        env:
+          STRAPI_TOKEN: ${{ secrets.STRAPI_TOKEN }}
+        run: |
+          if [ -z "$STRAPI_TOKEN" ]; then
+            echo "::error::GitHub Secret STRAPI_TOKEN fehlt."
+            exit 1
+          fi
+
+      - name: Artikel abrufen, SEO erzeugen, Angular bauen und prerendern
+        env:
+          STRAPI_URL: https://cms.ozan-orhan.com
+          STRAPI_TOKEN: ${{ secrets.STRAPI_TOKEN }}
+          CHROME_PFAD: ${{ steps.chrome.outputs.chrome-path }}
+        run: npm run build:prod
+
+      - name: Artikel und HTML im Build pruefen
+        run: |
+          test -s dist/portfolio/browser/blog/artikel.json
+          test -s dist/portfolio/browser/blog/index.html
+          node --input-type=module -e "
+            import { readFileSync } from 'node:fs';
+            const list = JSON.parse(readFileSync('dist/portfolio/browser/blog/artikel.json','utf8'));
+            if (!Array.isArray(list) || list.length < 1) process.exit(1);
+            console.log('Blogartikel im Build: ' + list.length);
+          "
+
+      # Sicherer Standard: Nur mit expliziter Repo-Variable und Ausloeser deployen.
+      # Bei workflow_dispatch bleibt deploy standardmaessig false.
+      - name: FTP-Zugangsdaten vor Upload pruefen
+        if: ${{ vars.ENABLE_FTP_DEPLOY == 'true' && (github.event_name == 'repository_dispatch' || inputs.deploy == true) }}
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
+        run: |
+          for variable in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_SERVER_DIR; do
+            if [ -z "${!variable}" ]; then
+              echo "::error::GitHub Secret $variable fehlt."
+              exit 1
+            fi
+          done
+          case "$FTP_SERVER_DIR" in
+            */) ;;
+            *) echo "::error::FTP_SERVER_DIR muss mit / enden."; exit 1 ;;
+          esac
+
+      - name: Website via verschluesseltem FTPS aktualisieren
+        if: ${{ vars.ENABLE_FTP_DEPLOY == 'true' && (github.event_name == 'repository_dispatch' || inputs.deploy == true) }}
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          local-dir: ./dist/portfolio/browser/
+          protocol: ftps
+          port: 21
+          security: strict
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.htaccess
+            **/.well-known/**
+            **/node_modules/**
