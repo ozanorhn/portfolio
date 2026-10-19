@@ -1,0 +1,53 @@
+# Automation-Betrieb und Self-Hosting
+
+> Die Infrastruktur unter den Automatisierungen: selbst gehostete Datenbank, zentrale Fehlermeldungen für Workflows, VPN mit fester IP und ein Passwortmanager für das Team.
+
+URL: https://ozan-orhan.com/projekte/automation-betrieb-self-hosting/
+Status: Im Betrieb
+Kontext: Unternehmenskontext · anonymisiert dargestellt
+Stack: Docker, Supabase (selbst gehostet), PostgreSQL, n8n, Slack, WireGuard, Vaultwarden, Linux
+
+## Ausgangspunkt
+
+Mit der Zahl der Automatisierungen wuchs der Bedarf an verlässlichem Betrieb: Fehler sollten nicht erst auffallen, wenn ein Ergebnis fehlt, Daten sollten aus Datenschutzgründen auf eigener Infrastruktur liegen, und Zugänge sollten nicht in Tabellen verwaltet werden.
+
+## Mein Beitrag
+
+Ich habe die selbst gehostete Datenbank in Docker eingerichtet, Workflows an einen zentralen Error-Workflow angebunden, eine Richtlinie für Benennung, Ablage und Fehlerbehandlung geschrieben, das VPN mit fester IP aufgesetzt und den Passwortmanager eingeführt.
+
+## Architektur
+
+Die Datenbank für Wissensbasis, Transkripte und Auswertungen läuft als selbst gehostete Supabase-Instanz in Docker auf einem Server in Deutschland. Die Workflows greifen über Credentials darauf zu.
+
+Workflows verweisen auf einen gemeinsamen Error-Workflow, der Fehler in einen Slack-Kanal meldet. Eine nächtliche Sicherung legt die Workflow-Definitionen extern ab.
+
+## Entscheidungen
+
+### Ein Error-Workflow für alle
+
+Statt Fehlerbehandlung in jedem Workflow neu zu bauen, gibt es einen zentralen Fehlerpfad. Neue Workflows hängen sich nach der Richtlinie daran an.
+
+### Eigene Datenbank statt Cloud
+
+Personenbezogene Inhalte wie Besprechungstranskripte bleiben auf eigener Infrastruktur in Deutschland.
+
+### Feste IP über VPN
+
+Für Systeme mit IP-Freigabe läuft der Zugriff über ein WireGuard-VPN mit einer gemeinsamen festen Adresse statt über wechselnde Einzelanschlüsse.
+
+## Ergebnis
+
+Fehler der angebundenen Workflows erscheinen zentral in Slack, Zugänge liegen im Passwortmanager statt in einer Tabelle, und die Datenbank läuft auf eigener Infrastruktur.
+
+## Erkenntnisse
+
+Zentrale Fehlermeldungen helfen nur, wenn sie jeden Workflow erfassen. Neue Workflows müssen deshalb konsequent an den Fehlerpfad angebunden werden, und Zugangsdaten gehören ausschließlich in den Credential Store.
+
+## Einschränkungen der Darstellung
+
+Dieses Projekt liegt im Unternehmenskontext. Es werden keine Screenshots interner
+Systeme, keine Kundennamen, keine Domains und keine internen Kennungen gezeigt.
+Die Darstellung ist auf die Architektur abstrahiert.
+
+Kontakt: contact@ozan-orhan.com
+

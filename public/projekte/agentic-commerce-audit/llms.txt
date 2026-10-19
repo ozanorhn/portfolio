@@ -1,0 +1,75 @@
+# Agentic Commerce Audit
+
+> Eine Prozesskette von der Bestellung bis zum fertigen Analyse-Deck: n8n steuert Status, Daten und Freigaben, ein eigener Worker misst, wie KI-Assistenten auf Kauffragen antworten.
+
+URL: https://ozan-orhan.com/projekte/agentic-commerce-audit/
+Status: Live im Testbetrieb seit Oktober 2026
+Kontext: Unternehmenskontext · anonymisiert dargestellt
+Stack: n8n, Webhooks, monday API, Claude Sonnet, DataForSEO LLM-Abfragen, ChatGPT · Gemini · Perplexity, JavaScript, n8n Data Tables, Docker
+
+## Ausgangspunkt
+
+Das Audit beantwortet eine neue Frage: Wie antworten ChatGPT, Gemini und Perplexity, wenn jemand eine echte Kauffrage stellt, und wird der untersuchte Shop dabei genannt? Dazu kommt eine technische Prüfung, ob der Shop für KI-Crawler und Agenten lesbar ist.
+
+Ohne Automatisierung hätte jedes Audit Bestellung, Datenerfassung, Abfragen an mehrere Modelle, Auswertung und Berichtserstellung von Hand verbunden.
+
+## Überblick
+
+Die Strecke besteht aus mehreren n8n-Workflows, die über Webhooks verkettet sind, und einem Audit-Worker, der als Container auf einem separaten Server läuft. Ein Projektboard dient als Statusmaschine: Jeder Auftrag durchläuft feste Zustände von Neu über Briefing und In Arbeit bis Review.
+
+## Mein Beitrag
+
+Ich habe die automatisierte Prozesskette entwickelt: die n8n-Workflows für Vormerkung, Bestellung, Briefing, Audit-Start, Worker-Rückmeldung und Hänger-Erkennung sowie den vorgelagerten Quick-Check als Proxy zu einem eigenen Prüfdienst.
+
+Die Zahlungsanbindung hat ein Kollege übernommen. Prüfkriterien und Produktkonzept sind im Team entstanden.
+
+## Architektur
+
+Eine Bestellung kommt per Webhook an, wird normalisiert und parallel in eine Tabelle, als Element im Projektboard und als Bestätigung an den Kunden geschrieben. Anschließend erzeugt Claude aus Shop und Kategorie einen Entwurf mit Kauffragen, Faktenfragen und Wettbewerbern als JSON. Der Entwurf wird im Briefing mit dem Kunden abgestimmt; das Briefing-Formular schreibt die Antworten an denselben Auftrag.
+
+Der Audit-Lauf startet, wenn ein Mensch den Status auf „In Arbeit“ setzt. Ein Board-Webhook ruft n8n auf; n8n prüft Board, Spalte und Status, verhindert einen Doppelstart und beauftragt den Worker über eine authentifizierte Schnittstelle. Der Worker stellt die Kauffragen an ChatGPT, Gemini und Perplexity, wertet Nennungen, Rang und zitierte Quellen aus, prüft den Shop und erzeugt ein Analyse-Deck.
+
+Nach Abschluss meldet sich der Worker per authentifiziertem Webhook zurück. n8n schließt den Lauf in einer eigenen Lauf-Tabelle ab und schreibt Fehler mit Schritt und Ursache als Update an den Auftrag.
+
+## Entscheidungen
+
+### Der Mensch startet den teuren Schritt
+
+Der Audit-Worker läuft nicht automatisch nach der Bestellung, sondern erst nach einem Statuswechsel durch einen Menschen. Briefing und Kauffragen sind dann abgestimmt, und Modellkosten entstehen nur für bestätigte Aufträge. Das fertige Deck geht erst nach einem Review an den Kunden.
+
+### Doppelstart-Schutz über eine Lauf-Tabelle
+
+Board-Webhooks können mehrfach feuern. Bevor der Worker beauftragt wird, prüft n8n, ob für denselben Auftrag bereits ein laufender Audit jünger als drei Stunden existiert. Erst danach wird der Lauf mit Job-ID gespeichert.
+
+### Hänger-Wache gegen verlorene Rückmeldungen
+
+Ein Zeitplan-Workflow prüft alle 15 Minuten Läufe, die länger als 90 Minuten laufen, und fragt den Worker nach dem Job-Status. Ist der Job fertig, aber die Rückmeldung verloren gegangen, wird das Ende nachgetragen. Echte Hänger erzeugen genau eine Warnung am Auftrag; ein Flag verhindert Wiederholungen.
+
+### Fehler landen dort, wo gearbeitet wird
+
+Fehlschläge beim Start oder im Worker erzeugen ein Update direkt am Auftrag, mit Job-ID, Schritt und Fehlermeldung. Niemand muss dafür in die Workflow-Protokolle schauen.
+
+### Ausfälle von Nebendiensten brechen die Bestellung nicht ab
+
+Antwortet der Prüfdienst nicht oder liefert das Modell unlesbares JSON, läuft die Bestellung trotzdem durch. Der interne Hinweis meldet dann, dass ein Teilergebnis fehlt.
+
+## Ergebnis
+
+Seit Oktober 2026 läuft die Strecke im Testbetrieb mit echten Durchläufen. Audit-Start, Worker-Rückmeldung und Hänger-Wache laufen in den protokollierten Ausführungen ohne Fehler, der vorgelagerte Quick-Check wird regelmäßig genutzt.
+
+Zwischen Bestellung und fertigem Analyse-Deck stehen nur noch zwei menschliche Entscheidungen: die Freigabe des Laufs und das Review des Ergebnisses.
+
+## Erkenntnisse
+
+Öffentliche Webhooks brauchen dieselbe Sorgfalt wie eine API. Vor dem regulären Betrieb stehen noch Härtungen an einzelnen Eingängen der Strecke an.
+
+Eine schlanke Lauf-Tabelle mit Status, Startzeit und Warn-Flag hat mehr Betriebssicherheit gebracht als zusätzliche Retries.
+
+## Einschränkungen der Darstellung
+
+Dieses Projekt liegt im Unternehmenskontext. Es werden keine Screenshots interner
+Systeme, keine Kundennamen, keine Domains und keine internen Kennungen gezeigt.
+Die Darstellung ist auf die Architektur abstrahiert.
+
+Kontakt: contact@ozan-orhan.com
+

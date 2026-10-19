@@ -1,0 +1,57 @@
+# MCP-Plattform, selbst gehostet
+
+> Eine eigene Plattform, über die KI-Agenten Projekte auf meinem Server verwalten können: jede Änderung erst als Vorschau, dann Freigabe per Passkey, dann Anwendung.
+
+URL: https://ozan-orhan.com/projekte/mcp-plattform-self-hosted/
+Status: Eigenes Infrastrukturprojekt, in Betrieb, Ausbau läuft
+Kontext: Eigenes Engineering-Projekt
+Stack: Python, MCP (Streamable HTTP), OAuth, Docker Compose, Caddy, Cloudflare, Passkeys, Debian
+
+## Ausgangspunkt
+
+Ich wollte Agenten wie ChatGPT oder Claude nutzen, um kleine Projekte auf meinem eigenen Server anzulegen, zu ändern und auszurollen. Ein direkter Shell-Zugang für ein Sprachmodell kam dafür nicht infrage.
+
+## Überblick
+
+Die Plattform stellt einen MCP-Server bereit, der über Streamable HTTP erreichbar ist und Clients per OAuth anmeldet. Die Tools decken Projektverwaltung, Deployments und Statusabfragen ab. Jede verändernde Aktion durchläuft Vorschau, Freigabe und Anwendung.
+
+## Mein Beitrag
+
+Eigenes Projekt: Architektur, Implementierung, Betrieb und Dokumentation stammen von mir.
+
+## Architektur
+
+Der Server läuft unter Debian mit Docker Compose. Dienste sind in getrennte Stacks aufgeteilt, etwa Reverse Proxy, MCP, n8n, Statusseite, Backups und Projekte, und hängen an einem gemeinsamen Proxy-Netzwerk. Anfragen laufen über Cloudflare und Caddy zum jeweiligen Dienst.
+
+Der MCP-Server trennt Daten nach Zweck: Freigaben sind schreibgeschützt eingebunden, der Zustand ist beschreibbar. Eine Freigabe ist an eine Anfrage gebunden, gilt nur einmal und läuft ab. Bestätigt wird sie per Face ID beziehungsweise Passkey, mit SSH als Rückfallweg.
+
+## Entscheidungen
+
+### Vorschau, Freigabe, Anwendung
+
+Ein Agent kann Änderungen vorbereiten, aber nicht allein anwenden. Er erhält eine Vorschau zurück, ich bestätige per Passkey, erst dann wird ausgeführt. Das Sprachmodell bleibt nützlich, ohne die letzte Entscheidung zu treffen.
+
+### Freigaben einmalig und mit Ablaufzeit
+
+Eine Freigabe ist an den Fingerabdruck der Anfrage gebunden, kann nur einmal verwendet werden und verfällt. Eine abgefangene oder alte Freigabe lässt sich nicht erneut nutzen.
+
+### Gestufte Teststrategie vor jedem Rollout
+
+Änderungen an der Plattform durchlaufen neun Stufen: Syntaxprüfung, isoliertes Image, Prüfung der Tool-Liste, Compose- und Sicherheitsvalidierung, Rollback-Punkt, kontrollierter Rollout, Healthchecks für HTTP, OAuth und Mounts, ein Acceptance-Projekt und erst dann der breite Einsatz.
+
+### Backups mit dokumentierter Wiederherstellung
+
+Ein eigener Backup-Stack sichert lokal und verschlüsselt extern. Der Recovery-Ablauf rollt nur die betroffene Komponente zurück und endet mit Healthchecks.
+
+## Ergebnis
+
+Die Plattform läuft auf meinem Server und stellt Agenten eine Reihe getesteter MCP-Tools bereit. Nicht authentifizierte Aufrufe werden abgewiesen, verändernde Aktionen brauchen meine Freigabe.
+
+## Erkenntnisse
+
+Bei Agenten mit Schreibrechten liegt der Aufwand weniger im Tool selbst als in Freigabe, Nachvollziehbarkeit und Wiederherstellung.
+
+Offen sind unter anderem schreibgeschützte Secrets-Mounts, strukturierte Fehlercodes und auswertbare Audit-Events.
+
+Kontakt: contact@ozan-orhan.com
+

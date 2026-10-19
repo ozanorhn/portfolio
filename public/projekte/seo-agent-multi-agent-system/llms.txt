@@ -1,0 +1,67 @@
+# SEO-Agent mit Multi-Agent-System
+
+> Ein selbst gehosteter Agent, der wiederkehrende SEO-Aufgaben übernimmt: Daten über MCP abrufen, nach festen Skills auswerten und Ergebnisse in Slack liefern.
+
+URL: https://ozan-orhan.com/projekte/seo-agent-multi-agent-system/
+Status: Im Einsatz, Skills werden laufend nachgeschärft
+Kontext: Unternehmenskontext · anonymisiert dargestellt
+Stack: Hermes Agent Framework, Claude Sonnet, MCP, Slack, Python, n8n, Google Search Console, SEO-Daten-APIs
+
+## Ausgangspunkt
+
+Viele SEO-Aufgaben folgen festen Abläufen: Daten aus Suchkonsole und SEO-Tools holen, nach Vorgaben auswerten, eine Empfehlung formulieren. Diese Arbeit sollte ein Agent übernehmen, der im gewohnten Chat erreichbar ist und dessen Ergebnisse geprüft werden, bevor etwas live geht.
+
+## Überblick
+
+Der Agent läuft auf dem quelloffenen Hermes-Framework auf einem eigenen Server. Aufgaben sind als versionierte Skills in Markdown beschrieben, Datenquellen sind über MCP angebunden, und das Team spricht den Agenten über Slack an.
+
+## Mein Beitrag
+
+Ich habe das Grundgerüst aufgesetzt, die Modellanbindung eingerichtet, die Skills und begleitende Python-Skripte geschrieben und die Datenquellen über MCP angebunden. Für die Zielüberprüfung habe ich die n8n-Gegenstelle gebaut.
+
+Für eine Multi-Agent-Variante habe ich ein Rollenmodell entworfen und in einem Testlauf erprobt. Fachliche Vorgaben für einzelne Aufgaben kamen aus dem SEO-Team.
+
+## Architektur
+
+Jeder Skill beschreibt eine Aufgabe mit Eingaben, Arbeitsschritten und Ausgabevorlage, etwa Keyword-Recherche, OnPage-Prüfung, Nachoptimierung oder Content-Briefing. Der Agent wählt anhand der Anfrage den passenden Skill, ruft die nötigen Daten über MCP-Tools ab und liefert das Ergebnis als Nachricht oder Dokument.
+
+Für die Zielüberprüfung arbeitet der Agent mit n8n zusammen: Er ruft im Zwei-Wochen-Takt einen Webhook auf. n8n liest die beobachteten URLs, vergleicht für jede URL Suchkonsolen- und Rankingdaten zweier Zeiträume, bewertet den Trend und antwortet synchron mit einer Zusammenfassung, die der Agent in Slack postet.
+
+In der Multi-Agent-Variante verteilt ein Orchestrator eine Analyse auf spezialisierte Rollen für Strategie, OnPage, Technik und KI-Sichtbarkeit. Eine Kritiker-Rolle prüft die Ergebnisse, bevor sie zusammengeführt werden.
+
+## Entscheidungen
+
+### Skills als versionierte Markdown-Dateien
+
+Eine Aufgabe ist eine lesbare Datei, keine verstreute Prompt-Logik. Das Team kann Vorgaben nachvollziehen und korrigieren, und Änderungen sind versioniert. Aus Korrekturen im Chat leitet der Agent angepasste Skills ab.
+
+### Auswertung in n8n, Kommunikation im Agenten
+
+Bei der Zielüberprüfung übernimmt n8n die deterministische Datenbeschaffung und den Trendvergleich, der Agent Auslösung und Kommunikation. Die Rechenlogik bleibt dadurch testbar und unabhängig vom Modell.
+
+### Signale abstimmen statt einer Schwelle folgen
+
+Die Trendbewertung sammelt Richtungssignale aus Klicks und Rankings und entscheidet per Mehrheit: besser, schlechter, gemischt oder stabil. Gemeldet werden nur klare Trends.
+
+### Lesen ja, schreiben nur mit Freigabe
+
+Der Agent liest Daten und erstellt Empfehlungen. Änderungen an Websites oder im CMS macht er nicht selbstständig; jede schreibende Aktion braucht eine menschliche Freigabe.
+
+## Ergebnis
+
+Der Agent ist im Team im Einsatz und übernimmt wiederkehrende SEO-Aufgaben nach festgelegten Skills. Der Multi-Agent-Testlauf lieferte Ergebnisse, die für die interne Priorisierung freigegeben wurden; ins CMS geht nichts ohne menschliche Freigabe.
+
+## Erkenntnisse
+
+Die Qualität hängt weniger am Modell als an klar geschriebenen Skills mit Beispielen und Ausgabevorlagen.
+
+Eine Kritiker-Rolle fängt Fehler ab, kostet aber Laufzeit. Für Routineaufgaben reicht meist ein einzelner Agent mit gutem Skill.
+
+## Einschränkungen der Darstellung
+
+Dieses Projekt liegt im Unternehmenskontext. Es werden keine Screenshots interner
+Systeme, keine Kundennamen, keine Domains und keine internen Kennungen gezeigt.
+Die Darstellung ist auf die Architektur abstrahiert.
+
+Kontakt: contact@ozan-orhan.com
+

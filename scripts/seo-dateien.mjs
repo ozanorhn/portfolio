@@ -39,12 +39,14 @@ for (const p of alle) {
   ];
   if (p.ausgangspunkt?.length) teile.push(``, `## Ausgangspunkt`, ``, p.ausgangspunkt.join('\n\n'));
   if (p.ueberblick?.length) teile.push(``, `## Überblick`, ``, p.ueberblick.join('\n\n'));
+  if (p.beitrag?.length) teile.push(``, `## Mein Beitrag`, ``, p.beitrag.join('\n\n'));
   if (p.architektur?.length) teile.push(``, `## Architektur`, ``, p.architektur.join('\n\n'));
   if (p.entscheidungen?.length) {
     teile.push(``, `## Entscheidungen`, ``);
     for (const e of p.entscheidungen) teile.push(`### ${e.titel}`, ``, e.text, ``);
   }
   teile.push(``, `## Ergebnis`, ``, p.ergebnis.join('\n\n'));
+  if (p.erkenntnisse?.length) teile.push(``, `## Erkenntnisse`, ``, p.erkenntnisse.join('\n\n'));
   if (p.abstrahiert) {
     teile.push(
       ``,

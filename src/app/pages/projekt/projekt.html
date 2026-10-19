@@ -53,6 +53,13 @@
           </section>
         }
 
+        @if (w.beitrag?.length) {
+          <section id="beitrag" class="teil" aria-labelledby="t-beitrag">
+            <h2 id="t-beitrag" class="untertitel teil__titel">Mein Beitrag</h2>
+            <div class="prosa">@for (p of w.beitrag; track $index) { <p>{{ p }}</p> }</div>
+          </section>
+        }
+
         @if (w.architektur?.length) {
           <section id="architektur" class="teil" aria-labelledby="t-arch">
             <h2 id="t-arch" class="untertitel teil__titel">Architektur</h2>
@@ -133,6 +140,13 @@
             </p>
           }
         </section>
+
+        @if (w.erkenntnisse?.length) {
+          <section id="erkenntnisse" class="teil" aria-labelledby="t-erk">
+            <h2 id="t-erk" class="untertitel teil__titel">Erkenntnisse</h2>
+            <div class="prosa">@for (p of w.erkenntnisse; track $index) { <p>{{ p }}</p> }</div>
+          </section>
+        }
 
         @if (fachartikel().length) {
           <section id="fachartikel" class="teil" aria-labelledby="t-artikel">

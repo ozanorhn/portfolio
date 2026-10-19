@@ -1,4 +1,5 @@
 // Projektdaten. Einzige Quelle der Wahrheit für Index, Detailseiten, SEO und llms.txt.
+import { SYSTEME } from './works-systeme';
 // Nur Aussagen, die durch die Projektdokumentation oder den Code belegt sind.
 
 export interface Plate {
@@ -31,7 +32,7 @@ export interface Work {
   kicker: string;
   lede: string;
   status: string;
-  /** kern = die fünf Kernarbeiten, weitere = Unternehmensarbeit ohne Tafel, ausbildung = Developer Akademie. */
+  /** kern = ausgewählte KI-Systeme (Startseite), weitere = Unternehmensarbeit ohne Tafel, ausbildung = Developer Akademie. */
   gruppe: 'kern' | 'weitere' | 'ausbildung';
   /** Herkunft der Arbeit, steht im Kenndatenblock neben Status und Stack. */
   kontext: string;
@@ -45,9 +46,15 @@ export interface Work {
   /** Leer, wenn der Ausgangspunkt den Überblick bereits enthält. */
   ueberblick: string[];
   architektur?: string[];
+  /** Was ich selbst gebaut habe; bei Teamarbeit auch, was nicht von mir stammt. */
+  beitrag?: string[];
   /** Engineering-Entscheidungen. Reliability und Security stehen hier, wo sie hingehören. */
   entscheidungen: Entscheidung[];
   ergebnis: string[];
+  /** Was ich aus dem Projekt mitnehme, einschließlich offener Punkte. */
+  erkenntnisse?: string[];
+  /** Kurzfassung für die Startseiten-Karte: Problem und eigener Beitrag in je einem Satz. */
+  karte?: { problem: string; beitrag: string };
   /** Demos, die nur auf bestimmten Projektseiten erscheinen */
   demo?: 'pocket' | 'grounding' | 'lnw';
   links?: { label: string; href: string }[];
@@ -59,7 +66,7 @@ export interface Work {
   seoBeschreibung?: string;
 }
 
-export const WORKS: Work[] = [
+const BASIS: Work[] = [
   // ── 01 ────────────────────────────────────────────────────────────────
   {
     slug: 'pocket-ai-agent',
@@ -74,6 +81,12 @@ export const WORKS: Work[] = [
       'Gerät, Agentenlogik auf dem Server, Toolzugriff über MCP.',
     status: 'Funktionsfähiger Prototyp, laufende Weiterentwicklung',
     gruppe: 'kern',
+    karte: {
+      problem:
+        'Ein handliches Sprachinterface sollte Werkzeuge wie Todoist, Notion und Kalender über einen eigenen, selbst gehosteten Agenten bedienen.',
+      beitrag:
+        'Ich habe Firmware, Server-Pipeline und MCP-Anbindung selbst gebaut: Aufnahme auf dem ESP32-S3, Transkription und Agentenlogik mit Python und FastAPI.',
+    },
     kontext: 'Eigenes Engineering-Projekt',
     stack: [
       'C++', 'ESP32-S3', 'FreeRTOS', 'PlatformIO', 'Python', 'FastAPI',
@@ -180,8 +193,8 @@ export const WORKS: Work[] = [
     lede:
       'Ein monatlicher Workflow, der Zeiterfassungen aus Toggl verarbeitet, kundenspezifisch ' +
       'aufbereitet und daraus automatisch Leistungsnachweise und Dokumente erzeugt.',
-    status: 'Aktiver monatlicher Workflow',
-    gruppe: 'kern',
+    status: 'Im Einsatz seit Ende 2025, Folgeversion im Test',
+    gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
@@ -271,6 +284,12 @@ export const WORKS: Work[] = [
     lede: 'Eine zentrale RAG-Wissensbasis, die Agenten über MCP als Retrieval-Tool nutzen können.',
     status: 'Produktiv aktiv',
     gruppe: 'kern',
+    karte: {
+      problem:
+        'Mehrere KI-Assistenten brauchten Zugriff auf internes Wissen, ohne dass jeder Agent eine eigene Dokumentpipeline bekommt.',
+      beitrag:
+        'Ich habe Ingest und Retrieval als getrennte n8n-Workflows gebaut und die Suche als read-only MCP-Tool mit mehrsprachigen Embeddings bereitgestellt.',
+    },
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
@@ -365,6 +384,12 @@ export const WORKS: Work[] = [
       'Maßnahmen messbar ausgewirkt haben — ohne dass jemand Daten von Hand sammelt.',
     status: 'Produktiv, drei Komponenten',
     gruppe: 'kern',
+    karte: {
+      problem:
+        'Sichtbarkeit in KI-Antworten, Suchdaten und Webanalyse lagen in getrennten Systemen und mussten von Hand zusammengeführt werden.',
+      beitrag:
+        'Ich habe die n8n-Pipelines gebaut, die fünf Datenquellen abrufen, normalisieren und von einem Analyse-Agenten mit strukturiertem Output auswerten lassen.',
+    },
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
@@ -472,8 +497,8 @@ export const WORKS: Work[] = [
     lede:
       'Eine LLM-gestützte Datenpipeline, die Stellenanzeigen aus HTML strukturiert und über ' +
       'last_seen_at idempotent synchron hält.',
-    status: 'Implementiert und lauffähig',
-    gruppe: 'kern',
+    status: 'Implementiert, derzeit nicht aktiv',
+    gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
@@ -837,13 +862,34 @@ export const WORKS: Work[] = [
   },
 ];
 
+/**
+ * Reihenfolge aller Projekte. Ausgewählte KI-Systeme zuerst, dann weitere Arbeiten, dann
+ * Ausbildungsprojekte. Die Nummer ergibt sich aus der Position.
+ */
+const REIHENFOLGE = [
+  'seo-agent-multi-agent-system', 'agentic-commerce-audit', 'wissensbasis-rag-mcp',
+  'ai-visibility-monitoring-platform', 'mcp-plattform-self-hosted', 'pocket-ai-agent',
+  'leistungsnachweis-automation', 'ki-rechnungspruefung', 'recruiting-jobs-sync',
+  'conversational-ai-meeting-assistant', 'grounding-page-generator',
+  'automation-betrieb-self-hosting',
+  'dabubble', 'join', 'pokedex', 'el-pollo-loco',
+];
+
+const ALLE = [...BASIS, ...SYSTEME];
+
+export const WORKS: Work[] = REIHENFOLGE.map((slug, i) => {
+  const w = ALLE.find((x) => x.slug === slug);
+  if (!w) throw new Error(`Projekt fehlt: ${slug}`);
+  return { ...w, nr: String(i + 1).padStart(2, '0') };
+});
+
 /** Alle Projekte in einer Reihe; die Gruppe steht am Werk selbst. */
 export const PROJEKTE = WORKS;
-/** Die fünf Kernarbeiten — das, was die Startseite zeigt. */
+/** Ausgewählte KI-Systeme — die Karten auf der Startseite. */
 export const KERNARBEITEN = WORKS.filter((w) => w.gruppe === 'kern');
 
 export const GRUPPEN_TITEL: Record<Work['gruppe'], string> = {
-  kern: 'Kernarbeiten',
+  kern: 'Ausgewählte KI-Systeme',
   weitere: 'Weitere Arbeiten',
   ausbildung: 'Ausbildungsprojekte — Developer Akademie',
 };
@@ -863,9 +909,11 @@ export function abschnitte(w: Work): Abschnitt[] {
   const a: Abschnitt[] = [];
   if (w.ausgangspunkt.length) a.push({ id: 'ausgangspunkt', titel: 'Ausgangspunkt' });
   if (w.ueberblick.length) a.push({ id: 'ueberblick', titel: 'Überblick' });
+  if (w.beitrag?.length) a.push({ id: 'beitrag', titel: 'Mein Beitrag' });
   if (w.architektur?.length) a.push({ id: 'architektur', titel: 'Architektur' });
   if (w.demo) a.push({ id: 'demo', titel: w.demo === 'pocket' ? 'Interaktion' : 'Freigabe' });
   if (w.entscheidungen.length) a.push({ id: 'entscheidungen', titel: 'Engineering-Entscheidungen' });
   a.push({ id: 'ergebnis', titel: 'Ergebnis' });
+  if (w.erkenntnisse?.length) a.push({ id: 'erkenntnisse', titel: 'Erkenntnisse' });
   return a;
 }
