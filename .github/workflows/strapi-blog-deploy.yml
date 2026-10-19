@@ -61,6 +61,8 @@ jobs:
         run: |
           test -s dist/portfolio/browser/blog/artikel.json
           test -s dist/portfolio/browser/blog/index.html
+          test -s dist/portfolio/browser/glossar/index.html
+          test -s dist/portfolio/browser/glossar/rag/index.html
           node --input-type=module -e "
             import { readFileSync } from 'node:fs';
             const list = JSON.parse(readFileSync('dist/portfolio/browser/blog/artikel.json','utf8'));
