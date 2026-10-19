@@ -50,8 +50,8 @@ export class ProjekteComponent implements OnInit {
     this.seo.set({
       titel: `Projekte & Fallstudien: AI-Agenten, RAG und n8n — ${SITE.name}`,
       beschreibung:
-        'Ausgewählte Projekte und Fallstudien: AI-Agenten, RAG mit MCP, n8n-Automationen und ' +
-        'LLM-Datenpipelines aus Unternehmensprojekten, dazu Projekte aus der Ausbildung.',
+        'Fallstudien zu KI-Agenten, RAG und MCP, n8n-Automatisierungen und LLM-Datenpipelines, ' +
+        'dazu eigene Plattform- und Ausbildungsprojekte.',
       pfad: '/projekte',
       breadcrumb: [{ name: 'Start', pfad: '/' }, { name: 'Projekte', pfad: '/projekte' }],
       jsonLd: {

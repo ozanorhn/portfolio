@@ -1,6 +1,6 @@
 # Automation-Betrieb und Self-Hosting
 
-> Die Infrastruktur unter den Automatisierungen: selbst gehostete Datenbank, zentrale Fehlermeldungen für Workflows, VPN mit fester IP und ein Passwortmanager für das Team.
+> Die Infrastruktur unter den Automatisierungen: eigene Datenbank, zentrale Fehlermeldungen, VPN mit fester IP und ein Passwortmanager für das Team.
 
 URL: https://ozan-orhan.com/projekte/automation-betrieb-self-hosting/
 Status: Im Betrieb
@@ -9,39 +9,37 @@ Stack: Docker, Supabase (selbst gehostet), PostgreSQL, n8n, Slack, WireGuard, Va
 
 ## Ausgangspunkt
 
-Mit der Zahl der Automatisierungen wuchs der Bedarf an verlässlichem Betrieb: Fehler sollten nicht erst auffallen, wenn ein Ergebnis fehlt, Daten sollten aus Datenschutzgründen auf eigener Infrastruktur liegen, und Zugänge sollten nicht in Tabellen verwaltet werden.
+Mit der Zahl der Automatisierungen wuchs der Bedarf an verlässlichem Betrieb: Fehler früh sehen, Daten auf eigener Infrastruktur halten, Zugänge nicht in Tabellen verwalten.
 
 ## Mein Beitrag
 
-Ich habe die selbst gehostete Datenbank in Docker eingerichtet, Workflows an einen zentralen Error-Workflow angebunden, eine Richtlinie für Benennung, Ablage und Fehlerbehandlung geschrieben, das VPN mit fester IP aufgesetzt und den Passwortmanager eingeführt.
+Ich habe die selbst gehostete Datenbank in Docker eingerichtet, Workflows an einen zentralen Error-Workflow angebunden, eine Richtlinie für Benennung und Fehlerbehandlung geschrieben, das VPN mit fester IP aufgesetzt und den Passwortmanager eingeführt.
 
 ## Architektur
 
-Die Datenbank für Wissensbasis, Transkripte und Auswertungen läuft als selbst gehostete Supabase-Instanz in Docker auf einem Server in Deutschland. Die Workflows greifen über Credentials darauf zu.
-
-Workflows verweisen auf einen gemeinsamen Error-Workflow, der Fehler in einen Slack-Kanal meldet. Eine nächtliche Sicherung legt die Workflow-Definitionen extern ab.
+Die Datenbank für Wissensbasis, Transkripte und Auswertungen läuft als selbst gehostete Supabase-Instanz in Docker. Workflows melden Fehler über einen gemeinsamen Error-Workflow in einen Chat-Kanal; eine nächtliche Sicherung legt die Definitionen extern ab.
 
 ## Entscheidungen
 
-### Ein Error-Workflow für alle
+### Ein Fehlerpfad für alle
 
-Statt Fehlerbehandlung in jedem Workflow neu zu bauen, gibt es einen zentralen Fehlerpfad. Neue Workflows hängen sich nach der Richtlinie daran an.
+Statt Fehlerbehandlung je Workflow gibt es einen zentralen Pfad, an den neue Workflows andocken.
 
 ### Eigene Datenbank statt Cloud
 
-Personenbezogene Inhalte wie Besprechungstranskripte bleiben auf eigener Infrastruktur in Deutschland.
+Personenbezogene Inhalte wie Transkripte bleiben auf eigener Infrastruktur in Deutschland.
 
 ### Feste IP über VPN
 
-Für Systeme mit IP-Freigabe läuft der Zugriff über ein WireGuard-VPN mit einer gemeinsamen festen Adresse statt über wechselnde Einzelanschlüsse.
+Systeme mit IP-Freigabe erreicht das Team über ein WireGuard-VPN mit gemeinsamer Adresse.
 
 ## Ergebnis
 
-Fehler der angebundenen Workflows erscheinen zentral in Slack, Zugänge liegen im Passwortmanager statt in einer Tabelle, und die Datenbank läuft auf eigener Infrastruktur.
+Fehler der angebundenen Workflows erscheinen zentral im Chat, Zugänge liegen im Passwortmanager, und die Datenbank läuft auf eigener Infrastruktur.
 
 ## Erkenntnisse
 
-Zentrale Fehlermeldungen helfen nur, wenn sie jeden Workflow erfassen. Neue Workflows müssen deshalb konsequent an den Fehlerpfad angebunden werden, und Zugangsdaten gehören ausschließlich in den Credential Store.
+Zentrale Fehlermeldungen helfen nur, wenn jeder Workflow angebunden ist, und Zugangsdaten gehören ausschließlich in den Credential Store.
 
 ## Einschränkungen der Darstellung
 

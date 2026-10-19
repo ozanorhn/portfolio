@@ -47,23 +47,15 @@
       </div>
       <div class="prosa profil__text">
         <p>
-          Aktuell arbeite ich als Junior Analytics &amp; AI Specialist. In dieser Rolle entwickle
-          ich die KI-Systeme und Automatisierungen, die auf dieser Seite beschrieben sind, selbst:
-          vom Datenfluss über die Prompt- und Schemadefinition bis zu Betrieb und Fehlerbehandlung.
-          Beruflich entwickle ich mich in Richtung AI Automation Engineer.
+          Aktuell arbeite ich als Junior Analytics &amp; AI Specialist und entwickle die
+          KI-Systeme auf dieser Seite selbst, vom Datenfluss über Prompt und Schema bis zu Betrieb
+          und Fehlerbehandlung. Mein Ziel ist die Rolle als AI Automation Engineer.
         </p>
         <p>
-          Mein Schwerpunkt sind <a routerLink="/glossar/ki-agent/">KI-Agenten</a> und
-          mehrstufige Workflows, die Sprachmodelle mit APIs, Datenquellen und bestehenden Systemen
-          verbinden. Dazu gehören <a routerLink="/glossar/rag/">RAG</a>-Wissensbasen, MCP-Server,
-          Datenpipelines für SEO- und KI-Sichtbarkeitsdaten und
-          <a routerLink="/glossar/ki-automatisierung/">KI-Automatisierungen</a> für interne Abläufe.
-        </p>
-        <p>
-          Mich interessiert der Weg vom funktionierenden Prototyp zum zuverlässigen System:
-          schema-validierte Ausgaben, Freigaben vor schreibenden Aktionen, zentrale
-          Fehlermeldungen, Idempotenz und nachvollziehbare Logs. Wenn ein System eine eigene
-          Oberfläche braucht, setze ich sie mit Angular und TypeScript selbst um.
+          Schwerpunkte sind <a routerLink="/glossar/ki-agent/">KI-Agenten</a>,
+          <a routerLink="/glossar/rag/">RAG</a>-Wissensbasen, MCP-Server und
+          <a routerLink="/glossar/ki-automatisierung/">KI-Automatisierungen</a>, gebaut für den
+          Betrieb: geprüfte Ausgaben, Freigaben vor schreibenden Aktionen, zentrale Fehlermeldungen.
         </p>
       </div>
       <dl class="profil__kenn">
@@ -84,6 +76,14 @@
       @for (w of ausgewaehlt; track w.slug) {
         <li class="karte">
           <article class="karte__inhalt" [attr.aria-labelledby]="'k-' + w.slug">
+            @if (w.fluss) {
+              <ol class="karte__fluss" aria-hidden="true">
+                @for (s of w.fluss.slice(0, 5); track $index) {
+                  <li><span class="karte__knoten"></span><span class="karte__station">{{ s.label }}</span></li>
+                }
+                <span class="karte__laeufer"></span>
+              </ol>
+            }
             <p class="meta karte__kicker">{{ w.kicker }}</p>
             <h3 class="karte__titel" [id]="'k-' + w.slug">
               <a [routerLink]="['/projekte', w.slug]">{{ w.titel }}</a>

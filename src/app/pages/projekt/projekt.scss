@@ -11,7 +11,8 @@
 .kenn { padding-bottom: clamp(24px, 3vw, 40px); }
 .kenn__liste {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  column-gap: clamp(16px, 2.4vw, 40px);
   border-top: $strich-regel solid $linie;
 }
 .kenn__paar { padding-block: $s3; border-bottom: $strich-haar solid $linie; }
@@ -66,4 +67,11 @@
   .einstieg--bild .einstieg__bild { order: -1; }
   .korpus__nav { position: static; top: auto; margin-bottom: $s5; }
   .teil { scroll-margin-top: 64px; }
+}
+
+/* Entscheidungen als Raster: auf breiten Flächen zwei Spalten, schneller zu überfliegen */
+@media (min-width: $bp-m) {
+  #entscheidungen { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(24px, 3vw, 48px); }
+  #entscheidungen > .teil__titel { grid-column: 1 / -1; }
+  #entscheidungen .entsch:last-of-type { border-bottom: $strich-haar solid $linie; }
 }

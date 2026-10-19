@@ -71,8 +71,11 @@ export class SystembildComponent implements OnInit {
   readonly hoch = signal<SafeHtml | null>(null);
 
   async ngOnInit(): Promise<void> {
-    const { DIAGRAMS } = await import('../data/diagrams');
-    const paar = DIAGRAMS[this.id()];
+    const [{ DIAGRAMS }, { DIAGRAMS_SYSTEME }] = await Promise.all([
+      import('../data/diagrams'),
+      import('../data/diagrams-systeme'),
+    ]);
+    const paar = DIAGRAMS[this.id()] ?? DIAGRAMS_SYSTEME[this.id()];
     if (!paar) return;
     this.quer.set(this.sanitizer.bypassSecurityTrustHtml(paar.quer));
     this.hoch.set(this.sanitizer.bypassSecurityTrustHtml(paar.hoch));

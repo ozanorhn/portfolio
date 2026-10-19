@@ -1,6 +1,6 @@
 # MCP-Plattform, selbst gehostet
 
-> Eine eigene Plattform, über die KI-Agenten Projekte auf meinem Server verwalten können: jede Änderung erst als Vorschau, dann Freigabe per Passkey, dann Anwendung.
+> Eine eigene Plattform, über die KI-Agenten Projekte auf meinem Server verwalten: erst Vorschau, dann Freigabe per Passkey, dann Anwendung.
 
 URL: https://ozan-orhan.com/projekte/mcp-plattform-self-hosted/
 Status: Eigenes Infrastrukturprojekt, in Betrieb, Ausbau läuft
@@ -9,49 +9,41 @@ Stack: Python, MCP (Streamable HTTP), OAuth, Docker Compose, Caddy, Cloudflare, 
 
 ## Ausgangspunkt
 
-Ich wollte Agenten wie ChatGPT oder Claude nutzen, um kleine Projekte auf meinem eigenen Server anzulegen, zu ändern und auszurollen. Ein direkter Shell-Zugang für ein Sprachmodell kam dafür nicht infrage.
-
-## Überblick
-
-Die Plattform stellt einen MCP-Server bereit, der über Streamable HTTP erreichbar ist und Clients per OAuth anmeldet. Die Tools decken Projektverwaltung, Deployments und Statusabfragen ab. Jede verändernde Aktion durchläuft Vorschau, Freigabe und Anwendung.
+Ich wollte Agenten wie ChatGPT oder Claude kleine Projekte auf meinem Server anlegen und ausrollen lassen. Ein Shell-Zugang für ein Sprachmodell kam nicht infrage.
 
 ## Mein Beitrag
 
-Eigenes Projekt: Architektur, Implementierung, Betrieb und Dokumentation stammen von mir.
+Eigenes Projekt: Architektur, Implementierung, Betrieb und Dokumentation.
 
 ## Architektur
 
-Der Server läuft unter Debian mit Docker Compose. Dienste sind in getrennte Stacks aufgeteilt, etwa Reverse Proxy, MCP, n8n, Statusseite, Backups und Projekte, und hängen an einem gemeinsamen Proxy-Netzwerk. Anfragen laufen über Cloudflare und Caddy zum jeweiligen Dienst.
-
-Der MCP-Server trennt Daten nach Zweck: Freigaben sind schreibgeschützt eingebunden, der Zustand ist beschreibbar. Eine Freigabe ist an eine Anfrage gebunden, gilt nur einmal und läuft ab. Bestätigt wird sie per Face ID beziehungsweise Passkey, mit SSH als Rückfallweg.
+Der MCP-Server läuft über Streamable HTTP hinter Cloudflare und Caddy und meldet Clients per OAuth an. Dienste liegen als getrennte Docker-Compose-Stacks an einem Proxy-Netzwerk. Freigaben sind schreibgeschützt eingebunden, der Zustand ist beschreibbar.
 
 ## Entscheidungen
 
 ### Vorschau, Freigabe, Anwendung
 
-Ein Agent kann Änderungen vorbereiten, aber nicht allein anwenden. Er erhält eine Vorschau zurück, ich bestätige per Passkey, erst dann wird ausgeführt. Das Sprachmodell bleibt nützlich, ohne die letzte Entscheidung zu treffen.
+Ein Agent kann Änderungen vorbereiten, aber nicht allein anwenden. Die letzte Entscheidung trifft ein Passkey auf meinem Gerät.
 
-### Freigaben einmalig und mit Ablaufzeit
+### Freigaben einmalig und befristet
 
-Eine Freigabe ist an den Fingerabdruck der Anfrage gebunden, kann nur einmal verwendet werden und verfällt. Eine abgefangene oder alte Freigabe lässt sich nicht erneut nutzen.
+Eine Freigabe ist an den Fingerabdruck der Anfrage gebunden, gilt einmal und verfällt.
 
-### Gestufte Teststrategie vor jedem Rollout
+### Neun Teststufen vor jedem Rollout
 
-Änderungen an der Plattform durchlaufen neun Stufen: Syntaxprüfung, isoliertes Image, Prüfung der Tool-Liste, Compose- und Sicherheitsvalidierung, Rollback-Punkt, kontrollierter Rollout, Healthchecks für HTTP, OAuth und Mounts, ein Acceptance-Projekt und erst dann der breite Einsatz.
+Von Syntaxprüfung und isoliertem Image über Rollback-Punkt und Healthchecks für HTTP, OAuth und Mounts bis zu einem Acceptance-Projekt.
 
-### Backups mit dokumentierter Wiederherstellung
+### Backups mit Wiederherstellung
 
-Ein eigener Backup-Stack sichert lokal und verschlüsselt extern. Der Recovery-Ablauf rollt nur die betroffene Komponente zurück und endet mit Healthchecks.
+Sicherung lokal und verschlüsselt extern; die Wiederherstellung rollt nur die betroffene Komponente zurück.
 
 ## Ergebnis
 
-Die Plattform läuft auf meinem Server und stellt Agenten eine Reihe getesteter MCP-Tools bereit. Nicht authentifizierte Aufrufe werden abgewiesen, verändernde Aktionen brauchen meine Freigabe.
+Die Plattform stellt Agenten getestete MCP-Tools bereit. Nicht authentifizierte Aufrufe werden abgewiesen, verändernde Aktionen brauchen meine Freigabe.
 
 ## Erkenntnisse
 
-Bei Agenten mit Schreibrechten liegt der Aufwand weniger im Tool selbst als in Freigabe, Nachvollziehbarkeit und Wiederherstellung.
-
-Offen sind unter anderem schreibgeschützte Secrets-Mounts, strukturierte Fehlercodes und auswertbare Audit-Events.
+Bei Agenten mit Schreibrechten liegt der Aufwand in Freigabe, Nachvollziehbarkeit und Wiederherstellung. Offen sind schreibgeschützte Secrets-Mounts und auswertbare Audit-Events.
 
 Kontakt: contact@ozan-orhan.com
 

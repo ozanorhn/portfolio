@@ -1,6 +1,6 @@
 # SEO-Agent mit Multi-Agent-System
 
-> Ein selbst gehosteter Agent, der wiederkehrende SEO-Aufgaben übernimmt: Daten über MCP abrufen, nach festen Skills auswerten und Ergebnisse in Slack liefern.
+> Ein selbst gehosteter Agent für wiederkehrende SEO-Aufgaben: Daten über MCP, Auswertung nach festen Skills, Ergebnisse im Team-Chat.
 
 URL: https://ozan-orhan.com/projekte/seo-agent-multi-agent-system/
 Status: Im Einsatz, Skills werden laufend nachgeschärft
@@ -9,53 +9,41 @@ Stack: Hermes Agent Framework, Claude Sonnet, MCP, Slack, Python, n8n, Google Se
 
 ## Ausgangspunkt
 
-Viele SEO-Aufgaben folgen festen Abläufen: Daten aus Suchkonsole und SEO-Tools holen, nach Vorgaben auswerten, eine Empfehlung formulieren. Diese Arbeit sollte ein Agent übernehmen, der im gewohnten Chat erreichbar ist und dessen Ergebnisse geprüft werden, bevor etwas live geht.
-
-## Überblick
-
-Der Agent läuft auf dem quelloffenen Hermes-Framework auf einem eigenen Server. Aufgaben sind als versionierte Skills in Markdown beschrieben, Datenquellen sind über MCP angebunden, und das Team spricht den Agenten über Slack an.
+Keyword-Recherche, OnPage-Checks oder Zielüberprüfungen folgen festen Abläufen. Ein Agent sollte sie im Team-Chat übernehmen, ohne dass etwas ungeprüft live geht.
 
 ## Mein Beitrag
 
-Ich habe das Grundgerüst aufgesetzt, die Modellanbindung eingerichtet, die Skills und begleitende Python-Skripte geschrieben und die Datenquellen über MCP angebunden. Für die Zielüberprüfung habe ich die n8n-Gegenstelle gebaut.
-
-Für eine Multi-Agent-Variante habe ich ein Rollenmodell entworfen und in einem Testlauf erprobt. Fachliche Vorgaben für einzelne Aufgaben kamen aus dem SEO-Team.
+Ich habe das Grundgerüst auf dem quelloffenen Hermes-Framework aufgesetzt, die Modellanbindung eingerichtet, Skills und Python-Skripte geschrieben, Datenquellen über MCP angebunden und die n8n-Gegenstelle für die Zielüberprüfung gebaut. Fachliche Vorgaben kamen aus dem SEO-Team.
 
 ## Architektur
 
-Jeder Skill beschreibt eine Aufgabe mit Eingaben, Arbeitsschritten und Ausgabevorlage, etwa Keyword-Recherche, OnPage-Prüfung, Nachoptimierung oder Content-Briefing. Der Agent wählt anhand der Anfrage den passenden Skill, ruft die nötigen Daten über MCP-Tools ab und liefert das Ergebnis als Nachricht oder Dokument.
-
-Für die Zielüberprüfung arbeitet der Agent mit n8n zusammen: Er ruft im Zwei-Wochen-Takt einen Webhook auf. n8n liest die beobachteten URLs, vergleicht für jede URL Suchkonsolen- und Rankingdaten zweier Zeiträume, bewertet den Trend und antwortet synchron mit einer Zusammenfassung, die der Agent in Slack postet.
-
-In der Multi-Agent-Variante verteilt ein Orchestrator eine Analyse auf spezialisierte Rollen für Strategie, OnPage, Technik und KI-Sichtbarkeit. Eine Kritiker-Rolle prüft die Ergebnisse, bevor sie zusammengeführt werden.
+Jeder Skill beschreibt eine Aufgabe mit Eingaben, Schritten und Ausgabevorlage. Der Agent wählt den passenden Skill und holt Daten über MCP-Tools. Für die Zielüberprüfung ruft er n8n auf, das je URL zwei Zeiträume vergleicht und eine Zusammenfassung zurückgibt. Im Multi-Agent-Test verteilte ein Orchestrator die Analyse auf Fachrollen, ein Kritiker prüfte.
 
 ## Entscheidungen
 
-### Skills als versionierte Markdown-Dateien
+### Skills als versionierte Dateien
 
-Eine Aufgabe ist eine lesbare Datei, keine verstreute Prompt-Logik. Das Team kann Vorgaben nachvollziehen und korrigieren, und Änderungen sind versioniert. Aus Korrekturen im Chat leitet der Agent angepasste Skills ab.
+Eine Aufgabe ist eine lesbare Markdown-Datei. Das Team kann Vorgaben nachvollziehen und korrigieren; aus Korrekturen leitet der Agent angepasste Skills ab.
 
-### Auswertung in n8n, Kommunikation im Agenten
+### Rechnen in n8n, Sprechen im Agenten
 
-Bei der Zielüberprüfung übernimmt n8n die deterministische Datenbeschaffung und den Trendvergleich, der Agent Auslösung und Kommunikation. Die Rechenlogik bleibt dadurch testbar und unabhängig vom Modell.
+Datenbeschaffung und Trendvergleich laufen deterministisch in n8n, der Agent übernimmt Auslösung und Kommunikation. So bleibt die Logik testbar und modellunabhängig.
 
-### Signale abstimmen statt einer Schwelle folgen
+### Signale abstimmen
 
-Die Trendbewertung sammelt Richtungssignale aus Klicks und Rankings und entscheidet per Mehrheit: besser, schlechter, gemischt oder stabil. Gemeldet werden nur klare Trends.
+Klick- und Rankingtrends werden per Mehrheit zu besser, schlechter, gemischt oder stabil zusammengefasst. Gemeldet werden nur klare Trends.
 
-### Lesen ja, schreiben nur mit Freigabe
+### Schreiben nur mit Freigabe
 
-Der Agent liest Daten und erstellt Empfehlungen. Änderungen an Websites oder im CMS macht er nicht selbstständig; jede schreibende Aktion braucht eine menschliche Freigabe.
+Der Agent liest und empfiehlt. Änderungen an Websites oder im CMS brauchen eine menschliche Freigabe.
 
 ## Ergebnis
 
-Der Agent ist im Team im Einsatz und übernimmt wiederkehrende SEO-Aufgaben nach festgelegten Skills. Der Multi-Agent-Testlauf lieferte Ergebnisse, die für die interne Priorisierung freigegeben wurden; ins CMS geht nichts ohne menschliche Freigabe.
+Der Agent übernimmt im Team wiederkehrende SEO-Aufgaben nach festen Skills. Der Multi-Agent-Testlauf lieferte Ergebnisse für die interne Priorisierung.
 
 ## Erkenntnisse
 
-Die Qualität hängt weniger am Modell als an klar geschriebenen Skills mit Beispielen und Ausgabevorlagen.
-
-Eine Kritiker-Rolle fängt Fehler ab, kostet aber Laufzeit. Für Routineaufgaben reicht meist ein einzelner Agent mit gutem Skill.
+Gute Skills mit Beispielen und Vorlagen bringen mehr als ein stärkeres Modell. Eine Kritiker-Rolle fängt Fehler ab, kostet aber Laufzeit; für Routine reicht ein Agent.
 
 ## Einschränkungen der Darstellung
 

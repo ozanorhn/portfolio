@@ -3,7 +3,7 @@
 > Eine zentrale RAG-Wissensbasis, die Agenten über MCP als Retrieval-Tool nutzen können.
 
 URL: https://ozan-orhan.com/projekte/wissensbasis-rag-mcp/
-Status: Produktiv aktiv
+Status: MCP-Server aktiv, Ingest läuft manuell
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: n8n, MCP-Server-Trigger, Postgres mit Vektor-Erweiterung, Mehrsprachige Embeddings, Dokument-Loader, Text-Splitter
 

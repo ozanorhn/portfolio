@@ -1,6 +1,6 @@
 # Agentic Commerce Audit
 
-> Eine Prozesskette von der Bestellung bis zum fertigen Analyse-Deck: n8n steuert Status, Daten und Freigaben, ein eigener Worker misst, wie KI-Assistenten auf Kauffragen antworten.
+> Von der Bestellung bis zum Analyse-Deck: n8n steuert Status, Daten und Freigaben, ein Worker misst, wie KI-Assistenten auf echte Kauffragen antworten.
 
 URL: https://ozan-orhan.com/projekte/agentic-commerce-audit/
 Status: Live im Testbetrieb seit Oktober 2026
@@ -9,61 +9,41 @@ Stack: n8n, Webhooks, monday API, Claude Sonnet, DataForSEO LLM-Abfragen, ChatGP
 
 ## Ausgangspunkt
 
-Das Audit beantwortet eine neue Frage: Wie antworten ChatGPT, Gemini und Perplexity, wenn jemand eine echte Kauffrage stellt, und wird der untersuchte Shop dabei genannt? Dazu kommt eine technische Prüfung, ob der Shop für KI-Crawler und Agenten lesbar ist.
-
-Ohne Automatisierung hätte jedes Audit Bestellung, Datenerfassung, Abfragen an mehrere Modelle, Auswertung und Berichtserstellung von Hand verbunden.
-
-## Überblick
-
-Die Strecke besteht aus mehreren n8n-Workflows, die über Webhooks verkettet sind, und einem Audit-Worker, der als Container auf einem separaten Server läuft. Ein Projektboard dient als Statusmaschine: Jeder Auftrag durchläuft feste Zustände von Neu über Briefing und In Arbeit bis Review.
+Das Audit prüft, ob ChatGPT, Gemini und Perplexity einen Shop bei echten Kauffragen nennen und ob der Shop für KI-Crawler lesbar ist. Ohne Automatisierung wären Bestellung, Abfragen an mehrere Modelle und Bericht Handarbeit gewesen.
 
 ## Mein Beitrag
 
-Ich habe die automatisierte Prozesskette entwickelt: die n8n-Workflows für Vormerkung, Bestellung, Briefing, Audit-Start, Worker-Rückmeldung und Hänger-Erkennung sowie den vorgelagerten Quick-Check als Proxy zu einem eigenen Prüfdienst.
-
-Die Zahlungsanbindung hat ein Kollege übernommen. Prüfkriterien und Produktkonzept sind im Team entstanden.
+Ich habe die n8n-Workflows für Vormerkung, Bestellung, Briefing, Audit-Start, Worker-Rückmeldung und Hänger-Erkennung gebaut, dazu den vorgelagerten Quick-Check. Die Zahlungsanbindung stammt von einem Kollegen, das Produktkonzept aus dem Team.
 
 ## Architektur
 
-Eine Bestellung kommt per Webhook an, wird normalisiert und parallel in eine Tabelle, als Element im Projektboard und als Bestätigung an den Kunden geschrieben. Anschließend erzeugt Claude aus Shop und Kategorie einen Entwurf mit Kauffragen, Faktenfragen und Wettbewerbern als JSON. Der Entwurf wird im Briefing mit dem Kunden abgestimmt; das Briefing-Formular schreibt die Antworten an denselben Auftrag.
-
-Der Audit-Lauf startet, wenn ein Mensch den Status auf „In Arbeit“ setzt. Ein Board-Webhook ruft n8n auf; n8n prüft Board, Spalte und Status, verhindert einen Doppelstart und beauftragt den Worker über eine authentifizierte Schnittstelle. Der Worker stellt die Kauffragen an ChatGPT, Gemini und Perplexity, wertet Nennungen, Rang und zitierte Quellen aus, prüft den Shop und erzeugt ein Analyse-Deck.
-
-Nach Abschluss meldet sich der Worker per authentifiziertem Webhook zurück. n8n schließt den Lauf in einer eigenen Lauf-Tabelle ab und schreibt Fehler mit Schritt und Ursache als Update an den Auftrag.
+Bestellungen kommen per Webhook, landen in Tabelle und Projektboard, und Claude entwirft Kauffragen als JSON für das Briefing. Ein Mensch startet den Lauf per Statuswechsel; n8n prüft auf Doppelstart und beauftragt den Worker. Der fragt drei KI-Assistenten ab, wertet Nennungen und Quellen aus und erzeugt ein Deck, das vor der Auslieferung geprüft wird.
 
 ## Entscheidungen
 
 ### Der Mensch startet den teuren Schritt
 
-Der Audit-Worker läuft nicht automatisch nach der Bestellung, sondern erst nach einem Statuswechsel durch einen Menschen. Briefing und Kauffragen sind dann abgestimmt, und Modellkosten entstehen nur für bestätigte Aufträge. Das fertige Deck geht erst nach einem Review an den Kunden.
+Modellkosten entstehen erst nach abgestimmtem Briefing und Freigabe. Das Deck geht erst nach einem Review raus.
 
-### Doppelstart-Schutz über eine Lauf-Tabelle
+### Doppelstart-Schutz
 
-Board-Webhooks können mehrfach feuern. Bevor der Worker beauftragt wird, prüft n8n, ob für denselben Auftrag bereits ein laufender Audit jünger als drei Stunden existiert. Erst danach wird der Lauf mit Job-ID gespeichert.
+Board-Webhooks können mehrfach feuern. Eine Lauf-Tabelle verhindert einen zweiten Start für denselben Auftrag innerhalb von drei Stunden.
 
-### Hänger-Wache gegen verlorene Rückmeldungen
+### Hänger-Wache
 
-Ein Zeitplan-Workflow prüft alle 15 Minuten Läufe, die länger als 90 Minuten laufen, und fragt den Worker nach dem Job-Status. Ist der Job fertig, aber die Rückmeldung verloren gegangen, wird das Ende nachgetragen. Echte Hänger erzeugen genau eine Warnung am Auftrag; ein Flag verhindert Wiederholungen.
+Alle 15 Minuten prüft n8n Läufe über 90 Minuten beim Worker nach, trägt verlorene Rückmeldungen nach und warnt bei echten Hängern genau einmal.
 
-### Fehler landen dort, wo gearbeitet wird
+### Fehler am Auftrag
 
-Fehlschläge beim Start oder im Worker erzeugen ein Update direkt am Auftrag, mit Job-ID, Schritt und Fehlermeldung. Niemand muss dafür in die Workflow-Protokolle schauen.
-
-### Ausfälle von Nebendiensten brechen die Bestellung nicht ab
-
-Antwortet der Prüfdienst nicht oder liefert das Modell unlesbares JSON, läuft die Bestellung trotzdem durch. Der interne Hinweis meldet dann, dass ein Teilergebnis fehlt.
+Fehlschläge erscheinen als Update direkt am Auftrag, mit Job, Schritt und Ursache. Fällt ein Nebendienst aus, läuft die Bestellung trotzdem weiter.
 
 ## Ergebnis
 
-Seit Oktober 2026 läuft die Strecke im Testbetrieb mit echten Durchläufen. Audit-Start, Worker-Rückmeldung und Hänger-Wache laufen in den protokollierten Ausführungen ohne Fehler, der vorgelagerte Quick-Check wird regelmäßig genutzt.
-
-Zwischen Bestellung und fertigem Analyse-Deck stehen nur noch zwei menschliche Entscheidungen: die Freigabe des Laufs und das Review des Ergebnisses.
+Die Strecke läuft seit Oktober 2026 im Testbetrieb mit echten Durchläufen. Zwischen Bestellung und Deck stehen zwei menschliche Entscheidungen: Freigabe und Review.
 
 ## Erkenntnisse
 
-Öffentliche Webhooks brauchen dieselbe Sorgfalt wie eine API. Vor dem regulären Betrieb stehen noch Härtungen an einzelnen Eingängen der Strecke an.
-
-Eine schlanke Lauf-Tabelle mit Status, Startzeit und Warn-Flag hat mehr Betriebssicherheit gebracht als zusätzliche Retries.
+Öffentliche Webhooks brauchen dieselbe Sorgfalt wie eine API; vor dem regulären Betrieb stehen noch Härtungen an einzelnen Eingängen an. Eine schlanke Lauf-Tabelle brachte mehr Betriebssicherheit als zusätzliche Retries.
 
 ## Einschränkungen der Darstellung
 

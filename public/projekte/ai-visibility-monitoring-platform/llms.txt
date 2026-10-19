@@ -3,7 +3,7 @@
 > Drei Workflows führen fünf externe Datenquellen zusammen und prüfen, ob sich umgesetzte Maßnahmen messbar ausgewirkt haben — ohne dass jemand Daten von Hand sammelt.
 
 URL: https://ozan-orhan.com/projekte/ai-visibility-monitoring-platform/
-Status: Produktiv, drei Komponenten
+Status: Seit Mitte 2026 im Einsatz, Datenanbindung wird überarbeitet
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: n8n, Webhook mit synchroner Antwort, Zeitplan-Trigger, OAuth-Credentials, LLM-Agent mit strukturiertem Output, Postgres über REST mit Upsert, JavaScript
 
@@ -51,7 +51,7 @@ Nur Einträge mit klarem Trend erscheinen. Die Kopfzeile weist aus, wie viele Ei
 
 ## Ergebnis
 
-Fünf externe Datenquellen und ein zweites Agent-System sind angebunden. Der Wirkungsnachweis für umgesetzte Maßnahmen läuft ohne manuelle Datensammlung, und Sichtbarkeitsverluste erzeugen nachverfolgbare Einträge in einer Datenbank.
+Fünf externe Datenquellen und ein zweites Agent-System sind angebunden. Der Wirkungsnachweis für umgesetzte Maßnahmen ist so gebaut, dass er ohne manuelle Datensammlung auskommt; Sichtbarkeitsverluste werden als nachverfolgbare Einträge gespeichert. Die Datenbank-Anbindung wird derzeit überarbeitet.
 
 ## Einschränkungen der Darstellung
 

@@ -1,6 +1,6 @@
 # KI-Rechnungsprüfung
 
-> Rechnungen kommen als PDF per Mail. Ein LLM liest sie gegen ein festes Schema aus, Code prüft das Ergebnis, und die Buchhaltung erhält einen Zuordnungsvorschlag.
+> Rechnungen kommen als PDF per Mail. Ein LLM liest sie gegen ein festes Schema aus, Code prüft, und die Fachabteilung bekommt einen Zuordnungsvorschlag.
 
 URL: https://ozan-orhan.com/projekte/ki-rechnungspruefung/
 Status: Im Testbetrieb, Live-Gang geplant
@@ -9,39 +9,33 @@ Stack: n8n, Gmail API, PDF-Textextraktion, LLM Information Extractor, JSON-Schem
 
 ## Ausgangspunkt
 
-Rechnungen externer Mitarbeitender mussten von Hand gelesen und den richtigen Positionen in Kostenvoranschlägen zugeordnet werden: Leistung, Stunden, Betrag, Kunde und Monat.
+Rechnungen externer Mitarbeitender mussten von Hand gelesen und Positionen in Kostenvoranschlägen zugeordnet werden.
 
 ## Mein Beitrag
 
-Ich habe den Workflow entwickelt, von der Postfach-Anbindung über die Schema-Extraktion und Validierung bis zur Zuordnungslogik und den Schutzmechanismen für den Schreibpfad.
+Ich habe den Workflow entwickelt: Postfach-Anbindung, Schema-Extraktion, Validierung, Zuordnungslogik und die Sperren für den Schreibpfad.
 
 ## Architektur
 
-Ein Gmail-Trigger holt passende Mails mit PDF-Anhang. Der Text jedes PDFs wird extrahiert und von einem LLM-Extraktor gegen ein festes JSON-Schema ausgelesen: Rechnungsnummer, Datum, Leistungsmonat, Positionen mit Leistung, Stunden und Netto.
-
-Code prüft das Ergebnis: Ist es überhaupt eine Rechnung, enthält das PDF Text, stimmt die Summe der Positionen mit dem Rechnungsbetrag überein, ist der Monat erkannt. Danach werden Positionen über die Projektboard-API den passenden Einträgen zugeordnet. Die Buchhaltung bekommt eine Zusammenfassung; unklare Fälle werden zur Prüfung markiert.
+Ein Gmail-Trigger holt Mails mit PDF. Ein LLM-Extraktor liest Nummer, Monat und Positionen gegen ein JSON-Schema aus. Code prüft Summen, Duplikate und Plausibilität und ordnet die Positionen über die Projektboard-API zu. Unklare Fälle werden zur Prüfung markiert.
 
 ## Entscheidungen
 
-### Das Modell extrahiert, Code entscheidet
+### Modell extrahiert, Code entscheidet
 
-Das LLM liefert nur strukturierte Felder. Ob eine Rechnung plausibel ist, prüfen deterministische Regeln, etwa der Abgleich von Positionssumme und Rechnungsbetrag.
+Ob eine Rechnung plausibel ist, prüfen Regeln, etwa Positionssumme gegen Rechnungsbetrag.
 
-### Vorschlag statt automatischer Buchung
+### Vorschlag statt Buchung
 
-Der Workflow schreibt nichts selbst in die Kostenvoranschläge. Er schlägt eine Zuordnung vor, die ein Mensch bestätigt. Der Schreibpfad ist mehrfach gesperrt: per Schalter, durch deaktivierte Schritte und durch eine Beschränkung auf Testboards.
+Der Workflow schreibt nichts selbst. Der Schreibpfad ist per Schalter, deaktivierte Schritte und Testboard-Beschränkung gesperrt.
 
-### Idempotenz über Labels und Duplikatprüfung
+### Idempotenz über Labels
 
-Verarbeitete Mails bekommen ein Status-Label und werden nicht erneut gelesen. Zusätzlich wird geprüft, ob dieselbe Rechnung desselben Absenders bereits erfasst ist.
-
-### Eigener Fehlerpfad
-
-Bricht ein Lauf ab, geht eine Fehlermeldung direkt an die Fachabteilung statt nur in ein Protokoll.
+Verarbeitete Mails bekommen ein Label; zusätzlich wird geprüft, ob dieselbe Rechnung schon erfasst ist.
 
 ## Ergebnis
 
-In den Testläufen werden Rechnungen ausgelesen, geprüft und zugeordnet, ohne dass Daten geschrieben werden. Der Live-Gang mit Freigabe durch die Buchhaltung ist geplant.
+In Testläufen werden Rechnungen ausgelesen, geprüft und zugeordnet, ohne Daten zu schreiben. Der Live-Gang mit Freigabe ist geplant.
 
 ## Einschränkungen der Darstellung
 

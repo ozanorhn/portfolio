@@ -17,6 +17,16 @@
 
     <section class="kenn" aria-label="Kenndaten">
       <dl class="kenn__liste">
+        <div class="kenn__paar">
+          <dt class="meta">Status</dt>
+          <dd>{{ w.status }}</dd>
+        </div>
+        @for (h of w.highlights ?? []; track h.label) {
+          <div class="kenn__paar">
+            <dt class="meta">{{ h.label }}</dt>
+            <dd>{{ h.wert }}</dd>
+          </div>
+        }
         <div class="kenn__paar kenn__paar--breit">
           <dt class="meta">Stack</dt>
           <dd class="kenn__stack">{{ w.stack.join(' · ') }}</dd>

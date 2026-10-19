@@ -101,6 +101,39 @@
 }
 .karte__status { font-size: 12.5px; color: $tusche-2; }
 
+/* Ablaufstreifen je Karte: reale Stationen, ein Datenpunkt läuft durch */
+.karte__fluss {
+  position: relative; list-style: none; margin: 0 0 $s4; padding: 14px 16px 12px;
+  display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+  background: $platte; border-radius: 2px; overflow: hidden;
+}
+.karte__fluss::before {
+  content: ''; position: absolute; left: 16px; right: 16px; top: 19px;
+  height: 1px; background: $petrol-platte;
+}
+.karte__fluss li { position: relative; min-width: 0; padding-right: 6px; }
+.karte__knoten {
+  display: block; width: 9px; height: 9px; margin-bottom: 8px; position: relative; z-index: 1;
+  border: 1px solid $kreide; border-radius: 50%; background: $platte;
+}
+.karte__station {
+  display: block; font-family: $mono; font-size: 10.5px; line-height: 1.3; color: $kreide;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.karte__laeufer {
+  position: absolute; top: 16px; left: 16px; width: 7px; height: 7px; border-radius: 50%;
+  background: $kreide; animation: karte-lauf 6s linear infinite;
+}
+.karte:nth-child(2n) .karte__laeufer { animation-delay: -2s; }
+.karte:nth-child(3n) .karte__laeufer { animation-delay: -4s; }
+@keyframes karte-lauf {
+  from { left: 16px; opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  to { left: calc(100% - 23px); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .karte__laeufer { display: none; } }
+
 /* Technische Artikel als schlichte Liste */
 .artikelliste { list-style: none; margin: 0; padding: 0; border-top: $strich-haar solid $linie; }
 .artikelliste__link {

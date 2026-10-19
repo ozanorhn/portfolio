@@ -53,6 +53,8 @@ export interface Work {
   ergebnis: string[];
   /** Was ich aus dem Projekt mitnehme, einschließlich offener Punkte. */
   erkenntnisse?: string[];
+  /** Scan-Elemente oben auf der Projektseite, z. B. Rolle, Kern, Sicherheit. Max. vier. */
+  highlights?: { label: string; wert: string }[];
   /** Kurzfassung für die Startseiten-Karte: Problem und eigener Beitrag in je einem Satz. */
   karte?: { problem: string; beitrag: string };
   /** Demos, die nur auf bestimmten Projektseiten erscheinen */
@@ -83,14 +85,25 @@ const BASIS: Work[] = [
     gruppe: 'kern',
     karte: {
       problem:
-        'Ein handliches Sprachinterface sollte Werkzeuge wie Todoist, Notion und Kalender über einen eigenen, selbst gehosteten Agenten bedienen.',
+        'Ein Sprachinterface für die Hosentasche sollte Werkzeuge über einen eigenen Agenten bedienen.',
       beitrag:
-        'Ich habe Firmware, Server-Pipeline und MCP-Anbindung selbst gebaut: Aufnahme auf dem ESP32-S3, Transkription und Agentenlogik mit Python und FastAPI.',
+        'Ich habe Firmware, Server-Pipeline und MCP-Anbindung gebaut: ESP32-S3, Python, FastAPI.',
     },
     kontext: 'Eigenes Engineering-Projekt',
     stack: [
-      'C++', 'ESP32-S3', 'FreeRTOS', 'PlatformIO', 'Python', 'FastAPI',
-      'Docker', 'Traefik', 'MCP', 'OpenRouter', 'Whisper Large V3', 'Fish Audio', 'Piper',
+      'C++',
+      'ESP32-S3',
+      'FreeRTOS',
+      'PlatformIO',
+      'Python',
+      'FastAPI',
+      'Docker',
+      'Traefik',
+      'MCP',
+      'OpenRouter',
+      'Whisper Large V3',
+      'Fish Audio',
+      'Piper',
     ],
     sprachen: ['C++', 'Python'],
     plate: {
@@ -198,8 +211,14 @@ const BASIS: Work[] = [
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
-      'n8n', 'Toggl API', 'Slack Reaction Trigger', 'Google Sheets', 'Google Drive',
-      'JavaScript', 'Datentransformation', 'Dokumentvorlagen',
+      'n8n',
+      'Toggl API',
+      'Slack Reaction Trigger',
+      'Google Sheets',
+      'Google Drive',
+      'JavaScript',
+      'Datentransformation',
+      'Dokumentvorlagen',
     ],
     plate: {
       kind: 'systembild',
@@ -282,19 +301,23 @@ const BASIS: Work[] = [
     titel: 'Wissensbasis — RAG + MCP-Server',
     kicker: 'RAG · Vector Retrieval · MCP',
     lede: 'Eine zentrale RAG-Wissensbasis, die Agenten über MCP als Retrieval-Tool nutzen können.',
-    status: 'Produktiv aktiv',
+    status: 'MCP-Server aktiv, Ingest läuft manuell',
     gruppe: 'kern',
     karte: {
       problem:
-        'Mehrere KI-Assistenten brauchten Zugriff auf internes Wissen, ohne dass jeder Agent eine eigene Dokumentpipeline bekommt.',
+        'Mehrere KI-Assistenten brauchten internes Wissen, ohne je eigene Dokumentpipeline.',
       beitrag:
-        'Ich habe Ingest und Retrieval als getrennte n8n-Workflows gebaut und die Suche als read-only MCP-Tool mit mehrsprachigen Embeddings bereitgestellt.',
+        'Ich habe Ingest und Retrieval getrennt gebaut und die Suche als read-only MCP-Tool bereitgestellt.',
     },
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
-      'n8n', 'MCP-Server-Trigger', 'Postgres mit Vektor-Erweiterung',
-      'Mehrsprachige Embeddings', 'Dokument-Loader', 'Text-Splitter',
+      'n8n',
+      'MCP-Server-Trigger',
+      'Postgres mit Vektor-Erweiterung',
+      'Mehrsprachige Embeddings',
+      'Dokument-Loader',
+      'Text-Splitter',
     ],
     plate: {
       kind: 'systembild',
@@ -382,19 +405,24 @@ const BASIS: Work[] = [
     lede:
       'Drei Workflows führen fünf externe Datenquellen zusammen und prüfen, ob sich umgesetzte ' +
       'Maßnahmen messbar ausgewirkt haben — ohne dass jemand Daten von Hand sammelt.',
-    status: 'Produktiv, drei Komponenten',
+    status: 'Seit Mitte 2026 im Einsatz, Datenanbindung wird überarbeitet',
     gruppe: 'kern',
     karte: {
       problem:
-        'Sichtbarkeit in KI-Antworten, Suchdaten und Webanalyse lagen in getrennten Systemen und mussten von Hand zusammengeführt werden.',
+        'KI-Sichtbarkeit, Suchdaten und Webanalyse lagen in getrennten Systemen.',
       beitrag:
-        'Ich habe die n8n-Pipelines gebaut, die fünf Datenquellen abrufen, normalisieren und von einem Analyse-Agenten mit strukturiertem Output auswerten lassen.',
+        'Ich habe Pipelines für fünf Datenquellen und einen Analyse-Agenten mit strukturiertem Output gebaut.',
     },
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
-      'n8n', 'Webhook mit synchroner Antwort', 'Zeitplan-Trigger', 'OAuth-Credentials',
-      'LLM-Agent mit strukturiertem Output', 'Postgres über REST mit Upsert', 'JavaScript',
+      'n8n',
+      'Webhook mit synchroner Antwort',
+      'Zeitplan-Trigger',
+      'OAuth-Credentials',
+      'LLM-Agent mit strukturiertem Output',
+      'Postgres über REST mit Upsert',
+      'JavaScript',
     ],
     plate: {
       kind: 'systembild',
@@ -480,8 +508,9 @@ const BASIS: Work[] = [
     ],
     ergebnis: [
       'Fünf externe Datenquellen und ein zweites Agent-System sind angebunden. Der ' +
-        'Wirkungsnachweis für umgesetzte Maßnahmen läuft ohne manuelle Datensammlung, und ' +
-        'Sichtbarkeitsverluste erzeugen nachverfolgbare Einträge in einer Datenbank.',
+        'Wirkungsnachweis für umgesetzte Maßnahmen ist so gebaut, dass er ohne manuelle ' +
+        'Datensammlung auskommt; Sichtbarkeitsverluste werden als nachverfolgbare Einträge ' +
+        'gespeichert. Die Datenbank-Anbindung wird derzeit überarbeitet.',
     ],
   },
 
@@ -502,8 +531,13 @@ const BASIS: Work[] = [
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
-      'n8n', 'Zeitplan-Trigger', 'HTTP-Abruf', 'JavaScript',
-      'Schema-gebundene LLM-Extraktion', 'Enum-Constraints', 'Datenspeicher mit Upsert',
+      'n8n',
+      'Zeitplan-Trigger',
+      'HTTP-Abruf',
+      'JavaScript',
+      'Schema-gebundene LLM-Extraktion',
+      'Enum-Constraints',
+      'Datenspeicher mit Upsert',
     ],
     plate: {
       kind: 'systembild',
@@ -633,8 +667,15 @@ const BASIS: Work[] = [
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
-      'n8n', 'Form-Trigger', 'LLM-Agent mit Tool Calling', 'JSON Schema', 'JSON-LD · Schema.org',
-      'Web-Scraping-API', 'Web-Such-API', 'Tabellenspeicher', 'JavaScript',
+      'n8n',
+      'Form-Trigger',
+      'LLM-Agent mit Tool Calling',
+      'JSON Schema',
+      'JSON-LD · Schema.org',
+      'Web-Scraping-API',
+      'Web-Such-API',
+      'Tabellenspeicher',
+      'JavaScript',
     ],
     plate: {
       kind: 'systembild',
@@ -726,11 +767,8 @@ const BASIS: Work[] = [
         'fortgeschrieben. Dadurch bleibt nachvollziehbar, welche recherchierten Werte vor der ' +
         'Generierung bestätigt oder angepasst wurden.',
     ],
-    links: [
-      { label: 'Grounding Page Standard', href: 'https://groundingpage.com/de/' },
-    ],
+    links: [{ label: 'Grounding Page Standard', href: 'https://groundingpage.com/de/' }],
   },
-
 
   {
     slug: 'dabubble',
@@ -867,12 +905,22 @@ const BASIS: Work[] = [
  * Ausbildungsprojekte. Die Nummer ergibt sich aus der Position.
  */
 const REIHENFOLGE = [
-  'seo-agent-multi-agent-system', 'agentic-commerce-audit', 'wissensbasis-rag-mcp',
-  'ai-visibility-monitoring-platform', 'mcp-plattform-self-hosted', 'pocket-ai-agent',
-  'leistungsnachweis-automation', 'ki-rechnungspruefung', 'recruiting-jobs-sync',
-  'conversational-ai-meeting-assistant', 'grounding-page-generator',
+  'seo-agent-multi-agent-system',
+  'agentic-commerce-audit',
+  'wissensbasis-rag-mcp',
+  'ai-visibility-monitoring-platform',
+  'mcp-plattform-self-hosted',
+  'pocket-ai-agent',
+  'leistungsnachweis-automation',
+  'ki-rechnungspruefung',
+  'recruiting-jobs-sync',
+  'conversational-ai-meeting-assistant',
+  'grounding-page-generator',
   'automation-betrieb-self-hosting',
-  'dabubble', 'join', 'pokedex', 'el-pollo-loco',
+  'dabubble',
+  'join',
+  'pokedex',
+  'el-pollo-loco',
 ];
 
 const ALLE = [...BASIS, ...SYSTEME];
@@ -912,7 +960,8 @@ export function abschnitte(w: Work): Abschnitt[] {
   if (w.beitrag?.length) a.push({ id: 'beitrag', titel: 'Mein Beitrag' });
   if (w.architektur?.length) a.push({ id: 'architektur', titel: 'Architektur' });
   if (w.demo) a.push({ id: 'demo', titel: w.demo === 'pocket' ? 'Interaktion' : 'Freigabe' });
-  if (w.entscheidungen.length) a.push({ id: 'entscheidungen', titel: 'Engineering-Entscheidungen' });
+  if (w.entscheidungen.length)
+    a.push({ id: 'entscheidungen', titel: 'Engineering-Entscheidungen' });
   a.push({ id: 'ergebnis', titel: 'Ergebnis' });
   if (w.erkenntnisse?.length) a.push({ id: 'erkenntnisse', titel: 'Erkenntnisse' });
   return a;
