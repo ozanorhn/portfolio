@@ -96,43 +96,24 @@ jobs:
             *) echo "::error::FTP_SERVER_DIR muss mit / enden."; exit 1 ;;
           esac
 
-      - name: FTPS Upload simulieren (kein Schreibzugriff)
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.ftp_dry_run == true }}
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          local-dir: ./dist/portfolio/browser/
-          protocol: ftps
-          port: 21
-          security: strict
-          dry-run: true
-          dangerous-clean-slate: false
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.htaccess
-            **/.well-known/**
-            **/node_modules/**
+      - name: lftp installieren
+        if: ${{ (github.event_name == 'workflow_dispatch' && inputs.ftp_dry_run == true) || (vars.ENABLE_FTP_DEPLOY == 'true' && (github.event_name == 'repository_dispatch' || inputs.deploy == true)) }}
+        run: sudo apt-get update -qq && sudo apt-get install -y lftp
 
-      - name: Website via verschluesseltem FTPS aktualisieren
-        if: ${{ vars.ENABLE_FTP_DEPLOY == 'true' && (github.event_name == 'repository_dispatch' || (inputs.deploy == true && inputs.ftp_dry_run != true)) }}
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          local-dir: ./dist/portfolio/browser/
-          protocol: ftps
-          port: 21
-          security: strict
-          dangerous-clean-slate: false
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.htaccess
-            **/.well-known/**
-            **/node_modules/**
+      - name: FTPS nur simulieren (keine Aenderung am Server)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.ftp_dry_run == true }}
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
+        run: bash scripts/deploy-ftps.sh dry-run
+
+      - name: Website per FTPS hochladen (keine Remote-Loeschungen)
+        if: ${{ vars.ENABLE_FTP_DEPLOY == 'true' && ((github.event_name == 'repository_dispatch' && vars.ENABLE_STRAPI_AUTODEPLOY == 'true') || (github.event_name == 'workflow_dispatch' && inputs.deploy == true && inputs.ftp_dry_run != true)) }}
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
+        run: bash scripts/deploy-ftps.sh deploy
