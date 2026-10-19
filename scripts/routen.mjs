@@ -43,15 +43,18 @@ export async function routen() {
   const w = await projekte();
   const b = blogArtikel();
   const g = glossarBegriffe();
+  // lastmod nur, wo ein echtes Änderungsdatum existiert; Build-Datum wäre ein falsches Signal.
+  const tag = (iso) => iso?.slice(0, 10);
+  const neuestes = (xs) => xs.map((x) => tag(x.geaendert)).filter(Boolean).sort().at(-1);
   return [
     { pfad: '/', prio: '1.0', freq: 'monthly' },
     { pfad: '/projekte', prio: '0.9', freq: 'monthly' },
     ...w.map((p) => ({ pfad: `/projekte/${p.slug}`, prio: '0.8', freq: 'yearly' })),
-    { pfad: '/blog', prio: '0.8', freq: 'weekly' },
-    ...b.map((a) => ({ pfad: `/blog/${a.slug}`, prio: '0.7', freq: 'monthly' })),
+    { pfad: '/blog', prio: '0.8', freq: 'weekly', lastmod: neuestes(b) },
+    ...b.map((a) => ({ pfad: `/blog/${a.slug}`, prio: '0.7', freq: 'monthly', lastmod: tag(a.geaendert) })),
     // Glossar erst, wenn es veröffentlichte Begriffe gibt
-    ...(g.length ? [{ pfad: '/glossar', prio: '0.7', freq: 'weekly' }] : []),
-    ...g.map((x) => ({ pfad: `/glossar/${x.slug}`, prio: '0.6', freq: 'monthly' })),
+    ...(g.length ? [{ pfad: '/glossar', prio: '0.7', freq: 'weekly', lastmod: neuestes(g) }] : []),
+    ...g.map((x) => ({ pfad: `/glossar/${x.slug}`, prio: '0.6', freq: 'monthly', lastmod: tag(x.geaendert) })),
     { pfad: '/facts', prio: '0.5', freq: 'yearly' },
     { pfad: '/impressum', prio: '0.2', freq: 'yearly' },
     { pfad: '/datenschutz', prio: '0.2', freq: 'yearly' },

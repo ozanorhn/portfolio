@@ -25,7 +25,8 @@
     "n8n",
     "webhook",
     "low-code",
-    "ki-agent"
+    "ki-agent",
+    "ki-automatisierung"
   ],
   "verwandteArtikel": [
     "mcp-server-mit-n8n-erstellen"

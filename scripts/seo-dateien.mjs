@@ -1,7 +1,6 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { ORIGIN, blogArtikel, glossarBegriffe, projekte, routen, seiteUrl } from './routen.mjs';
 
-const heute = new Date().toISOString().slice(0, 10);
 const alle = await projekte();
 const rt = await routen();
 const blog = blogArtikel();
@@ -12,7 +11,8 @@ writeFileSync(
   'public/sitemap.xml',
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
     rt.map((r) =>
-      `  <url>\n    <loc>${seiteUrl(r.pfad)}</loc>\n    <lastmod>${heute}</lastmod>\n` +
+      `  <url>\n    <loc>${seiteUrl(r.pfad)}</loc>\n` +
+      (r.lastmod ? `    <lastmod>${r.lastmod}</lastmod>\n` : '') +
       `    <changefreq>${r.freq}</changefreq>\n    <priority>${r.prio}</priority>\n  </url>`,
     ).join('\n') +
     `\n</urlset>\n`,

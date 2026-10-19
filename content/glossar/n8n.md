@@ -40,7 +40,8 @@
     "webhook",
     "ki-agent",
     "rpa",
-    "mcp-model-context-protocol"
+    "mcp-model-context-protocol",
+    "ki-automatisierung"
   ],
   "verwandteArtikel": [
     "mcp-server-mit-n8n-erstellen",

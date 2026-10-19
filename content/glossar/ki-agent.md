@@ -37,7 +37,8 @@
     "multi-agent-system",
     "n8n",
     "prompt-injection",
-    "system-prompt"
+    "system-prompt",
+    "ki-automatisierung"
   ],
   "verwandteArtikel": [
     "n8n-agents-vs-ai-agent-node"
