@@ -8,6 +8,11 @@ on:
         required: true
         default: false
         type: boolean
+      ftp_dry_run:
+        description: 'FTPS-Verbindung und geplante Dateiaenderungen nur simulieren (kein Upload)'
+        required: true
+        default: false
+        type: boolean
   repository_dispatch:
     types: [strapi-blog-published]
 
@@ -73,7 +78,7 @@ jobs:
       # Sicherer Standard: Nur mit expliziter Repo-Variable und Ausloeser deployen.
       # Bei workflow_dispatch bleibt deploy standardmaessig false.
       - name: FTP-Zugangsdaten vor Upload pruefen
-        if: ${{ vars.ENABLE_FTP_DEPLOY == 'true' && (github.event_name == 'repository_dispatch' || inputs.deploy == true) }}
+        if: ${{ (github.event_name == 'workflow_dispatch' && inputs.ftp_dry_run == true) || (vars.ENABLE_FTP_DEPLOY == 'true' && (github.event_name == 'repository_dispatch' || inputs.deploy == true)) }}
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
@@ -91,8 +96,29 @@ jobs:
             *) echo "::error::FTP_SERVER_DIR muss mit / enden."; exit 1 ;;
           esac
 
+      - name: FTPS Upload simulieren (kein Schreibzugriff)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.ftp_dry_run == true }}
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          local-dir: ./dist/portfolio/browser/
+          protocol: ftps
+          port: 21
+          security: strict
+          dry-run: true
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.htaccess
+            **/.well-known/**
+            **/node_modules/**
+
       - name: Website via verschluesseltem FTPS aktualisieren
-        if: ${{ vars.ENABLE_FTP_DEPLOY == 'true' && (github.event_name == 'repository_dispatch' || inputs.deploy == true) }}
+        if: ${{ vars.ENABLE_FTP_DEPLOY == 'true' && (github.event_name == 'repository_dispatch' || (inputs.deploy == true && inputs.ftp_dry_run != true)) }}
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
