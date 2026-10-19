@@ -41,7 +41,11 @@ fi
 # The FTP password comes from a GitHub secret (environment variable), never from git.
 # lftp negotiates explicit TLS on control and data connections; verification stays on.
 # lcd + cd + mirror . . avoid accidentally uploading into a new /browser/ folder.
-timeout 12m lftp --user "${FTP_USERNAME},${FTP_PASSWORD}" "ftp://${FTP_SERVER}:21" <<LFTP_CMDS
+# lftp must read the password from the environment. Supplying username,password
+# via --user did not authenticate on the GitHub runner (GetPass() / 530).
+# --env-password avoids exposing the password in the process argument list.
+export LFTP_PASSWORD="$FTP_PASSWORD"
+timeout 12m lftp --env-password --user "$FTP_USERNAME" --port 21 "ftp://$FTP_SERVER" <<LFTP_CMDS
 set cmd:fail-exit yes
 set net:max-retries 2
 set net:timeout 20
