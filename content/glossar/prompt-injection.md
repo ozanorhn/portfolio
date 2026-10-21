@@ -9,7 +9,7 @@
   "seoTitel": "Prompt Injection: Definition, Beispiele & Schutz",
   "seoBeschreibung": "Was ist Prompt Injection? Definition, Praxisbeispiel mit MCP, Unterschied zum Jailbreak, Folgen und Schutzmaßnahmen nach OWASP und BSI.",
   "erstveroeffentlicht": "2026-10-14T09:00:00Z",
-  "aktualisiert": "2026-10-14T09:00:00Z",
+  "aktualisiert": "2026-10-21T09:00:00Z",
   "steckbriefAussagen": [
     "Prompt Injection nutzt aus, dass ein Sprachmodell Anweisungen und verarbeitete Daten im selben Textstrom erhält und nicht zuverlässig trennen kann.",
     "Bei der indirekten Prompt Injection stecken die Anweisungen in Inhalten wie Webseiten, E-Mails oder Dokumenten, nicht in der Eingabe des Nutzers.",
@@ -139,6 +139,8 @@ OWASP empfiehlt dafür unter anderem (OWASP, 2025):
 - **Ein- und Ausgaben filtern:** Prüfschichten, oft [Guardrails](/glossar/guardrails/) genannt, erkennen auffällige Muster oder vertrauliche Daten.
 
 Bei [MCP](/glossar/mcp-model-context-protocol/) heißt das konkret: kleine Werkzeuge mit genau einer Aufgabe, lesende und schreibende Werkzeuge getrennt, Zugangsschlüssel nur in der Automatisierungsplattform. Wie Agenten über MCP mehrere Datenquellen kombinieren und warum ein Audit-Log der Werkzeugaufrufe hilft, beschreibt der Beitrag [Agentic RAG mit MCP](/blog/agentic-rag-mcp-architektur/).
+
+Wie solche Schutzmaßnahmen bei KI-Agenten zusammenwirken, beschreibt der Artikel [KI-Agenten Sicherheit](/blog/ki-agenten-sicherheit-tuev-bsi-studie/).
 
 ## Wie testet man eine KI-Anwendung auf Prompt Injection?
 

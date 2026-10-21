@@ -6,6 +6,29 @@ import { SITE, seiteUrl } from '../../core/site';
 import { THEMEN, type GlossarEintrag } from '../../data/glossar';
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+/** Glossar = Definition, Blog = Anwendung: je Thema die vertiefenden Artikel (Cluster laut SEO-Strategie). */
+// ponytail: feste Zuordnung; auf Strapi-Tags umstellen, wenn mehr als ~15 Artikel existieren
+const VERTIEFUNG: Record<string, { slug: string; titel: string }[]> = {
+  rag_suche: [
+    { slug: 'company-brain-aufbauen-rag-architektur', titel: 'Company Brain aufbauen' },
+    { slug: 'agentic-rag-mcp-architektur', titel: 'RAG über MCP bereitstellen' },
+    { slug: 'rag-berechtigungsmanagement-company-brain', titel: 'RAG-Berechtigungsmanagement' },
+  ],
+  agenten_mcp: [
+    { slug: 'mcp-server-mit-n8n-erstellen', titel: 'MCP-Server mit n8n erstellen' },
+    { slug: 'reverse-engineering-claude-ghidra-mcp', titel: 'Ghidra MCP mit Claude' },
+    { slug: 'claude-code-mods', titel: 'Claude Code Mods' },
+  ],
+  automatisierung: [
+    { slug: 'n8n-agents-vs-ai-agent-node', titel: 'n8n Agents vs. AI-Agent-Node' },
+  ],
+  sicherheit: [
+    { slug: 'ki-agenten-sicherheit-tuev-bsi-studie', titel: 'KI-Agenten Sicherheit' },
+    { slug: 'claude-dsgvo-konform-unternehmen', titel: 'Claude DSGVO-konform einsetzen' },
+    { slug: 'en-18286-ai-act-leitfaden', titel: 'EN 18286 AI Act' },
+  ],
+};
 const buchstabe = (b: GlossarEintrag) =>
   b.begriff.charAt(0).toLocaleUpperCase('de-DE').replace('Ä', 'A').replace('Ö', 'O').replace('Ü', 'U');
 
@@ -54,6 +77,14 @@ const buchstabe = (b: GlossarEintrag) =>
                   </li>
                 }
               </ul>
+              @if (vertiefung[g.thema]; as artikel) {
+                <p class="vertiefung">
+                  <span class="meta">Vertiefung</span>
+                  @for (a of artikel; track a.slug) {
+                    <a [href]="'/blog/' + a.slug + '/'">{{ a.titel }}</a>
+                  }
+                </p>
+              }
             </section>
           }
         } @else {
@@ -78,6 +109,8 @@ const buchstabe = (b: GlossarEintrag) =>
       .abc a:hover { color: $petrol; }
       .abc__leer { color: $linie; }
       .thema { padding-top: clamp(32px, 4vw, 56px); }
+      .vertiefung { display: flex; flex-wrap: wrap; align-items: baseline; gap: $s2 $s4; padding-top: $s4; }
+      .vertiefung a { color: $petrol; text-decoration: underline; text-underline-offset: 3px; }
       .thema__titel { padding-bottom: $s4; border-bottom: $strich-regel solid $linie; }
       .eintrag { border-bottom: $strich-haar solid $linie; scroll-margin-top: $s7; }
       .eintrag__link { padding-block: $s4; align-items: baseline; }
@@ -97,6 +130,7 @@ export class GlossarComponent {
   private readonly seo = inject(SeoService);
   readonly site = SITE;
   readonly alphabet = ALPHABET;
+  readonly vertiefung = VERTIEFUNG;
   /** Vom Resolver geladen (app.routes.ts), damit der vorgerenderte Inhalt bis dahin stehen bleibt. */
   readonly vorab = input<GlossarEintrag[] | undefined>(undefined);
   readonly begriffe = computed(() => this.vorab());

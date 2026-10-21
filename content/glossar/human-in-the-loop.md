@@ -12,7 +12,7 @@
   "seoTitel": "Was bedeutet Human in the Loop? Erklärt",
   "seoBeschreibung": "Was ist Human in the Loop? Menschliche Freigabe in KI-Automatisierungen: Funktionsweise in n8n, Formen, Risiken, EU AI Act und Praxisbeispiele.",
   "erstveroeffentlicht": "2026-10-14T09:00:00Z",
-  "aktualisiert": "2026-10-14T09:00:00Z",
+  "aktualisiert": "2026-10-21T09:00:00Z",
   "steckbriefAussagen": [
     "Human in the Loop ist ein Wartepunkt im Ablauf: Die Automatisierung hält an und läuft erst nach einer menschlichen Entscheidung weiter.",
     "Eine verlässliche Freigabe wird außerhalb des Modells erzwungen, etwa im Workflow, im Client oder in einem Sub-Workflow, nicht in einer Werkzeugbeschreibung.",
@@ -124,6 +124,8 @@ Viele Abläufe kombinieren die Modelle. Lesende Werkzeuge laufen ohne Freigabe, 
 **Freigabe von Entwürfen:** Die Automatisierung erzeugt einen Entwurf, etwa eine Antwort-E-Mail oder einen Artikel, der erst nach Prüfung versendet oder veröffentlicht wird. Fehler bleiben so intern.
 
 Anthropic beschreibt in seinem Leitfaden zu Agenten, dass Agenten an Kontrollpunkten oder bei Hindernissen für menschliches Feedback pausieren können, und empfiehlt Abbruchbedingungen wie eine maximale Zahl an Durchläufen (Anthropic, 2024).
+
+Wo Freigaben in einer Agenten-Architektur sitzen sollten, behandelt der Artikel [KI-Agenten Sicherheit](/blog/ki-agenten-sicherheit-tuev-bsi-studie/).
 
 ## Welche Nachteile und Risiken hat Human in the Loop?
 

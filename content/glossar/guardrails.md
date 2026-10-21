@@ -12,7 +12,7 @@
   "seoTitel": "Was sind Guardrails bei KI? Einfach erklärt",
   "seoBeschreibung": "Was sind Guardrails bei KI? Arten, Funktionsweise, Unterschied zum System Prompt, Tools wie der n8n Guardrails-Node und ein Praxisbeispiel.",
   "erstveroeffentlicht": "2026-10-14T09:00:00Z",
-  "aktualisiert": "2026-10-14T09:00:00Z",
+  "aktualisiert": "2026-10-21T09:00:00Z",
   "steckbriefAussagen": [
     "Guardrails prüfen Eingaben, Ausgaben und Werkzeugaufrufe einer KI-Anwendung außerhalb des Hauptmodells.",
     "Regelbasierte Guardrails sind schnell und vorhersagbar, modellbasierte erkennen auch neue Formulierungen, können sich aber irren.",
@@ -134,3 +134,5 @@ Modellbasierte Guardrails können sich irren. Sie blockieren harmlose Anfragen o
 Jede Prüfung kostet Zeit und, bei modellbasierten Varianten, Token. Das OpenAI Agents SDK lässt Eingabe-Guardrails standardmäßig parallel zum Agenten laufen. Dann kann der Agent bereits Token verbraucht oder Werkzeuge ausgeführt haben, bevor der Guardrail anschlägt; der blockierende Modus verhindert das, verlängert aber die Antwortzeit (OpenAI Agents SDK, Stand: Oktober 2026).
 
 Guardrails prüfen außerdem nur, wofür sie gebaut wurden. Eine Ausgabe kann das Schema erfüllen und trotzdem inhaltlich falsch sein. Deshalb gehören zu einer belastbaren Anwendung neben Guardrails immer minimale Rechte, nachvollziehbare Protokolle und für folgenreiche Schritte eine menschliche Prüfung.
+
+Wie Guardrails mit Rechten, Freigaben und Protokollierung zusammenspielen, zeigt der Artikel [KI-Agenten Sicherheit](/blog/ki-agenten-sicherheit-tuev-bsi-studie/).

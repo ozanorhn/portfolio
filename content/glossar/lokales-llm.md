@@ -13,7 +13,7 @@
   "seoTitel": "Lokales LLM: Vorteile, Grenzen & Einsatz",
   "seoBeschreibung": "Was ist ein lokales LLM? Ein Sprachmodell auf eigener Hardware. Mit Funktionsweise, Vergleich zur Cloud, Quantisierung und Betriebshinweisen.",
   "erstveroeffentlicht": "2026-10-14T09:00:00Z",
-  "aktualisiert": "2026-10-14T09:00:00Z",
+  "aktualisiert": "2026-10-21T09:00:00Z",
   "steckbriefAussagen": [
     "Ein lokales LLM besteht aus heruntergeladenen Modellgewichten und einer Laufzeitumgebung, die Anfragen im eigenen Netz beantwortet.",
     "Bei lokalem Betrieb verlassen Prompts und Daten das eigene Netzwerk nicht.",
@@ -110,6 +110,8 @@ Werkzeuge wie n8n, Chat-Oberflächen oder eigene Skripte schicken ihre Anfragen 
 | Skalierung | Begrenzt durch eigene Hardware | Weitgehend durch den Anbieter abgedeckt |
 
 Die Entscheidung ist selten grundsätzlich. Viele Architekturen kombinieren beides: sensible Schritte lokal, allgemeine Aufgaben über eine Cloud-API.
+
+Was beim datenschutzkonformen Einsatz eines Cloud-Modells zu beachten ist, zeigt der Artikel [Claude DSGVO-konform einsetzen](/blog/claude-dsgvo-konform-unternehmen/).
 
 ## Was sind Open-Weight-Modelle?
 
