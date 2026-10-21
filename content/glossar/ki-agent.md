@@ -13,7 +13,7 @@
   "seoTitel": "Was ist ein KI-Agent? Definition & Beispiele",
   "seoBeschreibung": "Was ist ein KI-Agent? Definition, Bausteine, Muster zwischen Workflow und Agent, Werkzeugzugriff über MCP, Risiken und ein Praxisbeispiel.",
   "erstveroeffentlicht": "2026-10-14T09:00:00Z",
-  "aktualisiert": "2026-10-21T09:00:00Z",
+  "aktualisiert": "2026-10-21T12:00:00Z",
   "steckbriefAussagen": [
     "Ein KI-Agent ist ein Sprachmodell, das in einer Schleife Werkzeuge nutzt und anhand der Ergebnisse den nächsten Schritt wählt.",
     "Anthropic unterscheidet Workflows mit vorab festgelegten Codepfaden von Agenten, die ihre Abläufe und Werkzeugnutzung selbst lenken.",
@@ -155,4 +155,4 @@ Ein besonderes Risiko ist [Prompt Injection](/glossar/prompt-injection/). Agente
 
 Die gängigen Schutzschichten sind [Guardrails](/glossar/guardrails/) für Ein- und Ausgaben, eine Freigabe nach dem Prinzip [Human in the Loop](/glossar/human-in-the-loop/) und Tests in einer abgeschotteten Umgebung. Anthropic empfiehlt für Agenten ausdrücklich umfangreiche Tests in Sandbox-Umgebungen zusammen mit passenden Guardrails (Anthropic, 2024).
 
-Welche Schutzmaßnahmen Unternehmen konkret umsetzen können, beschreibt der Artikel [KI-Agenten Sicherheit](/blog/ki-agenten-sicherheit-tuev-bsi-studie/).
+Welche Schutzmaßnahmen Unternehmen konkret umsetzen können, beschreibt der Artikel [KI-Agenten Sicherheit](/blog/ki-agenten-sicherheit-tuev-bsi-studie/). Ob und wie sich ein Agent gegenüber Menschen als KI zu erkennen geben muss, regeln die [Transparenzpflichten nach Art. 50 AI Act](/blog/art-50-ai-act-entwickler/).

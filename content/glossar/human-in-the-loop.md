@@ -12,7 +12,7 @@
   "seoTitel": "Was bedeutet Human in the Loop? Erklärt",
   "seoBeschreibung": "Was ist Human in the Loop? Menschliche Freigabe in KI-Automatisierungen: Funktionsweise in n8n, Formen, Risiken, EU AI Act und Praxisbeispiele.",
   "erstveroeffentlicht": "2026-10-14T09:00:00Z",
-  "aktualisiert": "2026-10-21T09:00:00Z",
+  "aktualisiert": "2026-10-21T12:00:00Z",
   "steckbriefAussagen": [
     "Human in the Loop ist ein Wartepunkt im Ablauf: Die Automatisierung hält an und läuft erst nach einer menschlichen Entscheidung weiter.",
     "Eine verlässliche Freigabe wird außerhalb des Modells erzwungen, etwa im Workflow, im Client oder in einem Sub-Workflow, nicht in einer Werkzeugbeschreibung.",
@@ -139,4 +139,4 @@ Daraus folgen zwei Regeln für die Praxis. Freigaben gehören nur an Stellen mit
 
 Der EU AI Act verlangt in Artikel 14 menschliche Aufsicht für Hochrisiko-KI-Systeme. Sie sollen so gestaltet sein, dass Menschen sie während der Nutzung wirksam beaufsichtigen können. Dazu gehört, Ausgaben richtig zu deuten, sie zu übergehen oder rückgängig zu machen und das System über eine Stopp-Funktion sicher anzuhalten (EU AI Act, Art. 14).
 
-Die meisten Automatisierungen im Büroalltag, etwa Berichte oder Entwürfe, fallen nicht automatisch in diese Kategorie. Ob ein System als Hochrisiko gilt, hängt vom Einsatzzweck ab und sollte im Einzelfall rechtlich geprüft werden. Unabhängig davon ist Human in the Loop eine bewährte technische Maßnahme, um Fehler von [KI-Agenten](/glossar/ki-agent/) und Folgen von [Prompt Injection](/glossar/prompt-injection/) abzufangen.
+Die meisten Automatisierungen im Büroalltag, etwa Berichte oder Entwürfe, fallen nicht automatisch in diese Kategorie. Ob ein System als Hochrisiko gilt, hängt vom Einsatzzweck ab und sollte im Einzelfall rechtlich geprüft werden. Unabhängig davon ist Human in the Loop eine bewährte technische Maßnahme, um Fehler von [KI-Agenten](/glossar/ki-agent/) und Folgen von [Prompt Injection](/glossar/prompt-injection/) abzufangen. Bei veröffentlichten KI-Texten kann eine nachweisbare menschliche Prüfung außerdem die Kennzeichnung nach [Art. 50 AI Act](/blog/art-50-ai-act-entwickler/) entbehrlich machen.

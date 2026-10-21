@@ -12,7 +12,7 @@
   "seoTitel": "Was ist MCP (Model Context Protocol)? Erklärt",
   "seoBeschreibung": "MCP (Model Context Protocol) ist der offene Standard, über den KI-Anwendungen Tools und Daten anbinden. Mit Praxisbeispiel, Vergleich und Fehlern.",
   "erstveroeffentlicht": "2026-10-14T09:00:00Z",
-  "aktualisiert": "2026-10-14T09:00:00Z",
+  "aktualisiert": "2026-10-21T12:00:00Z",
   "steckbriefAussagen": [
     "MCP (Model Context Protocol) ist ein offener Standard, über den KI-Anwendungen Werkzeuge und Daten über MCP-Server einheitlich ansprechen, statt für jede Kombination eine eigene Integration zu brauchen.",
     "MCP unterscheidet Host, Client und Server und überträgt Nachrichten als JSON-RPC 2.0 über stdio oder Streamable HTTP.",
@@ -176,7 +176,7 @@ Anthropic hat MCP am 25. November 2024 als offenen Standard vorgestellt, zusamme
 
 Am 9. Dezember 2025 hat Anthropic MCP an die Agentic AI Foundation übergeben, einen Directed Fund unter dem Dach der Linux Foundation, den Anthropic, Block und OpenAI gemeinsam gegründet haben (Anthropic, 2025). Das Governance-Modell von MCP bleibt laut Anthropic dabei unverändert.
 
-Zum Zeitpunkt der Übergabe nannte Anthropic mehr als 10.000 aktive öffentliche MCP-Server und Unterstützung in ChatGPT, Cursor, Gemini, Microsoft Copilot und Visual Studio Code (Anthropic, 2025). Die Spezifikation erscheint in datierten Versionen; Stand Oktober 2026 ist die Fassung 2026-07-28 aktuell.
+Zum Zeitpunkt der Übergabe nannte Anthropic mehr als 10.000 aktive öffentliche MCP-Server und Unterstützung in ChatGPT, Cursor, Gemini, Microsoft Copilot und Visual Studio Code (Anthropic, 2025). Die Spezifikation erscheint in datierten Versionen; Stand Oktober 2026 ist die [Fassung 2026-07-28](/blog/mcp-2026-07-28-zustandslose-spezifikation/) aktuell.
 
 ## Welche Fehler passieren beim Einsatz von MCP?
 
