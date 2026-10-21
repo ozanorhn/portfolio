@@ -7,13 +7,14 @@
   "alternativeNamen": [
     "Local LLM",
     "Open-Source-LLM",
-    "Open-Weight-Modell"
+    "Open-Weight-Modell",
+    "Lokale LLMs"
   ],
   "kurzdefinition": "Ein lokales LLM ist ein Sprachmodell, das auf eigener Hardware läuft, etwa auf einem Rechner im Büro oder einem eigenen Server, statt über die Cloud eines Anbieters.",
-  "seoTitel": "Lokales LLM: Vorteile, Grenzen & Einsatz",
-  "seoBeschreibung": "Was ist ein lokales LLM? Ein Sprachmodell auf eigener Hardware. Mit Funktionsweise, Vergleich zur Cloud, Quantisierung und Betriebshinweisen.",
+  "seoTitel": "Lokale LLMs: Modelle, Vorteile, Grenzen & Einsatz",
+  "seoBeschreibung": "Was ist ein lokales LLM? Sprachmodelle auf eigener Hardware: passende Open-Weight-Modelle, Vergleich zur Cloud, Quantisierung und Betrieb.",
   "erstveroeffentlicht": "2026-10-14T09:00:00Z",
-  "aktualisiert": "2026-10-21T09:00:00Z",
+  "aktualisiert": "2026-10-21T12:00:00Z",
   "steckbriefAussagen": [
     "Ein lokales LLM besteht aus heruntergeladenen Modellgewichten und einer Laufzeitumgebung, die Anfragen im eigenen Netz beantwortet.",
     "Bei lokalem Betrieb verlassen Prompts und Daten das eigene Netzwerk nicht.",
@@ -77,6 +78,10 @@
     {
       "frage": "Welche Hardware braucht ein lokales LLM?",
       "antwort": "Entscheidend ist vor allem der Grafikspeicher, denn das Modell muss möglichst vollständig hineinpassen. Kleinere Modelle laufen bereits auf gut ausgestatteten Laptops oder Rechnern mit viel Arbeitsspeicher, große Modelle brauchen eine oder mehrere leistungsstarke Grafikkarten. Durch Quantisierung, also eine verkleinerte Darstellung der Modellgewichte, sinkt der Speicherbedarf auf Kosten etwas geringerer Qualität."
+    },
+    {
+      "frage": "Welche Modelle eignen sich für ein lokales LLM?",
+      "antwort": "Infrage kommen Open-Weight-Modelle, deren trainierte Gewichte veröffentlicht sind. Ollama nennt auf seiner Projektseite unter anderem die Modellfamilien Gemma, Qwen, DeepSeek und gpt-oss (Stand: Oktober 2026). Vor dem Einsatz im Unternehmen lohnt ein Blick in die Lizenz des jeweiligen Modells, besonders bei kommerzieller Nutzung."
     }
   ]
 }
@@ -113,7 +118,7 @@ Die Entscheidung ist selten grundsätzlich. Viele Architekturen kombinieren beid
 
 Was beim datenschutzkonformen Einsatz eines Cloud-Modells zu beachten ist, zeigt der Artikel [Claude DSGVO-konform einsetzen](/blog/claude-dsgvo-konform-unternehmen/).
 
-## Was sind Open-Weight-Modelle?
+## Welche Modelle gibt es für lokale LLMs?
 
 Open-Weight-Modelle sind Sprachmodelle, deren trainierte Gewichte veröffentlicht werden. Man kann sie herunterladen und selbst betreiben. Ollama nennt auf seiner Projektseite unter anderem Modellfamilien wie Gemma, Qwen, DeepSeek und gpt-oss (Ollama auf GitHub, Stand: Oktober 2026).
 
