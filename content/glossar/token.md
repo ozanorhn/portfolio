@@ -14,7 +14,7 @@
   "seoTitel": "Token bei KI: Definition, Kosten und Limits",
   "seoBeschreibung": "Was ist ein Token bei KI? Die Texteinheit, die Sprachmodelle verarbeiten. Mit Faustregeln, Tokenisierung, Kosten, Limits und deutschen Texten.",
   "erstveroeffentlicht": "2026-10-19T09:00:00Z",
-  "aktualisiert": "2026-10-19T09:00:00Z",
+  "aktualisiert": "2026-10-21T12:00:00Z",
   "steckbriefAussagen": [
     "Sprachmodelle verarbeiten Text nicht als Wörter, sondern als Tokens: ganze Wörter, Wortteile, Satzzeichen oder einzelne Zeichen.",
     "Für englischen Text gilt als Faustregel etwa 4 Zeichen pro Token oder rund 75 Wörter pro 100 Tokens.",
@@ -160,3 +160,5 @@ Tokens und [Embeddings](/glossar/embeddings/) werden oft verwechselt. Ein Token 
 OpenAI nennt mehrere Wege, wenn eine Eingabe zu groß ist: den Prompt kürzen oder umformulieren, unnötigen oder wiederholten Kontext entfernen, große Eingaben aufteilen und Texte vorab zusammenfassen (OpenAI Help Center).
 
 In Automatisierungen bringt die Vorverarbeitung meist am meisten: HTML in reinen Text umwandeln, zitierte E-Mail-Verläufe abschneiden, nur relevante Dokumentabschnitte per [RAG](/glossar/rag/) übergeben statt ganzer Dateien. Bei einem [lokalen LLM](/glossar/lokales-llm/) fallen keine Gebühren pro Token an, die Grenzen des Kontextfensters und die Rechenzeit gelten aber genauso.
+
+Ein Beispiel aus der Agenten-Praxis: Warum Code Execution mit MCP Tokens spart, zeigt der Artikel [Agentic RAG mit MCP](/blog/agentic-rag-mcp-architektur/).

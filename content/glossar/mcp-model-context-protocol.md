@@ -133,6 +133,8 @@ Der zweite Workflow ist ein MCP-Server mit genau einem Werkzeug: semantische Suc
 
 Ein zweites Beispiel ist der [Hermes Pocket AI Agent](/projekte/pocket-ai-agent/), ein selbst gehosteter Sprachagent mit Handgerät. Der Agent auf dem Server ruft Todoist, Notion, Google Workspace und Spotify über MCP auf. Das Gerät selbst kennt keine dieser Integrationen. Neue Werkzeuge kommen auf dem Server hinzu, ohne dass die Firmware geändert werden muss.
 
+Weitere Praxisbeispiele für MCP mit Claude beschreiben die Artikel [Ghidra MCP mit Claude](/blog/reverse-engineering-claude-ghidra-mcp/) und [Claude Code Mods](/blog/claude-code-mods/).
+
 ## Wie funktioniert das Model Context Protocol?
 
 MCP beschreibt drei Rollen. Der Host ist die KI-Anwendung, etwa ein Chat-Assistent oder eine Entwicklungsumgebung. Der Client ist die Verbindungskomponente innerhalb des Hosts. Der Server stellt Kontext und Fähigkeiten bereit (MCP-Spezifikation, Version 2026-07-28).

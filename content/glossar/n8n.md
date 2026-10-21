@@ -9,7 +9,7 @@
   "seoTitel": "Was ist n8n? Einfach erklärt",
   "seoBeschreibung": "n8n ist ein Werkzeug zur Workflow-Automatisierung mit visueller Oberfläche. Mit Praxisbeispielen, Lizenz, Cloud vs. Selbsthosten und typischen Fehlern.",
   "erstveroeffentlicht": "2026-10-14T09:00:00Z",
-  "aktualisiert": "2026-10-14T09:00:00Z",
+  "aktualisiert": "2026-10-21T12:00:00Z",
   "steckbriefAussagen": [
     "n8n ist ein fair-code lizenziertes Werkzeug zur Workflow-Automatisierung, das Anwendungen über Nodes verbindet und KI-Funktionen mit Geschäftsprozessautomatisierung kombiniert.",
     "Ein n8n-Workflow startet über einen Trigger und läuft Node für Node; jeder einzelne Lauf ist eine Execution.",
@@ -177,6 +177,8 @@ Für KI-Schritte bietet n8n den AI-Agent-Node, der innerhalb eines Workflows lä
 Für das [Model Context Protocol](/glossar/mcp-model-context-protocol/) gibt es zwei Richtungen. Mit dem MCP Server Trigger wird ein Workflow zum MCP-Server, dessen angehängte Werkzeuge Clients wie Claude aufrufen können. Mit dem MCP Client Tool nutzt ein AI-Agent-Node die Werkzeuge eines externen MCP-Servers (n8n Docs). Die Einrichtung beschreibt die Anleitung [n8n MCP Server erstellen](/blog/mcp-server-mit-n8n-erstellen/).
 
 Ein Beispiel für die Server-Richtung ist die [Wissensbasis mit RAG und MCP](/projekte/wissensbasis-rag-mcp/): Ein n8n-Workflow stellt die Suche in internen Dokumenten als nur lesendes Werkzeug für beliebige Agenten bereit. Die Suche selbst läuft über eine [Vektordatenbank](/glossar/vektordatenbank/) in PostgreSQL.
+
+Was die zustandslose MCP-Spezifikation vom 28.07.2026 für den MCP Server Trigger bedeutet, beschreibt der Artikel [MCP 2026-07-28](/blog/mcp-2026-07-28-zustandslose-spezifikation/).
 
 ## Welche Fehler gibt es beim Einsatz von n8n?
 

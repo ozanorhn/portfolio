@@ -14,7 +14,7 @@
   "seoTitel": "Kontextfenster (Context Window) einfach erklärt",
   "seoBeschreibung": "Was ist ein Kontextfenster? Die Token-Grenze eines Sprachmodells pro Anfrage. Mit aktuellen Größen, Lost in the Middle, Kosten und Bezug zu RAG.",
   "erstveroeffentlicht": "2026-10-19T09:00:00Z",
-  "aktualisiert": "2026-10-19T09:00:00Z",
+  "aktualisiert": "2026-10-21T12:00:00Z",
   "steckbriefAussagen": [
     "Das Kontextfenster begrenzt, wie viele Tokens ein Sprachmodell in einer einzelnen Anfrage berücksichtigt, Eingabe und Ausgabe zusammen.",
     "Alles in einer Anfrage zählt mit: Systemprompt, Verlauf, Dokumente, Tool-Definitionen, Tool-Ergebnisse und die Antwort einschließlich Denkschritten.",
@@ -145,6 +145,8 @@ Die Anordnung im Prompt hilft. Anthropic empfiehlt, lange Dokumente oben im Prom
 Bei API-Modellen werden Eingabe-Tokens bei jeder Anfrage abgerechnet. Wer ein umfangreiches Handbuch mitschickt, bezahlt es bei jeder Frage erneut. Je voller das Kontextfenster, desto teurer die Anfrage und meist auch desto länger die Antwortzeit.
 
 Zusätzlich gibt es teils Preisstufen für lange Kontexte. Anthropic rechnet lange Kontexte bei den meisten aktuellen Modellen zum Standardpreis ab, bei Claude Haiku 5.5 kosten Prompts über 100.000 Tokens dagegen mehr (Anthropic, Context windows, Stand: Oktober 2026). Die Preisseite des jeweiligen Anbieters ist hier die einzige verlässliche Quelle.
+
+Wie Code Execution mit MCP verhindert, dass Werkzeugergebnisse das Kontextfenster füllen, beschreibt der Artikel [Agentic RAG mit MCP](/blog/agentic-rag-mcp-architektur/).
 
 ## Kontextfenster oder RAG: Was ist besser?
 
