@@ -5,7 +5,7 @@
 URL: https://ozan-orhan.com/projekte/recruiting-jobs-sync/
 Status: Implementiert, derzeit nicht aktiv
 Kontext: Unternehmenskontext · anonymisiert dargestellt
-Stack: n8n, Zeitplan-Trigger, HTTP-Abruf, JavaScript, Schema-gebundene LLM-Extraktion, Enum-Constraints, Datenspeicher mit Upsert
+Stack: Zeitplan-Trigger, HTTP-Abruf, JavaScript, Schema-gebundene LLM-Extraktion, Enum-Constraints, Datenspeicher mit Upsert, n8n (Orchestrierung)
 
 ## Ausgangspunkt
 

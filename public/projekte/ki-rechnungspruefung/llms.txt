@@ -5,7 +5,7 @@
 URL: https://ozan-orhan.com/projekte/ki-rechnungspruefung/
 Status: Im Testbetrieb, Live-Gang geplant
 Kontext: Unternehmenskontext · anonymisiert dargestellt
-Stack: n8n, Gmail API, PDF-Textextraktion, LLM Information Extractor, JSON-Schema, monday GraphQL, JavaScript, OpenRouter
+Stack: Gmail API, PDF-Textextraktion, LLM Information Extractor, JSON-Schema, monday GraphQL, JavaScript, OpenRouter, n8n (Orchestrierung)
 
 ## Ausgangspunkt
 

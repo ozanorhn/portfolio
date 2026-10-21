@@ -5,7 +5,7 @@
 URL: https://ozan-orhan.com/projekte/ai-visibility-monitoring-platform/
 Status: Seit Mitte 2026 im Einsatz, Datenanbindung wird überarbeitet
 Kontext: Unternehmenskontext · anonymisiert dargestellt
-Stack: n8n, Webhook mit synchroner Antwort, Zeitplan-Trigger, OAuth-Credentials, LLM-Agent mit strukturiertem Output, Postgres über REST mit Upsert, JavaScript
+Stack: Webhook mit synchroner Antwort, Zeitplan-Trigger, OAuth-Credentials, LLM-Agent mit strukturiertem Output, Postgres über REST mit Upsert, JavaScript, n8n (Orchestrierung)
 
 ## Ausgangspunkt
 

@@ -5,7 +5,7 @@
 URL: https://ozan-orhan.com/projekte/wissensbasis-rag-mcp/
 Status: MCP-Server aktiv, Ingest läuft manuell
 Kontext: Unternehmenskontext · anonymisiert dargestellt
-Stack: n8n, MCP-Server-Trigger, Postgres mit Vektor-Erweiterung, Mehrsprachige Embeddings, Dokument-Loader, Text-Splitter
+Stack: MCP-Server-Trigger, Postgres mit Vektor-Erweiterung, Mehrsprachige Embeddings, Dokument-Loader, Text-Splitter, n8n (Orchestrierung)
 
 ## Ausgangspunkt
 

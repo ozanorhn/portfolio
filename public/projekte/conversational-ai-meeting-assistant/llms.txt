@@ -5,7 +5,7 @@
 URL: https://ozan-orhan.com/projekte/conversational-ai-meeting-assistant/
 Status: Im Einsatz
 Kontext: Unternehmenskontext · anonymisiert dargestellt
-Stack: n8n, OpenAI API, Prompt Engineering, Google Workspace, Slack API
+Stack: OpenAI API, Prompt Engineering, Google Workspace, Slack API, n8n (Orchestrierung)
 
 ## Ausgangspunkt
 

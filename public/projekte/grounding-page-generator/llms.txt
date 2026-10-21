@@ -5,7 +5,7 @@
 URL: https://ozan-orhan.com/projekte/grounding-page-generator/
 Status: Produktiv im Einsatz
 Kontext: Unternehmenskontext · anonymisiert dargestellt
-Stack: n8n, Form-Trigger, LLM-Agent mit Tool Calling, JSON Schema, JSON-LD · Schema.org, Web-Scraping-API, Web-Such-API, Tabellenspeicher, JavaScript
+Stack: Form-Trigger, LLM-Agent mit Tool Calling, JSON Schema, JSON-LD · Schema.org, Web-Scraping-API, Web-Such-API, Tabellenspeicher, JavaScript, n8n (Orchestrierung)
 
 ## Ausgangspunkt
 
