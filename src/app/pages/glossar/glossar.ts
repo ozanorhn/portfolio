@@ -19,18 +19,23 @@ const VERTIEFUNG: Record<string, { slug: string; titel: string }[]> = {
     { slug: 'mcp-server-mit-n8n-erstellen', titel: 'MCP-Server mit n8n erstellen' },
     { slug: 'reverse-engineering-claude-ghidra-mcp', titel: 'Ghidra MCP mit Claude' },
     { slug: 'claude-code-mods', titel: 'Claude Code Mods' },
+    { slug: 'mcp-2026-07-28-zustandslose-spezifikation', titel: 'MCP 2026-07-28' },
   ],
-  automatisierung: [
-    { slug: 'n8n-agents-vs-ai-agent-node', titel: 'n8n Agents vs. AI-Agent-Node' },
-  ],
+  automatisierung: [{ slug: 'n8n-agents-vs-ai-agent-node', titel: 'n8n Agents vs. AI-Agent-Node' }],
   sicherheit: [
     { slug: 'ki-agenten-sicherheit-tuev-bsi-studie', titel: 'KI-Agenten Sicherheit' },
     { slug: 'claude-dsgvo-konform-unternehmen', titel: 'Claude DSGVO-konform einsetzen' },
     { slug: 'en-18286-ai-act-leitfaden', titel: 'EN 18286 AI Act' },
+    { slug: 'art-50-ai-act-entwickler', titel: 'Art. 50 AI Act' },
   ],
 };
 const buchstabe = (b: GlossarEintrag) =>
-  b.begriff.charAt(0).toLocaleUpperCase('de-DE').replace('Ä', 'A').replace('Ö', 'O').replace('Ü', 'U');
+  b.begriff
+    .charAt(0)
+    .toLocaleUpperCase('de-DE')
+    .replace('Ä', 'A')
+    .replace('Ö', 'O')
+    .replace('Ü', 'U');
 
 @Component({
   selector: 'app-glossar',
@@ -97,31 +102,91 @@ const buchstabe = (b: GlossarEintrag) =>
   styles: [
     `
       @use 'styles/tokens' as *;
-      .kopfblock { padding-block: clamp(28px, 4vw, 56px) clamp(20px, 2.6vw, 36px); row-gap: $s4; }
-      .kopfblock__pfad, .kopfblock__titel { grid-column: 1 / -1; }
-      .kopfblock__pfad a:hover { color: $petrol; }
-      .kopfblock__titel { max-width: 28ch; }
-      .kopfblock__lede { grid-column: 1 / 9; color: $tusche-2; }
-      .abc {
-        display: flex; flex-wrap: wrap; gap: $s2 $s4;
-        padding-block: $s4; border-block: $strich-regel solid $linie;
+      .kopfblock {
+        padding-block: clamp(28px, 4vw, 56px) clamp(20px, 2.6vw, 36px);
+        row-gap: $s4;
       }
-      .abc a:hover { color: $petrol; }
-      .abc__leer { color: $linie; }
-      .thema { padding-top: clamp(32px, 4vw, 56px); }
-      .vertiefung { display: flex; flex-wrap: wrap; align-items: baseline; gap: $s2 $s4; padding-top: $s4; }
-      .vertiefung a { color: $petrol; text-decoration: underline; text-underline-offset: 3px; }
-      .thema__titel { padding-bottom: $s4; border-bottom: $strich-regel solid $linie; }
-      .eintrag { border-bottom: $strich-haar solid $linie; scroll-margin-top: $s7; }
-      .eintrag__link { padding-block: $s4; align-items: baseline; }
-      .eintrag__titel { grid-column: 1 / 5; transition: color 120ms linear; }
-      .eintrag__link:hover .eintrag__titel { color: $petrol; }
-      .eintrag__kurz { grid-column: 5 / 12; color: $tusche-2; }
-      main { padding-bottom: clamp(48px, 6vw, 96px); }
-      .leer { padding-block: $s6 clamp(48px, 8vw, 120px); color: $tusche-2; }
+      .kopfblock__pfad,
+      .kopfblock__titel {
+        grid-column: 1 / -1;
+      }
+      .kopfblock__pfad a:hover {
+        color: $petrol;
+      }
+      .kopfblock__titel {
+        max-width: 28ch;
+      }
+      .kopfblock__lede {
+        grid-column: 1 / 9;
+        color: $tusche-2;
+      }
+      .abc {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $s2 $s4;
+        padding-block: $s4;
+        border-block: $strich-regel solid $linie;
+      }
+      .abc a:hover {
+        color: $petrol;
+      }
+      .abc__leer {
+        color: $linie;
+      }
+      .thema {
+        padding-top: clamp(32px, 4vw, 56px);
+      }
+      .vertiefung {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: $s2 $s4;
+        padding-top: $s4;
+      }
+      .vertiefung a {
+        color: $petrol;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .thema__titel {
+        padding-bottom: $s4;
+        border-bottom: $strich-regel solid $linie;
+      }
+      .eintrag {
+        border-bottom: $strich-haar solid $linie;
+        scroll-margin-top: $s7;
+      }
+      .eintrag__link {
+        padding-block: $s4;
+        align-items: baseline;
+      }
+      .eintrag__titel {
+        grid-column: 1 / 5;
+        transition: color 120ms linear;
+      }
+      .eintrag__link:hover .eintrag__titel {
+        color: $petrol;
+      }
+      .eintrag__kurz {
+        grid-column: 5 / 12;
+        color: $tusche-2;
+      }
+      main {
+        padding-bottom: clamp(48px, 6vw, 96px);
+      }
+      .leer {
+        padding-block: $s6 clamp(48px, 8vw, 120px);
+        color: $tusche-2;
+      }
       @media (max-width: $bp-m) {
-        .kopfblock__lede, .eintrag__titel, .eintrag__kurz { grid-column: 1 / -1; }
-        .eintrag__kurz { margin-top: 4px; }
+        .kopfblock__lede,
+        .eintrag__titel,
+        .eintrag__kurz {
+          grid-column: 1 / -1;
+        }
+        .eintrag__kurz {
+          margin-top: 4px;
+        }
       }
     `,
   ],

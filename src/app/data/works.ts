@@ -311,7 +311,7 @@ const BASIS: Work[] = [
   // ── 03 ────────────────────────────────────────────────────────────────
   {
     slug: 'wissensbasis-rag-mcp',
-    seoTitel: 'KI-Wissensdatenbank mit RAG und MCP-Server',
+    seoTitel: 'Wissensbasis mit RAG und MCP-Server: Fallstudie',
     seoBeschreibung:
       'Fallstudie: Zentrale RAG-Wissensbasis in n8n mit Postgres-Vektorsuche und mehrsprachigen Embeddings, die Agenten über einen MCP-Server abfragen.',
     nr: '03',
