@@ -52,6 +52,8 @@ const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const bildUrl = (b) => (b?.url ? new URL(b.url, CMS).href : undefined);
 const liste = (x) => (Array.isArray(x) ? x : []);
 const httpUrl = (u) => typeof u === 'string' && /^https?:\/\//.test(u);
+// YYYY-MM-DD in deutscher Zeit statt des UTC-Präfixes (sv-SE formatiert ISO-artig)
+const tagBerlin = (iso) => new Date(iso).toLocaleDateString('sv-SE', { timeZone: 'Europe/Berlin' });
 
 /** IDs aus Layout und Artikelvorlage; Überschriften dürfen sie nicht noch einmal vergeben. */
 const VORLAGEN_IDS = [
@@ -136,8 +138,8 @@ for (const artikelRoh of artikel) {
     [
       `# ${a.titel}`, '', `> ${a.kurz}`, '',
       `URL: ${seiteUrl(`/blog/${a.slug}`)}`,
-      `Veröffentlicht: ${a.datum.slice(0, 10)}`,
-      `Aktualisiert: ${a.geaendert.slice(0, 10)}`,
+      `Veröffentlicht: ${tagBerlin(a.datum)}`,
+      `Aktualisiert: ${tagBerlin(a.geaendert)}`,
       `Autor: ${a.autor}, AI Automation Engineer (${ORIGIN})`,
       a.kernaussagen.length || a.fakten.length
         ? `\n## Steckbrief\n\n${[

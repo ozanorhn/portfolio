@@ -57,5 +57,8 @@ export class BlogService {
   }
 }
 
+// Feste Zeitzone: Strapi liefert UTC; ohne sie zeigt ein Prerender in UTC kurz vor Mitternacht den Vortag
 export const datumLang = (iso: string) =>
-  new Date(iso).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
+  new Date(iso).toLocaleDateString('de-DE', {
+    day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Berlin',
+  });
