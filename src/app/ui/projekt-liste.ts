@@ -43,6 +43,7 @@ interface Gruppe {
                       <h3 class="pl__titel">{{ w.titel }}</h3>
                       <span class="pl__lede">{{ w.lede }}</span>
                       <span class="pl__meta">{{ w.kicker }}</span>
+                      <span class="pl__kontext">{{ w.kontext }}</span>
                     </span>
                   </a>
                 </li>
@@ -103,6 +104,11 @@ interface Gruppe {
       .pl__meta {
         display: block; margin-top: $s3;
         font-family: $mono; font-size: 11.5px; letter-spacing: 0.03em; color: $tusche-2;
+      }
+
+      .pl__kontext {
+        display: block; margin-top: 4px;
+        font-family: $mono; font-size: 11.5px; letter-spacing: 0.03em; color: $petrol;
       }
 
       /* Ausbildungsprojekte: kleinerer Grad, gleiche Sprache */

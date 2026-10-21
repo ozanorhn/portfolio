@@ -16,8 +16,8 @@
           <li style="--c: var(--akz-indigo)">KI-Agenten</li>
           <li style="--c: var(--akz-himmel)">MCP</li>
           <li style="--c: var(--akz-petrol)">RAG</li>
-          <li style="--c: var(--akz-koralle)">n8n</li>
           <li style="--c: var(--akz-bernstein)">Python</li>
+          <li style="--c: var(--akz-koralle)">n8n</li>
         </ul>
         <div class="auftakt__aktionen">
           <a class="knopf" [href]="'mailto:' + site.mail" data-tracking="kontakt-hero">
@@ -56,6 +56,7 @@
                 <app-system-visual [motiv]="w.visual" [alt]="'Systemszene ' + w.titel" [kompakt]="true" />
               </a>
             }
+            <p class="meta">{{ w.kontext }}</p>
             <h3 class="karte__titel" [id]="'k-' + w.slug">
               <a [routerLink]="['/projekte', w.slug]">{{ w.titel }}</a>
             </h3>

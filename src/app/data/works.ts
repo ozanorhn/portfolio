@@ -228,7 +228,6 @@ const BASIS: Work[] = [
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
-      'n8n',
       'Toggl API',
       'Slack Reaction Trigger',
       'Google Sheets',
@@ -236,6 +235,7 @@ const BASIS: Work[] = [
       'JavaScript',
       'Datentransformation',
       'Dokumentvorlagen',
+      'n8n (Orchestrierung)',
     ],
     plate: {
       kind: 'systembild',
@@ -331,12 +331,12 @@ const BASIS: Work[] = [
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
-      'n8n',
       'MCP-Server-Trigger',
       'Postgres mit Vektor-Erweiterung',
       'Mehrsprachige Embeddings',
       'Dokument-Loader',
       'Text-Splitter',
+      'n8n (Orchestrierung)',
     ],
     plate: {
       kind: 'systembild',
@@ -437,13 +437,13 @@ const BASIS: Work[] = [
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
-      'n8n',
       'Webhook mit synchroner Antwort',
       'Zeitplan-Trigger',
       'OAuth-Credentials',
       'LLM-Agent mit strukturiertem Output',
       'Postgres über REST mit Upsert',
       'JavaScript',
+      'n8n (Orchestrierung)',
     ],
     plate: {
       kind: 'systembild',
@@ -553,13 +553,13 @@ const BASIS: Work[] = [
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
-      'n8n',
       'Zeitplan-Trigger',
       'HTTP-Abruf',
       'JavaScript',
       'Schema-gebundene LLM-Extraktion',
       'Enum-Constraints',
       'Datenspeicher mit Upsert',
+      'n8n (Orchestrierung)',
     ],
     plate: {
       kind: 'systembild',
@@ -649,7 +649,7 @@ const BASIS: Work[] = [
     gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
-    stack: ['n8n', 'OpenAI API', 'Prompt Engineering', 'Google Workspace', 'Slack API'],
+    stack: ['OpenAI API', 'Prompt Engineering', 'Google Workspace', 'Slack API', 'n8n (Orchestrierung)'],
     fluss: [
       { label: 'Mitschrift', note: 'Besprechung' },
       { label: 'LLM', note: 'Strukturierung' },
@@ -691,7 +691,6 @@ const BASIS: Work[] = [
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
-      'n8n',
       'Form-Trigger',
       'LLM-Agent mit Tool Calling',
       'JSON Schema',
@@ -700,6 +699,7 @@ const BASIS: Work[] = [
       'Web-Such-API',
       'Tabellenspeicher',
       'JavaScript',
+      'n8n (Orchestrierung)',
     ],
     plate: {
       kind: 'systembild',

@@ -21,7 +21,6 @@ export const SYSTEME: Work[] = [
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
-      'n8n',
       'Webhooks',
       'monday API',
       'Claude Sonnet',
@@ -30,6 +29,7 @@ export const SYSTEME: Work[] = [
       'JavaScript',
       'n8n Data Tables',
       'Docker',
+      'n8n (Orchestrierung)',
     ],
     plate: {
       kind: 'systembild',
@@ -329,7 +329,6 @@ export const SYSTEME: Work[] = [
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
     stack: [
-      'n8n',
       'Gmail API',
       'PDF-Textextraktion',
       'LLM Information Extractor',
@@ -337,6 +336,7 @@ export const SYSTEME: Work[] = [
       'monday GraphQL',
       'JavaScript',
       'OpenRouter',
+      'n8n (Orchestrierung)',
     ],
     plate: {
       kind: 'systembild',

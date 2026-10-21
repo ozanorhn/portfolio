@@ -1,12 +1,12 @@
 import { Component, ElementRef, afterNextRender, effect, inject, viewChild } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
-import { filter, map } from 'rxjs';
+import { RouterLink } from '@angular/router';
 import { ConsentService } from '../core/consent.service';
 
-/** Pflichtseiten bleiben lesbar: dort erscheint der Dialog ohne Sperre des Hintergrunds. */
-const RECHTSSEITEN = /^\/(impressum|datenschutz)(\/|$|[?#])/;
-
+/**
+ * Einwilligung als schmale, nicht-modale Leiste am unteren Rand. Die Seite bleibt
+ * lesbar und bedienbar; der Hero wird nicht abgedunkelt. Beide Wahlmöglichkeiten
+ * sind gleich gewichtet, ohne Entscheidung bleibt das Tracking aus.
+ */
 @Component({
   selector: 'app-consent',
   standalone: true,
@@ -15,52 +15,47 @@ const RECHTSSEITEN = /^\/(impressum|datenschutz)(\/|$|[?#])/;
     <dialog
       #dialog
       class="consent"
-      [class.consent--frei]="aufRechtsseite()"
       aria-labelledby="consent-titel"
-      aria-describedby="consent-text consent-text-2"
+      aria-describedby="consent-text"
       (cancel)="abbrechen($event)"
     >
-      <p class="kicker">DATENSCHUTZ</p>
-      <h2 id="consent-titel" tabindex="-1">Deine Privatsphäre zählt.</h2>
-      <!-- Zwei kurze Absätze statt einem langen: lesbarer, und der Dialog wird nicht zum LCP-Element -->
-      <p id="consent-text">
-        Wir möchten mit optionaler Reichweitenmessung (Google Analytics über Google Tag Manager)
-        erfahren, wie unsere Website genutzt wird.
-      </p>
-      <p id="consent-text-2">
-        Ohne deine Zustimmung bleibt Google-Tracking deaktiviert. Deine Auswahl kannst du
-        jederzeit über „Cookie-Einstellungen“ im Footer ändern.
-      </p>
-      <p class="links">
-        <a routerLink="/datenschutz">Datenschutzerklärung</a>
-        <a routerLink="/impressum">Impressum</a>
-      </p>
-      @if (consent.details()) {
-        <div class="details">
-          <p>
-            <strong>Technisch notwendig</strong> – für die grundlegende Funktion der Website und das
-            Speichern deiner Auswahl. Immer aktiv.
-          </p>
-          <p>
-            <strong>Statistik (optional)</strong> – Google Analytics 4 über Google Tag Manager. Nur
-            mit deiner Zustimmung.
-          </p>
+      <div class="text">
+        <h2 id="consent-titel" tabindex="-1">Deine Privatsphäre zählt.</h2>
+        <p id="consent-text">
+          Optionale Reichweitenmessung (Google Analytics über Google Tag Manager) nur mit deiner
+          Zustimmung. Ändern jederzeit über „Cookie-Einstellungen“ im Footer.
+          <a routerLink="/datenschutz">Datenschutz</a> ·
+          <a routerLink="/impressum">Impressum</a>
+        </p>
+        @if (consent.details()) {
+          <div class="details">
+            <p>
+              <strong>Technisch notwendig</strong> – für die grundlegende Funktion der Website und
+              das Speichern deiner Auswahl. Immer aktiv.
+            </p>
+            <p>
+              <strong>Statistik (optional)</strong> – Google Analytics 4 über Google Tag Manager.
+              Nur mit deiner Zustimmung.
+            </p>
+          </div>
+        }
+      </div>
+      <div class="steuerung">
+        <div class="aktionen">
+          <button type="button" (click)="consent.waehlen(false)">Alle ablehnen</button>
+          <button type="button" (click)="consent.waehlen(true)" class="zustimmen">
+            Alle akzeptieren
+          </button>
         </div>
-      }
-      <div class="aktionen">
-        <button type="button" (click)="consent.waehlen(false)">Alle ablehnen</button>
-        <button type="button" (click)="consent.waehlen(true)" class="zustimmen">
-          Alle akzeptieren
+        <button
+          class="details-btn"
+          type="button"
+          [attr.aria-expanded]="consent.details()"
+          (click)="consent.details.set(!consent.details())"
+        >
+          {{ consent.details() ? 'Einstellungen schließen' : 'Einstellungen anzeigen' }}
         </button>
       </div>
-      <button
-        class="details-btn"
-        type="button"
-        [attr.aria-expanded]="consent.details()"
-        (click)="consent.details.set(!consent.details())"
-      >
-        {{ consent.details() ? 'Einstellungen schließen' : 'Einstellungen anzeigen' }}
-      </button>
     </dialog>
   `,
   styles: [
@@ -70,45 +65,44 @@ const RECHTSSEITEN = /^\/(impressum|datenschutz)(\/|$|[?#])/;
       }
       .consent {
         box-sizing: border-box;
-        width: min(calc(100% - 32px), 620px);
-        max-height: min(90vh, 780px);
+        position: fixed;
+        inset: auto 0 12px;
+        z-index: 10000;
+        width: min(calc(100% - 24px), 1120px);
+        max-height: min(60vh, 520px);
         overflow-y: auto;
-        margin: auto auto 16px;
-        padding: clamp(22px, 4vw, 34px);
-        border: 0;
+        margin: 0 auto;
+        padding: 14px 18px;
+        border: 1px solid #c9c8c2;
         background: #f5f2ed;
         color: #1c1b19;
-        border-radius: 12px;
-        box-shadow: 0 15px 65px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
       }
-      .consent::backdrop {
-        background: rgba(16, 30, 30, 0.48);
+      .consent[open] {
+        display: grid;
+        gap: 10px;
       }
-      /* Nicht-modal auf Impressum und Datenschutz: unten angedockt, Seite bleibt bedienbar */
-      .consent--frei {
-        position: fixed;
-        inset: auto 0 16px;
-        z-index: 10000;
-        max-height: min(60vh, 520px);
-      }
-      .kicker {
-        font-size: 11px;
-        letter-spacing: 0.15em;
-        color: #516464;
-        font-weight: 600;
+      @media (min-width: 900px) {
+        .consent[open] {
+          grid-template-columns: minmax(0, 1fr) 340px;
+          column-gap: 28px;
+          align-items: center;
+        }
       }
       h2 {
-        margin: 10px 0 14px;
+        margin: 0 0 4px;
         font-family: 'Source Serif 4', Georgia, serif;
-        font-size: clamp(25px, 4vw, 34px);
-        line-height: 1.2;
+        font-size: 18px;
+        line-height: 1.25;
       }
       h2:focus {
         outline: none;
       }
       p {
-        font-size: 14px;
-        line-height: 1.7;
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.55;
       }
       a {
         text-decoration: underline;
@@ -118,25 +112,22 @@ const RECHTSSEITEN = /^\/(impressum|datenschutz)(\/|$|[?#])/;
         outline: 3px solid #e8752a;
         outline-offset: 2px;
       }
-      .links {
-        display: flex;
-        gap: 16px;
-        margin-top: 4px;
-      }
       .details {
-        margin: 16px 0;
-        padding: 5px 16px;
+        margin-top: 10px;
+        padding: 6px 12px;
         border: 1px solid #c9c8c2;
+      }
+      .details p + p {
+        margin-top: 6px;
       }
       .aktionen {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        margin-top: 24px;
+        gap: 8px;
       }
       button {
-        min-height: 48px;
-        padding: 10px 14px;
+        min-height: 44px;
+        padding: 8px 12px;
         border: 1px solid #284f48;
         border-radius: 4px;
         background: transparent;
@@ -155,15 +146,12 @@ const RECHTSSEITEN = /^\/(impressum|datenschutz)(\/|$|[?#])/;
         color: white;
       }
       .details-btn {
-        margin-top: 8px;
+        min-height: 32px;
+        margin-top: 4px;
         width: 100%;
         border: 0;
+        font-weight: 500;
         text-decoration: underline;
-      }
-      @media (max-width: 380px) {
-        .aktionen {
-          grid-template-columns: 1fr;
-        }
       }
     `,
   ],
@@ -171,22 +159,12 @@ const RECHTSSEITEN = /^\/(impressum|datenschutz)(\/|$|[?#])/;
 export class ConsentComponent {
   readonly consent = inject(ConsentService);
   private readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
-  private readonly router = inject(Router);
   /** Element, das vor dem Öffnen den Fokus hatte (z. B. „Cookie-Einstellungen“ im Footer) */
   private vorherFokus: HTMLElement | null = null;
 
-  readonly aufRechtsseite = toSignal(
-    this.router.events.pipe(
-      filter((e) => e instanceof NavigationEnd),
-      map(() => RECHTSSEITEN.test(this.router.url)),
-    ),
-    // Beim Direktaufruf steht router.url vor der ersten Navigation noch auf "/"
-    { initialValue: RECHTSSEITEN.test(location.pathname) },
-  );
-
   constructor() {
     afterNextRender(() => this.consent.initialisieren());
-    effect(() => this.anzeigen(this.consent.sichtbar(), this.aufRechtsseite()));
+    effect(() => this.anzeigen(this.consent.sichtbar()));
   }
 
   /** Escape schließt ohne Entscheidung: keine Einwilligung, das Tracking bleibt aus. */
@@ -195,9 +173,9 @@ export class ConsentComponent {
     this.consent.schliessen();
   }
 
-  private anzeigen(sichtbar: boolean, frei: boolean): void {
+  private anzeigen(sichtbar: boolean): void {
     const el = this.dialog().nativeElement;
-    if (typeof el.showModal !== 'function') return;
+    if (typeof el.show !== 'function') return;
     if (!sichtbar) {
       if (!el.open) return;
       el.close();
@@ -205,24 +183,16 @@ export class ConsentComponent {
       this.vorherFokus = null;
       return;
     }
-    const modal = !frei;
-    if (el.open && el.matches(':modal') === modal) return;
-    if (!el.open) {
-      const aktiv = document.activeElement;
-      this.vorherFokus = aktiv instanceof HTMLElement && aktiv !== document.body ? aktiv : null;
-    }
-    if (el.open) el.close();
-    if (modal) {
-      // showModal macht den Rest der Seite inert und hält den Tab-Fokus im Dialog
-      el.showModal();
+    if (el.open) return;
+    const aktiv = document.activeElement;
+    this.vorherFokus = aktiv instanceof HTMLElement && aktiv !== document.body ? aktiv : null;
+    el.show();
+    if (this.vorherFokus) {
+      // Bewusst geöffnet (Footer): Fokus in die Leiste
       el.querySelector<HTMLElement>('#consent-titel')?.focus();
-    } else {
-      // Rechtsseiten: nicht-modal. show() fokussiert den Dialog; beim automatischen Öffnen
-      // bleibt der Fokus aber auf der Seite, nur über „Cookie-Einstellungen“ springt er hinein.
-      el.show();
-      if (!this.vorherFokus && el.contains(document.activeElement)) {
-        (document.activeElement as HTMLElement).blur();
-      }
+    } else if (el.contains(document.activeElement)) {
+      // Automatisch beim Laden: Fokus bleibt auf der Seite
+      (document.activeElement as HTMLElement).blur();
     }
   }
 }
