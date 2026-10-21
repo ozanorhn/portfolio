@@ -24,13 +24,12 @@ interface MenuPunkt {
     <header class="kopf">
       <div class="wrap kopf__zeile">
         <!-- Marke -->
-        <a routerLink="/" class="kopf__marke" [attr.aria-label]="site.name + ', Startseite'">
-          <svg class="kopf__zeichen" viewBox="0 0 20 22" aria-hidden="true" focusable="false">
-            <path
-              fill-rule="evenodd"
-              d="M5.2 2.5h11.3a1.6 1.6 0 0 1 1.6 1.6v13.8a1.6 1.6 0 0 1-1.6 1.6H1.4Zm1.4 4.1v2.6L10.3 11l-3.7 2.4v2.6L14.8 11Z"
-            />
-          </svg>
+        <a routerLink="/" class="kopf__marke" [attr.aria-label]="'ozan.orhan – ' + site.name + ', Startseite'">
+          <!-- Bildmarke: hell im hellen Modus, Negativ im dunklen; der Name steht daneben -->
+          <img class="kopf__zeichen kopf__zeichen--hell" src="assets/img/logo-hell.webp"
+               width="50" height="28" alt="" aria-hidden="true" decoding="async" />
+          <img class="kopf__zeichen kopf__zeichen--negativ" src="assets/img/logo-negativ.webp"
+               width="49" height="28" alt="" aria-hidden="true" decoding="async" />
           <span class="kopf__wort">ozan.orhan</span>
         </a>
 
@@ -120,7 +119,10 @@ interface MenuPunkt {
 
       /* ─── Marke ─────────────────────────────────────────────────── */
       .kopf__marke { display: inline-flex; align-items: center; gap: $s3; flex: none; }
-      .kopf__zeichen { width: 20px; height: auto; fill: $petrol; flex: none; }
+      .kopf__zeichen { height: 28px; width: auto; flex: none; display: block; }
+      .kopf__zeichen--negativ { display: none; }
+      :host-context([data-theme='dunkel']) .kopf__zeichen--hell { display: none; }
+      :host-context([data-theme='dunkel']) .kopf__zeichen--negativ { display: block; }
       .kopf__wort {
         font-family: $mono;
         font-size: 15.5px;
@@ -217,9 +219,8 @@ interface MenuPunkt {
         .kopf__nav { display: none; }
         .kopf__menue { display: block; }
       }
-      @media (max-width: 400px) {
-        .kopf__cta { display: none; }
-      }
+      /* Logo, Name, Theme und Menü brauchen den Platz; Kontakt steht im Menü */
+      @media (max-width: 480px) { .kopf__cta { display: none; } }
     `,
   ],
 })

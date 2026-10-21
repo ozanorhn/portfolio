@@ -48,7 +48,8 @@
   "verwandteArtikel": [],
   "verwandteProjekte": [
     "ai-visibility-monitoring-platform",
-    "grounding-page-generator"
+    "grounding-page-generator",
+    "agentic-commerce-audit"
   ],
   "quellen": [
     {

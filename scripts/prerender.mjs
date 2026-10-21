@@ -7,12 +7,23 @@ import { createServer } from 'node:http';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import { existsSync } from 'node:fs';
 import { extname, join, normalize } from 'node:path';
 import { blogArtikel, routen } from './routen.mjs';
 
 const run = promisify(execFile);
 const WURZEL = 'dist/portfolio/browser';
+/** Globales Stylesheet, einmal gelesen; '</style' darf im eingebetteten CSS nicht vorkommen. */
+const cssCache = new Map();
+const globalCss = (datei) => {
+  if (!cssCache.has(datei)) {
+    const css = readFileSync(join(WURZEL, datei), 'utf8');
+    if (/<\/style/i.test(css)) throw new Error(`${datei} enthält </style>, nicht einbettbar`);
+    cssCache.set(datei, css);
+  }
+  return cssCache.get(datei);
+};
 const CHROME =
   process.env.CHROME_PFAD ??
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
@@ -120,6 +131,13 @@ for (const { pfad } of await routen()) {
     // Der Renderer hat keine gespeicherte Wahl und zeigt den Consent-Dialog. Der gehört nicht
     // ins statische HTML (Suchmaschinen, Aufblitzen); Angular blendet ihn bei Bedarf selbst ein.
     stdout = stdout.replace(/(<app-consent[^>]*>)[\s\S]*?(<\/app-consent>)/, '$1$2');
+    // Globales CSS direkt einbetten: Angular leitet sein kritisches CSS aus der leeren index.html
+    // ab, es fehlen also globale Regeln (.lede, .titel …). Eingebettet gibt es weder eine
+    // blockierende Anfrage noch ein Aufblitzen ohne Stile. Klein genug: ca. 15 kB, ~3 kB Brotli.
+    stdout = stdout
+      .replace(/<link rel="stylesheet" href="(styles-[^"]+\.css)" media="[^"]*" onload="this\.media='all'">/, (_, datei) =>
+        `<style data-global="${datei}">${globalCss(datei)}</style>`)
+      .replace(/<noscript><link rel="stylesheet" href="styles-[^"]+\.css"><\/noscript>/, '');
 
     const ziel = pfad === '/' ? join(WURZEL, 'index.html') : join(WURZEL, pfad, 'index.html');
     await mkdir(join(ziel, '..'), { recursive: true });

@@ -182,4 +182,158 @@ export const SYSTEMBILDER = [
       },
     ],
   },
+  {
+    id: 'wissensbasis-rag-mcp',
+    titel: 'Wissensbasis — RAG + MCP-Server',
+    untertitel: 'Schreibpfad und Lesepfad getrennt',
+    beschreibung:
+      'Ingest: Dokumente aus einem Ordner laden, in Chunks zerlegen, mehrsprachige Embeddings erzeugen und in Postgres mit Vektor-Erweiterung speichern. Retrieval: Ein Agent ruft das einzige, lesende MCP-Tool auf, die Anfrage wird mit demselben Modell eingebettet und über eine Match-Funktion gesucht.',
+    bahnen: [
+      {
+        titel: 'Ingest', takt: 'Schreibpfad',
+        stationen: [
+          { label: 'Dokumentquelle', note: 'Ordner' },
+          { label: 'Laden', note: 'Dokument-Loader' },
+          { label: 'Chunking', note: 'Text-Splitter' },
+          { label: 'Embeddings', note: 'mehrsprachig' },
+          { label: 'Vector Store', note: 'Postgres' },
+        ],
+      },
+      {
+        titel: 'Retrieval', takt: 'Lesepfad über MCP',
+        stationen: [
+          { label: 'Agent', note: 'beliebiger Client' },
+          { label: 'MCP-Server', note: 'ein Tool, lesend' },
+          { label: 'Anfrage', note: 'gleiches Modell' },
+          { label: 'Match-Funktion', note: 'Postgres' },
+          { label: 'Treffer', note: 'an den Agenten' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'ai-visibility',
+    titel: 'AI Visibility Monitoring Platform',
+    untertitel: 'Drei Komponenten, fünf Datenquellen',
+    beschreibung:
+      'Täglich: Sichtbarkeits-APIs, defensive Extraktion, Kontext, Analyse-Agent ohne Tools, Normalisierung, Upsert in die Insights-Tabelle. Täglich: Webanalyse, Suchkonsole und Backlinks über zwei Zeiträume, Aggregation nach URL, Anomalieerkennung, Aufgaben und Meldung. Vierzehntägig: ein Agent-System ruft n8n per Webhook, n8n bewertet je URL den Trend und antwortet synchron.',
+    bahnen: [
+      {
+        titel: 'KI-Sichtbarkeit', takt: 'täglich',
+        stationen: [
+          { label: 'Sichtbarkeits-APIs', note: 'parallel' },
+          { label: 'Extraktion', note: 'defensiv, rekursiv' },
+          { label: 'Kontext', note: 'gewonnen · verloren' },
+          { label: 'Analyse-Agent', note: 'ohne Tools' },
+          { label: 'Normalisierung', note: 'in Code' },
+          { label: 'Upsert', note: 'stabile Schlüssel' },
+        ],
+      },
+      {
+        titel: 'Traffic und Rankings', takt: 'täglich',
+        stationen: [
+          { label: 'Drei Quellen', note: 'zwei Zeiträume' },
+          { label: 'Aggregation', note: 'nach URL' },
+          { label: 'Anomalien', note: 'Einbrüche' },
+          { label: 'Meldung', note: 'Aufgabe · Chat' },
+        ],
+      },
+      {
+        titel: 'Zielüberprüfung', takt: '14-tägig, extern',
+        stationen: [
+          { label: 'Agent-System', note: 'Auslöser' },
+          { label: 'Webhook', note: 'synchron' },
+          { label: 'Je URL', note: 'vier Abfragen' },
+          { label: 'Trend', note: 'Signal-Voting' },
+          { label: 'Antwort', note: 'an den Agenten' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'grounding-page-generator',
+    titel: 'Grounding Page Generator',
+    untertitel: 'Dreistufiger Self-Service',
+    beschreibung:
+      'Dreistufiger Self-Service-Flow. Stufe eins: Formular, Verzweigung nach vorhandener URL, Research-Agent mit Web-Such-Tool und JSON-Schema, Session als Audit-Trail. Stufe zwei: Validierung durch den Menschen zwischen den beiden Modellaufrufen, danach deterministisches Merge, bei dem die Nutzereingabe die KI schlägt, wenn sie vorhanden ist. Stufe drei: Generierungs-Chain gegen ein strenges Ausgabeschema und das fertige Dokument aus Titel, Meta-Description, JSON-LD und HTML. Scheitert das Scraping, fällt der Lauf auf den Pfad ohne URL zurück.',
+    bahnen: [
+      {
+        titel: 'Stufe 1', takt: 'Recherche',
+        stationen: [
+          { label: 'Formular', note: 'Entität · URL optional' },
+          { label: 'Verzweigung', note: 'URL vorhanden?' },
+          { label: 'Research-Agent', note: 'LLM + Web-Suche' },
+          { label: 'Session', note: 'Audit-Trail je Lauf' },
+        ],
+      },
+      {
+        titel: 'Stufe 2', takt: 'Validierung',
+        stationen: [
+          { label: 'Validierung', note: 'durch den Menschen', gate: true },
+          { label: 'Merge', note: 'Eingabe schlägt KI' },
+        ],
+      },
+      {
+        titel: 'Stufe 3', takt: 'Generierung',
+        stationen: [
+          { label: 'Generierungs-Chain', note: 'strenges Schema' },
+          { label: 'Dokument', note: 'Titel · Meta · JSON-LD · HTML' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'recruiting-jobs-sync',
+    titel: 'Recruiting Jobs Sync',
+    untertitel: 'Täglicher Batch, selbstheilend',
+    beschreibung:
+      'Täglicher Batch. Ein Lauf-Zeitstempel wird zu Beginn gesetzt und über den gesamten Lauf geführt. Karriereseite, Scraping und Extraktion, LLM-gestützte strukturierte Extraktion, Validierung und Normalisierung, Upsert in den Datenspeicher; die Schleife läuft je Link mit Batchgröße eins. Jeder berührte Datensatz bekommt last_seen_at auf den Laufzeitpunkt. Am Ende werden alle aktiven Zeilen mit älterem last_seen_at auf inaktiv gesetzt statt gelöscht; beim nächsten erfolgreichen Lauf kommt der Eintrag zurück.',
+    bahnen: [
+      {
+        titel: 'Je Link', takt: 'Batchgröße 1',
+        stationen: [
+          { label: 'Karriereseite', note: 'HTML, keine API' },
+          { label: 'Scraping', note: 'Links dedupliziert' },
+          { label: 'LLM-Extraktion', note: 'JSON-Schema · Enum' },
+          { label: 'Validierung', note: 'Unklares bleibt leer' },
+          { label: 'Upsert', note: 'Match über Slug' },
+        ],
+      },
+      {
+        titel: 'Laufende', takt: 'einmal je Lauf',
+        stationen: [
+          { label: 'Zeitstempel', note: 'last_seen_at' },
+          { label: 'Vergleich', note: 'älter als Lauf' },
+          { label: 'Inaktiv', note: 'nicht gelöscht' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'leistungsnachweis-automation',
+    titel: 'Leistungsnachweis Automation',
+    untertitel: 'Monatlich, nach Freigabe',
+    beschreibung:
+      'Monatlicher n8n-Workflow. Eine Chat-Nachricht fragt die Freigabe ab; eine Reaktion darauf startet den Lauf und bestimmt den Zeitraum. Zeiteinträge werden aus der Zeiterfassung geladen, Kunden zugeordnet und transformiert, daraus entstehen Tabellen und Dokumente, die in der Ablage gespeichert werden. Der Abschluss wird im Chat zurückgemeldet. Ohne Reaktion startet kein Lauf.',
+    bahnen: [
+      {
+        titel: 'Start', takt: 'monatlich',
+        stationen: [
+          { label: 'Freigabe-Nachricht', note: 'Chat' },
+          { label: 'Reaktion', note: 'Mensch', gate: true },
+          { label: 'Zeitraum', note: 'Monat · von / bis' },
+          { label: 'Zeiteinträge', note: 'Zeiterfassung-API' },
+        ],
+      },
+      {
+        titel: 'Je Kunde', takt: 'Schleife',
+        stationen: [
+          { label: 'Zuordnung', note: 'je Kunde strukturiert' },
+          { label: 'Dokumente', note: 'Vorlagen befüllt' },
+          { label: 'Ablage', note: 'Ordner je Kunde' },
+          { label: 'Abschluss', note: 'Rückmeldung im Chat' },
+        ],
+      },
+    ],
+  },
 ];

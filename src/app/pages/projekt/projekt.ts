@@ -1,3 +1,5 @@
+import { SystemVisualComponent } from '../../ui/system-visual';
+import { AblaufAusklappenComponent } from '../../ui/ablauf-ausklappen';
 import { Component, ChangeDetectionStrategy, computed, effect, inject, input } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
@@ -15,6 +17,8 @@ import { AnalyticsService } from '../../core/analytics.service';
 import { SITE, seiteUrl } from '../../core/site';
 import { abschnitte, findWork, nachbar, type FlussStation } from '../../data/works';
 import { BlogService } from '../../data/blog';
+import { GlossarService } from '../../data/glossar';
+import { WEITERLESEN } from '../../data/weiterlesen';
 
 @Component({
   selector: 'app-projekt',
@@ -22,7 +26,7 @@ import { BlogService } from '../../data/blog';
   imports: [
     RouterLink, KopfComponent, FussComponent, TafelComponent, SystemFlowComponent,
     AgentStateFlowComponent, ToolInvocationComponent, ApprovalExampleComponent,
-    CaseStudyNavComponent, LucideAngularModule,
+    CaseStudyNavComponent, LucideAngularModule, SystemVisualComponent, AblaufAusklappenComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './projekt.html',
@@ -59,8 +63,22 @@ export class ProjektComponent {
   readonly naechste = computed(() => nachbar(this.slug()));
   /** Veröffentlichte Artikel, die in Strapi dieser Fallstudie zugeordnet sind */
   private readonly blogListe = toSignal(inject(BlogService).liste(), { initialValue: [] });
-  readonly fachartikel = computed(() =>
-    this.blogListe().filter((a) => a.projektSlugs?.includes(this.slug())),
+  private readonly glossar = toSignal(inject(GlossarService).liste(), { initialValue: [] });
+  private readonly weiter = computed(() => WEITERLESEN[this.slug()] ?? {});
+  /** Strapi-Zuordnung (projektSlugs) plus lokal gepflegte Querverweise aus weiterlesen.ts */
+  readonly fachartikel = computed(() => {
+    const lokal = this.weiter().artikel ?? [];
+    return this.blogListe().filter(
+      (a) => a.projektSlugs?.includes(this.slug()) || lokal.includes(a.slug),
+    );
+  });
+  readonly verwandteProjekte = computed(() =>
+    (this.weiter().projekte ?? []).map((s) => findWork(s)).filter((w) => !!w),
+  );
+  readonly begriffe = computed(() =>
+    (this.weiter().begriffe ?? [])
+      .map((s) => this.glossar().find((b) => b.slug === s))
+      .filter((b) => !!b),
   );
   readonly nav = computed(() => {
     const w = this.work();
@@ -90,7 +108,7 @@ export class ProjektComponent {
         url: seiteUrl(`/projekte/${w.slug}`),
         inLanguage: 'de-DE',
         keywords: w.stack.join(', '),
-        creator: { '@type': 'Person', name: SITE.name, url: SITE.origin },
+        creator: { '@type': 'Person', '@id': `${SITE.origin}/#person`, name: SITE.name, url: SITE.origin },
         isPartOf: { '@type': 'CollectionPage', url: seiteUrl('/projekte') },
       };
       if (w.repo) schema['codeRepository'] = w.repo;

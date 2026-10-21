@@ -4,6 +4,20 @@
 .einstieg__text { grid-column: 1 / 9; }
 .einstieg--bild .einstieg__text { grid-column: 1 / 7; }
 .einstieg__bild { grid-column: 7 / 13; }
+.einstieg--seite { align-items: center; }
+.einstieg--seite .einstieg__text { grid-column: 1 / 7; }
+.einstieg__visual { grid-column: 7 / 13; }
+/* Bühne: die Systemszene als breite Fläche unter dem Titel, mit Farbband */
+.buehne {
+  margin-bottom: clamp(24px, 3vw, 44px); padding: clamp(16px, 3vw, 48px);
+  border-radius: 8px; background: color-mix(in srgb, var(--akz-bernstein) 7%, var(--papier-tief));
+}
+.buehne[data-motiv='rechnung'] { background: color-mix(in srgb, var(--akz-koralle) 7%, var(--papier-tief)); }
+.buehne app-system-visual { max-width: 760px; margin-inline: auto; }
+@media (max-width: $bp-m) {
+  .einstieg--seite .einstieg__text, .einstieg__visual { grid-column: 1 / -1; }
+  .buehne { padding: 10px; }
+}
 .einstieg__lede { margin-top: $s4; color: $tusche-2; max-width: 52ch; }
 .einstieg__marke { margin-top: $s4; }
 
@@ -75,3 +89,9 @@
   #entscheidungen > .teil__titel { grid-column: 1 / -1; }
   #entscheidungen .entsch:last-of-type { border-bottom: $strich-haar solid $linie; }
 }
+
+/* Weiterlesen: drei kurze Linklisten, auf breiten Flächen nebeneinander */
+.weiterlesen { display: grid; gap: $s5; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+.weiterlesen__titel { margin: 0 0 $s2; }
+.weiterlesen ul { margin: 0; padding-left: 1.1em; }
+.weiterlesen li + li { margin-top: $s2; }

@@ -40,7 +40,9 @@
     "mcp-server-mit-n8n-erstellen"
   ],
   "verwandteProjekte": [
-    "leistungsnachweis-automation"
+    "leistungsnachweis-automation",
+    "ki-rechnungspruefung",
+    "agentic-commerce-audit"
   ],
   "quellen": [
     {

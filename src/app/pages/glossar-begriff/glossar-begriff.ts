@@ -1,15 +1,13 @@
 import { Component, ChangeDetectionStrategy, computed, effect, inject, input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { switchMap } from 'rxjs';
 import { KopfComponent } from '../../ui/kopf';
 import { FussComponent } from '../../ui/fuss';
 import { CaseStudyNavComponent } from '../../ui/case-study-nav';
 import { SeoService } from '../../core/seo.service';
 import { SITE, person, seitenTitel, seiteUrl } from '../../core/site';
 import { datumLang } from '../../data/blog';
-import { GlossarService, THEMEN, type GlossarBegriff } from '../../data/glossar';
+import { THEMEN, type GlossarBegriff } from '../../data/glossar';
 import type { Abschnitt } from '../../data/works';
 
 @Component({
@@ -22,7 +20,6 @@ import type { Abschnitt } from '../../data/works';
 })
 export class GlossarBegriffComponent {
   private readonly seo = inject(SeoService);
-  private readonly glossar = inject(GlossarService);
   private readonly sanitizer = inject(DomSanitizer);
   readonly slug = input<string>('');
   readonly datum = datumLang;
@@ -30,9 +27,9 @@ export class GlossarBegriffComponent {
   readonly themen = THEMEN;
 
   /** undefined: lädt noch · null: nicht gefunden */
-  readonly begriff = toSignal(
-    toObservable(this.slug).pipe(switchMap((s) => this.glossar.begriff(s))),
-  );
+  readonly vorab = input<GlossarBegriff | null | undefined>(undefined);
+  /** Vom Resolver geladen (app.routes.ts). */
+  readonly begriff = computed(() => this.vorab());
 
   /** Das HTML ist im Build bereinigt (scripts/markdown.mjs); Angulars Filter würde die Anker entfernen. */
   readonly html = computed(() => {

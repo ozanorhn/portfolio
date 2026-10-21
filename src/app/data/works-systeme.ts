@@ -16,6 +16,7 @@ export const SYSTEME: Work[] = [
       'Von der Bestellung bis zum Analyse-Deck: n8n steuert Status, Daten und Freigaben, ein ' +
       'Worker misst, wie KI-Assistenten auf echte Kauffragen antworten.',
     status: 'Live im Testbetrieb seit Oktober 2026',
+    herkunft: 'beruflich',
     gruppe: 'kern',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
@@ -42,6 +43,8 @@ export const SYSTEME: Work[] = [
       { label: 'Worker', note: 'drei Modelle' },
       { label: 'Review', note: 'Mensch' },
     ],
+    visual: 'aca',
+    layout: 'buehne',
     highlights: [
       { label: 'Meine Rolle', wert: 'Prozesskette in n8n, Worker-Anbindung' },
       { label: 'Kern', wert: 'Statusmaschine mit zwei Freigaben' },
@@ -120,6 +123,7 @@ export const SYSTEME: Work[] = [
       'Ein selbst gehosteter Agent für wiederkehrende SEO-Aufgaben: Daten über MCP, Auswertung ' +
       'nach festen Skills, Ergebnisse im Team-Chat.',
     status: 'Im Einsatz, Skills werden laufend nachgeschärft',
+    herkunft: 'beruflich',
     gruppe: 'kern',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
@@ -145,6 +149,8 @@ export const SYSTEME: Work[] = [
       { label: 'Ergebnis', note: 'Chat' },
       { label: 'Freigabe', note: 'Mensch' },
     ],
+    visual: 'seo-agent',
+    layout: 'seite',
     highlights: [
       { label: 'Meine Rolle', wert: 'Setup, Skills, MCP-Anbindung, n8n-Gegenstelle' },
       { label: 'Kern', wert: 'Versionierte Skills statt Prompt-Sammlung' },
@@ -221,6 +227,7 @@ export const SYSTEME: Work[] = [
       'Eine eigene Plattform, über die KI-Agenten Projekte auf meinem Server verwalten: erst ' +
       'Vorschau, dann Freigabe per Passkey, dann Anwendung.',
     status: 'Eigenes Infrastrukturprojekt, in Betrieb, Ausbau läuft',
+    herkunft: 'eigen',
     gruppe: 'kern',
     kontext: 'Eigenes Engineering-Projekt',
     stack: [
@@ -246,6 +253,8 @@ export const SYSTEME: Work[] = [
       { label: 'Passkey', note: 'Freigabe' },
       { label: 'Anwendung', note: 'Docker' },
     ],
+    visual: 'mcp',
+    layout: 'seite',
     highlights: [
       { label: 'Meine Rolle', wert: 'Eigenes Projekt, komplett' },
       { label: 'Kern', wert: 'Vorschau → Passkey → Anwendung' },
@@ -315,6 +324,7 @@ export const SYSTEME: Work[] = [
       'Rechnungen kommen als PDF per Mail. Ein LLM liest sie gegen ein festes Schema aus, Code ' +
       'prüft, und die Fachabteilung bekommt einen Zuordnungsvorschlag.',
     status: 'Im Testbetrieb, Live-Gang geplant',
+    herkunft: 'beruflich',
     gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
@@ -340,6 +350,8 @@ export const SYSTEME: Work[] = [
       { label: 'Vorschlag', note: 'Zuordnung' },
       { label: 'Freigabe', note: 'Mensch' },
     ],
+    visual: 'rechnung',
+    layout: 'buehne',
     highlights: [
       { label: 'Meine Rolle', wert: 'Workflow komplett' },
       { label: 'Kern', wert: 'Modell extrahiert, Code entscheidet' },
@@ -395,6 +407,7 @@ export const SYSTEME: Work[] = [
       'Die Infrastruktur unter den Automatisierungen: eigene Datenbank, zentrale ' +
       'Fehlermeldungen, VPN mit fester IP und ein Passwortmanager für das Team.',
     status: 'Im Betrieb',
+    herkunft: 'beruflich',
     gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
@@ -418,6 +431,8 @@ export const SYSTEME: Work[] = [
       { label: 'Fehler', note: 'zentral' },
       { label: 'Chat', note: 'Meldung' },
     ],
+    visual: 'betrieb',
+    layout: 'seite',
     highlights: [
       { label: 'Meine Rolle', wert: 'Einrichtung und Richtlinie' },
       { label: 'Kern', wert: 'Ein Fehlerpfad für alle Workflows' },

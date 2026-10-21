@@ -36,7 +36,10 @@
     "n8n-agents-vs-ai-agent-node",
     "agentic-rag-mcp-architektur"
   ],
-  "verwandteProjekte": [],
+  "verwandteProjekte": [
+    "ki-rechnungspruefung",
+    "recruiting-jobs-sync"
+  ],
   "quellen": [
     {
       "titel": "OpenAI API Docs: Structured model outputs",

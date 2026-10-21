@@ -1,10 +1,9 @@
-import { Component, ChangeDetectionStrategy, computed, effect, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, ChangeDetectionStrategy, computed, effect, inject, input } from '@angular/core';
 import { KopfComponent } from '../../ui/kopf';
 import { FussComponent } from '../../ui/fuss';
 import { SeoService } from '../../core/seo.service';
 import { SITE, seiteUrl } from '../../core/site';
-import { GlossarService, THEMEN, type GlossarEintrag } from '../../data/glossar';
+import { THEMEN, type GlossarEintrag } from '../../data/glossar';
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const buchstabe = (b: GlossarEintrag) =>
@@ -98,7 +97,9 @@ export class GlossarComponent {
   private readonly seo = inject(SeoService);
   readonly site = SITE;
   readonly alphabet = ALPHABET;
-  readonly begriffe = toSignal(inject(GlossarService).liste());
+  /** Vom Resolver geladen (app.routes.ts), damit der vorgerenderte Inhalt bis dahin stehen bleibt. */
+  readonly vorab = input<GlossarEintrag[] | undefined>(undefined);
+  readonly begriffe = computed(() => this.vorab());
 
   readonly gruppen = computed(() => {
     const alle = this.begriffe() ?? [];

@@ -38,7 +38,9 @@
     "chunking"
   ],
   "verwandteArtikel": [],
-  "verwandteProjekte": [],
+  "verwandteProjekte": [
+    "wissensbasis-rag-mcp"
+  ],
   "quellen": [
     {
       "titel": "Google Machine Learning Crash Course: Embeddings",

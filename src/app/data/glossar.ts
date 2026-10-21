@@ -41,6 +41,7 @@ export const THEMEN: Record<string, string> = {
   automatisierung: 'Automatisierung',
   sicherheit: 'Sicherheit',
   ki_sichtbarkeit: 'Sichtbarkeit in KI-Suchen',
+  seo_grundlagen: 'SEO-Grundlagen',
 };
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;

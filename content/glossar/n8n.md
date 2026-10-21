@@ -49,7 +49,8 @@
   ],
   "verwandteProjekte": [
     "leistungsnachweis-automation",
-    "recruiting-jobs-sync"
+    "recruiting-jobs-sync",
+    "automation-betrieb-self-hosting"
   ],
   "quellen": [
     {

@@ -2,18 +2,31 @@
 
 @if (work(); as w) {
   <main id="inhalt" class="wrap">
-    <header class="einstieg grid" [class.einstieg--bild]="w.plate?.kind === 'bild'">
+    <header class="einstieg grid" [class.einstieg--bild]="w.plate?.kind === 'bild'"
+      [class.einstieg--seite]="w.visual && w.layout !== 'buehne' && w.plate?.kind !== 'bild'" [attr.data-motiv]="w.visual">
       <div class="einstieg__text">
         <h1 class="titel">{{ w.titel }}</h1>
         <p class="lede einstieg__lede">{{ w.lede }}</p>
         <p class="mono einstieg__marke">Projekt {{ w.nr }} · {{ w.kicker }}</p>
       </div>
+      <!-- Ein Foto als Tafel ist selbst die Hauptvisualisierung; dann keine zweite Szene daneben -->
+      @if (w.visual && w.layout !== 'buehne' && w.plate?.kind !== 'bild') {
+        <div class="einstieg__visual">
+          <app-system-visual [motiv]="w.visual" [alt]="'Systemszene ' + w.titel + ': ' + w.lede" />
+        </div>
+      }
       @if (w.plate?.kind === 'bild') {
         <div class="einstieg__bild">
           <app-tafel [plate]="w.plate" [eager]="true" [hoehe]="'46vh'" />
         </div>
       }
     </header>
+
+    @if (w.visual && w.layout === 'buehne') {
+      <div class="buehne" [attr.data-motiv]="w.visual">
+        <app-system-visual [motiv]="w.visual" [alt]="'Systemszene ' + w.titel + ': ' + w.lede" />
+      </div>
+    }
 
     <section class="kenn" aria-label="Kenndaten">
       <dl class="kenn__liste">
@@ -34,7 +47,8 @@
       </dl>
     </section>
 
-    @if (w.plate?.kind === 'systembild') {
+    <!-- Mit eigener Systemszene wandert das Diagramm aufklappbar in den Abschnitt Architektur -->
+    @if (w.plate?.kind === 'systembild' && !w.visual) {
       <!-- Das Systembild ist das größte Element der Seite. Es bekommt die volle
            Breite, damit die Beschriftung lesbar bleibt, und steht nach dem Titel,
            damit auf schmalen Geräten zuerst klar ist, worum es geht. -->
@@ -79,6 +93,11 @@
               <app-system-flow class="teil__flow" [stationen]="w.fluss" [kopf]="w.titel + ' · Ablauf'" />
             }
             <div class="prosa">@for (p of w.architektur; track $index) { <p>{{ p }}</p> }</div>
+            @if (w.visual && w.plate?.kind === 'systembild') {
+              <app-ablauf-ausklappen [hinweis]="'Bahnen, Stationen und Freigaben'">
+                <app-tafel [plate]="w.plate" />
+              </app-ablauf-ausklappen>
+            }
           </section>
         } @else if (w.fluss && !w.plate) {
           <section id="architektur" class="teil" aria-labelledby="t-arch">
@@ -158,14 +177,41 @@
           </section>
         }
 
-        @if (fachartikel().length) {
-          <section id="fachartikel" class="teil" aria-labelledby="t-artikel">
-            <h2 id="t-artikel" class="untertitel teil__titel">Fachartikel zum Thema</h2>
-            <ul class="prosa">
-              @for (a of fachartikel(); track a.slug) {
-                <li><a class="textlink" [href]="'/blog/' + a.slug + '/'">{{ a.titel }}</a></li>
+        @if (fachartikel().length || verwandteProjekte().length || begriffe().length) {
+          <section id="weiterlesen" class="teil" aria-labelledby="t-weiter">
+            <h2 id="t-weiter" class="untertitel teil__titel">Weiterlesen</h2>
+            <div class="weiterlesen">
+              @if (verwandteProjekte().length) {
+                <div>
+                  <h3 class="meta weiterlesen__titel">Verwandte Projekte</h3>
+                  <ul class="prosa">
+                    @for (v of verwandteProjekte(); track v!.slug) {
+                      <li><a class="textlink" [routerLink]="['/projekte', v!.slug]">{{ v!.titel }}</a></li>
+                    }
+                  </ul>
+                </div>
               }
-            </ul>
+              @if (fachartikel().length) {
+                <div>
+                  <h3 class="meta weiterlesen__titel">Fachartikel</h3>
+                  <ul class="prosa">
+                    @for (a of fachartikel(); track a.slug) {
+                      <li><a class="textlink" [href]="'/blog/' + a.slug + '/'">{{ a.titel }}</a></li>
+                    }
+                  </ul>
+                </div>
+              }
+              @if (begriffe().length) {
+                <div>
+                  <h3 class="meta weiterlesen__titel">Begriffe im Glossar</h3>
+                  <ul class="prosa">
+                    @for (b of begriffe(); track b!.slug) {
+                      <li><a class="textlink" [href]="'/glossar/' + b!.slug + '/'">{{ b!.begriff }}</a></li>
+                    }
+                  </ul>
+                </div>
+              }
+            </div>
           </section>
         }
 

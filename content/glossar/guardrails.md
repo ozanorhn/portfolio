@@ -37,7 +37,9 @@
     "structured-output"
   ],
   "verwandteArtikel": [],
-  "verwandteProjekte": [],
+  "verwandteProjekte": [
+    "mcp-plattform-self-hosted"
+  ],
   "quellen": [
     {
       "titel": "n8n Docs: Guardrails node",

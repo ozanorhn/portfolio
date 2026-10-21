@@ -51,7 +51,9 @@
     "reverse-engineering-claude-ghidra-mcp"
   ],
   "verwandteProjekte": [
-    "wissensbasis-rag-mcp"
+    "wissensbasis-rag-mcp",
+    "mcp-plattform-self-hosted",
+    "seo-agent-multi-agent-system"
   ],
   "quellen": [
     {

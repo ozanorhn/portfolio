@@ -72,8 +72,8 @@ export const FAQ: { frage: string; antwort: string }[] = [
 export const SEITEN_META: SeoInput = {
   titel: 'Ozan Orhan — Grounding Page',
   beschreibung:
-    'Ozan Orhan ist AI Automation Engineer aus Hannover: KI-Automatisierung, AI-Agenten ' +
-    'und LLM-Anwendungen mit Python, RAG, MCP und n8n. Grounding Page nach Standard v1.6.',
+    'Fakten zu Ozan Orhan, AI Automation Engineer aus Hannover: KI-Agenten, ' +
+    'LLM-Anwendungen, RAG, MCP und n8n mit Python. Grounding Page nach Standard v1.6.',
   pfad: '/facts',
   typ: 'profile',
   breadcrumb: [

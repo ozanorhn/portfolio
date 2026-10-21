@@ -9,6 +9,7 @@
     "seo": "node scripts/seo-dateien.mjs",
     "build": "npm run blog && npm run glossar && npm run seo && ng build",
     "prerender": "node scripts/prerender.mjs",
+    "indexnow": "node scripts/indexnow.mjs",
     "build:prod": "npm run build && npm run prerender",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

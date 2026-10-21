@@ -1,4 +1,5 @@
 // Projektdaten. Einzige Quelle der Wahrheit für Index, Detailseiten, SEO und llms.txt.
+import type { Motiv } from '../ui/system-visual';
 import { SYSTEME } from './works-systeme';
 // Nur Aussagen, die durch die Projektdokumentation oder den Code belegt sind.
 
@@ -36,6 +37,15 @@ export interface Work {
   gruppe: 'kern' | 'weitere' | 'ausbildung';
   /** Herkunft der Arbeit, steht im Kenndatenblock neben Status und Stack. */
   kontext: string;
+  /**
+   * Intern, wird nicht ausgegeben: Herkunft der Arbeit.
+   * beruflich = aus der Anstellung, anonymisiert. eigen = privates Projekt.
+   * vertraulich = eigenständiges, unentgeltliches Projekt (auch für andere Personen oder
+   * Organisationen) mit Geheimhaltung. Kein Gewerbe, keine Dienstleistung. Dafür gilt: keine Kunden-, Firmen- oder
+   * identifizierenden Angaben, keine Screenshots, Daten oder internen URLs, Architektur nur
+   * abstrahiert, eigener Beitrag ehrlich, keine erfundenen Ergebnisse, nur freigegebene Angaben.
+   */
+  herkunft?: 'beruflich' | 'eigen' | 'vertraulich' | 'ausbildung';
   /** Unternehmenskontext oder bewusst abstrahierte Darstellung. Steuert den Hinweis in llms.txt. */
   abstrahiert?: boolean;
   stack: string[];
@@ -53,6 +63,10 @@ export interface Work {
   ergebnis: string[];
   /** Was ich aus dem Projekt mitnehme, einschließlich offener Punkte. */
   erkenntnisse?: string[];
+  /** Individuelle Systemszene für Projektseite und Startseiten-Karte. */
+  visual?: Motiv;
+  /** seite = Szene neben dem Titel, buehne = Szene als breite Bühne unter dem Titel. */
+  layout?: 'seite' | 'buehne';
   /** Scan-Elemente oben auf der Projektseite, z. B. Rolle, Kern, Sicherheit. Max. vier. */
   highlights?: { label: string; wert: string }[];
   /** Kurzfassung für die Startseiten-Karte: Problem und eigener Beitrag in je einem Satz. */
@@ -82,7 +96,9 @@ const BASIS: Work[] = [
       'Ein selbst gehosteter Sprachagent mit einem Handgerät als Interface. Aufnahme auf dem ' +
       'Gerät, Agentenlogik auf dem Server, Toolzugriff über MCP.',
     status: 'Funktionsfähiger Prototyp, laufende Weiterentwicklung',
+    herkunft: 'eigen',
     gruppe: 'kern',
+    visual: 'pocket',
     karte: {
       problem:
         'Ein Sprachinterface für die Hosentasche sollte Werkzeuge über einen eigenen Agenten bedienen.',
@@ -207,6 +223,7 @@ const BASIS: Work[] = [
       'Ein monatlicher Workflow, der Zeiterfassungen aus Toggl verarbeitet, kundenspezifisch ' +
       'aufbereitet und daraus automatisch Leistungsnachweise und Dokumente erzeugt.',
     status: 'Im Einsatz seit Ende 2025, Folgeversion im Test',
+    herkunft: 'beruflich',
     gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
@@ -302,7 +319,9 @@ const BASIS: Work[] = [
     kicker: 'RAG · Vector Retrieval · MCP',
     lede: 'Eine zentrale RAG-Wissensbasis, die Agenten über MCP als Retrieval-Tool nutzen können.',
     status: 'MCP-Server aktiv, Ingest läuft manuell',
+    herkunft: 'beruflich',
     gruppe: 'kern',
+    visual: 'rag',
     karte: {
       problem:
         'Mehrere KI-Assistenten brauchten internes Wissen, ohne je eigene Dokumentpipeline.',
@@ -406,7 +425,9 @@ const BASIS: Work[] = [
       'Drei Workflows führen fünf externe Datenquellen zusammen und prüfen, ob sich umgesetzte ' +
       'Maßnahmen messbar ausgewirkt haben — ohne dass jemand Daten von Hand sammelt.',
     status: 'Seit Mitte 2026 im Einsatz, Datenanbindung wird überarbeitet',
+    herkunft: 'beruflich',
     gruppe: 'kern',
+    visual: 'monitoring',
     karte: {
       problem:
         'KI-Sichtbarkeit, Suchdaten und Webanalyse lagen in getrennten Systemen.',
@@ -527,6 +548,7 @@ const BASIS: Work[] = [
       'Eine LLM-gestützte Datenpipeline, die Stellenanzeigen aus HTML strukturiert und über ' +
       'last_seen_at idempotent synchron hält.',
     status: 'Implementiert, derzeit nicht aktiv',
+    herkunft: 'beruflich',
     gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
@@ -623,6 +645,7 @@ const BASIS: Work[] = [
       'Strukturiert gesprochene Sprache per LLM, zieht Action Items heraus und stellt sie in ' +
       'Slack und per Mail zu.',
     status: 'Im Einsatz',
+    herkunft: 'beruflich',
     gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
@@ -663,6 +686,7 @@ const BASIS: Work[] = [
       'Fakten recherchieren, von einem Menschen bestätigen lassen, als HTML mit JSON-LD ' +
       'ausliefern. Vorher war das Handarbeit von Spezialisten.',
     status: 'Produktiv im Einsatz',
+    herkunft: 'beruflich',
     gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
     abstrahiert: true,
@@ -779,6 +803,7 @@ const BASIS: Work[] = [
       'Team-Messenger mit Kanälen, Direktnachrichten und Threads. Nachrichten synchronisieren in ' +
       'Echtzeit über Firebase; gebaut in Angular mit RxJS.',
     status: 'Abgeschlossen, live',
+    herkunft: 'ausbildung',
     gruppe: 'ausbildung',
     kontext: 'Ausbildungsprojekt · Developer Akademie',
     stack: ['Angular', 'TypeScript', 'Firebase', 'RxJS', 'SCSS'],
@@ -811,6 +836,7 @@ const BASIS: Work[] = [
       'Aufgabenmanager nach dem Kanban-Prinzip: Tasks anlegen, per Drag-and-Drop zwischen ' +
       'Spalten bewegen, Personen zuordnen. Reines JavaScript mit Firebase.',
     status: 'Abgeschlossen, live',
+    herkunft: 'ausbildung',
     gruppe: 'ausbildung',
     kontext: 'Ausbildungsprojekt · Developer Akademie',
     stack: ['JavaScript', 'HTML/CSS', 'Firebase'],
@@ -843,6 +869,7 @@ const BASIS: Work[] = [
       'Pokémon-Datenbank auf Basis der PokéAPI: Liste mit Nachladen, Detailansicht und Suche. ' +
       'Reines JavaScript mit asynchronen API-Aufrufen.',
     status: 'Abgeschlossen, live',
+    herkunft: 'ausbildung',
     gruppe: 'ausbildung',
     kontext: 'Ausbildungsprojekt · Developer Akademie',
     stack: ['JavaScript', 'REST API', 'HTML/CSS'],
@@ -875,6 +902,7 @@ const BASIS: Work[] = [
       'Jump-and-Run-Spiel mit Game-Loop, Kollisionserkennung und Endgegner. Objektorientiertes ' +
       'JavaScript auf dem HTML-Canvas.',
     status: 'Abgeschlossen, live',
+    herkunft: 'ausbildung',
     gruppe: 'ausbildung',
     kontext: 'Ausbildungsprojekt · Developer Akademie',
     stack: ['JavaScript', 'HTML Canvas', 'OOP', 'HTML/CSS'],

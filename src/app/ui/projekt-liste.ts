@@ -22,7 +22,7 @@ interface Gruppe {
   imports: [RouterLink, TafelComponent, SystemFlowComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="pl" [class.pl--mit-vorschau]="vorschau()">
+    <div class="pl" [class.pl--mit-vorschau]="vorschau()" [class.pl--kompakt]="kompakt()">
       <div class="pl__gruppen">
         @for (g of gruppen(); track g.key) {
           <section class="pl__gruppe" [class.pl__gruppe--leise]="g.key === 'ausbildung'">
@@ -125,6 +125,11 @@ interface Gruppe {
           padding-top: clamp(16px, 1.8vw, 24px);
         }
       }
+      /* Kompakt (Startseite): Titel und eine Zeile, ohne Kicker */
+      .pl--kompakt .pl__meta { display: none; }
+      .pl--kompakt .pl__zeile { padding-block: clamp(12px, 1.3vw, 16px); }
+      .pl--kompakt .pl__titel { font-size: clamp(18px, 1.6vw, 22px); }
+      .pl--kompakt .pl__lede { font-size: 14.5px; margin-top: 4px; }
       @media (max-width: $bp-m) {
         .pl__zeile { grid-template-columns: 2.2rem minmax(0, 1fr); }
       }
@@ -134,6 +139,7 @@ interface Gruppe {
 export class ProjektListeComponent {
   readonly projekte = input.required<Work[]>();
   readonly vorschau = input(false);
+  readonly kompakt = input(false);
   private readonly gewaehlt = signal<string | null>(null);
 
   /** Gruppen in Reihenfolge des ersten Auftretens, Werke in Listenreihenfolge. */

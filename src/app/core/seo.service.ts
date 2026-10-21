@@ -86,12 +86,22 @@ export class SeoService {
 
   private jsonLd(data: SeoInput['jsonLd']): void {
     const id = 'seiten-schema';
-    this.doc.getElementById(id)?.remove();
-    if (!data) return;
+    const vorhanden = this.doc.getElementById(id);
+    if (!data) {
+      vorhanden?.remove();
+      return;
+    }
+    const json = JSON.stringify(data);
+    // Vorgerendertes Skript weiterverwenden statt ersetzen: sonst zählen Validatoren, die
+    // Roh-HTML und gerendertes DOM vergleichen, dasselbe Schema doppelt.
+    if (vorhanden) {
+      if (vorhanden.textContent !== json) vorhanden.textContent = json;
+      return;
+    }
     const script = this.doc.createElement('script');
     script.id = id;
     script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(data);
+    script.textContent = json;
     this.doc.head.appendChild(script);
   }
 }

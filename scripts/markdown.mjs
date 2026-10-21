@@ -55,7 +55,10 @@ export function rendern(markdown, seitenPfad, belegteIds = []) {
       },
     },
   });
-  const html = md.parse(markdown);
+  // Tabellen in einen scrollbaren Rahmen: breite Tabellen dürfen auf dem Handy nicht die Seite verbreitern
+  const html = md.parse(markdown)
+    .replace(/<table>/g, '<div class="tabellen-rahmen"><table>')
+    .replace(/<\/table>/g, '</table></div>');
   const woerter = markdown.split(/\s+/).filter(Boolean).length;
   return { html, inhalt, woerter, lesezeit: Math.max(1, Math.round(woerter / 200)) };
 }

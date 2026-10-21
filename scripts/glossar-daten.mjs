@@ -24,6 +24,7 @@ const THEMEN = {
   automatisierung: 'Automatisierung',
   sicherheit: 'Sicherheit',
   ki_sichtbarkeit: 'Sichtbarkeit in KI-Suchen',
+  seo_grundlagen: 'SEO-Grundlagen',
 };
 
 /** IDs aus Layout und Begriffsvorlage; Überschriften im Text dürfen sie nicht vergeben. */

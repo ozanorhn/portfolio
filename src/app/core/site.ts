@@ -7,6 +7,8 @@ export const SITE = {
   mail: 'contact@ozan-orhan.com',
   github: 'https://github.com/ozanorhn',
   linkedin: 'https://www.linkedin.com/in/ozan-o-7014a22a3',
+  /** Autorenprofil auf arcnode.de, vom Nutzer als weiteres Profil freigegeben */
+  arcnode: 'https://arcnode.de/autor/ozan/',
 } as const;
 
 /** Ein Satz für Schema (Person.description), Startseite, Faktenseite und llms.txt. */
@@ -39,7 +41,7 @@ export function person(): Record<string, unknown> {
     email: `mailto:${SITE.mail}`,
     address: { '@type': 'PostalAddress', addressLocality: 'Hannover', addressCountry: 'DE' },
     knowsAbout: KNOWS_ABOUT,
-    sameAs: [SITE.github, SITE.linkedin],
+    sameAs: [SITE.github, SITE.linkedin, SITE.arcnode],
   };
 }
 

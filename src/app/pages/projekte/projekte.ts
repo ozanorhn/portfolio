@@ -1,10 +1,13 @@
-import { Component, ChangeDetectionStrategy, OnInit, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, computed, inject, signal } from '@angular/core';
 import { KopfComponent } from '../../ui/kopf';
 import { FussComponent } from '../../ui/fuss';
 import { ProjektListeComponent } from '../../ui/projekt-liste';
 import { SeoService } from '../../core/seo.service';
 import { SITE, seiteUrl } from '../../core/site';
-import { PROJEKTE } from '../../data/works';
+import { PROJEKTE, type Work } from '../../data/works';
+
+/** SubmitEvent mit den WebMCP-Erweiterungen (deklarative API), solange TypeScript sie nicht kennt. */
+type AgentSubmitEvent = SubmitEvent & { agentInvoked?: boolean; respondWith?: (p: Promise<unknown>) => void };
 
 @Component({
   selector: 'app-projekte',
@@ -23,8 +26,42 @@ import { PROJEKTE } from '../../data/works';
         </p>
       </header>
 
+      <!-- Echte Suche für Menschen; die tool*-Attribute machen sie zugleich zum
+           WebMCP-Werkzeug (deklarative API). toolaction ist kein Chrome-Attribut, schadet nicht. -->
+      <form
+        class="suche"
+        role="search"
+        toolname="filter_project_list"
+        tooldescription="Filtert die sichtbare Projektliste von Ozan Orhan nach Technologie oder Stichwort, z. B. MCP, Python, RAG oder n8n. Nur lesend."
+        toolaction="Projektliste auf dieser Seite filtern"
+        toolautosubmit
+        (submit)="absenden($event)"
+      >
+        <label class="meta suche__label" for="projekt-suche">Projekte durchsuchen</label>
+        <div class="suche__zeile">
+          <input
+            id="projekt-suche"
+            name="suche"
+            type="search"
+            autocomplete="off"
+            placeholder="z. B. MCP, Python, n8n"
+            toolparamdescription="Technologie oder Stichwort, z. B. MCP, Python, RAG, n8n"
+            [value]="suche()"
+            (input)="suche.set($any($event.target).value)"
+          />
+          <button type="submit" class="aktion">Filtern</button>
+        </div>
+        <p class="suche__info mono" aria-live="polite">
+          {{ treffer().length }} von {{ projekte.length }} Projekten
+        </p>
+      </form>
+
       <section aria-label="Alle Projekte">
-        <app-projekt-liste [projekte]="projekte" [vorschau]="true" />
+        @if (treffer().length) {
+          <app-projekt-liste [projekte]="treffer()" [vorschau]="true" />
+        } @else {
+          <p class="prosa">Kein Projekt zu „{{ suche() }}“. Versuch es mit MCP, Python, RAG oder n8n.</p>
+        }
       </section>
     </main>
     <app-fuss />
@@ -35,6 +72,17 @@ import { PROJEKTE } from '../../data/works';
       .kopfblock { padding-block: clamp(28px, 4vw, 56px) clamp(20px, 2.6vw, 36px); }
       .kopfblock__titel { grid-column: 1 / 7; }
       .kopfblock__lede { grid-column: 8 / 13; align-self: end; color: $tusche-2; }
+      .suche { margin-bottom: clamp(20px, 2.6vw, 36px); max-width: 36rem; }
+      .suche__label { display: block; margin-bottom: $s2; }
+      .suche__zeile { display: flex; gap: $s3; align-items: stretch; }
+      .suche input {
+        flex: 1; min-width: 0; min-height: 44px; padding: 0 $s3;
+        font: inherit; font-size: 16px; color: $tusche; background: transparent;
+        border: $strich-haar solid $linie; border-radius: 4px;
+      }
+      .suche input:focus-visible { outline: 2px solid $petrol; outline-offset: 2px; }
+      .suche button { min-height: 44px; background: none; border: 0; cursor: pointer; }
+      .suche__info { margin-top: $s2; font-size: 12px; color: $tusche-2; }
       @media (max-width: $bp-m) {
         .kopfblock__titel, .kopfblock__lede { grid-column: 1 / -1; }
         .kopfblock__lede { margin-top: $s4; }
@@ -45,6 +93,27 @@ import { PROJEKTE } from '../../data/works';
 export class ProjekteComponent implements OnInit {
   private readonly seo = inject(SeoService);
   readonly projekte = PROJEKTE;
+  readonly suche = signal('');
+  /** Treffer in Titel, Kurzbeschreibung, Kicker und Stack; leere Suche zeigt alles. */
+  readonly treffer = computed<Work[]>(() => {
+    const q = this.suche().trim().toLowerCase().slice(0, 80);
+    if (!q) return PROJEKTE;
+    return PROJEKTE.filter((w) =>
+      `${w.titel} ${w.lede} ${w.kicker} ${w.stack.join(' ')}`.toLowerCase().includes(q),
+    );
+  });
+
+  /** Kein Seitenwechsel: gefiltert wird live. Für Agenten gibt es die Treffer als Antwort. */
+  absenden(e: Event): void {
+    e.preventDefault();
+    const ev = e as AgentSubmitEvent;
+    const daten = new FormData(ev.target as HTMLFormElement);
+    this.suche.set(String(daten.get('suche') ?? ''));
+    if (ev.agentInvoked && typeof ev.respondWith === 'function') {
+      const liste = this.treffer().slice(0, 8).map((w) => `${w.titel}: ${seiteUrl(`/projekte/${w.slug}`)}`);
+      ev.respondWith(Promise.resolve(liste.length ? liste.join('\n') : 'Keine Treffer.'));
+    }
+  }
 
   ngOnInit(): void {
     this.seo.set({

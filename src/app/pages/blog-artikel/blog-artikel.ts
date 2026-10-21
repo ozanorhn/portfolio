@@ -11,14 +11,12 @@ import {
 import { ViewportScroller } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { switchMap } from 'rxjs';
 import { KopfComponent } from '../../ui/kopf';
 import { FussComponent } from '../../ui/fuss';
 import { CaseStudyNavComponent } from '../../ui/case-study-nav';
 import { SeoService } from '../../core/seo.service';
 import { SITE, person, seitenTitel, seiteUrl } from '../../core/site';
-import { BlogService, datumLang, type BlogArtikel } from '../../data/blog';
+import { datumLang, type BlogArtikel } from '../../data/blog';
 import type { Abschnitt } from '../../data/works';
 
 @Component({
@@ -31,7 +29,6 @@ import type { Abschnitt } from '../../data/works';
 })
 export class BlogArtikelComponent {
   private readonly seo = inject(SeoService);
-  private readonly blog = inject(BlogService);
   private readonly sanitizer = inject(DomSanitizer);
   private readonly route = inject(ActivatedRoute);
   private readonly scroller = inject(ViewportScroller);
@@ -40,8 +37,9 @@ export class BlogArtikelComponent {
   readonly datum = datumLang;
   readonly site = SITE;
 
-  /** undefined: lädt noch · null: nicht gefunden */
-  readonly artikel = toSignal(toObservable(this.slug).pipe(switchMap((s) => this.blog.artikel(s))));
+  /** Vom Resolver geladen (siehe app.routes.ts). undefined: lädt noch · null: nicht gefunden */
+  readonly vorab = input<BlogArtikel | null | undefined>(undefined);
+  readonly artikel = computed(() => this.vorab());
 
   /** Das HTML ist im Build bereinigt (rohes HTML maskiert, nur sichere Links);
    *  Angulars Filter würde sonst die Anker des Inhaltsverzeichnisses entfernen. */

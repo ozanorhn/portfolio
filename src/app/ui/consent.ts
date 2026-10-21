@@ -17,15 +17,19 @@ const RECHTSSEITEN = /^\/(impressum|datenschutz)(\/|$|[?#])/;
       class="consent"
       [class.consent--frei]="aufRechtsseite()"
       aria-labelledby="consent-titel"
-      aria-describedby="consent-text"
+      aria-describedby="consent-text consent-text-2"
       (cancel)="abbrechen($event)"
     >
       <p class="kicker">DATENSCHUTZ</p>
       <h2 id="consent-titel" tabindex="-1">Deine Privatsphäre zählt.</h2>
+      <!-- Zwei kurze Absätze statt einem langen: lesbarer, und der Dialog wird nicht zum LCP-Element -->
       <p id="consent-text">
         Wir möchten mit optionaler Reichweitenmessung (Google Analytics über Google Tag Manager)
-        erfahren, wie unsere Website genutzt wird. Ohne deine Zustimmung bleibt Google-Tracking
-        deaktiviert. Deine Auswahl kannst du jederzeit über „Cookie-Einstellungen“ im Footer ändern.
+        erfahren, wie unsere Website genutzt wird.
+      </p>
+      <p id="consent-text-2">
+        Ohne deine Zustimmung bleibt Google-Tracking deaktiviert. Deine Auswahl kannst du
+        jederzeit über „Cookie-Einstellungen“ im Footer ändern.
       </p>
       <p class="links">
         <a routerLink="/datenschutz">Datenschutzerklärung</a>

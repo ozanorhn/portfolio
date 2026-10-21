@@ -70,23 +70,45 @@ function quer(b) {
   return svg + '</svg>';
 }
 
+/**
+ * Hochformat für schmale Geräte: jede Bahn als Schlange in zwei Spalten, damit das Bild
+ * kurz bleibt und die Beschriftung groß genug ist.
+ */
 function hoch(b) {
-  const X = 56, schritt = 112;
-  let y = 120, nr = 0;
-  const teile = [];
-  for (const bahn of b.bahnen) {
-    let t = text(32, y, bahn.titel, { size: 15, anchor: 'start', ls: 1.2 }) +
-      text(32, y + 24, bahn.takt, { size: 13, fill: F.kreide2, font: SANS, anchor: 'start', ls: 0.8 });
-    const y0 = y + 72, y1 = y0 + (bahn.stationen.length - 1) * schritt;
-    t += linie(X, y0, X, y1);
-    bahn.stationen.forEach((s, k) => { t += station(X, y0 + k * schritt, s, ++nr, false); });
-    t += puls(`M${X},${y0} L${X},${y1}`, 5 + bahn.stationen.length, teile.length * 1.5);
-    teile.push(t);
-    y = y1 + 110;
-  }
-  return kopf(b, 440, y - 30, `h${b.id}`) +
-    text(32, 62, b.titel, { size: 13, fill: F.kreide2, font: SANS, anchor: 'start', ls: 1.1 }) +
-    linie(32, 78, 408, 78, F.linie) + teile.join('') + '</svg>';
+  const W = 440, spalte = [44, 236], zeile = 92;
+  let y = 96, nr = 0;
+  let inhalt = '';
+  b.bahnen.forEach((bahn, bi) => {
+    inhalt += text(28, y, bahn.titel, { size: 15, anchor: 'start', ls: 1.1 }) +
+      text(28, y + 22, bahn.takt, { size: 12.5, fill: F.kreide2, font: SANS, anchor: 'start', ls: 0.8 });
+    const y0 = y + 66;
+    const pkt = bahn.stationen.map((_, k) => {
+      const r = Math.floor(k / 2);
+      const c = r % 2 === 0 ? k % 2 : 1 - (k % 2);
+      return [spalte[c], y0 + r * zeile];
+    });
+    // Querverbindungen laufen unterhalb der Beschriftung, damit keine Linie durch Text geht
+    const pfad = pkt.map(([x, yy], k) => {
+      if (k === 0) return `M${x},${yy}`;
+      const [px, py] = pkt[k - 1];
+      return py === yy ? `L${px},${yy + 44} L${x},${yy + 44} L${x},${yy}` : `L${x},${yy}`;
+    }).join(' ');
+    inhalt += `<path d="${pfad}" fill="none" stroke="${F.petrol}" stroke-width="0.9" vector-effect="non-scaling-stroke"/>`;
+    bahn.stationen.forEach((s2, k) => {
+      const [x, yy] = pkt[k];
+      nr++;
+      inhalt += (s2.gate ? linie(x - 10, yy, x + 10, yy, F.kreide, ' stroke-width="2.4"')
+        : `<circle cx="${x}" cy="${yy}" r="7" fill="${F.platte}" stroke="${F.kreide}" stroke-width="1"/>`) +
+        text(x + 18, yy - 12, String(nr).padStart(2, '0'), { size: 11, fill: F.kreide2, anchor: 'start', ls: 1 }) +
+        text(x + 18, yy + 6, s2.label, { size: 15, anchor: 'start', ls: 0.5 }) +
+        (s2.note ? text(x + 18, yy + 26, s2.note, { size: 12, fill: F.kreide2, anchor: 'start', ls: 0.4 }) : '');
+    });
+    inhalt += puls(pfad.replace(/,/g, ' '), 4 + bahn.stationen.length, bi * 1.3);
+    y = pkt[pkt.length - 1][1] + 84;
+  });
+  return kopf(b, W, y - 20, `h${b.id}`) +
+    text(28, 52, b.titel, { size: 12.5, fill: F.kreide2, font: SANS, anchor: 'start', ls: 1 }) +
+    linie(28, 66, W - 28, 66, F.linie) + inhalt + '</svg>';
 }
 
 const eintraege = SYSTEMBILDER.map((b) => `  '${b.id}': {\n    quer: \`${quer(b)}\`,\n    hoch: \`${hoch(b)}\`,\n  },`);

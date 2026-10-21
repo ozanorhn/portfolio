@@ -45,7 +45,8 @@
   ],
   "verwandteProjekte": [
     "pocket-ai-agent",
-    "leistungsnachweis-automation"
+    "leistungsnachweis-automation",
+    "seo-agent-multi-agent-system"
   ],
   "quellen": [
     {

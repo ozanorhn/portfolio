@@ -28,7 +28,7 @@ Hauptteil …
 | status | ja | `entwurf` oder `veroeffentlicht`; nur veröffentlichte Begriffe gehen live |
 | begriff | ja | max. 60, Anzeigename |
 | h1 | ja | max. 90, Begriff vorn, z. B. „Vektordatenbank: Definition, Funktionsweise und Beispiele“ |
-| thema | ja | `ki_grundlagen`, `rag_suche`, `agenten_mcp`, `automatisierung`, `sicherheit`, `ki_sichtbarkeit` |
+| thema | ja | `ki_grundlagen`, `rag_suche`, `agenten_mcp`, `automatisierung`, `sicherheit`, `ki_sichtbarkeit`, `seo_grundlagen` |
 | alternativeNamen | nein | Synonyme, Abkürzungen, englische Form (Schema `alternateName`) |
 | kurzdefinition | ja | max. 300, 1–2 Sätze, beginnt mit „X ist …“; erscheint wortgleich auf Seite, Übersicht, Schema, llms.txt |
 | seoTitel | nein | max. 60, Begriff vorn; Name wird nur angehängt, wenn Platz ist |

@@ -1,10 +1,9 @@
-import { Component, ChangeDetectionStrategy, OnInit, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, ChangeDetectionStrategy, OnInit, computed, inject, input } from '@angular/core';
 import { KopfComponent } from '../../ui/kopf';
 import { FussComponent } from '../../ui/fuss';
 import { SeoService } from '../../core/seo.service';
 import { SITE, seiteUrl } from '../../core/site';
-import { BlogService, datumLang } from '../../data/blog';
+import { datumLang, type BlogEintrag } from '../../data/blog';
 
 @Component({
   selector: 'app-blog',
@@ -118,7 +117,9 @@ import { BlogService, datumLang } from '../../data/blog';
 })
 export class BlogComponent implements OnInit {
   private readonly seo = inject(SeoService);
-  readonly artikel = toSignal(inject(BlogService).liste());
+  /** Vom Resolver geladen (app.routes.ts), damit der vorgerenderte Inhalt bis dahin stehen bleibt. */
+  readonly vorab = input<BlogEintrag[] | undefined>(undefined);
+  readonly artikel = computed(() => this.vorab());
   readonly datum = datumLang;
 
   ngOnInit(): void {

@@ -8,6 +8,7 @@ import {
   UrlSerializer,
   provideRouter,
   withComponentInputBinding,
+  withEnabledBlockingInitialNavigation,
   withInMemoryScrolling,
 } from '@angular/router';
 
@@ -22,6 +23,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withComponentInputBinding(),
+      // Vorgerenderte Seiten: Root-Komponente erst nach der ersten Navigation erzeugen, damit der
+      // statische Inhalt bis dahin stehen bleibt (sonst kurze Lücke: Layout-Shift, später LCP).
+      withEnabledBlockingInitialNavigation(),
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' }),
     ),
     { provide: UrlSerializer, useClass: SchraegstrichSerializer },

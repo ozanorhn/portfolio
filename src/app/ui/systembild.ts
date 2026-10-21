@@ -75,7 +75,8 @@ export class SystembildComponent implements OnInit {
       import('../data/diagrams'),
       import('../data/diagrams-systeme'),
     ]);
-    const paar = DIAGRAMS[this.id()] ?? DIAGRAMS_SYSTEME[this.id()];
+    // Neu erzeugte Systembilder haben Vorrang: sie bringen eine lesbare Mobilfassung mit
+    const paar = DIAGRAMS_SYSTEME[this.id()] ?? DIAGRAMS[this.id()];
     if (!paar) return;
     this.quer.set(this.sanitizer.bypassSecurityTrustHtml(paar.quer));
     this.hoch.set(this.sanitizer.bypassSecurityTrustHtml(paar.hoch));

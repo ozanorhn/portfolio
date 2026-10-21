@@ -25,3 +25,22 @@ RewriteRule ^arbeiten/([a-z0-9-]+)/?$ https://ozan-orhan.com/projekte/$1/ [R=301
   # Google-Domains nur für den Tag Manager nach Einwilligung; neue GTM-Tags brauchen ggf. weitere.
   Header always set Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' 'sha256-R8t4YGqOtwTVjq7cpQuDlLEEoBkRAvF8khU8NTZELq4=' 'unsafe-hashes' 'sha256-MhtPZXr7+LpJUY5qtMutB+qWfQtMaPccfe7QXtCcEYc=' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
 </IfModule>
+
+# Caching: Angular-Bundles tragen einen Inhalts-Hash im Namen und ändern sich nie,
+# HTML und JSON dagegen bei jedem Deployment. Ungehashte Bilder und Schriften kurz cachen.
+<IfModule mod_headers.c>
+  <FilesMatch "^(main|chunk|polyfills|styles)-[A-Z0-9]{8}\.(js|css)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(html|json|txt|xml)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.(webp|png|jpg|svg|ico|woff2)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
+
+# WebMCP-Beschreibung ohne Dateiendung als JSON ausliefern
+<Files "webmcp">
+  ForceType application/json
+</Files>

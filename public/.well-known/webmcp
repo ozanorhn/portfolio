@@ -1,0 +1,116 @@
+{
+  "name": "ozan-orhan.com",
+  "description": "Persönliches Entwicklerportfolio von Ozan Orhan, AI Automation Engineer aus Hannover. Die Werkzeuge sind nur lesend und liefern ausschließlich öffentliche Inhalte.",
+  "url": "https://ozan-orhan.com/",
+  "spec": "https://github.com/webmachinelearning/webmcp",
+  "note": "Die Werkzeuge werden im Browser über document.modelContext (imperativ) und als Formular auf /projekte/ (deklarativ) registriert. Diese Datei beschreibt sie nur; WebMCP selbst sieht kein Manifest vor.",
+  "tools": [
+    {
+      "name": "find_projects",
+      "pages": [
+        "/"
+      ],
+      "type": "imperative",
+      "description": "Findet Projekte und Fallstudien nach Technologie oder Stichwort, z. B. MCP, Python, RAG, n8n.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "technologie": {
+            "type": "string"
+          },
+          "stichwort": {
+            "type": "string"
+          }
+        }
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "consequentialHint": false,
+        "untrustedContentHint": false
+      }
+    },
+    {
+      "name": "open_case_study",
+      "pages": [
+        "/"
+      ],
+      "type": "imperative",
+      "description": "Öffnet die Fallstudie eines Projekts und liefert Ausgangspunkt, Beitrag und Status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "slug"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "consequentialHint": false,
+        "untrustedContentHint": false
+      }
+    },
+    {
+      "name": "find_articles",
+      "pages": [
+        "/"
+      ],
+      "type": "imperative",
+      "description": "Sucht technische Fachartikel zu KI-Agenten, MCP, RAG und n8n.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "stichwort": {
+            "type": "string"
+          }
+        }
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "consequentialHint": false,
+        "untrustedContentHint": false
+      }
+    },
+    {
+      "name": "get_profile",
+      "pages": [
+        "/"
+      ],
+      "type": "imperative",
+      "description": "Berufliches Kurzprofil mit öffentlichen Kontaktwegen. Sendet nichts.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "consequentialHint": false,
+        "untrustedContentHint": false
+      }
+    },
+    {
+      "name": "filter_project_list",
+      "pages": [
+        "/projekte/"
+      ],
+      "type": "declarative",
+      "description": "Filtert die sichtbare Projektliste nach Technologie oder Stichwort.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "suche": {
+            "type": "string"
+          }
+        }
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "consequentialHint": false,
+        "untrustedContentHint": false
+      }
+    }
+  ]
+}

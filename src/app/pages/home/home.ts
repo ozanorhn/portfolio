@@ -4,26 +4,38 @@ import { RouterLink } from '@angular/router';
 import { KopfComponent } from '../../ui/kopf';
 import { FussComponent } from '../../ui/fuss';
 import { ProjektListeComponent } from '../../ui/projekt-liste';
+import { HeroVisualComponent } from '../../ui/hero-visual';
+import { SystemVisualComponent } from '../../ui/system-visual';
 import { LucideAngularModule, Mail, Github, Linkedin, MapPin, ArrowRight } from 'lucide-angular';
 import { SeoService } from '../../core/seo.service';
 import { BESCHREIBUNG, SITE, person, seiteUrl } from '../../core/site';
-import { KERNARBEITEN, WORKS } from '../../data/works';
+import { WORKS, type Work } from '../../data/works';
 import { BlogService } from '../../data/blog';
 import { STACK } from '../../data/stack';
+
+/** Sechs KI-Systeme, die zusammen das Profil abdecken: Agenten, Prozesskette, RAG/MCP, Betrieb, Monitoring, Sprache. */
+const HOME_SYSTEME = [
+  'seo-agent-multi-agent-system',
+  'agentic-commerce-audit',
+  'wissensbasis-rag-mcp',
+  'ai-visibility-monitoring-platform',
+  'mcp-plattform-self-hosted',
+  'pocket-ai-agent',
+];
 
 const HOME_ARTIKEL = [
   'mcp-server-mit-n8n-erstellen',
   'agentic-rag-mcp-architektur',
   'n8n-agents-vs-ai-agent-node',
   'ki-agenten-sicherheit-tuev-bsi-studie',
-  'reverse-engineering-claude-ghidra-mcp',
 ];
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    RouterLink, KopfComponent, FussComponent, ProjektListeComponent,
+    RouterLink, KopfComponent, FussComponent, ProjektListeComponent, HeroVisualComponent,
+    SystemVisualComponent,
     LucideAngularModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,8 +51,11 @@ export class HomeComponent implements OnInit {
   readonly IconOrt = MapPin;
   readonly IconPfeil = ArrowRight;
   /** Ausgewählte KI-Systeme als Karten; alle übrigen Projekte stehen darunter als Liste. */
-  readonly ausgewaehlt = KERNARBEITEN;
-  readonly weitere = WORKS.filter((w) => w.gruppe !== 'kern');
+  readonly ausgewaehlt = HOME_SYSTEME.map((s) => WORKS.find((w) => w.slug === s)).filter((w): w is Work => !!w);
+  /** Übrige Arbeiten ohne Ausbildungsprojekte; die stehen vollständig unter /projekte. */
+  readonly weitere = WORKS.filter((w) => !HOME_SYSTEME.includes(w.slug) && w.gruppe !== 'ausbildung')
+    // Eine einzige Liste ohne Zwischenüberschriften
+    .map((w) => ({ ...w, gruppe: 'weitere' as const }));
   private readonly blog = toSignal(inject(BlogService).liste(), { initialValue: [] });
   /** Fachlich passende Artikel in fester Reihenfolge; fehlende Slugs fallen einfach weg. */
   readonly artikel = computed(() =>
@@ -51,7 +66,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.set({
-      titel: `${SITE.name} – ${SITE.rolle} in Hannover`,
+      titel: `${SITE.name} | ${SITE.rolle} in Hannover`,
       beschreibung:
         'Ozan Orhan ist AI Automation Engineer in Hannover. Er entwickelt KI-Agenten, ' +
         'RAG- und MCP-Systeme und n8n-Automatisierungen mit Python. Projekte und Kontakt.',
