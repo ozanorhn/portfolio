@@ -378,7 +378,7 @@ export class HeroVisualComponent {
       x: 260,
       y: 360,
       farbe: 'var(--akz-koralle)',
-      text: 'n8n orchestriert die Abläufe: Trigger, Datenflüsse, Fehlerpfade und menschliche Freigaben in nachvollziehbaren Workflows.',
+      text: 'n8n startet Abläufe per Webhook oder Zeitplan, verbindet die Dienste und meldet Fehler an einer zentralen Stelle.',
     },
     {
       id: 'api',

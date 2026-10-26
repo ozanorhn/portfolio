@@ -6,7 +6,7 @@ URL: https://ozan-orhan.com/projekte/agentic-commerce-audit/
 Reifegrad: Testbetrieb
 Status: Live im Testbetrieb seit Oktober 2026
 Kontext: Unternehmenskontext · anonymisiert dargestellt
-Stack: Webhooks, monday API, Claude Sonnet, DataForSEO LLM-Abfragen, ChatGPT · Gemini · Perplexity, JavaScript, n8n Data Tables, Docker, n8n (Orchestrierung)
+Stack: Webhooks, monday API, Claude Sonnet, DataForSEO LLM-Abfragen, ChatGPT · Gemini · Perplexity, JavaScript, Supabase, Docker, n8n (Orchestrierung)
 
 ## Ausgangspunkt
 

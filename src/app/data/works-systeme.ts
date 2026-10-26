@@ -36,7 +36,7 @@ export const SYSTEME: Work[] = [
       'DataForSEO LLM-Abfragen',
       'ChatGPT · Gemini · Perplexity',
       'JavaScript',
-      'n8n Data Tables',
+      'Supabase',
       'Docker',
       'n8n (Orchestrierung)',
     ],
