@@ -39,6 +39,7 @@ export class ProjektComponent {
   private gemeldet: string | null = null;
   readonly IconExtern = ArrowUpRight;
   readonly reifeTitel = REIFE_TITEL;
+  readonly site = SITE;
   readonly slug = input<string>('');
 
   /** Abstrahiertes Beispiel eines Toolaufrufs über MCP. */
@@ -102,6 +103,7 @@ export class ProjektComponent {
       const schema: Record<string, unknown> = {
         '@context': 'https://schema.org',
         '@type': w.repo ? 'SoftwareSourceCode' : 'CreativeWork',
+        '@id': `${seiteUrl(`/projekte/${w.slug}`)}#projekt`,
         name: w.titel,
         headline: w.titel,
         description: w.lede,
@@ -110,11 +112,12 @@ export class ProjektComponent {
         inLanguage: 'de-DE',
         keywords: w.stack.join(', '),
         creativeWorkStatus: REIFE_TITEL[w.reife],
-        creator: { '@type': 'Person', '@id': `${SITE.origin}/#person`, name: SITE.name, url: SITE.origin },
-        isPartOf: { '@type': 'CollectionPage', url: seiteUrl('/projekte') },
+        creator: { '@type': 'Person', '@id': `${SITE.origin}/#person`, name: SITE.name, url: seiteUrl('/') },
+        isPartOf: { '@id': `${seiteUrl('/projekte')}#sammlung` },
       };
       if (w.repo) schema['codeRepository'] = w.repo;
-      if (w.sprachen?.length) schema['programmingLanguage'] = w.sprachen;
+      // programmingLanguage gibt es nur an SoftwareSourceCode
+      if (w.repo && w.sprachen?.length) schema['programmingLanguage'] = w.sprachen;
 
       this.seo.set({
         titel: `${w.seoTitel ?? w.titel} — ${SITE.name}`,

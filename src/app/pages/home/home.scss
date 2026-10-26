@@ -154,7 +154,7 @@
 }
 .artikelliste__link:hover .artikelliste__titel { color: $petrol; }
 .artikelliste__titel { font-family: $serif; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.3; }
-.artikelliste__kurz { color: $tusche-2; font-size: 15px; line-height: 1.5; }
+.artikelliste__kurz { color: $tusche-2; font-size: 15px; line-height: 1.5; max-width: 68ch; }
 
 @media (max-width: $bp-m) {
   .karten { grid-template-columns: minmax(0, 1fr); }

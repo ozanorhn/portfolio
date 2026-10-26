@@ -93,6 +93,7 @@ export class HomeComponent implements OnInit {
           name: `${SITE.name} – ${SITE.rolle}`,
           dateModified: STAND,
           inLanguage: 'de-DE',
+          primaryImageOfPage: { '@id': `${SITE.origin}/#portraet` },
           mainEntity: person(),
         },
         {

@@ -19,6 +19,8 @@
   .buehne { padding: 10px; }
 }
 .einstieg__lede { margin-top: $s4; color: $tusche-2; max-width: 52ch; }
+.einstieg__autor { margin-top: $s3; font-size: 14px; color: $tusche-2; }
+.einstieg__autor a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .einstieg__marke { margin-top: $s4; }
 
 /* Kenndaten: nur der Stack, über die volle Breite */

@@ -51,7 +51,7 @@ export function person(): Record<string, unknown> {
     '@type': 'Person',
     '@id': `${SITE.origin}/#person`,
     name: SITE.name,
-    url: SITE.origin,
+    url: `${SITE.origin}/`,
     jobTitle: [SITE.rolle, SITE.rolleAutomation],
     description: BESCHREIBUNG,
     image: portraet(),

@@ -55,7 +55,16 @@ export const FAQ: { frage: string; antwort: string }[] = [
       'Toolzugriffe über MCP laufen auf einem eigenen Server.',
   },
   {
-    frage: 'Wie arbeitet Ozan Orhan mit Coding-Agenten?',
+    frage: 'Welche Erfahrung hat Ozan Orhan mit MCP, RAG und KI-Agenten?',
+    antwort:
+      'Ozan Orhan hat eine selbst gehostete MCP-Plattform mit OAuth und Passkey-Freigabe gebaut ' +
+      'und betreibt sie. Er hat eine RAG-Wissensbasis mit Vektorsuche in PostgreSQL umgesetzt, ' +
+      'die Agenten über einen MCP-Server als Retrieval-Tool nutzen, und einen SEO-Agenten mit ' +
+      'eigenen Skills und Datenquellen über MCP aufgesetzt. Eine Multi-Agent-Variante mit ' +
+      'Orchestrator und Kritiker lief als Testlauf.',
+  },
+  {
+    frage: 'Welche Erfahrung hat Ozan Orhan mit Agentic Coding?',
     antwort:
       'Ozan Orhan entwickelt mit Claude Code und weiteren Coding-Agenten, baut dafür eigene ' +
       'Skills und MCP-Anbindungen und passt den Entwicklungsablauf an das jeweilige Projekt an. ' +
@@ -78,15 +87,17 @@ export const FAQ: { frage: string; antwort: string }[] = [
   },
 ];
 
+const SEITEN_TITEL = 'Fakten zu Ozan Orhan, AI Engineer aus Hannover';
+
 export const SEITEN_META: SeoInput = {
-  titel: 'Fakten zu Ozan Orhan, AI Engineer aus Hannover',
+  titel: SEITEN_TITEL,
   beschreibung:
     'Fakten zu Ozan Orhan, AI Engineer und AI Automation Engineer aus Hannover: Rolle, ' +
     'Schwerpunkte, Projekte und Profile. Grounding Page nach Standard v1.6.',
   pfad: '/facts',
   typ: 'profile',
   breadcrumb: [
-    { name: 'Startseite', pfad: '/' },
+    { name: 'Start', pfad: '/' },
     { name: 'Grounding Page', pfad: '/facts' },
   ],
   jsonLd: [
@@ -94,6 +105,9 @@ export const SEITEN_META: SeoInput = {
       '@context': 'https://schema.org',
       // dateCreated/dateModified gehören an die ProfilePage, nicht an die Person
       '@type': 'ProfilePage',
+      '@id': `${seiteUrl('/facts')}#profil`,
+      name: SEITEN_TITEL,
+      isPartOf: { '@id': `${SITE.origin}/#website` },
       url: ENTITAET.url,
       inLanguage: 'de-DE',
       dateCreated: ENTITAET.erstellt,

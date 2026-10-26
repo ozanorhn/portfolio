@@ -164,7 +164,7 @@ export class ProjekteComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.set({
-      titel: `Projekte: KI-Agenten, MCP, RAG und Automatisierung — ${SITE.name}`,
+      titel: `Projekte: KI-Agenten, MCP, RAG, Automatisierung | ${SITE.name}`,
       beschreibung:
         'Fallstudien von Ozan Orhan zu KI-Agenten, MCP-Servern, RAG-Wissenssystemen und ' +
         'Prozessautomatisierung, je mit Reifegrad, eigenem Beitrag und Architektur.',
@@ -173,6 +173,7 @@ export class ProjekteComponent implements OnInit {
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
+        '@id': `${seiteUrl('/projekte')}#sammlung`,
         name: 'Projekte von Ozan Orhan',
         url: seiteUrl('/projekte'),
         inLanguage: 'de-DE',
