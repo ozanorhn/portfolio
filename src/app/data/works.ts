@@ -176,8 +176,7 @@ const BASIS: Work[] = [
     ueberblick: [],
     beitrag: [
       'Eigenes Projekt: Ich habe die Firmware für den ESP32-S3, den Voice Relay mit FastAPI, ' +
-        'das Deployment mit Docker und Traefik und die Anbindung der Werkzeuge über MCP gebaut. ' +
-        'Als Agent-Laufzeit setze ich das quelloffene Hermes-Framework ein.',
+        'das Deployment mit Docker und Traefik und die Anbindung der Werkzeuge über MCP gebaut.',
     ],
     architektur: [
       'Der Stick sendet PCM16 mit 16 kHz Mono an einen FastAPI Voice Relay. Der Relay ruft ' +

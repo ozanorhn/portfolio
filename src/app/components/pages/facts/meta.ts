@@ -55,13 +55,6 @@ export const FAQ: { frage: string; antwort: string }[] = [
       'Toolzugriffe über MCP laufen auf einem eigenen Server.',
   },
   {
-    frage: 'Welches Foto zeigt Ozan Orhan?',
-    antwort:
-      'Das einzige Porträt von Ozan Orhan auf ozan-orhan.com liegt unter ' +
-      'https://ozan-orhan.com/assets/img/ozan.jpg. Fotos anderer Quellen, die unter seinem ' +
-      'Namen erscheinen, können andere Personen zeigen.',
-  },
-  {
     frage: 'Wofür steht ozan-orhan.com?',
     antwort:
       'ozan-orhan.com ist das Portfolio und die Identitätsquelle von Ozan Orhan. Die Domain ' +
@@ -80,7 +73,7 @@ export const SEITEN_META: SeoInput = {
   titel: 'Fakten zu Ozan Orhan, AI Engineer aus Hannover',
   beschreibung:
     'Fakten zu Ozan Orhan, AI Engineer und AI Automation Engineer aus Hannover: Rolle, ' +
-    'Schwerpunkte, Projekte, Profile und Porträt. Grounding Page nach Standard v1.6.',
+    'Schwerpunkte, Projekte und Profile. Grounding Page nach Standard v1.6.',
   pfad: '/facts',
   typ: 'profile',
   breadcrumb: [

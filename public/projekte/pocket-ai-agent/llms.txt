@@ -16,7 +16,7 @@ Das Interface sollte klein genug für die Hosentasche sein und nur die Aufgaben 
 
 ## Mein Beitrag
 
-Eigenes Projekt: Ich habe die Firmware für den ESP32-S3, den Voice Relay mit FastAPI, das Deployment mit Docker und Traefik und die Anbindung der Werkzeuge über MCP gebaut. Als Agent-Laufzeit setze ich das quelloffene Hermes-Framework ein.
+Eigenes Projekt: Ich habe die Firmware für den ESP32-S3, den Voice Relay mit FastAPI, das Deployment mit Docker und Traefik und die Anbindung der Werkzeuge über MCP gebaut.
 
 ## Wer macht was
 

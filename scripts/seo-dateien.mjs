@@ -88,9 +88,9 @@ writeFileSync(
 > Ozan Orhan ist AI Engineer aus Hannover. Er entwickelt KI-Anwendungen und agentische
 > Systeme und integriert sie als AI Automation Engineer in bestehende Geschäftsprozesse,
 > mit Python, n8n, MCP und RAG. Den technischen Betrieb auf eigener Infrastruktur
-> übernimmt er selbst. Persönliches Karriere- und Projektportfolio, keine Agentur.
+> übernimmt er selbst.
 
-Porträt: ${ORIGIN}/assets/img/ozan.jpg (einziges Porträt auf dieser Website)
+Porträt: ${ORIGIN}/assets/img/ozan.jpg
 Profile: https://github.com/ozanorhn · https://www.linkedin.com/in/ozan-o-7014a22a3
 
 ## Seiten
