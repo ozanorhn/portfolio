@@ -18,7 +18,7 @@ export const STACK: StackGruppe[] = [
     icon: Bot,
     eintraege: [
       'AI Agents', 'Multi-Agent Workflows', 'Tool Calling', 'Structured Outputs',
-      'Human-in-the-loop', 'Prompt Engineering',
+      'Human-in-the-loop', 'Prompt Engineering', 'Agent Skills',
     ],
   },
   {
@@ -29,7 +29,7 @@ export const STACK: StackGruppe[] = [
   {
     titel: 'LLM & Integration',
     icon: Plug,
-    eintraege: ['OpenAI', 'Claude', 'OpenRouter', 'MCP', 'REST APIs', 'Webhooks'],
+    eintraege: ['OpenAI', 'Claude', 'Claude Code', 'Codex', 'OpenRouter', 'MCP', 'REST APIs', 'Webhooks'],
   },
   {
     titel: 'Automation & Backend',

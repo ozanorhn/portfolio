@@ -55,6 +55,15 @@ export const FAQ: { frage: string; antwort: string }[] = [
       'Toolzugriffe über MCP laufen auf einem eigenen Server.',
   },
   {
+    frage: 'Wie arbeitet Ozan Orhan mit Coding-Agenten?',
+    antwort:
+      'Ozan Orhan entwickelt mit Claude Code und weiteren Coding-Agenten, baut dafür eigene ' +
+      'Skills und MCP-Anbindungen und passt den Entwicklungsablauf an das jeweilige Projekt an. ' +
+      'Die Agenten unterstützen bei Implementierung, Überarbeitung, Fehlersuche und ' +
+      'Dokumentation. Die technische Verantwortung und die Entscheidung über die Übernahme von ' +
+      'Änderungen liegen bei ihm.',
+  },
+  {
     frage: 'Wofür steht ozan-orhan.com?',
     antwort:
       'ozan-orhan.com ist das Portfolio und die Identitätsquelle von Ozan Orhan. Die Domain ' +

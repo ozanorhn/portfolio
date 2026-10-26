@@ -102,7 +102,7 @@ Profile: https://github.com/ozanorhn · https://www.linkedin.com/in/ozan-o-7014a
 
 ## Schwerpunkte und belegende Fallstudien
 
-${felder.map((f) => `- ${f.titel}: ${f.text} Belege: ${f.projekte.map((sl) => `[${titelVon(sl)}](${seiteUrl(`/projekte/${sl}`)})`).join(', ')}`).join('\n')}
+${felder.map((f) => `- ${f.titel}: ${f.text} Belege: ${[...f.projekte.map((sl) => `[${titelVon(sl)}](${seiteUrl(`/projekte/${sl}`)})`), ...(f.weitere ?? []).map((x) => `[${x.titel}](${x.href.startsWith('http') ? x.href : ORIGIN + x.href}) (${x.art})`)].join(', ')}`).join('\n')}
 
 ## Projekte
 

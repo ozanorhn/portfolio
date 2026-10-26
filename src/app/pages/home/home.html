@@ -74,7 +74,7 @@
     <div class="grid schwerpunkte__kopf">
       <h2 id="schwerpunkte-titel" class="untertitel">Schwerpunkte und Belege</h2>
       <p class="schwerpunkte__intro">
-        Fünf Felder, in denen ich KI-Systeme baue. Unter jedem stehen die Fallstudien, die es
+        Sechs Felder, in denen ich KI-Systeme baue. Unter jedem stehen die Fallstudien, die es
         belegen, mit ihrem Reifegrad.
       </p>
     </div>
@@ -92,6 +92,21 @@
                 </a>
               </li>
             }
+            @for (x of s.weitere ?? []; track x.href) {
+              <li>
+                @if (x.href.startsWith('http')) {
+                  <a class="beleg" [href]="x.href" target="_blank" rel="noopener noreferrer">
+                    <span class="beleg__titel">{{ x.titel }}</span>
+                    <span class="beleg__reife mono">{{ x.art }}</span>
+                  </a>
+                } @else {
+                  <a class="beleg" [href]="x.href">
+                    <span class="beleg__titel">{{ x.titel }}</span>
+                    <span class="beleg__reife mono">{{ x.art }}</span>
+                  </a>
+                }
+              </li>
+            }
           </ul>
         </li>
       }
@@ -104,9 +119,9 @@
         <h2 id="arbeitsweise-titel" class="untertitel">Arbeitsweise und Verantwortung</h2>
         <p class="arbeitsweise__intro">
           Ich übernehme die ganze Strecke: den Prozess verstehen, die Architektur entscheiden,
-          implementieren, ausrollen und im Betrieb halten. Entwickelt wird mit Coding-Agenten,
-          eigenen Regeln und Skills und einem getrennten Review-Schritt.
-          <a class="textlink" href="/blog/claude-code-mods/">Mehr zu Claude Code</a>
+          implementieren, ausrollen und im Betrieb halten. Coding-Agenten unterstützen mich dabei;
+          welche Änderung übernommen wird, entscheide ich.
+          <a class="textlink" href="#schwerpunkt-agentic-coding">Mehr zu Agentic Coding</a>
         </p>
       </div>
       <dl class="grundsaetze">

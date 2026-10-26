@@ -7,6 +7,8 @@ export interface Schwerpunkt {
   text: string;
   /** Fallstudien, die den Schwerpunkt belegen, die stärkste zuerst. */
   projekte: string[];
+  /** Weitere öffentliche Belege außerhalb der Fallstudien, etwa Quellcode oder Fachartikel. */
+  weitere?: { titel: string; href: string; art: string }[];
 }
 
 export const SCHWERPUNKTE: Schwerpunkt[] = [
@@ -19,6 +21,20 @@ export const SCHWERPUNKTE: Schwerpunkt[] = [
       'schreibenden Aktionen, bis zum Sprachagenten auf eigener Hardware. Eine Multi-Agent-' +
       'Variante mit Orchestrator und Kritiker lief als Testlauf.',
     projekte: ['seo-agent-multi-agent-system', 'mcp-plattform-self-hosted', 'pocket-ai-agent'],
+  },
+  {
+    id: 'agentic-coding',
+    titel: 'Agentic Coding und KI-gestützte Softwareentwicklung',
+    text:
+      'Ich entwickle mit Claude Code und weiteren Coding-Agenten, baue dafür eigene Skills und ' +
+      'MCP-Anbindungen und passe den Entwicklungsablauf an das jeweilige Projekt an. Die Agenten ' +
+      'unterstützen bei Implementierung, Überarbeitung, Fehlersuche und Dokumentation. Die ' +
+      'technische Verantwortung und die Entscheidung, welche Änderung übernommen wird, liegen bei mir.',
+    projekte: ['mcp-plattform-self-hosted', 'seo-agent-multi-agent-system', 'wissensbasis-rag-mcp'],
+    weitere: [
+      { titel: 'Quellcode dieser Website', href: 'https://github.com/ozanorhn/portfolio', art: 'GitHub' },
+      { titel: 'Claude Code Mods erklärt', href: '/blog/claude-code-mods/', art: 'Fachartikel' },
+    ],
   },
   {
     id: 'wissen',

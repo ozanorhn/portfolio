@@ -27,7 +27,7 @@ export const KNOWS_ABOUT = [
   'RAG', 'KI-Automatisierung', 'Prozessautomatisierung', 'KI-Sichtbarkeit', 'Voice Agents',
   'LLM Integration', 'Structured Outputs', 'Human-in-the-loop', 'Self-Hosting',
   'n8n', 'Python', 'FastAPI', 'TypeScript', 'Angular', 'REST APIs', 'Docker', 'PostgreSQL',
-  'ESP32', 'Observability',
+  'ESP32', 'Observability', 'Agentic Coding', 'KI-gestützte Softwareentwicklung', 'Claude Code',
 ];
 
 /** Porträt als ImageObject; Bildunterschrift identisch mit dem sichtbaren Alt-Text. */
@@ -61,7 +61,7 @@ export function person(): Record<string, unknown> {
       alternateName: [SITE.rolleAutomation, 'KI-Entwickler'],
       skills:
         'KI-Agenten, agentische Systeme, Model Context Protocol, RAG, Prozessautomatisierung, ' +
-        'n8n, Python, Self-Hosting',
+        'Agentic Coding, n8n, Python, Self-Hosting',
     },
     email: `mailto:${SITE.mail}`,
     address: { '@type': 'PostalAddress', addressLocality: 'Hannover', addressCountry: 'DE' },
