@@ -36,7 +36,7 @@ const AGENT: Knoten = {
         class="hv"
         viewBox="0 0 520 420"
         role="group"
-        aria-label="Systemlandschaft: ein KI-Agent in der Mitte, verbunden mit LLM, MCP, RAG, n8n, APIs und Datenquellen. Knoten auswählen für eine Erklärung."
+        aria-label="Systemlandschaft: ein KI-Agent in der Mitte, verbunden mit LLM, MCP, RAG, Code, APIs und Datenquellen. Knoten auswählen für eine Erklärung."
       >
         <circle class="hv__bahn" cx="260" cy="210" r="150" />
         <circle class="hv__bahn hv__bahn--innen" cx="260" cy="210" r="92" />
@@ -373,12 +373,12 @@ export class HeroVisualComponent {
       text: 'Retrieval-Augmented Generation: Antworten stützen sich auf passende Abschnitte aus einer Vektor-Wissensbasis.',
     },
     {
-      id: 'n8n',
-      label: 'n8n',
+      id: 'code',
+      label: 'Code',
       x: 260,
       y: 360,
       farbe: 'var(--akz-koralle)',
-      text: 'n8n startet Abläufe per Webhook oder Zeitplan, verbindet die Dienste und meldet Fehler an einer zentralen Stelle.',
+      text: 'Deterministischer Code in Python und TypeScript prüft Ausgaben, rechnet und schreibt. Das Modell liest, der Code entscheidet.',
     },
     {
       id: 'api',
