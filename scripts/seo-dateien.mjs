@@ -1,7 +1,8 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
-import { ORIGIN, blogArtikel, glossarBegriffe, projekte, routen, seiteUrl } from './routen.mjs';
+import { ORIGIN, blogArtikel, glossarBegriffe, projekte, routen, schwerpunkte, seiteUrl } from './routen.mjs';
 
 const alle = await projekte();
+const felder = await schwerpunkte();
 const rt = await routen();
 const blog = blogArtikel();
 const glossar = glossarBegriffe();
@@ -20,6 +21,12 @@ writeFileSync(
 
 writeFileSync('public/robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${ORIGIN}/sitemap.xml\n`);
 
+const REIFE = {
+  produktiv: 'Im Einsatz', test: 'Testbetrieb', prototyp: 'Prototyp',
+  pausiert: 'Nicht aktiv', abgeschlossen: 'Abgeschlossen',
+};
+const titelVon = (slug) => alle.find((p) => p.slug === slug)?.titel ?? slug;
+
 // ── llms.txt je Projekt ────────────────────────────────────────────────
 const liste = (t, xs) => (xs?.length ? `\n## ${t}\n\n${xs.map((x) => `- ${x}`).join('\n')}\n` : '');
 
@@ -32,6 +39,7 @@ for (const p of alle) {
     `> ${p.lede}`,
     ``,
     `URL: ${seiteUrl(`/projekte/${p.slug}`)}`,
+    `Reifegrad: ${REIFE[p.reife] ?? p.status}`,
     `Status: ${p.status}`,
     `Kontext: ${p.kontext}`,
     `Stack: ${p.stack.join(', ')}`,
@@ -40,6 +48,13 @@ for (const p of alle) {
   if (p.ausgangspunkt?.length) teile.push(``, `## Ausgangspunkt`, ``, p.ausgangspunkt.join('\n\n'));
   if (p.ueberblick?.length) teile.push(``, `## Überblick`, ``, p.ueberblick.join('\n\n'));
   if (p.beitrag?.length) teile.push(``, `## Mein Beitrag`, ``, p.beitrag.join('\n\n'));
+  if (p.aufgabenteilung) {
+    const a = p.aufgabenteilung;
+    teile.push(``, `## Wer macht was`, ``);
+    if (a.ki) teile.push(`- KI: ${a.ki}`);
+    if (a.software) teile.push(`- Deterministische Software: ${a.software}`);
+    if (a.mensch) teile.push(`- Mensch: ${a.mensch}`);
+  }
   if (p.architektur?.length) teile.push(``, `## Architektur`, ``, p.architektur.join('\n\n'));
   if (p.entscheidungen?.length) {
     teile.push(``, `## Entscheidungen`, ``);
@@ -63,17 +78,20 @@ for (const p of alle) {
 
 // ── llms.txt als Index ─────────────────────────────────────────────────
 const zeile = (p) =>
-  `- [${p.titel}](${seiteUrl(`/projekte/${p.slug}`)}) — ${p.kicker}. ` +
+  `- [${p.titel}](${seiteUrl(`/projekte/${p.slug}`)}) — ${p.kicker}. Reifegrad: ${REIFE[p.reife]}. ` +
   `Maschinenlesbar: ${ORIGIN}/projekte/${p.slug}/llms.txt`;
 
 writeFileSync(
   'public/llms.txt',
-  `# Ozan Orhan — AI Automation Engineer
+  `# Ozan Orhan — AI Engineer und AI Automation Engineer
 
-> Ozan Orhan ist AI Automation Engineer aus Hannover. Er entwickelt KI-Agenten und
-> automatisiert Geschäftsprozesse mit KI, n8n, RAG und MCP. Schwerpunkte sind
-> Agenten, n8n, Python, MCP, RAG, APIs und zuverlässige Automatisierungsabläufe.
-> Standort Hannover, Deutschland.
+> Ozan Orhan ist AI Engineer aus Hannover. Er entwickelt KI-Anwendungen und agentische
+> Systeme und integriert sie als AI Automation Engineer in bestehende Geschäftsprozesse,
+> mit Python, n8n, MCP und RAG. Den technischen Betrieb auf eigener Infrastruktur
+> übernimmt er selbst. Persönliches Karriere- und Projektportfolio, keine Agentur.
+
+Porträt: ${ORIGIN}/assets/img/ozan.jpg (einziges Porträt auf dieser Website)
+Profile: https://github.com/ozanorhn · https://www.linkedin.com/in/ozan-o-7014a22a3
 
 ## Seiten
 
@@ -81,6 +99,10 @@ writeFileSync(
 - [Projekte](${seiteUrl('/projekte')})
 - [Blog](${seiteUrl('/blog')})
 - [Grounding Page (Faktenseite nach Grounding Page Standard v1.6)](${seiteUrl('/facts')})
+
+## Schwerpunkte und belegende Fallstudien
+
+${felder.map((f) => `- ${f.titel}: ${f.text} Belege: ${f.projekte.map((sl) => `[${titelVon(sl)}](${seiteUrl(`/projekte/${sl}`)})`).join(', ')}`).join('\n')}
 
 ## Projekte
 
@@ -92,6 +114,8 @@ ${glossar.length ? `## Glossar\n\n${glossar.map((g) => `- [${g.begriff}](${seite
 - Projekte aus dem Unternehmenskontext werden ohne Kundennamen, Domains oder interne
   Kennungen dargestellt.
 - Zu den Projekten liegen keine veröffentlichten Kennzahlen zu Zeit- oder Kostenersparnis vor.
+- Der Reifegrad je Projekt (Im Einsatz, Testbetrieb, Prototyp, nicht aktiv) steht auf jeder
+  Fallstudie; ein Audit oder Testlauf ist kein produktiv eingesetztes System.
 - Kontakt: contact@ozan-orhan.com
 `,
 );

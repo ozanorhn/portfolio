@@ -15,7 +15,7 @@ import { LucideAngularModule, ArrowUpRight } from 'lucide-angular';
 import { SeoService } from '../../core/seo.service';
 import { AnalyticsService } from '../../core/analytics.service';
 import { SITE, seiteUrl } from '../../core/site';
-import { abschnitte, findWork, nachbar, type FlussStation } from '../../data/works';
+import { REIFE_TITEL, abschnitte, findWork, nachbar, type FlussStation } from '../../data/works';
 import { BlogService } from '../../data/blog';
 import { GlossarService } from '../../data/glossar';
 import { WEITERLESEN } from '../../data/weiterlesen';
@@ -38,6 +38,7 @@ export class ProjektComponent {
   /** Zuletzt gemeldete Fallstudie: ein Event pro Aufruf, auch wenn der effect erneut läuft. */
   private gemeldet: string | null = null;
   readonly IconExtern = ArrowUpRight;
+  readonly reifeTitel = REIFE_TITEL;
   readonly slug = input<string>('');
 
   /** Abstrahiertes Beispiel eines Toolaufrufs über MCP. */
@@ -97,7 +98,7 @@ export class ProjektComponent {
         });
         return;
       }
-      const bild = w.plate?.kind === 'bild' ? w.plate.ref : 'assets/img/og-bild.png';
+      const bild = w.plate?.kind === 'bild' ? w.plate.ref : undefined;
       const schema: Record<string, unknown> = {
         '@context': 'https://schema.org',
         '@type': w.repo ? 'SoftwareSourceCode' : 'CreativeWork',
@@ -108,6 +109,7 @@ export class ProjektComponent {
         url: seiteUrl(`/projekte/${w.slug}`),
         inLanguage: 'de-DE',
         keywords: w.stack.join(', '),
+        creativeWorkStatus: REIFE_TITEL[w.reife],
         creator: { '@type': 'Person', '@id': `${SITE.origin}/#person`, name: SITE.name, url: SITE.origin },
         isPartOf: { '@type': 'CollectionPage', url: seiteUrl('/projekte') },
       };

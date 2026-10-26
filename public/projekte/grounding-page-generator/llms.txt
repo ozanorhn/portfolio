@@ -3,6 +3,7 @@
 > Ein dreistufiger Workflow, der eine Grounding Page nach dem offenen Standard erzeugt: Fakten recherchieren, von einem Menschen bestätigen lassen, als HTML mit JSON-LD ausliefern. Vorher war das Handarbeit von Spezialisten.
 
 URL: https://ozan-orhan.com/projekte/grounding-page-generator/
+Reifegrad: Im Einsatz
 Status: Produktiv im Einsatz
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: Form-Trigger, LLM-Agent mit Tool Calling, JSON Schema, JSON-LD · Schema.org, Web-Scraping-API, Web-Such-API, Tabellenspeicher, JavaScript, n8n (Orchestrierung)
@@ -12,6 +13,12 @@ Stack: Form-Trigger, LLM-Agent mit Tool Calling, JSON Schema, JSON-LD · Schema.
 Der Grounding Page Standard definiert ein strukturiertes Format für überprüfbare Entitätsinformationen, die für Menschen und AI-Systeme lesbar sind. Er adressiert vier Risiken in AI-Antwortsystemen: Halluzination, Entitätsverwechslung, Nichtnennung und englischdominierte Retrieval-Muster.
 
 Die manuelle Erstellung erfordert Recherche, strukturierte Fakten, Disambiguierung und konsistentes Schema.org-Markup. Ich habe dafür einen dreistufigen Workflow gebaut, der Recherche und Generierung automatisiert, die fachliche Freigabe aber beim Menschen lässt.
+
+## Wer macht was
+
+- KI: Ein Research-Agent mit Web-Suche füllt die Felder mit Quellen und Konfidenz; ein zweiter Modellaufruf erzeugt Texte und JSON-LD.
+- Deterministische Software: Formularstufen, Session-ID, deterministischer Merge und ein striktes Ausgabeschema.
+- Mensch: Bestätigt oder korrigiert die recherchierten Felder, bevor generiert wird.
 
 ## Architektur
 

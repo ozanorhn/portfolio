@@ -12,10 +12,19 @@ export const seiteUrl = (pfad) => ORIGIN + (pfad.endsWith('/') ? pfad : `${pfad}
 
 /** works.ts einmal kompilieren und laden, damit Sitemap und llms.txt nie driften. */
 export async function projekte() {
+  return (await ladeTs('works')).WORKS;
+}
+
+/** Schwerpunkte und Arbeitsgrundsätze aus derselben Quelle wie die Startseite. */
+export async function schwerpunkte() {
+  return (await ladeTs('schwerpunkte')).SCHWERPUNKTE;
+}
+
+async function ladeTs(name) {
   const esbuild = require_('esbuild');
   // fileURLToPath statt .pathname: sonst bleibt das Leerzeichen im Ordnernamen als %20 stehen.
-  const quelle = fileURLToPath(new URL('../src/app/data/works.ts', import.meta.url));
-  const out = join(mkdtempSync(join(tmpdir(), 'works-')), 'works.cjs');
+  const quelle = fileURLToPath(new URL(`../src/app/data/${name}.ts`, import.meta.url));
+  const out = join(mkdtempSync(join(tmpdir(), `${name}-`)), `${name}.cjs`);
   await esbuild.build({
     entryPoints: [quelle],
     bundle: true,
@@ -24,7 +33,7 @@ export async function projekte() {
     outfile: out,
     logLevel: 'silent',
   });
-  return require_(out).WORKS;
+  return require_(out);
 }
 
 /** Von scripts/blog-daten.mjs erzeugt; fehlt die Datei, gibt es noch keine Artikel. */

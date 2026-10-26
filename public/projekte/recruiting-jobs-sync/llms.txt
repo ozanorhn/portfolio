@@ -3,6 +3,7 @@
 > Eine LLM-gestützte Datenpipeline, die Stellenanzeigen aus HTML strukturiert und über last_seen_at idempotent synchron hält.
 
 URL: https://ozan-orhan.com/projekte/recruiting-jobs-sync/
+Reifegrad: Nicht aktiv
 Status: Implementiert, derzeit nicht aktiv
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: Zeitplan-Trigger, HTTP-Abruf, JavaScript, Schema-gebundene LLM-Extraktion, Enum-Constraints, Datenspeicher mit Upsert, n8n (Orchestrierung)
@@ -12,6 +13,11 @@ Stack: Zeitplan-Trigger, HTTP-Abruf, JavaScript, Schema-gebundene LLM-Extraktion
 Die Quelle ist eine Karriereseite ohne API oder Änderungsereignisse. Ein reiner Import würde deshalb Stellen dauerhaft als aktiv halten, auch wenn sie auf der Quelle bereits entfernt wurden.
 
 Ich habe dafür einen täglichen Sync gebaut, der Stellen aus HTML extrahiert, strukturiert speichert und über einen Lauf-Zeitstempel erkennt, welche Einträge nicht mehr vorhanden sind.
+
+## Wer macht was
+
+- KI: Extrahiert die Felder einer Stellenanzeige schema-gebunden aus bereinigtem HTML; ein Enum begrenzt die Seniorität.
+- Deterministische Software: Linkextraktion, HTML-Bereinigung, Upsert über den Slug und Deaktivierung über last_seen_at.
 
 ## Architektur
 

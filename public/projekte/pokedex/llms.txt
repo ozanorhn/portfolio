@@ -3,6 +3,7 @@
 > Pokémon-Datenbank auf Basis der PokéAPI: Liste mit Nachladen, Detailansicht und Suche. Reines JavaScript mit asynchronen API-Aufrufen.
 
 URL: https://ozan-orhan.com/projekte/pokedex/
+Reifegrad: Abgeschlossen
 Status: Abgeschlossen, live
 Kontext: Ausbildungsprojekt · Developer Akademie
 Stack: JavaScript, REST API, HTML/CSS

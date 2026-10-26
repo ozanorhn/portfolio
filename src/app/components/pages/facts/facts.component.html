@@ -17,18 +17,20 @@
     <section aria-labelledby="gp-zusammenfassung">
       <h2 id="gp-zusammenfassung">Ozan Orhan: Entitätszusammenfassung</h2>
       <p>
-        Ozan Orhan ist ein AI Automation Engineer mit Standort Hannover. Sein Arbeitsgebiet ist die
-        Verbindung von Sprachmodellen mit realen Systemen: Agenten mit Tool Calling, Zugriffe über
-        das Model Context Protocol (MCP), Retrieval-Augmented Generation (RAG) über
-        Postgres-Vektorsuche und Automatisierungsabläufe in n8n.
+        Ozan Orhan ist AI Engineer mit Standort Hannover. Er entwickelt KI-Anwendungen und
+        agentische Systeme: Agenten, die Werkzeuge über das Model Context Protocol (MCP) nutzen,
+        Wissenssysteme mit Retrieval-Augmented Generation (RAG) über Postgres-Vektorsuche und
+        Automatisierungsabläufe mit n8n und Python. Für die Einbindung in bestehende
+        Geschäftsprozesse verwendet er auch die Bezeichnung AI Automation Engineer.
       </p>
       <p>
-        Seine Projekte umfassen einen selbst gehosteten Sprachagenten auf ESP32-Hardware, eine
-        Automatisierung monatlicher Leistungsnachweise aus Toggl-Zeiterfassungen, eine interne
-        Wissensbasis mit MCP-Server, eine Plattform zur Beobachtung der Sichtbarkeit in
-        AI-Antwortsystemen und einen Generator für Grounding Pages nach dem Grounding Page Standard.
-        Oberflächen für diese Systeme baut er in Angular. Die Projekte aus dem Unternehmenskontext
-        sind auf ozan-orhan.com anonymisiert dokumentiert.
+        Seine Projekte umfassen einen SEO-Agenten auf dem Hermes-Framework mit Multi-Agent-Testlauf,
+        eine selbst gehostete MCP-Plattform mit OAuth und Passkey-Freigabe, eine interne
+        Wissensbasis mit MCP-Server, einen sprachgesteuerten Agenten auf ESP32-Hardware, ein Audit
+        der Sichtbarkeit von Shops in KI-Assistenten, eine Plattform zur Beobachtung der
+        Sichtbarkeit in KI-Antworten und mehrere Prozessautomatisierungen. Den Betrieb auf eigener
+        Infrastruktur übernimmt er selbst. Projekte aus dem Unternehmenskontext sind auf
+        ozan-orhan.com anonymisiert dokumentiert; jede Fallstudie nennt ihren Reifegrad.
       </p>
     </section>
 
@@ -37,9 +39,9 @@
       <dl class="data-grid">
         <dt>Entitätstyp</dt><dd>Person</dd>
         <dt>Name</dt><dd>Ozan Orhan</dd>
-        <dt>Berufsbezeichnung</dt><dd>AI Automation Engineer</dd>
-        <dt>Spezialisierung</dt><dd>KI-Automatisierung, Prozessautomatisierung</dd>
-        <dt>Segment</dt><dd>AI Automation, LLM-Anwendungen, Workflow Engineering</dd>
+        <dt>Berufsbezeichnung</dt><dd>{{ site.rolle }}, {{ site.rolleAutomation }}</dd>
+        <dt>Schwerpunkte</dt><dd>Agenten und MCP, Wissenssysteme mit RAG, Prozessautomatisierung, KI-Sichtbarkeit und Agentic Commerce, Betrieb und Self-Hosting</dd>
+        <dt>Segment</dt><dd>KI-Softwareentwicklung, agentische Systeme, AI Automation</dd>
         <dt>Standort</dt><dd>Hannover, Deutschland</dd>
         <dt>Sprachen</dt><dd>Deutsch, Englisch</dd>
         <dt>Fachgebiete</dt>
@@ -48,6 +50,13 @@
         <dd>Baut die gesamte Kette einer Automatisierung: Prozesslogik, Daten- und API-Anbindung, Oberfläche. Beim Hermes Pocket AI Agent bis zur Firmware des Geräts.</dd>
         <dt>Betrieb</dt>
         <dd>Self-hosting auf einem VPS hinter Traefik, zentraler Error-Workflow, wöchentlich gebündelte Alerts, stündliche Erfassung der LLM-Kosten</dd>
+        <dt>Porträt</dt>
+        <dd>
+          <figure class="gp__portraet">
+            <img [src]="site.portraet" [alt]="portraetAlt" width="160" height="160" loading="lazy" decoding="async" />
+            <figcaption><a [href]="site.portraet">{{ site.portraet }}</a> · einziges Porträt auf dieser Website</figcaption>
+          </figure>
+        </dd>
         <dt>Website</dt><dd><a [href]="site.origin + '/'">ozan-orhan.com</a></dd>
         <dt>Kontakt</dt><dd><a [href]="'mailto:' + site.mail">{{ site.mail }}</a></dd>
       </dl>
@@ -94,6 +103,7 @@
         <dt>Projektübersicht</dt><dd><a routerLink="/projekte">ozan-orhan.com/projekte</a></dd>
         <dt>GitHub</dt><dd><a [href]="site.github" rel="me noopener noreferrer" target="_blank">github.com/ozanorhn</a></dd>
         <dt>LinkedIn</dt><dd><a [href]="site.linkedin" rel="me noopener noreferrer" target="_blank">LinkedIn-Profil</a></dd>
+        <dt>Autorenprofil</dt><dd><a [href]="site.arcnode" rel="me noopener noreferrer" target="_blank">arcnode.de</a></dd>
         <dt>Maschinenlesbar</dt><dd><a [href]="site.origin + '/llms.txt'">ozan-orhan.com/llms.txt</a></dd>
       </dl>
     </section>
@@ -123,7 +133,7 @@
       <h2 id="gp-abgrenzung">Ozan Orhan: Abgrenzung</h2>
       <ul>
         <li>Nicht zu verwechseln mit anderen Personen namens Ozan Orhan aus Musik, Sport, Unterhaltung oder anderen Branchen.</li>
-        <li>Der Vorname Ozan und der Nachname Orhan sind im türkischen Sprachraum verbreitet. Diese Seite bezieht sich ausschließlich auf den AI Automation Engineer mit Website ozan-orhan.com.</li>
+        <li>Der Vorname Ozan und der Nachname Orhan sind im türkischen Sprachraum verbreitet. Diese Seite bezieht sich ausschließlich auf den AI Engineer mit Website ozan-orhan.com.</li>
         <li>Kein Marketing- oder SEO-Dienstleister. Der Schwerpunkt liegt auf der technischen Umsetzung von Agenten, Automatisierungen und Integrationen.</li>
       </ul>
     </section>

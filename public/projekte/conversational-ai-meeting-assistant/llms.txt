@@ -3,6 +3,7 @@
 > Strukturiert gesprochene Sprache per LLM, zieht Action Items heraus und stellt sie in Slack und per Mail zu.
 
 URL: https://ozan-orhan.com/projekte/conversational-ai-meeting-assistant/
+Reifegrad: Im Einsatz
 Status: Im Einsatz
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: OpenAI API, Prompt Engineering, Google Workspace, Slack API, n8n (Orchestrierung)
@@ -14,6 +15,11 @@ Aus Besprechungen entstehen Zusagen und Aufgaben, die nach dem Termin von Hand a
 ## Überblick
 
 Der Workflow verarbeitet Besprechungsmitschriften mit einem LLM, extrahiert Action Items und leitet sie an Slack und Mail weiter.
+
+## Wer macht was
+
+- KI: Ein LLM strukturiert die Mitschrift und extrahiert Action Items.
+- Deterministische Software: n8n verteilt die Ergebnisse an Slack und per Mail.
 
 ## Ergebnis
 

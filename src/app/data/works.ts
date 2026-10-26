@@ -21,6 +21,16 @@ export interface FlussStation {
   note?: string;
 }
 
+export type Reife = 'produktiv' | 'test' | 'prototyp' | 'pausiert' | 'abgeschlossen';
+
+export const REIFE_TITEL: Record<Reife, string> = {
+  produktiv: 'Im Einsatz',
+  test: 'Testbetrieb',
+  prototyp: 'Prototyp',
+  pausiert: 'Nicht aktiv',
+  abgeschlossen: 'Abgeschlossen',
+};
+
 export interface Abschnitt {
   id: string;
   titel: string;
@@ -63,6 +73,13 @@ export interface Work {
   ergebnis: string[];
   /** Was ich aus dem Projekt mitnehme, einschließlich offener Punkte. */
   erkenntnisse?: string[];
+  /** Einheitlicher Reifegrad für Karten, Listen und Filter; der Freitext steht in status. */
+  reife: Reife;
+  /**
+   * Wer im Ablauf was übernimmt. Nur Felder, die aus der Fallstudie belegt sind;
+   * fehlt ein Feld, wird es nicht angezeigt.
+   */
+  aufgabenteilung?: { ki?: string; software?: string; mensch?: string };
   /** Individuelle Systemszene für Projektseite und Startseiten-Karte. */
   visual?: Motiv;
   /** seite = Szene neben dem Titel, buehne = Szene als breite Bühne unter dem Titel. */
@@ -96,6 +113,15 @@ const BASIS: Work[] = [
       'Ein selbst gehosteter Sprachagent mit einem Handgerät als Interface. Aufnahme auf dem ' +
       'Gerät, Agentenlogik auf dem Server, Toolzugriff über MCP.',
     status: 'Funktionsfähiger Prototyp, laufende Weiterentwicklung',
+    reife: 'prototyp',
+    aufgabenteilung: {
+      ki:
+        'Whisper transkribiert die Aufnahme, der Agent hält Session und Gedächtnis und ruft Werkzeuge über MCP auf, die Sprachausgabe spricht die Antwort.',
+      software:
+        'Die Firmware trennt Oberfläche und Netz in eigene Tasks; Voice Relay, Fallbacks für Ton, Netz und Todoist-Integration sowie das Deployment laufen ohne Modell.',
+      mensch:
+        'Spricht die Anfrage ein und kann sie jederzeit abbrechen.',
+    },
     herkunft: 'eigen',
     gruppe: 'kern',
     visual: 'pocket',
@@ -148,6 +174,11 @@ const BASIS: Work[] = [
         'Lautsprecher, WLAN und Akku.',
     ],
     ueberblick: [],
+    beitrag: [
+      'Eigenes Projekt: Ich habe die Firmware für den ESP32-S3, den Voice Relay mit FastAPI, ' +
+        'das Deployment mit Docker und Traefik und die Anbindung der Werkzeuge über MCP gebaut. ' +
+        'Als Agent-Laufzeit setze ich das quelloffene Hermes-Framework ein.',
+    ],
     architektur: [
       'Der Stick sendet PCM16 mit 16 kHz Mono an einen FastAPI Voice Relay. Der Relay ruft ' +
         'Whisper Large V3 über OpenRouter auf und gibt den Text an den Hermes Agent weiter.',
@@ -223,6 +254,15 @@ const BASIS: Work[] = [
       'Ein monatlicher Workflow, der Zeiterfassungen aus Toggl verarbeitet, kundenspezifisch ' +
       'aufbereitet und daraus automatisch Leistungsnachweise und Dokumente erzeugt.',
     status: 'Im Einsatz seit Ende 2025, Folgeversion im Test',
+    reife: 'produktiv',
+    aufgabenteilung: {
+      ki:
+        'Keine KI im Ablauf: Die Verarbeitung ist vollständig regelbasiert.',
+      software:
+        'Lädt Zeiteinträge aus Toggl, ordnet sie Kunden zu, befüllt Vorlagen und legt die Dokumente in Drive ab.',
+      mensch:
+        'Gibt den monatlichen Lauf per Slack-Reaktion frei und wählt damit den Zeitraum.',
+    },
     herkunft: 'beruflich',
     gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
@@ -319,6 +359,15 @@ const BASIS: Work[] = [
     kicker: 'RAG · Vector Retrieval · MCP',
     lede: 'Eine zentrale RAG-Wissensbasis, die Agenten über MCP als Retrieval-Tool nutzen können.',
     status: 'MCP-Server aktiv, Ingest läuft manuell',
+    reife: 'produktiv',
+    aufgabenteilung: {
+      ki:
+        'Ein mehrsprachiges Embedding-Modell bildet Dokumente und Anfragen als Vektoren ab; der anfragende Agent entscheidet, wann er die Wissensbasis nutzt.',
+      software:
+        'Ingest, Chunking, Vektorsuche über eine eigene Match-Funktion in PostgreSQL und das read-only MCP-Tool.',
+      mensch:
+        'Stößt den Ingest neuer Dokumente manuell an.',
+    },
     herkunft: 'beruflich',
     gruppe: 'kern',
     visual: 'rag',
@@ -425,6 +474,15 @@ const BASIS: Work[] = [
       'Drei Workflows führen fünf externe Datenquellen zusammen und prüfen, ob sich umgesetzte ' +
       'Maßnahmen messbar ausgewirkt haben — ohne dass jemand Daten von Hand sammelt.',
     status: 'Seit Mitte 2026 im Einsatz, Datenanbindung wird überarbeitet',
+    reife: 'produktiv',
+    aufgabenteilung: {
+      ki:
+        'Ein Analyse-Agent ohne Tools und ohne Schreibzugriff leitet aus vorbereitetem Kontext priorisierte Einträge als schema-gebundenes JSON ab.',
+      software:
+        'Abruf der fünf Datenquellen, defensive Extraktion, Signal-Voting, Normalisierung und sämtliche Schreibvorgänge.',
+      mensch:
+        'Arbeitet mit den angelegten Aufgaben und Meldungen weiter.',
+    },
     herkunft: 'beruflich',
     gruppe: 'kern',
     visual: 'monitoring',
@@ -468,6 +526,10 @@ const BASIS: Work[] = [
         'Webanalyse und Sichtbarkeit in KI-Antworten.',
       'Sie beantworten drei Fragen: wo Sichtbarkeit in KI-Antworten verloren geht, wo Traffic ' +
         'einbricht, und ob sich umgesetzte Maßnahmen messbar ausgewirkt haben.',
+    ],
+    beitrag: [
+      'Ich habe die Pipelines für die fünf Datenquellen und den Analyse-Agenten mit ' +
+        'strukturiertem Output gebaut.',
     ],
     architektur: [
       'Zwei Komponenten laufen täglich. Die erste ruft die Sichtbarkeits-APIs parallel ab, ' +
@@ -548,6 +610,13 @@ const BASIS: Work[] = [
       'Eine LLM-gestützte Datenpipeline, die Stellenanzeigen aus HTML strukturiert und über ' +
       'last_seen_at idempotent synchron hält.',
     status: 'Implementiert, derzeit nicht aktiv',
+    reife: 'pausiert',
+    aufgabenteilung: {
+      ki:
+        'Extrahiert die Felder einer Stellenanzeige schema-gebunden aus bereinigtem HTML; ein Enum begrenzt die Seniorität.',
+      software:
+        'Linkextraktion, HTML-Bereinigung, Upsert über den Slug und Deaktivierung über last_seen_at.',
+    },
     herkunft: 'beruflich',
     gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
@@ -645,6 +714,13 @@ const BASIS: Work[] = [
       'Strukturiert gesprochene Sprache per LLM, zieht Action Items heraus und stellt sie in ' +
       'Slack und per Mail zu.',
     status: 'Im Einsatz',
+    reife: 'produktiv',
+    aufgabenteilung: {
+      ki:
+        'Ein LLM strukturiert die Mitschrift und extrahiert Action Items.',
+      software:
+        'n8n verteilt die Ergebnisse an Slack und per Mail.',
+    },
     herkunft: 'beruflich',
     gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
@@ -686,6 +762,15 @@ const BASIS: Work[] = [
       'Fakten recherchieren, von einem Menschen bestätigen lassen, als HTML mit JSON-LD ' +
       'ausliefern. Vorher war das Handarbeit von Spezialisten.',
     status: 'Produktiv im Einsatz',
+    reife: 'produktiv',
+    aufgabenteilung: {
+      ki:
+        'Ein Research-Agent mit Web-Suche füllt die Felder mit Quellen und Konfidenz; ein zweiter Modellaufruf erzeugt Texte und JSON-LD.',
+      software:
+        'Formularstufen, Session-ID, deterministischer Merge und ein striktes Ausgabeschema.',
+      mensch:
+        'Bestätigt oder korrigiert die recherchierten Felder, bevor generiert wird.',
+    },
     herkunft: 'beruflich',
     gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
@@ -803,6 +888,7 @@ const BASIS: Work[] = [
       'Team-Messenger mit Kanälen, Direktnachrichten und Threads. Nachrichten synchronisieren in ' +
       'Echtzeit über Firebase; gebaut in Angular mit RxJS.',
     status: 'Abgeschlossen, live',
+    reife: 'abgeschlossen',
     herkunft: 'ausbildung',
     gruppe: 'ausbildung',
     kontext: 'Ausbildungsprojekt · Developer Akademie',
@@ -836,6 +922,7 @@ const BASIS: Work[] = [
       'Aufgabenmanager nach dem Kanban-Prinzip: Tasks anlegen, per Drag-and-Drop zwischen ' +
       'Spalten bewegen, Personen zuordnen. Reines JavaScript mit Firebase.',
     status: 'Abgeschlossen, live',
+    reife: 'abgeschlossen',
     herkunft: 'ausbildung',
     gruppe: 'ausbildung',
     kontext: 'Ausbildungsprojekt · Developer Akademie',
@@ -869,6 +956,7 @@ const BASIS: Work[] = [
       'Pokémon-Datenbank auf Basis der PokéAPI: Liste mit Nachladen, Detailansicht und Suche. ' +
       'Reines JavaScript mit asynchronen API-Aufrufen.',
     status: 'Abgeschlossen, live',
+    reife: 'abgeschlossen',
     herkunft: 'ausbildung',
     gruppe: 'ausbildung',
     kontext: 'Ausbildungsprojekt · Developer Akademie',
@@ -902,6 +990,7 @@ const BASIS: Work[] = [
       'Jump-and-Run-Spiel mit Game-Loop, Kollisionserkennung und Endgegner. Objektorientiertes ' +
       'JavaScript auf dem HTML-Canvas.',
     status: 'Abgeschlossen, live',
+    reife: 'abgeschlossen',
     herkunft: 'ausbildung',
     gruppe: 'ausbildung',
     kontext: 'Ausbildungsprojekt · Developer Akademie',
@@ -986,6 +1075,7 @@ export function abschnitte(w: Work): Abschnitt[] {
   if (w.ausgangspunkt.length) a.push({ id: 'ausgangspunkt', titel: 'Ausgangspunkt' });
   if (w.ueberblick.length) a.push({ id: 'ueberblick', titel: 'Überblick' });
   if (w.beitrag?.length) a.push({ id: 'beitrag', titel: 'Mein Beitrag' });
+  if (w.aufgabenteilung) a.push({ id: 'aufgabenteilung', titel: 'Wer macht was' });
   if (w.architektur?.length) a.push({ id: 'architektur', titel: 'Architektur' });
   if (w.demo) a.push({ id: 'demo', titel: w.demo === 'pocket' ? 'Interaktion' : 'Freigabe' });
   if (w.entscheidungen.length)

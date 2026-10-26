@@ -3,6 +3,7 @@
 > Von der Bestellung bis zum Analyse-Deck: n8n steuert Status, Daten und Freigaben, ein Worker misst, wie KI-Assistenten auf echte Kauffragen antworten.
 
 URL: https://ozan-orhan.com/projekte/agentic-commerce-audit/
+Reifegrad: Testbetrieb
 Status: Live im Testbetrieb seit Oktober 2026
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: Webhooks, monday API, Claude Sonnet, DataForSEO LLM-Abfragen, ChatGPT · Gemini · Perplexity, JavaScript, n8n Data Tables, Docker, n8n (Orchestrierung)
@@ -14,6 +15,12 @@ Das Audit prüft, ob ChatGPT, Gemini und Perplexity einen Shop bei echten Kauffr
 ## Mein Beitrag
 
 Ich habe die n8n-Workflows für Vormerkung, Bestellung, Briefing, Audit-Start, Worker-Rückmeldung und Hänger-Erkennung gebaut, dazu den vorgelagerten Quick-Check. Die Zahlungsanbindung stammt von einem Kollegen, das Produktkonzept aus dem Team.
+
+## Wer macht was
+
+- KI: Claude entwirft Kauffragen für das Briefing; der Worker stellt sie ChatGPT, Gemini und Perplexity und wertet Nennungen und Quellen aus.
+- Deterministische Software: n8n führt Status, Doppelstart-Schutz, Hänger-Wache und Fehlermeldungen am Auftrag.
+- Mensch: Startet den Lauf nach abgestimmtem Briefing und prüft das Deck vor der Auslieferung.
 
 ## Architektur
 

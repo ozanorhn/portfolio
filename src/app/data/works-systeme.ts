@@ -16,6 +16,15 @@ export const SYSTEME: Work[] = [
       'Von der Bestellung bis zum Analyse-Deck: n8n steuert Status, Daten und Freigaben, ein ' +
       'Worker misst, wie KI-Assistenten auf echte Kauffragen antworten.',
     status: 'Live im Testbetrieb seit Oktober 2026',
+    reife: 'test',
+    aufgabenteilung: {
+      ki:
+        'Claude entwirft Kauffragen für das Briefing; der Worker stellt sie ChatGPT, Gemini und Perplexity und wertet Nennungen und Quellen aus.',
+      software:
+        'n8n führt Status, Doppelstart-Schutz, Hänger-Wache und Fehlermeldungen am Auftrag.',
+      mensch:
+        'Startet den Lauf nach abgestimmtem Briefing und prüft das Deck vor der Auslieferung.',
+    },
     herkunft: 'beruflich',
     gruppe: 'kern',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
@@ -123,6 +132,15 @@ export const SYSTEME: Work[] = [
       'Ein selbst gehosteter Agent für wiederkehrende SEO-Aufgaben: Daten über MCP, Auswertung ' +
       'nach festen Skills, Ergebnisse im Team-Chat.',
     status: 'Im Einsatz, Skills werden laufend nachgeschärft',
+    reife: 'produktiv',
+    aufgabenteilung: {
+      ki:
+        'Wählt den passenden Skill, holt Daten über MCP-Tools und formuliert Auswertung und Empfehlung im Team-Chat.',
+      software:
+        'n8n beschafft Daten und vergleicht Trends deterministisch; Skills liegen als versionierte Dateien vor.',
+      mensch:
+        'Das SEO-Team gibt fachliche Vorgaben und korrigiert Skills; Änderungen an Websites oder im CMS brauchen eine Freigabe.',
+    },
     herkunft: 'beruflich',
     gruppe: 'kern',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
@@ -227,6 +245,15 @@ export const SYSTEME: Work[] = [
       'Eine eigene Plattform, über die KI-Agenten Projekte auf meinem Server verwalten: erst ' +
       'Vorschau, dann Freigabe per Passkey, dann Anwendung.',
     status: 'Eigenes Infrastrukturprojekt, in Betrieb, Ausbau läuft',
+    reife: 'produktiv',
+    aufgabenteilung: {
+      ki:
+        'Agenten wie ChatGPT oder Claude bereiten Änderungen über MCP-Tools vor.',
+      software:
+        'OAuth-Anmeldung, Vorschau, neun Teststufen, Container-Deployment und Backups mit Wiederherstellung.',
+      mensch:
+        'Ich gebe jede verändernde Aktion einzeln per Passkey frei.',
+    },
     herkunft: 'eigen',
     gruppe: 'kern',
     kontext: 'Eigenes Engineering-Projekt',
@@ -324,6 +351,15 @@ export const SYSTEME: Work[] = [
       'Rechnungen kommen als PDF per Mail. Ein LLM liest sie gegen ein festes Schema aus, Code ' +
       'prüft, und die Fachabteilung bekommt einen Zuordnungsvorschlag.',
     status: 'Im Testbetrieb, Live-Gang geplant',
+    reife: 'test',
+    aufgabenteilung: {
+      ki:
+        'Ein LLM liest Rechnungsnummer, Monat und Positionen gegen ein JSON-Schema aus.',
+      software:
+        'Prüft Summen, Duplikate und Plausibilität und ordnet Positionen zu; der Schreibpfad ist dreifach gesperrt.',
+      mensch:
+        'Die Fachabteilung prüft markierte Fälle und entscheidet über die Zuordnung.',
+    },
     herkunft: 'beruflich',
     gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',
@@ -407,6 +443,13 @@ export const SYSTEME: Work[] = [
       'Die Infrastruktur unter den Automatisierungen: eigene Datenbank, zentrale ' +
       'Fehlermeldungen, VPN mit fester IP und ein Passwortmanager für das Team.',
     status: 'Im Betrieb',
+    reife: 'produktiv',
+    aufgabenteilung: {
+      software:
+        'Zentraler Error-Workflow, selbst gehostete Datenbank in Docker und nächtliche Sicherung der Workflow-Definitionen.',
+      mensch:
+        'Das Team sieht Fehler zentral im Chat und verwaltet Zugänge im Passwortmanager.',
+    },
     herkunft: 'beruflich',
     gruppe: 'weitere',
     kontext: 'Unternehmenskontext · anonymisiert dargestellt',

@@ -3,6 +3,7 @@
 > Eine eigene Plattform, über die KI-Agenten Projekte auf meinem Server verwalten: erst Vorschau, dann Freigabe per Passkey, dann Anwendung.
 
 URL: https://ozan-orhan.com/projekte/mcp-plattform-self-hosted/
+Reifegrad: Im Einsatz
 Status: Eigenes Infrastrukturprojekt, in Betrieb, Ausbau läuft
 Kontext: Eigenes Engineering-Projekt
 Stack: Python, MCP (Streamable HTTP), OAuth, Docker Compose, Caddy, Cloudflare, Passkeys, Debian
@@ -14,6 +15,12 @@ Ich wollte Agenten wie ChatGPT oder Claude kleine Projekte auf meinem Server anl
 ## Mein Beitrag
 
 Eigenes Projekt: Architektur, Implementierung, Betrieb und Dokumentation.
+
+## Wer macht was
+
+- KI: Agenten wie ChatGPT oder Claude bereiten Änderungen über MCP-Tools vor.
+- Deterministische Software: OAuth-Anmeldung, Vorschau, neun Teststufen, Container-Deployment und Backups mit Wiederherstellung.
+- Mensch: Ich gebe jede verändernde Aktion einzeln per Passkey frei.
 
 ## Architektur
 

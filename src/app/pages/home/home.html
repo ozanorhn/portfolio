@@ -5,32 +5,26 @@
     <div class="grid auftakt__raster">
       <div class="auftakt__text">
         <h1 id="auftakt-titel" class="display auftakt__these">
-          Ozan Orhan <span class="auftakt__rolle-gross">– AI Automation Engineer aus Hannover</span>
+          Ich entwickle <span class="zusammen">KI-Anwendungen</span> und agentische Systeme.
         </h1>
+        <p class="auftakt__wer">{{ site.name }} · {{ site.rolle }} aus Hannover</p>
         <p class="lede auftakt__lede">
-          Ich entwickle KI-Agenten, MCP- und RAG-Systeme sowie intelligente Automatisierungen
-          mit Python und n8n.
+          Agenten, die über MCP mit Werkzeugen arbeiten, Wissenssysteme mit RAG und
+          Prozessautomatisierung mit Python und n8n. Ich binde sie an bestehende Systeme an,
+          setze Freigaben dort, wo ein Mensch entscheidet, und betreibe sie selbst gehostet.
         </p>
-        <p class="auftakt__ort mono">Hannover · Deutschlandweit Remote</p>
-        <ul class="auftakt__chips" aria-label="Schwerpunkte">
-          <li style="--c: var(--akz-indigo)">KI-Agenten</li>
-          <li style="--c: var(--akz-himmel)">MCP</li>
-          <li style="--c: var(--akz-petrol)">RAG</li>
-          <li style="--c: var(--akz-bernstein)">Python</li>
-          <li style="--c: var(--akz-koralle)">n8n</li>
-        </ul>
         <div class="auftakt__aktionen">
-          <a class="knopf" [href]="'mailto:' + site.mail" data-tracking="kontakt-hero">
-            <lucide-icon [img]="IconMail" [size]="16" [strokeWidth]="1.8" />Kontakt aufnehmen
+          <a class="knopf" routerLink="/projekte" data-tracking="projekte-hero">
+            Projekte ansehen<lucide-icon [img]="IconPfeil" [size]="16" [strokeWidth]="1.8" />
           </a>
-          <a class="aktion aktion--primaer" routerLink="/" fragment="systeme">
-            Projekte ansehen<lucide-icon [img]="IconPfeil" [size]="14" [strokeWidth]="2" />
+          <a class="aktion aktion--primaer" [href]="'mailto:' + site.mail" data-tracking="kontakt-hero">
+            <lucide-icon [img]="IconMail" [size]="15" [strokeWidth]="1.8" />Kontakt aufnehmen
           </a>
           <span class="auftakt__wege">
-            <a class="rundknopf" [href]="site.linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn-Profil">
+            <a class="rundknopf" [href]="site.linkedin" target="_blank" rel="noopener noreferrer me" aria-label="LinkedIn-Profil von Ozan Orhan">
               <lucide-icon [img]="IconLinkedin" [size]="17" [strokeWidth]="1.7" />
             </a>
-            <a class="rundknopf" [href]="site.github" target="_blank" rel="noopener noreferrer" aria-label="GitHub-Profil">
+            <a class="rundknopf" [href]="site.github" target="_blank" rel="noopener noreferrer me" aria-label="GitHub-Profil von Ozan Orhan">
               <lucide-icon [img]="IconGithub" [size]="17" [strokeWidth]="1.7" />
             </a>
           </span>
@@ -44,8 +38,8 @@
 
   <section class="block wrap" id="systeme" aria-labelledby="systeme-titel">
     <div class="block__kopf">
-      <h2 id="systeme-titel" class="untertitel">Ausgewählte KI-Systeme</h2>
-      <a class="aktion" routerLink="/projekte">Alle Projekte</a>
+      <h2 id="systeme-titel" class="untertitel">Ausgewählte Projekte</h2>
+      <a class="aktion" routerLink="/projekte">Alle {{ anzahl }} Projekte</a>
     </div>
     <ul class="karten">
       @for (w of ausgewaehlt; track w.slug) {
@@ -56,10 +50,13 @@
                 <app-system-visual [motiv]="w.visual" [alt]="'Systemszene ' + w.titel" [kompakt]="true" />
               </a>
             }
-            <p class="meta">{{ w.kontext }}</p>
             <h3 class="karte__titel" [id]="'k-' + w.slug">
               <a [routerLink]="['/projekte', w.slug]">{{ w.titel }}</a>
             </h3>
+            <p class="karte__einordnung mono">
+              <span class="reife" [attr.data-reife]="w.reife">{{ reifeTitel[w.reife] }}</span>
+              <span>{{ herkunft(w) }}</span>
+            </p>
             <p class="karte__satz">{{ w.karte?.beitrag ?? w.lede }}</p>
             <p class="karte__fuss">
               <span class="mono karte__stack">{{ w.stack.slice(0, 4).join(' · ') }}</span>
@@ -73,59 +70,104 @@
     </ul>
   </section>
 
-  <section class="block wrap" id="profil" aria-labelledby="profil-titel">
-    <div class="block__kopf"><h2 id="profil-titel" class="untertitel">Entwicklungserfahrung</h2></div>
-    <div class="grid profil">
-      <div class="profil__bild">
-        <img
-          src="assets/img/ozan.webp"
-          alt="Porträt von Ozan Orhan"
-          width="500" height="500" loading="lazy" decoding="async"
-        />
-      </div>
-      <div class="profil__text">
-        <p class="profil__intro">
-          Als AI Automation Engineer entwickle ich KI-Systeme beruflich und privat, dazu
-          eigenständige, unentgeltliche Projekte, teils für andere Personen oder Organisationen.
-          Vertrauliches erscheint anonymisiert. Alle gezeigten Systeme habe ich selbst entwickelt.
+  <section class="block wrap" id="schwerpunkte" aria-labelledby="schwerpunkte-titel">
+    <div class="grid schwerpunkte__kopf">
+      <h2 id="schwerpunkte-titel" class="untertitel">Schwerpunkte und Belege</h2>
+      <p class="schwerpunkte__intro">
+        Fünf Felder, in denen ich KI-Systeme baue. Unter jedem stehen die Fallstudien, die es
+        belegen, mit ihrem Reifegrad.
+      </p>
+    </div>
+    <ol class="felder">
+      @for (s of schwerpunkte; track s.id) {
+        <li class="feld grid" [id]="'schwerpunkt-' + s.id">
+          <h3 class="feld__titel">{{ s.titel }}</h3>
+          <p class="feld__text">{{ s.text }}</p>
+          <ul class="feld__belege" [attr.aria-label]="'Belege für ' + s.titel">
+            @for (w of belege(s.projekte); track w.slug) {
+              <li>
+                <a class="beleg" [routerLink]="['/projekte', w.slug]">
+                  <span class="beleg__titel">{{ w.titel }}</span>
+                  <span class="beleg__reife reife mono" [attr.data-reife]="w.reife">{{ reifeTitel[w.reife] }}</span>
+                </a>
+              </li>
+            }
+          </ul>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <section class="block wrap" id="arbeitsweise" aria-labelledby="arbeitsweise-titel">
+    <div class="grid arbeitsweise">
+      <div class="arbeitsweise__kopf">
+        <h2 id="arbeitsweise-titel" class="untertitel">Arbeitsweise und Verantwortung</h2>
+        <p class="arbeitsweise__intro">
+          Ich übernehme die ganze Strecke: den Prozess verstehen, die Architektur entscheiden,
+          implementieren, ausrollen und im Betrieb halten. Entwickelt wird mit Coding-Agenten,
+          eigenen Regeln und Skills und einem getrennten Review-Schritt.
+          <a class="textlink" href="/blog/claude-code-mods/">Mehr zu Claude Code</a>
         </p>
-        <ul class="kompetenzen">
-          <li style="--c: var(--akz-indigo)">
-            <h3>Agenten &amp; Orchestrierung</h3>
-            <p>Skills, Tool Use über MCP, Multi-Agent-Rollen mit Kritiker.</p>
-            <a routerLink="/projekte/seo-agent-multi-agent-system">SEO-Agent →</a>
-          </li>
-          <li style="--c: var(--akz-petrol)">
-            <h3>RAG &amp; MCP</h3>
-            <p>Wissensbasis mit Vektorsuche, lesend als MCP-Tool bereitgestellt.</p>
-            <a routerLink="/projekte/wissensbasis-rag-mcp">Wissensbasis →</a>
-          </li>
-          <li style="--c: var(--akz-bernstein)">
-            <h3>Automatisierung &amp; Pipelines</h3>
-            <p>n8n-Prozessketten, LLM-Extraktion gegen Schemas, Freigaben.</p>
-            <a routerLink="/projekte/agentic-commerce-audit">Agentic Commerce Audit →</a>
-          </li>
-          <li style="--c: var(--akz-salbei)">
-            <h3>Betrieb &amp; Self-Hosting</h3>
-            <p>Docker, OAuth, Passkey-Freigaben, zentrale Fehlermeldungen.</p>
-            <a routerLink="/projekte/mcp-plattform-self-hosted">MCP-Plattform →</a>
-          </li>
-        </ul>
       </div>
-      <dl class="profil__kenn">
-        <div><dt class="meta">Spezialisierung</dt><dd>AI Automation Engineer</dd></div>
-        <div><dt class="meta">Projektkontext</dt><dd>Beruflich · Privat · Eigenständig und unentgeltlich</dd></div>
-        <div><dt class="meta">Schwerpunkte</dt><dd>KI-Agenten · Multi-Agent-Workflows · RAG · MCP · Datenpipelines</dd></div>
-        <div><dt class="meta">Arbeitsweise</dt><dd>Structured Outputs · Human-in-the-loop · Error Handling · Self-Hosting</dd></div>
+      <dl class="grundsaetze">
+        @for (g of grundsaetze; track g.titel) {
+          <div class="grundsatz">
+            <dt class="grundsatz__titel">{{ g.titel }}</dt>
+            <dd class="grundsatz__text">
+              {{ g.text }}
+              @if (g.projekte.length) {
+                <span class="grundsatz__belege">
+                  @for (w of belege(g.projekte); track w.slug; let letzte = $last) {
+                    <a class="textlink" [routerLink]="['/projekte', w.slug]">{{ w.titel }}</a>@if (!letzte) {<span aria-hidden="true"> · </span>}
+                  }
+                </span>
+              }
+            </dd>
+          </div>
+        }
       </dl>
     </div>
   </section>
 
-
+  <section class="block wrap" id="profil" aria-labelledby="profil-titel">
+    <div class="block__kopf"><h2 id="profil-titel" class="untertitel">Profil</h2></div>
+    <div class="grid profil">
+      <figure class="profil__bild">
+        <img
+          src="assets/img/ozan.webp"
+          [alt]="portraetAlt"
+          width="500" height="500" loading="lazy" decoding="async"
+        />
+      </figure>
+      <div class="profil__text">
+        <p class="profil__intro">
+          Ich bin Ozan Orhan, {{ site.rolle }} aus Hannover. Ich entwickle KI-Systeme beruflich
+          und in eigenen Projekten, dazu eigenständige, unentgeltliche Projekte, teils für andere
+          Personen oder Organisationen.
+        </p>
+        <p class="profil__absatz">
+          Den Begriff {{ site.rolleAutomation }} nutze ich für den Teil meiner Arbeit, in dem
+          Sprachmodelle in bestehende Prozesse eingebunden werden: Postfach, Projektboard,
+          Zeiterfassung, Datenbank. Die Grundlagen in Frontend und TypeScript stammen aus der
+          Ausbildung an der Developer Akademie.
+        </p>
+        <p class="profil__absatz">
+          Vertrauliches erscheint anonymisiert. Jede Fallstudie sagt, was ich selbst gebaut
+          habe und was von anderen stammt.
+        </p>
+      </div>
+      <dl class="profil__kenn">
+        <div><dt class="meta">Rolle</dt><dd>{{ site.rolle }} · {{ site.rolleAutomation }}</dd></div>
+        <div><dt class="meta">Standort</dt><dd>Hannover, Deutschland</dd></div>
+        <div><dt class="meta">Projektkontext</dt><dd>Beruflich · Privat · Eigenständig und unentgeltlich</dd></div>
+        <div><dt class="meta">Sprachen</dt><dd>Deutsch · Englisch</dd></div>
+      </dl>
+    </div>
+  </section>
 
   <section class="block wrap" id="stack" aria-labelledby="stack-titel">
     <div class="grid techstack">
-      <h2 id="stack-titel" class="untertitel techstack__titel">Tech-Stack</h2>
+      <h2 id="stack-titel" class="untertitel techstack__titel">Technologien aus den Projekten</h2>
       <dl class="techstack__gruppen">
         @for (g of stack; track g.titel) {
           <div class="techstack__gruppe">
@@ -144,20 +186,10 @@
     </div>
   </section>
 
-  <section class="block wrap" id="projekte" aria-labelledby="werk-titel">
-    <div class="block__kopf">
-      <h2 id="werk-titel" class="untertitel">Weitere technische Projekte</h2>
-      <a class="aktion" routerLink="/projekte">Alle Projekte</a>
-    </div>
-    <app-projekt-liste [projekte]="weitere" [kompakt]="true" />
-  </section>
-
-
-
   @if (artikel().length) {
     <section class="block wrap" id="artikel" aria-labelledby="artikel-titel">
       <div class="block__kopf">
-        <h2 id="artikel-titel" class="untertitel">Technische Artikel</h2>
+        <h2 id="artikel-titel" class="untertitel">Fachartikel</h2>
         <a class="aktion" routerLink="/blog">Alle Artikel</a>
       </div>
       <ul class="artikelliste">
@@ -179,28 +211,29 @@
       <div class="kontakt__text">
         <h2 id="kontakt-titel" class="untertitel">Kontakt</h2>
         <p class="kontakt__zeile">
-          Für Recruiter, Hiring Manager und technische Teams: Rollen im AI Automation Engineering
-          und Austausch zu Agenten, RAG, MCP und Automatisierung.
+          Für Recruiter, Hiring Manager und technische Teams: Gespräche über Rollen im AI
+          Engineering und AI Automation Engineering sowie fachlicher Austausch zu Agenten, RAG,
+          MCP und Automatisierung.
         </p>
       </div>
       <div class="kontakt__wege">
         <p class="kontakt__mail">
-          <a [href]="'mailto:' + site.mail">
+          <a [href]="'mailto:' + site.mail" data-tracking="kontakt-mail">
             <lucide-icon [img]="IconMail" [size]="20" [strokeWidth]="1.5" />{{ site.mail }}
           </a>
         </p>
         <ul class="kontakt__links mono">
           <li>
-            <a [href]="site.linkedin" target="_blank" rel="noopener noreferrer">
+            <a [href]="site.linkedin" target="_blank" rel="noopener noreferrer me">
               <lucide-icon [img]="IconLinkedin" [size]="15" [strokeWidth]="1.6" />LinkedIn
             </a>
           </li>
           <li>
-            <a [href]="site.github" target="_blank" rel="noopener noreferrer">
+            <a [href]="site.github" target="_blank" rel="noopener noreferrer me">
               <lucide-icon [img]="IconGithub" [size]="15" [strokeWidth]="1.6" />GitHub
             </a>
           </li>
-          <li><lucide-icon [img]="IconOrt" [size]="15" [strokeWidth]="1.6" />Hannover · deutschlandweit remote möglich</li>
+          <li><lucide-icon [img]="IconOrt" [size]="15" [strokeWidth]="1.6" />Hannover, Deutschland</li>
         </ul>
       </div>
     </div>

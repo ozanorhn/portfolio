@@ -8,22 +8,23 @@ web
 
 ## Users
 
-Zwei gleichrangige Primärzielgruppen, die dieselbe Seite unterschiedlich lesen:
+Hauptzielgruppe (Stand 2026-10-26, Entscheidung des Nutzers): **Recruiter, Hiring Manager und technische Entscheider**, die eine Festanstellung im AI Engineering besetzen. Job: schnell erfassen, was Ozan baut, und technische Tiefe, Architekturentscheidungen und eigenen Beitrag je Projekt beurteilen.
 
-1. **Entscheider in Unternehmen** (Geschäftsführung, Bereichsleitung, Operations, Marketing/SEO), die Automatisierung oder KI-Integration einkaufen wollen. Situation: ein Prozess dauert zu lange, läuft manuell oder ist fehleranfällig. Job: einschätzen, ob Ozan das Problem versteht, es schon einmal gelöst hat und vertrauenswürdig ist.
-2. **Hiring Manager und Tech Leads**, die eine Festanstellung besetzen. Job: technische Tiefe, Architekturentscheidungen und Codequalität beurteilen.
-
-Beide Gruppen müssen ohne Umweg bedient werden. Die Seite darf für keine der beiden zur Kompromissfassung werden: geschäftliche Wirkung und technische Substanz stehen nebeneinander, nicht anstelle voneinander.
+Persönliches Karriereportfolio, **keine Agentur und kein Freelance-Angebot**: keine kommerziellen Angebote, keine Kurse oder Schulungen, keine erfundene Verfügbarkeit oder Wechselbereitschaft.
 
 Sprache: Deutsch (`de-DE`).
 
 ## Product Purpose
 
-Persönliches Portfolio von Ozan Orhan, AI Automation Engineer aus Hannover. Es soll seine stärkste Arbeit so zeigen, dass sie als ernsthafte Ingenieursarbeit gelesen wird — nicht als Sammlung von Tool-Demos.
+Persönliches Portfolio von Ozan Orhan, AI Engineer (und AI Automation Engineer) aus Hannover. Es soll seine stärkste Arbeit so zeigen, dass sie als ernsthafte Ingenieursarbeit gelesen wird — nicht als Sammlung von Tool-Demos.
 
-Erfolg: eine qualifizierte Kontaktaufnahme (Projektanfrage oder Gespräch über eine Anstellung) durch jemanden, der vorher mindestens eine Fallstudie in Tiefe gelesen hat.
+Erfolg: eine qualifizierte Kontaktaufnahme für ein Gespräch über eine Rolle durch jemanden, der vorher mindestens eine Fallstudie in Tiefe gelesen hat.
 
 ## Positioning
+
+**Kernaussage:** „Ich entwickle KI-Anwendungen und agentische Systeme.“ Darunter: „Ozan Orhan · AI Engineer aus Hannover“. Übergreifende Rolle ist **AI Engineer**; **AI Automation Engineer** bleibt als zweite, gleichwertige Bezeichnung sichtbar (Profil, Footer, Schema `jobTitle`). „KI-Entwickler“, „KI-Softwareentwicklung“ und „Prozessautomatisierung“ werden natürlich mitgeführt. Keine Zielrollen-Formulierung, kein „Junior“.
+
+Jeder Schwerpunkt ist an belegende Fallstudien gebunden (`src/app/data/schwerpunkte.ts`), jede Fallstudie nennt Reifegrad (Im Einsatz, Testbetrieb, Prototyp, Nicht aktiv, Abgeschlossen) und die Aufteilung KI / deterministische Software / Mensch. Ein Audit oder Testlauf wird nie als produktives System dargestellt.
 
 Ozan baut die gesamte Kette selbst: von der Prozesslogik im Hintergrund über API- und Datenanbindung bis zur Oberfläche im Frontend — und auf der Hardware-Seite bis zum physischen Gerät. Das unterscheidet ihn sowohl von reinen n8n-/No-Code-Automatisierern (keine eigene Frontend- und Systemtiefe) als auch von reinen Frontend-Entwicklern (keine Prozess- und Integrationstiefe).
 
@@ -38,7 +39,7 @@ Arbeitsweise als Teil der Positionierung: Ausgangspunkt ist immer ein konkretes 
 
 ## Capabilities and Constraints
 
-**Bestehender Stack (bindend):** Angular 20/21 mit Standalone Components, TypeScript, SCSS, `lucide-angular` als einzige Icon-Familie. Tailwind v4 ist installiert, aber faktisch ungenutzt. Kein SSR/Prerendering aktiv.
+**Bestehender Stack (bindend):** Angular 20/21 mit Standalone Components, TypeScript, SCSS, `lucide-angular` als einzige Icon-Familie. Tailwind v4 ist installiert, aber faktisch ungenutzt. Statisches Prerendering über `scripts/prerender.mjs` (Chrome headless) ist aktiv; `npm run build:prod` = Blog → SEO-Dateien → ng build → Prerender.
 
 **Bestätigte Struktur (Entscheidung des Nutzers):** Startseite → Werk-Übersicht → Detailseiten. Die vier Kernarbeiten erhalten eigene, editorial gesetzte Fallstudienseiten; die Ausbildungsprojekte behalten eigene Detailseiten in reduzierter Form.
 
@@ -48,11 +49,12 @@ Arbeitsweise als Teil der Positionierung: Ausgangspunkt ist immer ein konkretes 
 
 **Geklärt:** Die AI Visibility Monitoring Platform ist Enterprise-Arbeit und wird anonymisiert dargestellt (Enterprise-Case-Study der verifizierten Doku). Messbare Ergebniszahlen existieren zu keiner der fünf Kernarbeiten; die Dokumentationen weisen die jeweiligen Messlücken ausdrücklich aus, und die Seite übernimmt diese Ehrlichkeit statt sie zu füllen.
 
-**Offen / noch nicht entschieden:** ob SSR/Prerendering eingeführt wird; ob „Production & Operations“ als eigener Abschluss-Abschnitt erscheint; wie mit den zuvor gelisteten, in der neuen Hierarchie nicht mehr benannten anonymisierten Workflows verfahren wird.
+**Offen / noch nicht entschieden:** ob „Production & Operations“ als eigener Abschluss-Abschnitt erscheint; wie mit den zuvor gelisteten, in der neuen Hierarchie nicht mehr benannten anonymisierten Workflows verfahren wird.
 
 ## Brand Commitments
 
-- Name und Identität: Ozan Orhan, AI Automation Engineer, Hannover.
+- Name und Identität: Ozan Orhan, AI Engineer · AI Automation Engineer, Hannover.
+- Einziges Porträt: `public/assets/img/ozan.jpg` (800 × 800, plus `ozan.webp`). `Person.image` (`#portraet`), Faktenseite und Profil zeigen genau diese Datei; das OG-Bild nutzt dasselbe Foto.
 - Domain `ozan-orhan.com`; E-Mail `contact@ozan-orhan.com`; GitHub `ozanorhn`; LinkedIn `ozan-o-7014a22a3`.
 - Icons ausschließlich aus `lucide-angular`, keine Emojis als Icons.
 - **Ansprache: durchgängig Du.** Vom Nutzer entschieden; gilt für jede Zeile auf jeder Seite, inklusive Formularen, Fehlermeldungen und rechtlichen Seiten, soweit dort zulässig.
@@ -114,7 +116,7 @@ Nicht belegt und deshalb ohne Vorher/Nachher: Hermes (kein Vorzustand dokumentie
 
 ### Vorhandene Assets
 
-Porträt `public/assets/img/ozan.png`, 1080 × 1080 px. Hardwarefoto `public/assets/img/pocket-agent.jpg`, 1086 × 700 px. Screenshots der Ausbildungsprojekte in `public/assets/img/`.
+Porträt `public/assets/img/ozan.jpg`, 800 × 800 px (die alte `ozan.png` liegt nur noch auf dem Server, nicht im Repo). Hardwarefoto `public/assets/img/pocket-agent.jpg`, 1086 × 700 px. Screenshots der Ausbildungsprojekte in `public/assets/img/`.
 
 Gesetzte Systembilder in `public/assets/diagrams/`, je Quer- und Hochformat: `wissensbasis-rag-mcp-quer.svg` / `-hoch.svg` und `recruiting-jobs-sync-quer.svg` / `-hoch.svg`. Vollständig auf den verifizierten Dokumentationen aufgebaut, keine n8n-Canvas-Screenshots, keine Diagramm-Templates, keine erfundenen Dienste. Damit brauchen die Arbeiten 03 und 05 kein Bildmaterial mehr.
 

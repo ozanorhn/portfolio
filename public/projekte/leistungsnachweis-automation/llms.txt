@@ -3,6 +3,7 @@
 > Ein monatlicher Workflow, der Zeiterfassungen aus Toggl verarbeitet, kundenspezifisch aufbereitet und daraus automatisch Leistungsnachweise und Dokumente erzeugt.
 
 URL: https://ozan-orhan.com/projekte/leistungsnachweis-automation/
+Reifegrad: Im Einsatz
 Status: Im Einsatz seit Ende 2025, Folgeversion im Test
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: Toggl API, Slack Reaction Trigger, Google Sheets, Google Drive, JavaScript, Datentransformation, Dokumentvorlagen, n8n (Orchestrierung)
@@ -12,6 +13,12 @@ Stack: Toggl API, Slack Reaction Trigger, Google Sheets, Google Drive, JavaScrip
 Die Arbeitszeiten liegen bereits strukturiert in Toggl vor. Für monatliche Leistungsnachweise mussten diese Daten jedoch erneut gefiltert, Kunden zugeordnet, aufbereitet und in Dokumente übertragen werden.
 
 Der Workflow übernimmt diesen Prozess automatisiert und erzeugt aus den vorhandenen Zeiterfassungen die benötigten Leistungsnachweise.
+
+## Wer macht was
+
+- KI: Keine KI im Ablauf: Die Verarbeitung ist vollständig regelbasiert.
+- Deterministische Software: Lädt Zeiteinträge aus Toggl, ordnet sie Kunden zu, befüllt Vorlagen und legt die Dokumente in Drive ab.
+- Mensch: Gibt den monatlichen Lauf per Slack-Reaktion frei und wählt damit den Zeitraum.
 
 ## Architektur
 

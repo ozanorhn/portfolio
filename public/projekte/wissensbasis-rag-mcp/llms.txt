@@ -3,6 +3,7 @@
 > Eine zentrale RAG-Wissensbasis, die Agenten über MCP als Retrieval-Tool nutzen können.
 
 URL: https://ozan-orhan.com/projekte/wissensbasis-rag-mcp/
+Reifegrad: Im Einsatz
 Status: MCP-Server aktiv, Ingest läuft manuell
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: MCP-Server-Trigger, Postgres mit Vektor-Erweiterung, Mehrsprachige Embeddings, Dokument-Loader, Text-Splitter, n8n (Orchestrierung)
@@ -12,6 +13,12 @@ Stack: MCP-Server-Trigger, Postgres mit Vektor-Erweiterung, Mehrsprachige Embedd
 Interne Dokumente sollten mehreren AI-Assistenten zur Verfügung stehen, ohne Retrieval und Datenanbindung für jeden Agenten erneut aufzubauen.
 
 Dafür habe ich die Wissensbasis als eigene Retrieval-Schicht umgesetzt, die über MCP von unterschiedlichen Clients genutzt werden kann.
+
+## Wer macht was
+
+- KI: Ein mehrsprachiges Embedding-Modell bildet Dokumente und Anfragen als Vektoren ab; der anfragende Agent entscheidet, wann er die Wissensbasis nutzt.
+- Deterministische Software: Ingest, Chunking, Vektorsuche über eine eigene Match-Funktion in PostgreSQL und das read-only MCP-Tool.
+- Mensch: Stößt den Ingest neuer Dokumente manuell an.
 
 ## Architektur
 

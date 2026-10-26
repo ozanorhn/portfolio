@@ -3,6 +3,7 @@
 > Die Infrastruktur unter den Automatisierungen: eigene Datenbank, zentrale Fehlermeldungen, VPN mit fester IP und ein Passwortmanager für das Team.
 
 URL: https://ozan-orhan.com/projekte/automation-betrieb-self-hosting/
+Reifegrad: Im Einsatz
 Status: Im Betrieb
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: Docker, Supabase (selbst gehostet), PostgreSQL, n8n, Slack, WireGuard, Vaultwarden, Linux
@@ -14,6 +15,11 @@ Mit der Zahl der Automatisierungen wuchs der Bedarf an verlässlichem Betrieb: F
 ## Mein Beitrag
 
 Ich habe die selbst gehostete Datenbank in Docker eingerichtet, Workflows an einen zentralen Error-Workflow angebunden, eine Richtlinie für Benennung und Fehlerbehandlung geschrieben, das VPN mit fester IP aufgesetzt und den Passwortmanager eingeführt.
+
+## Wer macht was
+
+- Deterministische Software: Zentraler Error-Workflow, selbst gehostete Datenbank in Docker und nächtliche Sicherung der Workflow-Definitionen.
+- Mensch: Das Team sieht Fehler zentral im Chat und verwaltet Zugänge im Passwortmanager.
 
 ## Architektur
 

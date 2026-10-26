@@ -1,9 +1,12 @@
-# Ozan Orhan — AI Automation Engineer
+# Ozan Orhan — AI Engineer und AI Automation Engineer
 
-> Ozan Orhan ist AI Automation Engineer aus Hannover. Er entwickelt KI-Agenten und
-> automatisiert Geschäftsprozesse mit KI, n8n, RAG und MCP. Schwerpunkte sind
-> Agenten, n8n, Python, MCP, RAG, APIs und zuverlässige Automatisierungsabläufe.
-> Standort Hannover, Deutschland.
+> Ozan Orhan ist AI Engineer aus Hannover. Er entwickelt KI-Anwendungen und agentische
+> Systeme und integriert sie als AI Automation Engineer in bestehende Geschäftsprozesse,
+> mit Python, n8n, MCP und RAG. Den technischen Betrieb auf eigener Infrastruktur
+> übernimmt er selbst. Persönliches Karriere- und Projektportfolio, keine Agentur.
+
+Porträt: https://ozan-orhan.com/assets/img/ozan.jpg (einziges Porträt auf dieser Website)
+Profile: https://github.com/ozanorhn · https://www.linkedin.com/in/ozan-o-7014a22a3
 
 ## Seiten
 
@@ -12,29 +15,40 @@
 - [Blog](https://ozan-orhan.com/blog/)
 - [Grounding Page (Faktenseite nach Grounding Page Standard v1.6)](https://ozan-orhan.com/facts/)
 
+## Schwerpunkte und belegende Fallstudien
+
+- Agenten und MCP: Agenten, die Aufgaben in mehreren Schritten bearbeiten und Werkzeuge über das Model Context Protocol nutzen: mit festen Skills, eigenem MCP-Server und Freigabe vor schreibenden Aktionen, bis zum Sprachagenten auf eigener Hardware. Eine Multi-Agent-Variante mit Orchestrator und Kritiker lief als Testlauf. Belege: [SEO-Agent mit Multi-Agent-System](https://ozan-orhan.com/projekte/seo-agent-multi-agent-system/), [MCP-Plattform, selbst gehostet](https://ozan-orhan.com/projekte/mcp-plattform-self-hosted/), [Hermes Pocket AI Agent](https://ozan-orhan.com/projekte/pocket-ai-agent/)
+- Wissenssysteme mit RAG: Interne Dokumente als zentrale Retrieval-Schicht: Chunking, mehrsprachige Embeddings, Vektorsuche in PostgreSQL und Zugriff für beliebige Agenten über einen MCP-Server. Belege: [Wissensbasis — RAG + MCP-Server](https://ozan-orhan.com/projekte/wissensbasis-rag-mcp/)
+- Prozessautomatisierung: Wiederkehrende Abläufe mit n8n, Code und APIs. Sprachmodelle lesen Rechnungen, Mitschriften und Webseiten gegen feste Schemas, Code prüft und entscheidet, Menschen geben frei. Belege: [KI-Rechnungsprüfung](https://ozan-orhan.com/projekte/ki-rechnungspruefung/), [Leistungsnachweis Automation](https://ozan-orhan.com/projekte/leistungsnachweis-automation/), [Recruiting Jobs Sync](https://ozan-orhan.com/projekte/recruiting-jobs-sync/), [Conversational AI Meeting Assistant](https://ozan-orhan.com/projekte/conversational-ai-meeting-assistant/)
+- KI-Sichtbarkeit und Agentic Commerce: Messen, ob KI-Assistenten Marken, Shops und Quellen nennen, und Inhalte so aufbereiten, dass Antwortsysteme sie eindeutig zuordnen können: Monitoring über fünf Datenquellen, ein Audit mit echten Kauffragen und ein Generator für Grounding Pages. Belege: [AI Visibility Monitoring Platform](https://ozan-orhan.com/projekte/ai-visibility-monitoring-platform/), [Agentic Commerce Audit](https://ozan-orhan.com/projekte/agentic-commerce-audit/), [Grounding Page Generator](https://ozan-orhan.com/projekte/grounding-page-generator/)
+- Betrieb und Self-Hosting: Was nach dem Livegang zählt: Container-Deployments, ein zentraler Fehlerpfad, Hänger-Erkennung, Backups mit Wiederherstellung und Zugänge im Credential Store. Belege: [Automation-Betrieb und Self-Hosting](https://ozan-orhan.com/projekte/automation-betrieb-self-hosting/), [MCP-Plattform, selbst gehostet](https://ozan-orhan.com/projekte/mcp-plattform-self-hosted/), [Agentic Commerce Audit](https://ozan-orhan.com/projekte/agentic-commerce-audit/)
+
 ## Projekte
 
-- [SEO-Agent mit Multi-Agent-System](https://ozan-orhan.com/projekte/seo-agent-multi-agent-system/) — Agent-Framework · MCP · Multi-Agent · Slack. Maschinenlesbar: https://ozan-orhan.com/projekte/seo-agent-multi-agent-system/llms.txt
-- [Agentic Commerce Audit](https://ozan-orhan.com/projekte/agentic-commerce-audit/) — Workflow-Orchestrierung · LLM-Abfragen · Audit-Worker. Maschinenlesbar: https://ozan-orhan.com/projekte/agentic-commerce-audit/llms.txt
-- [Wissensbasis — RAG + MCP-Server](https://ozan-orhan.com/projekte/wissensbasis-rag-mcp/) — RAG · Vector Retrieval · MCP. Maschinenlesbar: https://ozan-orhan.com/projekte/wissensbasis-rag-mcp/llms.txt
-- [AI Visibility Monitoring Platform](https://ozan-orhan.com/projekte/ai-visibility-monitoring-platform/) — Monitoring · Fünf Datenquellen · Agent-Anbindung. Maschinenlesbar: https://ozan-orhan.com/projekte/ai-visibility-monitoring-platform/llms.txt
-- [MCP-Plattform, selbst gehostet](https://ozan-orhan.com/projekte/mcp-plattform-self-hosted/) — MCP · OAuth · Docker · Human-in-the-loop. Maschinenlesbar: https://ozan-orhan.com/projekte/mcp-plattform-self-hosted/llms.txt
-- [Hermes Pocket AI Agent](https://ozan-orhan.com/projekte/pocket-ai-agent/) — Voice Agent · MCP · Embedded. Maschinenlesbar: https://ozan-orhan.com/projekte/pocket-ai-agent/llms.txt
-- [Leistungsnachweis Automation](https://ozan-orhan.com/projekte/leistungsnachweis-automation/) — API Integration · Document Automation · Human Approval. Maschinenlesbar: https://ozan-orhan.com/projekte/leistungsnachweis-automation/llms.txt
-- [KI-Rechnungsprüfung](https://ozan-orhan.com/projekte/ki-rechnungspruefung/) — Dokumenten-KI · Schema-Extraktion · Human-in-the-loop. Maschinenlesbar: https://ozan-orhan.com/projekte/ki-rechnungspruefung/llms.txt
-- [Recruiting Jobs Sync](https://ozan-orhan.com/projekte/recruiting-jobs-sync/) — LLM Extraction · Idempotent Sync · Data Pipeline. Maschinenlesbar: https://ozan-orhan.com/projekte/recruiting-jobs-sync/llms.txt
-- [Conversational AI Meeting Assistant](https://ozan-orhan.com/projekte/conversational-ai-meeting-assistant/) — Besprechungen · Action Items per LLM. Maschinenlesbar: https://ozan-orhan.com/projekte/conversational-ai-meeting-assistant/llms.txt
-- [Grounding Page Generator](https://ozan-orhan.com/projekte/grounding-page-generator/) — Grounding Page Standard v1.6 · Human-in-the-loop. Maschinenlesbar: https://ozan-orhan.com/projekte/grounding-page-generator/llms.txt
-- [Automation-Betrieb und Self-Hosting](https://ozan-orhan.com/projekte/automation-betrieb-self-hosting/) — Self-Hosting · Error Handling · Docker. Maschinenlesbar: https://ozan-orhan.com/projekte/automation-betrieb-self-hosting/llms.txt
-- [DaBubble](https://ozan-orhan.com/projekte/dabubble/) — Angular · Firebase. Maschinenlesbar: https://ozan-orhan.com/projekte/dabubble/llms.txt
-- [Join](https://ozan-orhan.com/projekte/join/) — JavaScript · Firebase. Maschinenlesbar: https://ozan-orhan.com/projekte/join/llms.txt
-- [Pokedex](https://ozan-orhan.com/projekte/pokedex/) — JavaScript · REST API. Maschinenlesbar: https://ozan-orhan.com/projekte/pokedex/llms.txt
-- [El Pollo Loco](https://ozan-orhan.com/projekte/el-pollo-loco/) — JavaScript · OOP · Canvas. Maschinenlesbar: https://ozan-orhan.com/projekte/el-pollo-loco/llms.txt
+- [SEO-Agent mit Multi-Agent-System](https://ozan-orhan.com/projekte/seo-agent-multi-agent-system/) — Agent-Framework · MCP · Multi-Agent · Slack. Reifegrad: Im Einsatz. Maschinenlesbar: https://ozan-orhan.com/projekte/seo-agent-multi-agent-system/llms.txt
+- [Agentic Commerce Audit](https://ozan-orhan.com/projekte/agentic-commerce-audit/) — Workflow-Orchestrierung · LLM-Abfragen · Audit-Worker. Reifegrad: Testbetrieb. Maschinenlesbar: https://ozan-orhan.com/projekte/agentic-commerce-audit/llms.txt
+- [Wissensbasis — RAG + MCP-Server](https://ozan-orhan.com/projekte/wissensbasis-rag-mcp/) — RAG · Vector Retrieval · MCP. Reifegrad: Im Einsatz. Maschinenlesbar: https://ozan-orhan.com/projekte/wissensbasis-rag-mcp/llms.txt
+- [AI Visibility Monitoring Platform](https://ozan-orhan.com/projekte/ai-visibility-monitoring-platform/) — Monitoring · Fünf Datenquellen · Agent-Anbindung. Reifegrad: Im Einsatz. Maschinenlesbar: https://ozan-orhan.com/projekte/ai-visibility-monitoring-platform/llms.txt
+- [MCP-Plattform, selbst gehostet](https://ozan-orhan.com/projekte/mcp-plattform-self-hosted/) — MCP · OAuth · Docker · Human-in-the-loop. Reifegrad: Im Einsatz. Maschinenlesbar: https://ozan-orhan.com/projekte/mcp-plattform-self-hosted/llms.txt
+- [Hermes Pocket AI Agent](https://ozan-orhan.com/projekte/pocket-ai-agent/) — Voice Agent · MCP · Embedded. Reifegrad: Prototyp. Maschinenlesbar: https://ozan-orhan.com/projekte/pocket-ai-agent/llms.txt
+- [Leistungsnachweis Automation](https://ozan-orhan.com/projekte/leistungsnachweis-automation/) — API Integration · Document Automation · Human Approval. Reifegrad: Im Einsatz. Maschinenlesbar: https://ozan-orhan.com/projekte/leistungsnachweis-automation/llms.txt
+- [KI-Rechnungsprüfung](https://ozan-orhan.com/projekte/ki-rechnungspruefung/) — Dokumenten-KI · Schema-Extraktion · Human-in-the-loop. Reifegrad: Testbetrieb. Maschinenlesbar: https://ozan-orhan.com/projekte/ki-rechnungspruefung/llms.txt
+- [Recruiting Jobs Sync](https://ozan-orhan.com/projekte/recruiting-jobs-sync/) — LLM Extraction · Idempotent Sync · Data Pipeline. Reifegrad: Nicht aktiv. Maschinenlesbar: https://ozan-orhan.com/projekte/recruiting-jobs-sync/llms.txt
+- [Conversational AI Meeting Assistant](https://ozan-orhan.com/projekte/conversational-ai-meeting-assistant/) — Besprechungen · Action Items per LLM. Reifegrad: Im Einsatz. Maschinenlesbar: https://ozan-orhan.com/projekte/conversational-ai-meeting-assistant/llms.txt
+- [Grounding Page Generator](https://ozan-orhan.com/projekte/grounding-page-generator/) — Grounding Page Standard v1.6 · Human-in-the-loop. Reifegrad: Im Einsatz. Maschinenlesbar: https://ozan-orhan.com/projekte/grounding-page-generator/llms.txt
+- [Automation-Betrieb und Self-Hosting](https://ozan-orhan.com/projekte/automation-betrieb-self-hosting/) — Self-Hosting · Error Handling · Docker. Reifegrad: Im Einsatz. Maschinenlesbar: https://ozan-orhan.com/projekte/automation-betrieb-self-hosting/llms.txt
+- [DaBubble](https://ozan-orhan.com/projekte/dabubble/) — Angular · Firebase. Reifegrad: Abgeschlossen. Maschinenlesbar: https://ozan-orhan.com/projekte/dabubble/llms.txt
+- [Join](https://ozan-orhan.com/projekte/join/) — JavaScript · Firebase. Reifegrad: Abgeschlossen. Maschinenlesbar: https://ozan-orhan.com/projekte/join/llms.txt
+- [Pokedex](https://ozan-orhan.com/projekte/pokedex/) — JavaScript · REST API. Reifegrad: Abgeschlossen. Maschinenlesbar: https://ozan-orhan.com/projekte/pokedex/llms.txt
+- [El Pollo Loco](https://ozan-orhan.com/projekte/el-pollo-loco/) — JavaScript · OOP · Canvas. Reifegrad: Abgeschlossen. Maschinenlesbar: https://ozan-orhan.com/projekte/el-pollo-loco/llms.txt
 
 ## Blog
 
-- [EN 18286 AI Act: Leitfaden zum ersten harmonisierten QMS-Standard](https://ozan-orhan.com/blog/en-18286-ai-act-leitfaden/) — Die harmonisierte Norm EN 18286 schafft unter dem EU AI Act erstmals eine offizielle Konformitätsvermutung für Qualitätsmanagementsysteme nach Artikel 17. Erfahren Sie, was die Norm fordert, wie sie sich von ISO 42001 abhebt und wie Sie KI-Pipelines audit-sicher aufstellen. Maschinenlesbar: https://ozan-orhan.com/blog/en-18286-ai-act-leitfaden/llms.txt
+- [KI-Meeting-Assistenten im Praxiseinsatz: Vergleich, DSGVO (§ 201 StGB) und automatisierte Workflows](https://ozan-orhan.com/blog/ki-meeting-assistenten-vergleich-dsgvo/) — KI-Meeting-Assistenten versprechen automatisierte Protokolle, bergen im DACH-Raum durch § 201 StGB und die DSGVO jedoch strafrechtliche Risiken. Dieser Leitfaden vergleicht Bot-basierte, lokale und native Tools und zeigt, wie Teams Transkripte rechtssicher in n8n-Workflows überführen. Maschinenlesbar: https://ozan-orhan.com/blog/ki-meeting-assistenten-vergleich-dsgvo/llms.txt
+- [MCP 2026-07-28: Was die zustandslose Spezifikation für bestehende MCP-Server bedeutet](https://ozan-orhan.com/blog/mcp-2026-07-28-zustandslose-spezifikation/) — Die MCP-Spezifikation 2026-07-28 streicht Handshake und Session-ID. Server müssen server/discover anbieten. Sampling, Roots und HTTP+SSE sind deprecated. Was das für lokale Server, Remote-Server und n8n heißt. Maschinenlesbar: https://ozan-orhan.com/blog/mcp-2026-07-28-zustandslose-spezifikation/llms.txt
 - [KI-Agenten Sicherheit: Technische Antworten auf die TÜV/BSI-Studie 2026](https://ozan-orhan.com/blog/ki-agenten-sicherheit-tuev-bsi-studie/) — 84 Prozent der Unternehmen fürchten Fehlentscheidungen durch KI-Agenten. Die fünf Risiken aus der TÜV/BSI-Studie lassen sich mit Grounding, Schema-Validierung, Freigaben vor der Aktion, minimalen Tool-Rechten und Observability gezielt eingrenzen. Maschinenlesbar: https://ozan-orhan.com/blog/ki-agenten-sicherheit-tuev-bsi-studie/llms.txt
+- [EN 18286 AI Act: Leitfaden zum ersten harmonisierten QMS-Standard](https://ozan-orhan.com/blog/en-18286-ai-act-leitfaden/) — Die harmonisierte Norm EN 18286 schafft unter dem EU AI Act erstmals eine offizielle Konformitätsvermutung für Qualitätsmanagementsysteme nach Artikel 17. Erfahren Sie, was die Norm fordert, wie sie sich von ISO 42001 abhebt und wie Sie KI-Pipelines audit-sicher aufstellen. Maschinenlesbar: https://ozan-orhan.com/blog/en-18286-ai-act-leitfaden/llms.txt
+- [Art. 50 AI Act für Entwickler: KI-Agenten, Chatbots und KI-Inhalte technisch kennzeichnen](https://ozan-orhan.com/blog/art-50-ai-act-entwickler/) — Art. 50 AI Act gilt seit dem 2. August 2026. Was Entwickler von Chatbots, Agenten und Content-Pipelines umsetzen müssen (KI-Hinweis, maschinenlesbare Markierung, nachweisbare Freigabe) und was bis zum 2. Dezember 2026 fällig ist. Maschinenlesbar: https://ozan-orhan.com/blog/art-50-ai-act-entwickler/llms.txt
 - [Claude DSGVO-konform einsetzen: B2B-Praxisleitfaden für Teams, API und AWS Bedrock](https://ozan-orhan.com/blog/claude-dsgvo-konform-unternehmen/) — Claude DSGVO-konform im Unternehmen zu betreiben, erfordert kommerzielle Lizenzen statt privater Pro-Accounts. Während Anthropic bei Team- und API-Tarifen ein DPA integriert und kein Modelltraining durchführt, bietet erst die Inferenz via AWS Bedrock in Frankfurt garantierte EU-Datenresidenz. Maschinenlesbar: https://ozan-orhan.com/blog/claude-dsgvo-konform-unternehmen/llms.txt
 - [RAG Berechtigungsmanagement: Vertrauliche Firmendaten im Company Brain vor Datenabfluss schützen](https://ozan-orhan.com/blog/rag-berechtigungsmanagement-company-brain/) — RAG Berechtigungsmanagement verhindert, dass Mitarbeiter vertrauliche Firmendaten über interne KI-Assistenten abfragen. Durch Pre-Filtering und Document-Level Security werden Zugriffsrechte direkt beim Vektor-Retrieval durchgesetzt, noch bevor Chunks in den Sprachmodell-Kontext gelangen. Maschinenlesbar: https://ozan-orhan.com/blog/rag-berechtigungsmanagement-company-brain/llms.txt
 - [Reverse Engineering mit Claude: Ghidra MCP, REA und wo die Grenzen liegen](https://ozan-orhan.com/blog/reverse-engineering-claude-ghidra-mcp/) — Reverse Engineering mit Claude läuft über MCP-Server, die Ghidra, IDA oder Hopper für den Agenten aufrufbar machen. Die Werkzeuge sind alt, neu ist der Agent als Bediener. Claudes Cyber-Schutz blockt dabei auch legitime Analysen. Maschinenlesbar: https://ozan-orhan.com/blog/reverse-engineering-claude-ghidra-mcp/llms.txt
@@ -94,4 +108,6 @@
 - Projekte aus dem Unternehmenskontext werden ohne Kundennamen, Domains oder interne
   Kennungen dargestellt.
 - Zu den Projekten liegen keine veröffentlichten Kennzahlen zu Zeit- oder Kostenersparnis vor.
+- Der Reifegrad je Projekt (Im Einsatz, Testbetrieb, Prototyp, nicht aktiv) steht auf jeder
+  Fallstudie; ein Audit oder Testlauf ist kein produktiv eingesetztes System.
 - Kontakt: contact@ozan-orhan.com

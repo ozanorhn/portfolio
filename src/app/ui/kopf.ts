@@ -241,15 +241,17 @@ export class KopfComponent {
   /** Inline sichtbar */
   readonly punkte: MenuPunkt[] = [
     { label: 'Projekte', pfad: '/projekte' },
-    { label: 'Blog', pfad: '/blog' },
+    { label: 'Schwerpunkte', pfad: '/', fragment: 'schwerpunkte' },
     { label: 'Profil', pfad: '/', fragment: 'profil' },
+    { label: 'Blog', pfad: '/blog' },
   ];
   /** Im Menü auf schmalen Geräten, inklusive Kontakt */
   readonly alleP: MenuPunkt[] = [
     { label: 'Start', pfad: '/' },
     { label: 'Projekte', pfad: '/projekte' },
-    { label: 'Blog', pfad: '/blog' },
+    { label: 'Schwerpunkte', pfad: '/', fragment: 'schwerpunkte' },
     { label: 'Profil', pfad: '/', fragment: 'profil' },
+    { label: 'Blog', pfad: '/blog' },
     { label: 'Kontakt', pfad: '/', fragment: 'kontakt' },
   ];
   readonly rechtliches: MenuPunkt[] = [

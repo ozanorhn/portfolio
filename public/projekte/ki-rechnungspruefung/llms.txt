@@ -3,6 +3,7 @@
 > Rechnungen kommen als PDF per Mail. Ein LLM liest sie gegen ein festes Schema aus, Code prüft, und die Fachabteilung bekommt einen Zuordnungsvorschlag.
 
 URL: https://ozan-orhan.com/projekte/ki-rechnungspruefung/
+Reifegrad: Testbetrieb
 Status: Im Testbetrieb, Live-Gang geplant
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: Gmail API, PDF-Textextraktion, LLM Information Extractor, JSON-Schema, monday GraphQL, JavaScript, OpenRouter, n8n (Orchestrierung)
@@ -14,6 +15,12 @@ Rechnungen externer Mitarbeitender mussten von Hand gelesen und Positionen in Ko
 ## Mein Beitrag
 
 Ich habe den Workflow entwickelt: Postfach-Anbindung, Schema-Extraktion, Validierung, Zuordnungslogik und die Sperren für den Schreibpfad.
+
+## Wer macht was
+
+- KI: Ein LLM liest Rechnungsnummer, Monat und Positionen gegen ein JSON-Schema aus.
+- Deterministische Software: Prüft Summen, Duplikate und Plausibilität und ordnet Positionen zu; der Schreibpfad ist dreifach gesperrt.
+- Mensch: Die Fachabteilung prüft markierte Fälle und entscheidet über die Zuordnung.
 
 ## Architektur
 

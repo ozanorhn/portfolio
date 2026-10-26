@@ -60,3 +60,7 @@
   .data-grid { grid-template-columns: 1fr; }
   .data-grid dd { border-top: 0; padding-top: 0; }
 }
+
+.gp__portraet { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
+.gp__portraet img { width: 96px; height: 96px; object-fit: cover; border-radius: 4px; background: var(--papier-tief); }
+.gp__portraet figcaption { font-size: 14px; overflow-wrap: anywhere; }

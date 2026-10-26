@@ -3,6 +3,7 @@
 > Drei Workflows führen fünf externe Datenquellen zusammen und prüfen, ob sich umgesetzte Maßnahmen messbar ausgewirkt haben — ohne dass jemand Daten von Hand sammelt.
 
 URL: https://ozan-orhan.com/projekte/ai-visibility-monitoring-platform/
+Reifegrad: Im Einsatz
 Status: Seit Mitte 2026 im Einsatz, Datenanbindung wird überarbeitet
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: Webhook mit synchroner Antwort, Zeitplan-Trigger, OAuth-Credentials, LLM-Agent mit strukturiertem Output, Postgres über REST mit Upsert, JavaScript, n8n (Orchestrierung)
@@ -16,6 +17,16 @@ Sichtbarkeit in KI-Antworten, Suchmetriken, Webanalyse und Backlinks lagen in f�
 Drei n8n-Workflows führen fünf externe Datenquellen zusammen: Suchmetriken, Ranking-Daten, Webanalyse und Sichtbarkeit in KI-Antworten.
 
 Sie beantworten drei Fragen: wo Sichtbarkeit in KI-Antworten verloren geht, wo Traffic einbricht, und ob sich umgesetzte Maßnahmen messbar ausgewirkt haben.
+
+## Mein Beitrag
+
+Ich habe die Pipelines für die fünf Datenquellen und den Analyse-Agenten mit strukturiertem Output gebaut.
+
+## Wer macht was
+
+- KI: Ein Analyse-Agent ohne Tools und ohne Schreibzugriff leitet aus vorbereitetem Kontext priorisierte Einträge als schema-gebundenes JSON ab.
+- Deterministische Software: Abruf der fünf Datenquellen, defensive Extraktion, Signal-Voting, Normalisierung und sämtliche Schreibvorgänge.
+- Mensch: Arbeitet mit den angelegten Aufgaben und Meldungen weiter.
 
 ## Architektur
 

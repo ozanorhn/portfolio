@@ -3,6 +3,7 @@
 > Ein selbst gehosteter Agent für wiederkehrende SEO-Aufgaben: Daten über MCP, Auswertung nach festen Skills, Ergebnisse im Team-Chat.
 
 URL: https://ozan-orhan.com/projekte/seo-agent-multi-agent-system/
+Reifegrad: Im Einsatz
 Status: Im Einsatz, Skills werden laufend nachgeschärft
 Kontext: Unternehmenskontext · anonymisiert dargestellt
 Stack: Hermes Agent Framework, Claude Sonnet, MCP, Slack, Python, n8n, Google Search Console, SEO-Daten-APIs
@@ -14,6 +15,12 @@ Keyword-Recherche, OnPage-Checks oder Zielüberprüfungen folgen festen Abläufe
 ## Mein Beitrag
 
 Ich habe das Grundgerüst auf dem quelloffenen Hermes-Framework aufgesetzt, die Modellanbindung eingerichtet, Skills und Python-Skripte geschrieben, Datenquellen über MCP angebunden und die n8n-Gegenstelle für die Zielüberprüfung gebaut. Fachliche Vorgaben kamen aus dem SEO-Team.
+
+## Wer macht was
+
+- KI: Wählt den passenden Skill, holt Daten über MCP-Tools und formuliert Auswertung und Empfehlung im Team-Chat.
+- Deterministische Software: n8n beschafft Daten und vergleicht Trends deterministisch; Skills liegen als versionierte Dateien vor.
+- Mensch: Das SEO-Team gibt fachliche Vorgaben und korrigiert Skills; Änderungen an Websites oder im CMS brauchen eine Freigabe.
 
 ## Architektur
 

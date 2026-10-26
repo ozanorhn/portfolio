@@ -19,7 +19,7 @@ import { GlossarService } from '../data/glossar';
         <div class="fuss__band">
           <div>
             <p class="meta">{{ site.name }}</p>
-            <p class="fuss__rolle">{{ site.rolle }}</p>
+            <p class="fuss__rolle">{{ site.rolle }} · {{ site.rolleAutomation }}</p>
           </div>
           <nav class="fuss__nav" aria-label="Weitere Seiten">
             <a routerLink="/" fragment="kontakt">Kontakt</a>

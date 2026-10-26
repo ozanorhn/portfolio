@@ -95,3 +95,11 @@
 .weiterlesen__titel { margin: 0 0 $s2; }
 .weiterlesen ul { margin: 0; padding-left: 1.1em; }
 .weiterlesen li + li { margin-top: $s2; }
+
+/* Aufgabenteilung: drei Spalten nebeneinander, auf schmalen Flächen untereinander */
+.teilung {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  gap: $s5 clamp(20px, 2.4vw, 36px); margin: 0;
+}
+.teilung__spalte { padding-top: $s3; border-top: $strich-regel solid $tusche; }
+.teilung__spalte dd { margin: $s2 0 0; font-size: 15.5px; line-height: 1.55; color: $tusche-2; }

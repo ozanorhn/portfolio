@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, computed, input, signal } from '@an
 import { RouterLink } from '@angular/router';
 import { TafelComponent } from './tafel';
 import { SystemFlowComponent } from './system-flow';
-import { GRUPPEN_TITEL, type Work } from '../data/works';
+import { GRUPPEN_TITEL, REIFE_TITEL, type Work } from '../data/works';
 
 interface Gruppe {
   key: Work['gruppe'];
@@ -43,7 +43,10 @@ interface Gruppe {
                       <h3 class="pl__titel">{{ w.titel }}</h3>
                       <span class="pl__lede">{{ w.lede }}</span>
                       <span class="pl__meta">{{ w.kicker }}</span>
-                      <span class="pl__kontext">{{ w.kontext }}</span>
+                      <span class="pl__kontext">
+                        <span class="reife" [attr.data-reife]="w.reife">{{ reifeTitel[w.reife] }}</span>
+                        <span>{{ w.kontext }}</span>
+                      </span>
                     </span>
                   </a>
                 </li>
@@ -107,8 +110,8 @@ interface Gruppe {
       }
 
       .pl__kontext {
-        display: block; margin-top: 4px;
-        font-family: $mono; font-size: 11.5px; letter-spacing: 0.03em; color: $petrol;
+        display: flex; flex-wrap: wrap; gap: 0 $s4; margin-top: 6px;
+        font-family: $mono; font-size: 11.5px; letter-spacing: 0.03em; color: $tusche-2;
       }
 
       /* Ausbildungsprojekte: kleinerer Grad, gleiche Sprache */
@@ -146,6 +149,7 @@ export class ProjektListeComponent {
   readonly projekte = input.required<Work[]>();
   readonly vorschau = input(false);
   readonly kompakt = input(false);
+  readonly reifeTitel = REIFE_TITEL;
   private readonly gewaehlt = signal<string | null>(null);
 
   /** Gruppen in Reihenfolge des ersten Auftretens, Werke in Listenreihenfolge. */

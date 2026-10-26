@@ -179,7 +179,7 @@ export class WebMcpService {
   private profil(): string {
     return kurz(
       [
-        `${SITE.name}, ${SITE.rolle}, ${SITE.ort}. Deutschlandweit remote.`,
+        `${SITE.name}, ${SITE.rolle} und ${SITE.rolleAutomation}, ${SITE.ort}.`,
         'Schwerpunkte: KI-Agenten, MCP- und RAG-Systeme, LLM-Integration, Automatisierung mit Python und n8n.',
         `Projekte: ${seiteUrl('/projekte')} · Fakten: ${seiteUrl('/facts')}`,
         `Kontakt: ${SITE.mail} · LinkedIn: ${SITE.linkedin} · GitHub: ${SITE.github}`,

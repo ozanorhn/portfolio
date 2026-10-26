@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { KopfComponent } from '../../../ui/kopf';
 import { FussComponent } from '../../../ui/fuss';
 import { SeoService } from '../../../core/seo.service';
-import { SITE } from '../../../core/site';
+import { PORTRAET_ALT, SITE } from '../../../core/site';
 import { KERNARBEITEN, WORKS } from '../../../data/works';
 import { ENTITAET, FAQ, SEITEN_META } from './meta';
 
@@ -18,6 +18,7 @@ import { ENTITAET, FAQ, SEITEN_META } from './meta';
 export class FactsComponent implements OnInit {
   private readonly seo = inject(SeoService);
   readonly site = SITE;
+  readonly portraetAlt = PORTRAET_ALT;
   readonly e = ENTITAET;
   readonly faq = FAQ;
   readonly kernprojekte = KERNARBEITEN;

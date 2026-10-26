@@ -31,6 +31,10 @@
     <section class="kenn" aria-label="Kenndaten">
       <dl class="kenn__liste">
         <div class="kenn__paar">
+          <dt class="meta">Reifegrad</dt>
+          <dd><span class="reife" [attr.data-reife]="w.reife">{{ reifeTitel[w.reife] }}</span></dd>
+        </div>
+        <div class="kenn__paar">
           <dt class="meta">Status</dt>
           <dd>{{ w.status }}</dd>
         </div>
@@ -85,6 +89,23 @@
           <section id="beitrag" class="teil" aria-labelledby="t-beitrag">
             <h2 id="t-beitrag" class="untertitel teil__titel">Mein Beitrag</h2>
             <div class="prosa">@for (p of w.beitrag; track $index) { <p>{{ p }}</p> }</div>
+          </section>
+        }
+
+        @if (w.aufgabenteilung; as a) {
+          <section id="aufgabenteilung" class="teil" aria-labelledby="t-teilung">
+            <h2 id="t-teilung" class="untertitel teil__titel">Wer macht was</h2>
+            <dl class="teilung">
+              @if (a.ki) {
+                <div class="teilung__spalte"><dt class="meta">KI</dt><dd>{{ a.ki }}</dd></div>
+              }
+              @if (a.software) {
+                <div class="teilung__spalte"><dt class="meta">Deterministische Software</dt><dd>{{ a.software }}</dd></div>
+              }
+              @if (a.mensch) {
+                <div class="teilung__spalte"><dt class="meta">Mensch</dt><dd>{{ a.mensch }}</dd></div>
+              }
+            </dl>
           </section>
         }
 
@@ -222,7 +243,7 @@
         <section class="teil" aria-labelledby="t-kontakt">
           <h2 id="t-kontakt" class="untertitel teil__titel">Kontakt</h2>
           <p class="prosa">
-            Fragen zur Umsetzung oder eine passende Rolle im AI Engineering?
+            Fragen zur Umsetzung oder ein Gespräch über eine Rolle im AI Engineering?
             <a class="aktion" routerLink="/" fragment="kontakt">Zum Kontakt</a>
           </p>
         </section>

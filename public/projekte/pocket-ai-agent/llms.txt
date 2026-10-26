@@ -3,6 +3,7 @@
 > Ein selbst gehosteter Sprachagent mit einem Handgerät als Interface. Aufnahme auf dem Gerät, Agentenlogik auf dem Server, Toolzugriff über MCP.
 
 URL: https://ozan-orhan.com/projekte/pocket-ai-agent/
+Reifegrad: Prototyp
 Status: Funktionsfähiger Prototyp, laufende Weiterentwicklung
 Kontext: Eigenes Engineering-Projekt
 Stack: C++, ESP32-S3, FreeRTOS, PlatformIO, Python, FastAPI, Docker, Traefik, MCP, OpenRouter, Whisper Large V3, Fish Audio, Piper
@@ -12,6 +13,16 @@ Stack: C++, ESP32-S3, FreeRTOS, PlatformIO, Python, FastAPI, Docker, Traefik, MC
 Ich wollte einen Sprachagenten bauen, der auf meine eigenen Tools zugreifen kann, ohne dass Modelle, Memory und Integrationen an ein einzelnes Gerät gebunden sind.
 
 Das Interface sollte klein genug für die Hosentasche sein und nur die Aufgaben übernehmen, die wirklich auf die Hardware gehören: Aufnahme, Anzeige und Wiedergabe. Das Gerät ist ein M5Stack StickS3 auf Basis eines ESP32-S3 mit Display, Mikrofon, Lautsprecher, WLAN und Akku.
+
+## Mein Beitrag
+
+Eigenes Projekt: Ich habe die Firmware für den ESP32-S3, den Voice Relay mit FastAPI, das Deployment mit Docker und Traefik und die Anbindung der Werkzeuge über MCP gebaut. Als Agent-Laufzeit setze ich das quelloffene Hermes-Framework ein.
+
+## Wer macht was
+
+- KI: Whisper transkribiert die Aufnahme, der Agent hält Session und Gedächtnis und ruft Werkzeuge über MCP auf, die Sprachausgabe spricht die Antwort.
+- Deterministische Software: Die Firmware trennt Oberfläche und Netz in eigene Tasks; Voice Relay, Fallbacks für Ton, Netz und Todoist-Integration sowie das Deployment laufen ohne Modell.
+- Mensch: Spricht die Anfrage ein und kann sie jederzeit abbrechen.
 
 ## Architektur
 

@@ -13,6 +13,9 @@ export interface SeoInput {
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
+/** Beschreibt das Standard-OG-Bild: Porträt, Name und Kernaussage der Startseite. */
+const OG_ALT = 'Ozan Orhan, AI Engineer aus Hannover, neben dem Satz: Ich entwickle KI-Anwendungen und agentische Systeme.';
+
 @Injectable({ providedIn: 'root' })
 export class SeoService {
   private readonly doc = inject(DOCUMENT);
@@ -31,6 +34,18 @@ export class SeoService {
     this.upsertProperty('og:url', url);
     this.upsertProperty('og:type', input.typ ?? 'website');
     this.upsertProperty('og:image', bild);
+    // Breite, Höhe und Alt-Text nur für das Standardbild bekannt; andere Bilder ohne Angaben
+    if (!input.bild) {
+      this.upsertProperty('og:image:width', '1200');
+      this.upsertProperty('og:image:height', '630');
+      this.upsertProperty('og:image:alt', OG_ALT);
+      this.upsertName('twitter:image:alt', OG_ALT);
+    } else {
+      this.meta.removeTag('property="og:image:width"');
+      this.meta.removeTag('property="og:image:height"');
+      this.meta.removeTag('property="og:image:alt"');
+      this.meta.removeTag('name="twitter:image:alt"');
+    }
     this.upsertProperty('og:locale', 'de_DE');
     this.upsertProperty('og:site_name', SITE.name);
     this.upsertName('twitter:card', 'summary_large_image');
